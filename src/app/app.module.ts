@@ -18,6 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
+import { RegistrazioneComponent } from './registrazione/registrazione.component';
 
 
 
@@ -31,6 +32,7 @@ import {MatIconModule} from '@angular/material/icon';
     AdminComponent,
     ContattiComponent,
     LoginComponent,
+    RegistrazioneComponent,
   ],
   imports: [
     BrowserModule,
