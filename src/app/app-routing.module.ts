@@ -22,14 +22,14 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'responsible-page',
+    path: 'responsible',
     loadChildren: () =>
       import('./pages/responsible-page/responsible-page.module').then(
         (m) => m.ResponsiblePageModule
       ),
   },
   {
-    path: 'customer-page',
+    path: 'customer',
     loadChildren: () =>
       import('./pages/customer-page/customer-page.module').then(
         (m) => m.CustomerPageModule

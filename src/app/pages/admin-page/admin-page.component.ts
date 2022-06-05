@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AjaxService } from 'src/app/ajax.service';
-import { UtilsService } from 'src/app/utils.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -14,14 +14,14 @@ export class AdminPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private ajax: AjaxService,
+    private auth: AuthService,
     private utils: UtilsService
   ) {}
 
   printData() {
     console.log(this.form.value);
     //per registrarsi
-    this.ajax.registrazione(this.form.value).subscribe((response) => {
+    this.auth.registrazione(this.form.value).subscribe((response) => {
       console.log(response);
       console.log('registrazione effettuata');
       this.router.navigate(['/login']);
