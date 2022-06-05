@@ -3,63 +3,78 @@
 
 <!--Copertina-->
 <div class="container-fluid custom-margin">
+  ù
+
   <div class="row justify-content-center">
     <div class="col-12 p-0">
-      <img class="copertina pc-only" src="assets/copertina.jpg" alt="immagine di copertina" />
-      <img class="copertina mobile-only" src="assets/copertina-mobile.jpg" alt="immagine di copertina" />
+      <img
+        class="copertina pc-only"
+        src="assets/copertina.jpg"
+        alt="immagine di copertina"
+      />
+      <img
+        class="copertina mobile-only"
+        src="assets/copertina-mobile.jpg"
+        alt="immagine di copertina"
+      />
       <img class="logo" src="assets/logo-white.png" alt="logo" />
     </div>
   </div>
-</div>
 
+  <!--Chi siamo-->
+  <div class="container">
+    <div class="row mt-4 identita">
+      <div class="col-6">
+        <h1>Chi siamo</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
+          tempora ullam quo, expedita reprehenderit ratione harum repellendus
+          voluptatibus atque odit doloribus nulla pariatur nisi voluptates rerum
+          voluptatum magni amet ex?
+        </p>
+      </div>
+      <!--Prenota-->
+      <div class="col-6">
+        <div class="form-group text-center">
+          <h1>Prendi appuntamento</h1>
+        </div>
+        <app-prenotazione></app-prenotazione>
+      </div>
+    </div>
 
-<!--Chi siamo-->
-<div class="row offset-1 mt-4 identita">
-  <div class="col-6">
-    <h1>Chi siamo</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-      tempora ullam quo, expedita reprehenderit ratione harum repellendus
-      voluptatibus atque odit doloribus nulla pariatur nisi voluptates rerum
-      voluptatum magni amet ex?
-    </p>
-  </div>
-  <!--Prenota-->
-  <div class="col-6">
-    <div class="form-group text-center">
-      <h1>Prendi appuntamento</h1>
-  </div>
-    <app-prenotazione></app-prenotazione>
-  </div>
-</div>
+    <!--Contattaci-->
+    <div class="row mt-4 identita">
+      <div class="col-6">
+        <app-contatti></app-contatti>
+      </div>
 
-<!--Contattaci-->
-<div class="row offset-1 mt-4 identita">
-  <div class="col-6">
-    <app-contatti></app-contatti>
-  </div>
-
-  <!--Maps-->
-  <div class="col-lg-6">
-    <div>
-      <div class="card mb-5">
-        <legend class="text-center text-lg-left header pl-lg-3">
-          Dove siamo
-        </legend>
-        <div class="card-block text-center text-lg-left p-3">
-          <h4>Indirizzo</h4>
-          <div>
-            Via Angelo Olivieri, 55,<br />
-            Lido di Ostia RM<br />
-            +39/346 063 6109<br />
-            email@esempio.com<br />
-          </div>
-          <hr />
-          <div>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11909.496065737898!2d12.2895961!3d41.7340249!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf0b31e0906e27186!2sMatt%20barber%20shop!5e0!3m2!1sit!2sit!4v1611783575279!5m2!1sit!2sit"
-              width="100%" height="300px" frameborder="0" style="border: 0" allowfullscreen="" aria-hidden="false"
-              tabindex="0"></iframe>
+      <!--Maps-->
+      <div class="col-lg-6">
+        <div>
+          <h2 class="text-center text-lg-left header pl-lg-3">Dove siamo</h2>
+          <div class="card mb-5">
+            <div class="card-block text-center text-lg-left p-3">
+              <h4>Indirizzo</h4>
+              <div>
+                Via Angelo Olivieri, 55,<br />
+                Lido di Ostia RM<br />
+                +39/346 063 6109<br />
+                email@esempio.com<br />
+              </div>
+              <hr />
+              <div>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11909.496065737898!2d12.2895961!3d41.7340249!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf0b31e0906e27186!2sMatt%20barber%20shop!5e0!3m2!1sit!2sit!4v1611783575279!5m2!1sit!2sit"
+                  width="100%"
+                  height="300px"
+                  frameborder="0"
+                  style="border: 0"
+                  allowfullscreen=""
+                  aria-hidden="false"
+                  tabindex="0"
+                ></iframe>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -67,45 +82,57 @@
   </div>
 </div>
 
- <!--FOOTER-->
- <footer class="bg-dark text-white text-center text-lg-start">
+<!--FOOTER-->
+<footer class="bg-dark text-white text-center text-lg-start">
   <div class="container p-4">
-      <div class="row">
-          <div class="col-12 col-lg-8">
-              <h5 class="text-uppercase">Footer Content</h5>
-              <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-                  molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-                  voluptatem veniam, est atque cumque eum delectus sint!
-              </p>
-          </div>
-
-          <div class="col-12 col-lg-4">
-              <h5 class="text-uppercase mb-0">Contatti</h5>
-
-              <ul class="list-unstyled">
-                  <li>
-                      <i class="fas fa-phone-square"></i>
-                      <a href="tel:3460636109" class="text-white">Phone</a>
-                  </li>
-                  <li>
-                      <i class="fab fa-whatsapp-square"></i>
-                      <a href="https://api.whatsapp.com/send?phone=393460636109&fbclid=IwAR3K9mgC2eVtnrv44kOJYcw_KdPjPJedCpNqOR0ShJq3Qdt1QbajM0FBpeE" class="text-white">Whatsapp</a>
-                  </li>
-                  <li>
-                      <i class="fab fa-instagram-square"></i>
-                      <a href="https://www.instagram.com/matt_barber_shop/" class="text-white">Instagram</a>
-                  </li>
-                  <li>
-                      <i class="fab fa-facebook-square"></i>
-                      <a href="https://www.facebook.com/Matt-barber-shop-711951539003465/?ti=as" class="text-white">Facebook</a>
-                  </li>
-              </ul>
-          </div>
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <h5 class="text-uppercase">Footer Content</h5>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque
+          ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae
+          repudiandae aliquam voluptatem veniam, est atque cumque eum delectus
+          sint!
+        </p>
       </div>
+
+      <div class="col-12 col-lg-4">
+        <h5 class="text-uppercase mb-0">Contatti</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <i class="fas fa-phone-square"></i>
+            <a href="tel:3460636109" class="text-white">Phone</a>
+          </li>
+          <li>
+            <i class="fab fa-whatsapp-square"></i>
+            <a
+              href="https://api.whatsapp.com/send?phone=393460636109&fbclid=IwAR3K9mgC2eVtnrv44kOJYcw_KdPjPJedCpNqOR0ShJq3Qdt1QbajM0FBpeE"
+              class="text-white"
+              >Whatsapp</a
+            >
+          </li>
+          <li>
+            <i class="fab fa-instagram-square"></i>
+            <a
+              href="https://www.instagram.com/matt_barber_shop/"
+              class="text-white"
+              >Instagram</a
+            >
+          </li>
+          <li>
+            <i class="fab fa-facebook-square"></i>
+            <a
+              href="https://www.facebook.com/Matt-barber-shop-711951539003465/?ti=as"
+              class="text-white"
+              >Facebook</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-      © 2022 Copyright:
-      
+    © 2022 Copyright:
   </div>
 </footer>
