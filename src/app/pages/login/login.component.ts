@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AjaxService } from '../ajax.service';
-import { UtilsService } from '../utils.service';
+import { AjaxService } from '../../ajax.service';
+import { UtilsService } from '../../utils.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 

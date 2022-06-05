@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { AdminPageRoutingModule } from './admin-page-routing.module';
 import { AdminPageComponent } from './admin-page.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AdminPageComponent
-  ],
+  declarations: [AdminPageComponent],
   imports: [
     CommonModule,
-    AdminPageRoutingModule
-  ]
+    AdminPageRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-export class AdminPageModule { }
+export class AdminPageModule {}

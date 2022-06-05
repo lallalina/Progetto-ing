@@ -1,23 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 
-const routes: Routes = [{
-  path:"",
-  component: HomeComponent
-},{
-  path:'admin',
-  component: AdminComponent
-},{
-  path:'login',
-  component: LoginComponent
-},
-  { path: 'admin-page', loadChildren: () => import('./pages/admin-page/admin-page.module').then(m => m.AdminPageModule) }];
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('./pages/main-page/main-page.module').then(
+        (m) => m.MainPageModule
+      ),
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./pages/admin-page/admin-page.module').then(
+        (m) => m.AdminPageModule
+      ),
+  },
+  {
+    path: 'responsible-page',
+    loadChildren: () =>
+      import('./pages/responsible-page/responsible-page.module').then(
+        (m) => m.ResponsiblePageModule
+      ),
+  },
+  {
+    path: 'customer-page',
+    loadChildren: () =>
+      import('./pages/customer-page/customer-page.module').then(
+        (m) => m.CustomerPageModule
+      ),
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
