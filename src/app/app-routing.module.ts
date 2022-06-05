@@ -13,7 +13,8 @@ const routes: Routes = [{
 },{
   path:'login',
   component: LoginComponent
-}];
+},
+  { path: 'admin-page', loadChildren: () => import('./pages/admin-page/admin-page.module').then(m => m.AdminPageModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
