@@ -13,6 +13,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './shared/shared.module';
+import { AdminPageModule } from './pages/admin-page/admin-page.module';
+import { CustomerPageModule } from './pages/customer-page/customer-page.module';
+import { ResponsiblePageModule } from './pages/responsible-page/responsible-page.module';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
