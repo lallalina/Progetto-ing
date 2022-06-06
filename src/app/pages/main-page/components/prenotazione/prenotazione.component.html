@@ -1,0 +1,161 @@
+<div id="prendi-appuntamento">
+  <form action="">
+    <div class="form-group">
+      <label for="customer-name">Nome prenotazione</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nome-prenotazione"
+        placeholder="Inserisci nome prenotazione"
+        required
+      />
+      <small class="form-text text-muted"
+        >Ricorda il nome della tua prenotazione.</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="customer-date">Data e ora</label>
+      <input
+        type="datetime-local"
+        class="form-control date-time-local"
+        id="data-e-ora"
+      />
+    </div>
+    <div class="form-group">
+      <label for="customer-name">Barbiere</label>
+      <select class="form-control" id="nome-barbiere">
+        <option value="Matt">Matt</option>
+        <option value="Chicco">Chicco</option>
+      </select>
+      <small class="form-text text-muted"
+        >Scegli da chi vuoi farti tagliare i capelli.</small
+      >
+    </div>
+    <div class="form-group">
+      <div class="text-center">
+        <button
+          class="btn btn-light bottone-collapse p-0"
+          type="button"
+          data-toggle="collapse"
+          data-target="#altre-opzioni"
+          aria-expanded="false"
+          id="more-options"
+        >
+          <span id="piu-opzioni" class="material-icons position-relative"
+            >keyboard_arrow_down</span
+          >
+        </button>
+      </div>
+      <div class="collapse" id="altre-opzioni">
+        <div class="row">
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck1"
+              checked
+            />
+            <label class="custom-control-label" for="customCheck1"
+              >Taglio & Shampoo</label
+            >
+          </div>
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck2"
+            />
+            <label class="custom-control-label" for="customCheck2"
+              >Taglio bimbo</label
+            >
+          </div>
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck4"
+            />
+            <label class="custom-control-label" for="customCheck4"
+              >Barba lunga</label
+            >
+          </div>
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck5"
+            />
+            <label class="custom-control-label" for="customCheck5"
+              >Barba corta</label
+            >
+          </div>
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck6"
+            />
+            <label class="custom-control-label" for="customCheck6"
+              >Colore</label
+            >
+          </div>
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck7"
+            />
+            <label class="custom-control-label" for="customCheck7"
+              >Tiraggio</label
+            >
+          </div>
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck8"
+            />
+            <label class="custom-control-label" for="customCheck8"
+              >Meches</label
+            >
+          </div>
+          <div
+            class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+          >
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck9"
+            />
+            <label class="custom-control-label" for="customCheck9"
+              >Trattamenti</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-dark" id="prenota-taglio">
+        Prenota
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+  var app = angular.module("myApp", ["hm.prenotazione"]);
+</script>
