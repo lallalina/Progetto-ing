@@ -7,7 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UtilsService } from './services/utils.service';
+import { UtilsService } from './core/services/utils.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

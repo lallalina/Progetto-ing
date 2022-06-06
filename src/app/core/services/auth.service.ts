@@ -1,12 +1,26 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../../models/user.model';
+import { MockedUsers } from '../../__mocks__/users.mock';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private readonly userSubject = new BehaviorSubject<User>(null);
+  readonly user$ = this.userSubject.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  get user(): User {
+    return this.userSubject.value;
+  }
+
+  set user(value: User) {
+    this.userSubject.next(value);
+  }
 
   registrazione(param) {
     return this.http.post(`${environment.API_URL}/private/nuovoUtente`, param, {
@@ -22,5 +36,13 @@ export class AuthService {
         Authorization: 'Basic ' + btoa(username + ':' + password),
       }),
     });
+  }
+
+  mockLogin(username: User['username'], password: User['password']) {
+    let user = MockedUsers.find(
+      (item) => item.username === username && item.password === password
+    );
+    console.log(user);
+    this.user = user;
   }
 }

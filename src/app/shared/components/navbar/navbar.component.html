@@ -1,21 +1,33 @@
- <!-- NAVBAR -->
- <nav class="navbar fixed-top navbar-expand-lg">
-  <img class="navbar-logo ml-lg-3 mr-lg-3" src="assets/logo-white.png" alt="logo" id="navbar-logo">
+<!-- NAVBAR -->
+<nav class="navbar fixed-top navbar-expand-lg">
+  <img
+    class="navbar-logo ml-lg-3 mr-lg-3"
+    src="assets/logo-white.png"
+    alt="logo"
+    id="navbar-logo"
+  />
 
   <div class="navbar-collapse collapse">
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-              <a class="nav-link navbar-text" [routerLink]="['']">Home</a>
-          </li>
-          <li class="nav-item active">
-              <a class="nav-link navbar-text" href="#chisiamo">Chi siamo</a>
-          </li>
-          <li class="nav-item active">
-              <a class="nav-link navbar-text" href="#contattaci">Contattaci</a>
-          </li>
-          <li class="nav-item active">
-              <a class="nav-link navbar-text" href="#">Shop</a>
-          </li>
-      </ul>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link navbar-text" [routerLink]="['']">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link navbar-text" href="#chisiamo">Chi siamo</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link navbar-text" href="#contattaci">Contattaci</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link navbar-text" href="#">Shop</a>
+      </li>
+    </ul>
+    <button
+      type="button"
+      class="btn btn-link text-white"
+      [routerLink]="['/login']"
+    >
+      Login
+    </button>
   </div>
 </nav>
