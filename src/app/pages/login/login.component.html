@@ -7,6 +7,9 @@
           <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
         </div>
       </div>
+      <span class="material-icons clickable" [routerLink]="['']">
+        arrow_back
+      </span>
       <div class="d-flex justify-content-center form_container">
         <form [formGroup]="form" (ngSubmit)="fakeLogin()">
           <div class="input-group mb-3">
