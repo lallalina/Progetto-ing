@@ -1,0 +1,33 @@
+/*INSTAGRAM*/
+
+.little-logo{
+    max-width: 50px;
+}
+
+.hidden-link:hover{
+    text-decoration: none;
+}
+
+.gradient-color {
+    background: -webkit-linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.instafeed{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+    border-radius: 5px;
+}
+.instafeed-mobile{
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    display:inline;
+    margin: auto;
+    border-radius: 10px;
+    padding: 5px;
+}
