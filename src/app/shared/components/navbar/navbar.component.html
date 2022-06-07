@@ -13,21 +13,31 @@
         <a class="nav-link navbar-text" [routerLink]="['']">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link navbar-text" href="#chisiamo">Chi siamo</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link navbar-text" href="#contattaci">Contattaci</a>
-      </li>
-      <li class="nav-item active">
         <a class="nav-link navbar-text" href="#">Shop</a>
+      </li>
+      <li class="nav-item active" *ngIf="user && user.role === UserRole.ADMIN">
+        <a class="nav-link navbar-text" [routerLink]="['/admin']"
+          >Area amministratore</a
+        >
       </li>
     </ul>
     <button
       type="button"
       class="btn btn-link text-white"
       [routerLink]="['/login']"
+      *ngIf="!user; else logged"
     >
       Login
     </button>
+
+    <ng-template #logged class="clickable">
+      <span class="text-white clickable">{{ user.name }}</span>
+      <span
+        class="material-icons clickable text-white ml-2 text-sm"
+        (click)="logout()"
+      >
+        logout
+      </span>
+    </ng-template>
   </div>
 </nav>

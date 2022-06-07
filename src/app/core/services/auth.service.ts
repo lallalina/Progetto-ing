@@ -12,7 +12,9 @@ export class AuthService {
   private readonly userSubject = new BehaviorSubject<User>(null);
   readonly user$ = this.userSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getLoggedUser();
+  }
 
   get user(): User {
     return this.userSubject.value;
@@ -44,5 +46,11 @@ export class AuthService {
     );
     console.log(user);
     this.user = user;
+  }
+
+  getLoggedUser() {
+    let _id = parseInt(sessionStorage.getItem('id'));
+    let _user = MockedUsers.find((user) => user.id === _id);
+    this.user = _user;
   }
 }

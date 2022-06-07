@@ -139,6 +139,6 @@
   margin-left: 150%;
 }
 
-.clickable {
+.clickable:hover {
   cursor: pointer;
 }
