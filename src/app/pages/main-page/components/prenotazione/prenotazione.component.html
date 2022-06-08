@@ -1,62 +1,89 @@
-<div id="prendi-appuntamento">
-  <form action="">
-    <div class="form-group">
-      <label for="customer-name">Nome prenotazione</label>
-      <input
-        type="text"
-        class="form-control"
-        id="nome-prenotazione"
-        placeholder="Inserisci nome prenotazione"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="customer-date">Data e ora</label>
-      <input
-        type="datetime-local"
-        class="form-control date-time-local"
-        id="data-e-ora"
-      />
-    </div>
-    <div class="form-group">
-      <small class="form-text text-muted"
-        >Scegli da chi vuoi farti tagliare i capelli</small
-      >
-      <label for="customer-name">Barbiere</label>
-      <select class="form-control" id="nome-barbiere">
-        <option value="Matt">Matt</option>
-        <option value="Chicco">Chicco</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <fieldset>
-        <legend>Trattamenti</legend><br>
-      <div class="row">
-          <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-              <input type="checkbox" name="taglio"> Taglio
-          </div>
-          <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-            <input type="checkbox" name="taglio"> Shampoo
-          </div>
-          <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-            <input type="checkbox" name="taglio"> Taglio bimbo
-          </div>
-          <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-              <input type="checkbox" name="taglio"> Barba
-          </div>
-          <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-            <input type="checkbox" name="taglio"> Anti-forfora
-          </div>
-          <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-            <input type="checkbox" name="taglio"> Anti-caduta
-          </div>
+<div id="prendi-appuntamento" class="mt-4">
+  <form action="" class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="customer-name">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nome-prenotazione"
+          placeholder="Nome"
+          required
+        />
       </div>
-      </fieldset>
-  </div>
-    <div class="form-group text-center">
-      <button type="submit" class="btn btn-dark" id="prenota-taglio">
-        Prenota
-      </button>
+      <div class="form-group">
+        <label for="customer-mail">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="mail"
+          placeholder="Email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="customer-date">Data e ora</label>
+        <input
+          type="datetime-local"
+          class="form-control date-time-local"
+          id="data-e-ora"
+        />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <small class="form-text text-muted"
+          >Scegli da chi vuoi farti tagliare i capelli</small
+        >
+        <label for="customer-name">Barbiere</label>
+        <select class="form-control" id="nome-barbiere">
+          <option value="Matt">Matt</option>
+          <option value="Chicco">Chicco</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <fieldset>
+          <legend>Trattamenti</legend>
+          <br />
+          <div class="row">
+            <div
+              class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+            >
+              <input type="checkbox" name="taglio" /> Taglio
+            </div>
+            <div
+              class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+            >
+              <input type="checkbox" name="taglio" /> Shampoo
+            </div>
+            <div
+              class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+            >
+              <input type="checkbox" name="taglio" /> Taglio bimbo
+            </div>
+            <div
+              class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+            >
+              <input type="checkbox" name="taglio" /> Barba
+            </div>
+            <div
+              class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+            >
+              <input type="checkbox" name="taglio" /> Anti-forfora
+            </div>
+            <div
+              class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+            >
+              <input type="checkbox" name="taglio" /> Anti-caduta
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-dark" id="prenota-taglio">
+          Prenota
+        </button>
+      </div>
     </div>
   </form>
 </div>
