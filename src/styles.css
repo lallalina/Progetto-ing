@@ -54,11 +54,12 @@
 }
 
 /*Icone*/
-.icons {
-  width: 25px;
-  height: 25px;
-
-  background-color: white;
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: white;
 }
 
 /*CHI SIAMO*/
@@ -141,4 +142,12 @@
 
 .clickable:hover {
   cursor: pointer;
+}
+
+#prenota {
+  background-color: rgb(178, 145, 118);
+  box-shadow: 5px 5px 3px #a3a0a1;
+  background-color: #dbbc8e;
+  vertical-align: middle;
+  border: 1px solid black;
 }
