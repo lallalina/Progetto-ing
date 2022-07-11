@@ -17,6 +17,9 @@ import { AdminPageModule } from './pages/admin-page/admin-page.module';
 import { CustomerPageModule } from './pages/customer-page/customer-page.module';
 import { ResponsiblePageModule } from './pages/responsible-page/responsible-page.module';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
@@ -30,6 +33,10 @@ import { ResponsiblePageModule } from './pages/responsible-page/responsible-page
     BrowserAnimationsModule,
     MatIconModule,
     SharedModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [UtilsService],
   bootstrap: [AppComponent],
