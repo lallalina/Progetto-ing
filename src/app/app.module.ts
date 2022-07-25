@@ -19,6 +19,7 @@ import { ResponsiblePageModule } from './pages/responsible-page/responsible-page
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CustomerPageComponent } from './pages/customer-page/customer-page.component';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],

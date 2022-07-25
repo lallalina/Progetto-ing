@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './core/guards/admin.guard';
 import { CustomerGuard } from './core/guards/customer.guard';
 import { ResponsibleGuard } from './core/guards/responsible.guard';
+import { CustomerPageComponent } from './pages/customer-page/customer-page.component';
 import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
@@ -40,6 +41,11 @@ const routes: Routes = [
       import('./pages/customer-page/customer-page.module').then(
         (m) => m.CustomerPageModule
       ),
+  },
+  {
+    //prova per il customer page
+    path: 'ciao',
+    component: CustomerPageComponent,
   },
 ];
 
