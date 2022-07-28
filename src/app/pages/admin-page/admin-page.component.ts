@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AjaxService } from 'src/app/core/services/ajax.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 
@@ -11,11 +12,14 @@ import { UtilsService } from 'src/app/core/services/utils.service';
 })
 export class AdminPageComponent implements OnInit {
   form;
+  admin;
+  barbiere;
 
   constructor(
     private router: Router,
     private auth: AuthService,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private ajax: AjaxService
   ) {}
 
   printData() {
@@ -41,6 +45,22 @@ export class AdminPageComponent implements OnInit {
         Validators.minLength(10),
       ]),
       role: new FormControl('', [Validators.required]),
+    });
+  }
+
+  //aggiungi nuovo admin
+  addAdmin() {
+    this.ajax.nuovoAdmin(this.form.value).subscribe((response) => {
+      console.log(response);
+      this.admin = response;
+    });
+  }
+
+  //aggiungi nuovo parrucchiere
+  addBarbiere() {
+    this.ajax.nuovoBarbiere(this.form.value).subscribe((response) => {
+      console.log(response);
+      this.barbiere = response;
     });
   }
 

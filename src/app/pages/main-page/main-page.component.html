@@ -34,7 +34,22 @@
       <!--Recensioni-->
       <div class="col-6 mb-3 mt-3" id="recensioni">
         <h1>recensioni</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisici</p>
+        <ul *ngFor="let row of reviews.content">
+          <div class="row">
+            <ol>
+              voto:
+              {{
+                row.valutazione
+              }}
+            </ol>
+            <ol>
+              motivo:
+              {{
+                row.descrizione
+              }}
+            </ol>
+          </div>
+        </ul>
       </div>
 
       <!--Prenota-->

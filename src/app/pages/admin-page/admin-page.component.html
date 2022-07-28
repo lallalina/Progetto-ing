@@ -10,7 +10,7 @@
     <!--Content-->
     <div class="row mt-4">
       <div class="col-6">
-        <form>
+        <form [formGroup]="form" (ngSubmit)="addBarbiere()">
           <legend>Registra Parrucchieri</legend>
           <div class="form-group">
             <input
@@ -50,7 +50,7 @@
 
       <!--Registra admin-->
       <div class="col-6">
-        <form>
+        <form [formGroup]="form" (ngSubmit)="addAdmin()">
           <legend>Registra Admin</legend>
           <div class="form-group">
             <input
