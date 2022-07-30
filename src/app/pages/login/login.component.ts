@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  //per loggarsi -creazione di un altro form e submit
+  //per loggarsi
   login() {
     this.auth
       .login(
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
           break;
         }
         case UserRole.CUSTOMER: {
-          this.router.navigate(['customer']);
+          this.router.navigate(['home']);
           break;
         }
         case UserRole.RESPONSIBLE: {

@@ -14,16 +14,10 @@ export class MainPageComponent implements OnInit {
 
   //prendi recensioni
   getRecensioni() {
-    this.ajax.recensioni().subscribe(
-      (response) => {
-        console.log(response);
-        this.reviews = response;
-      },
-      (error) => {
-        alert('Non ci sono recensioni qui');
-        this.error = error;
-      }
-    );
+    this.ajax.recensioni().subscribe((response) => {
+      console.log(response);
+      this.reviews = response;
+    });
   }
 
   ngOnInit(): void {

@@ -13,14 +13,18 @@
         <a class="nav-link navbar-text" [routerLink]="['']">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link navbar-text" [routerLink]="['/ciao']">Shop</a>
+        <a class="nav-link navbar-text" [routerLink]="['/shop']">Shop</a>
       </li>
       <li class="nav-item active" *ngIf="user && user.role === UserRole.ADMIN">
         <a class="nav-link navbar-text" [routerLink]="['/admin']"
           >Area amministratore</a
         >
       </li>
+      <a class="button fancy-button" [routerLink]="['/cart']"
+        ><i class="material-icons">shopping_cart</i></a
+      >
     </ul>
+
     <button
       type="button"
       class="btn btn-link text-white"

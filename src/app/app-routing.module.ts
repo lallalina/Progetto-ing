@@ -5,6 +5,7 @@ import { CustomerGuard } from './core/guards/customer.guard';
 import { ResponsibleGuard } from './core/guards/responsible.guard';
 import { CustomerPageComponent } from './pages/customer-page/customer-page.component';
 import { LoginComponent } from './pages/login/login.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -44,8 +45,13 @@ const routes: Routes = [
   },
   {
     //prova per il customer page
-    path: 'ciao',
+    path: 'shop',
     component: CustomerPageComponent,
+  },
+  {
+    //prova per il carrello page
+    path: 'cart',
+    component: CartComponent,
   },
 ];
 

@@ -14,6 +14,9 @@ export class AdminPageComponent implements OnInit {
   form;
   admin;
   barbiere;
+  prodotto;
+  product = [];
+  treatments = [];
 
   constructor(
     private router: Router,
@@ -22,6 +25,7 @@ export class AdminPageComponent implements OnInit {
     private ajax: AjaxService
   ) {}
 
+  //CONTROLLI
   printData() {
     console.log(this.form.value);
     //per registrarsi
@@ -33,7 +37,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   initRegistrazione() {
-    //controllo validità sezioni del form 2
+    //controllo validità sezioni dei form
     this.form = new FormGroup({
       nome: new FormControl('', Validators.required),
       cognome: new FormControl('', Validators.required),
@@ -47,6 +51,80 @@ export class AdminPageComponent implements OnInit {
       role: new FormControl('', [Validators.required]),
     });
   }
+
+  initProdotto() {
+    //controllo validità sezioni prodotto
+    this.form = new FormGroup({
+      nome: new FormControl('', Validators.required),
+      prezzo: new FormControl('', Validators.required),
+      descrizione: new FormControl('', Validators.required),
+    });
+  }
+
+  initTrattamento() {
+    //controllo validità sezioni prodotto
+    this.form = new FormGroup({
+      nome: new FormControl('', Validators.required),
+      prezzo: new FormControl('', Validators.required),
+      durata: new FormControl('', Validators.required),
+    });
+  }
+
+  //AGGIUNGI-CANCELLA-PRENDI-----
+
+  //PRODOTTI
+
+  //aggiungi nuovo prodotto
+  addProdotto() {
+    this.ajax.addProdotto(this.form.value).subscribe((response) => {
+      console.log(response);
+      this.admin = response;
+    });
+  }
+
+  //prendi prodotto
+  getProdotto() {
+    this.ajax.prodotti().subscribe((response) => {
+      console.log(response);
+      this.product = response;
+    });
+  }
+
+  //cancella prodotto
+  deleteProdotto() {
+    this.ajax.deleteProdotto(this.form.value).subscribe((response) => {
+      console.log(response);
+      this.admin = response;
+    });
+  }
+
+  //TRATTAMENTI
+
+  //aggiungi nuovo trattamento
+  addTrattamento() {
+    this.ajax.addTrattamento(this.form.value).subscribe((response) => {
+      console.log(response);
+      this.admin = response;
+    });
+  }
+
+  //prendi trattamento
+  getTrattamento() {
+    this.ajax.trattamenti().subscribe((response) => {
+      console.log(response);
+      this.treatments = response;
+    });
+  }
+
+  //cacnella trattamento
+  deleteTrattamento() {
+    this.ajax.deleteTrattamento(this.form.value).subscribe((response) => {
+      console.log(response);
+      this.admin = response;
+    });
+  }
+
+  //UTENTI
 
   //aggiungi nuovo admin
   addAdmin() {
@@ -66,5 +144,7 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initRegistrazione();
+    this.initProdotto();
+    this.initTrattamento;
   }
 }
