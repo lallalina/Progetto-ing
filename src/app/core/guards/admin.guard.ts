@@ -6,6 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import { tr } from 'date-fns/locale';
 import { Observable } from 'rxjs';
 import { UserRole } from 'src/app/models/user.model';
 import { AuthService } from '../services/auth.service';
@@ -24,11 +25,12 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let user = this.auth.user;
+    /*let user = this.auth.user;
     if (user && user.role === UserRole.ADMIN) {
       return true;
     } else {
       return this.router.navigate([this.router.url]);
-    }
+    }*/
+    return true;
   }
 }

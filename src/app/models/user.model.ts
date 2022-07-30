@@ -1,14 +1,19 @@
 export enum UserRole {
-  ADMIN = 'admin',
-  RESPONSIBLE = 'responsabile',
+  ADMIN = 'ROLE_ADMIN',
+  RESPONSIBLE = 'ROLE_BARBIERE',
   CUSTOMER = 'cliente',
+}
+
+export interface Authority {
+  authority: UserRole;
 }
 
 export interface User {
   id: number;
   username: string;
-  password: string;
-  name: string;
-  surname: string;
-  role: UserRole;
+  accountNonExpired: boolean;
+  accountNonLocked: boolean;
+  authorities: Authority[];
+  enabled: boolean;
+  credentialsNonExpired: boolean;
 }

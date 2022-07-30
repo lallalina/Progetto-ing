@@ -15,7 +15,7 @@
       <li class="nav-item active">
         <a class="nav-link navbar-text" [routerLink]="['/shop']">Shop</a>
       </li>
-      <li class="nav-item active" *ngIf="user && user.role === UserRole.ADMIN">
+      <li class="nav-item active" *ngIf="user && isAdmin()">
         <a class="nav-link navbar-text" [routerLink]="['/admin']"
           >Area amministratore</a
         >

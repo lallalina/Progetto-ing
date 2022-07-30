@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserRole } from 'src/app/models/user.model';
+import { AjaxService } from 'src/app/core/services/ajax.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   error;
   hide = true;
   password;
+  credentials;
 
   constructor(
     private auth: AuthService,
@@ -25,17 +27,19 @@ export class LoginComponent implements OnInit {
   ) {}
 
   //per loggarsi
-  login() {
+  checkLogin() {
+    console.log(this.form.controls['email'].value);
+    console.log(this.form.controls['password'].value);
     this.auth
-      .login(
-        this.form.controls['email'].value,
-        this.form.controls['password'].value
-      )
+      .login({
+        username: this.form.controls['email'].value,
+        password: this.form.controls['password'].value,
+      })
       .subscribe(
         (response) => {
           //viene eseguito solo dopo che il server risponde, response è l'oggetto che mi arriva dal server
           console.log(response);
-          this.utils.salvaLogin();
+          this.auth.user = response;
           this.utente = response; //restituisce l'oggetto
         },
         (error) => {
@@ -50,19 +54,30 @@ export class LoginComponent implements OnInit {
       );
   }
 
+  //controllo validità sezioni del form
   initForm() {
-    //controllo validità sezioni del form 1
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });
   }
 
+  //chiamata al server
+  login() {
+    this.auth.login(this.form.value).subscribe((response) => {
+      console.log(response);
+      this.credentials = response;
+    });
+  }
+
+  //controllo dei ruoli
+  checkRole() {}
+
   ngOnInit(): void {
     this.initForm();
   }
 
-  fakeLogin() {
+  /*akeLogin() {
     console.log('fakelogin');
     let email = this.form.controls['email'].value;
     let password = this.form.controls['password'].value;
@@ -93,5 +108,5 @@ export class LoginComponent implements OnInit {
         }
       }
     }
-  }
+  }*/
 }

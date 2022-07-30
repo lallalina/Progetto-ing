@@ -18,6 +18,11 @@ export class NavbarComponent implements OnInit {
     this.auth.user$.subscribe((user) => (this.user = user));
   }
 
+  //controllo ruolo admin
+  isAdmin() {
+    return this.user.authorities.includes({ authority: UserRole.ADMIN });
+  }
+
   logout() {
     this.auth.user = null;
     sessionStorage.clear();

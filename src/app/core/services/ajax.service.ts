@@ -49,9 +49,4 @@ export class AjaxService {
   nuovoBarbiere(obj): Observable<any> {
     return this.http.post(this.baseUrl + '/admin/nuovoBarbiere', obj);
   }
-
-  //login
-  login(obj): Observable<any> {
-    return this.http.post(this.baseUrl + '/login', obj);
-  }
 }

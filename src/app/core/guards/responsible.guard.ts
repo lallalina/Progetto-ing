@@ -24,11 +24,12 @@ export class ResponsibleGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let user = this.auth.user;
+    /*let user = this.auth.user;
     if (user && user.role === UserRole.RESPONSIBLE) {
       return true;
     } else {
       return false;
-    }
+    }*/
+    return true;
   }
 }
