@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'responsible',
-    canActivate: [ResponsibleGuard],
+    // canActivate: [ResponsibleGuard],
     loadChildren: () =>
       import('./pages/responsible-page/responsible-page.module').then(
         (m) => m.ResponsiblePageModule
@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'customer',
-    canActivate: [CustomerGuard],
+    // canActivate: [CustomerGuard],
     loadChildren: () =>
       import('./pages/customer-page/customer-page.module').then(
         (m) => m.CustomerPageModule

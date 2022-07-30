@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   //login -passo i parametri
-  login(obj): Observable<any> {
+  login(obj: FormData): Observable<any> {
     return this.http.post(environment.API_URL + '/login', obj);
   }
 
