@@ -5,16 +5,8 @@
 <div class="container-fluid custom-margin">
   <div class="row justify-content-center">
     <div class="col-12 p-0">
-      <img
-        class="copertina pc-only"
-        src="assets/copertina.jpg"
-        alt="immagine di copertina"
-      />
-      <img
-        class="copertina mobile-only"
-        src="assets/copertina-mobile.jpg"
-        alt="immagine di copertina"
-      />
+      <img class="copertina pc-only" src="assets/copertina.jpg" alt="immagine di copertina" />
+      <img class="copertina mobile-only" src="assets/copertina-mobile.jpg" alt="immagine di copertina" />
       <img class="logo" src="assets/logo-white.png" alt="logo" />
     </div>
   </div>
@@ -32,20 +24,20 @@
         </p>
       </div>
       <!--Recensioni-->
-      <div class="col-6 mb-3 mt-3" id="recensioni">
+      <div class="col-6 mb-3 mt-3" id="recensioni" *ngIf="reviews">
         <h1>recensioni</h1>
         <ul *ngFor="let row of reviews.content">
           <div class="row">
             <ol>
               voto:
               {{
-                row.valutazione
+              row.valutazione
               }}
             </ol>
             <ol>
               motivo:
               {{
-                row.descrizione
+              row.descrizione
               }}
             </ol>
           </div>
@@ -89,14 +81,8 @@
               <div>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11909.496065737898!2d12.2895961!3d41.7340249!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf0b31e0906e27186!2sMatt%20barber%20shop!5e0!3m2!1sit!2sit!4v1611783575279!5m2!1sit!2sit"
-                  width="100%"
-                  height="300px"
-                  frameborder="0"
-                  style="border: 0"
-                  allowfullscreen=""
-                  aria-hidden="false"
-                  tabindex="0"
-                ></iframe>
+                  width="100%" height="300px" frameborder="0" style="border: 0" allowfullscreen="" aria-hidden="false"
+                  tabindex="0"></iframe>
               </div>
             </div>
           </div>

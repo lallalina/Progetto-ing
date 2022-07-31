@@ -10,17 +10,22 @@ import { User, UserRole } from 'src/app/models/user.model';
 })
 export class NavbarComponent implements OnInit {
   user: User;
+  isAdmin: boolean;
   readonly UserRole = UserRole;
 
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.auth.user$.subscribe((user) => (this.user = user));
-  }
+    this.auth.user$.subscribe((user) => {
+      console.log(user);
+      this.user = user;
 
-  //controllo ruolo admin
-  isAdmin() {
-    return this.user.authorities.includes({ role: UserRole.ADMIN });
+      //controllo ruolo admin
+      console.log(this.user.authorities);
+      this.isAdmin = !!this.user.authorities.find(
+        (elem) => elem.role === UserRole.ADMIN
+      );
+    });
   }
 
   logout() {

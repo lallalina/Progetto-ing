@@ -26,10 +26,12 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
+  ngOnInit(): void {
+    this.initForm();
+  }
+
   //per loggarsi
-  checkLogin() {
-    console.log(this.form.controls['email'].value);
-    console.log(this.form.controls['password'].value);
+  login() {
     const data = new FormData();
     data.append('username', this.form.controls['email'].value);
     data.append('password', this.form.controls['password'].value);
@@ -60,20 +62,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  //chiamata al server
-  login() {
-    this.auth.login(this.form.value).subscribe((response) => {
-      console.log(response);
-      this.credentials = response;
-    });
-  }
-
   //controllo dei ruoli
   checkRole() {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
 
   /*akeLogin() {
     console.log('fakelogin');

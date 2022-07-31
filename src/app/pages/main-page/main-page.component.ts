@@ -21,6 +21,6 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRecensioni();
+    //this.getRecensioni();
   }
 }

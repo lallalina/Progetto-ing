@@ -12,12 +12,12 @@ export class AuthService {
   readonly user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    // this.getLoggedUser();
+    this.getLoggedUser();
   }
 
   //login -passo i parametri
-  login(obj: FormData): Observable<any> {
-    return this.http.post(environment.API_URL + '/login', obj);
+  login(obj: FormData) {
+    return this.http.post<User>(environment.API_URL + '/login', obj);
   }
 
   //ottengo l'ultimo valore dell'user
@@ -27,6 +27,7 @@ export class AuthService {
 
   //imposto un valore ad user
   set user(value: User) {
+    sessionStorage.setItem('user', JSON.stringify(value));
     this.userSubject.next(value);
   }
 
@@ -38,11 +39,11 @@ export class AuthService {
     );
   }
 
-  /*
   //prendere id nel session storage
   getLoggedUser() {
-    let _id = parseInt(sessionStorage.getItem('id'));
-    let _user = find((user) => user.id === _id);
-    this.user = _user;
-  }*/
+    let _user = JSON.parse(sessionStorage.getItem('user'));
+    if (_user) {
+      this.user = _user;
+    }
+  }
 }
