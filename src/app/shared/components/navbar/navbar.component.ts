@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
   //controllo ruolo admin
   isAdmin() {
-    return this.user.authorities.includes({ authority: UserRole.ADMIN });
+    return this.user.authorities.includes({ role: UserRole.ADMIN });
   }
 
   logout() {
