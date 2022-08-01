@@ -45,5 +45,6 @@ export class AuthService {
     if (_user) {
       this.user = _user;
     }
+    console.log(_user);
   }
 }

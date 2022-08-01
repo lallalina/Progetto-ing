@@ -48,7 +48,7 @@ export class AdminPageComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
       ]),
-      role: new FormControl('', [Validators.required]),
+      url: new FormControl('', Validators.required),
     });
   }
 

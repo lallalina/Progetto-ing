@@ -39,22 +39,38 @@
     left: 50%;
     width: 15%;
   }
-  .navbar-text {
-    font-size: larger;
-    color: white;
-  }
 }
+
+body {
+  background-color: rgb(40, 39, 39);
+}
+
+/*NAVBAR*/
+
 .navbar-logo {
   max-width: 75px;
 }
 
 .navbar {
-  background-color: black;
+  background-color: rgba(73, 62, 32, 0.5);
   font-family: "Times New Roman", Times, serif;
-  height: 70px;
+  height: 80px;
 }
 
-/*Icone*/
+.navbar ul li {
+  list-style: none;
+  display: inline-block;
+}
+
+.navbar ul li a {
+  transition: all ease 0, 5s;
+}
+
+.navbar ul li a:hover {
+  background-color: #211b4385;
+}
+
+/*Text decoration */
 a {
   text-decoration: none;
   color: white;
@@ -63,10 +79,67 @@ a:hover {
   color: white;
 }
 
+label {
+  color: white;
+}
+
 /*CHI SIAMO*/
 .identita h1 {
-  color: rgb(75, 43, 18);
+  color: wheat;
   font-family: fantasy;
+}
+
+.identita p {
+  color: white;
+}
+
+/*GRID PHOTO*/
+.grid-container {
+  display: grid;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  grid-template-areas:
+    "area1 area1 area1 area2 area2 area2 area3 area3 area3 area4 area4 area4"
+    "area1 area1 area1 area2 area2 area2 area3 area3 area3 area4 area4 area4";
+}
+
+.grid-item1 {
+  background-image: url("assets/0c0bf35b7687f4de66abe5e482ef3776--barbershop-ideas-barbershop-design.jpg");
+  text-align: center;
+  border: black 5px solid;
+  grid-area: area1;
+  height: 150%;
+}
+
+.grid-item2 {
+  background-image: url("assets/51259655-fare-taglio-di-capelli-look-perfetto-giovane-uomo-con-la-barba-ottenere-taglio-di-capelli-dal-parruc.webp");
+  text-align: center;
+  border: black 5px solid;
+  grid-area: area2;
+  height: 150%;
+}
+.grid-item3 {
+  background-image: url("assets/cura-e-taglio-capelli.jpg");
+  text-align: center;
+  border: black 5px solid;
+  grid-area: area3;
+  height: 150%;
+  background-size: cover;
+}
+
+.grid-item4 {
+  background-image: url("assets/pennelli-da-barba-rasatura-youbarber.jpg");
+  text-align: center;
+  border: black 5px solid;
+  grid-area: area4;
+  height: 150%;
+  background-size: cover;
+}
+
+/*PRENOTA*/
+.prenota {
+  margin-top: 80px;
 }
 
 /*LOGIN*/
@@ -145,13 +218,22 @@ a:hover {
   cursor: pointer;
 }
 
-#prenota {
-  background-color: rgb(178, 145, 118);
-  box-shadow: 5px 5px 3px #a3a0a1;
-  background-color: #dbbc8e;
-  vertical-align: middle;
-  border: 1px solid black;
+/*FOOTER*/
+.footer {
+  background-color: rgba(73, 62, 32, 0.5);
+  margin-top: 5px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.footer ol {
+  padding: 4px;
+  text-align: center;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

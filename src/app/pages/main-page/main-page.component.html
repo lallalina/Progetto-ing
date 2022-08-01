@@ -5,92 +5,50 @@
 <div class="container-fluid custom-margin">
   <div class="row justify-content-center">
     <div class="col-12 p-0">
-      <img class="copertina pc-only" src="assets/copertina.jpg" alt="immagine di copertina" />
-      <img class="copertina mobile-only" src="assets/copertina-mobile.jpg" alt="immagine di copertina" />
+      <img
+        class="copertina pc-only"
+        src="assets/copertina.jpg"
+        alt="immagine di copertina"
+      />
+      <img
+        class="copertina mobile-only"
+        src="assets/copertina-mobile.jpg"
+        alt="immagine di copertina"
+      />
       <img class="logo" src="assets/logo-white.png" alt="logo" />
     </div>
   </div>
 
   <!--Chi siamo-->
-  <div class="container-fluid">
-    <div class="row mt-4 identita">
-      <div class="col-6 mb-3 mt-3" id="chisiamo">
-        <h1>Chi siamo</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-          tempora ullam quo, expedita reprehenderit ratione harum repellendus
-          voluptatibus atque odit doloribus nulla pariatur nisi voluptates rerum
-          voluptatum magni amet ex?
-        </p>
-      </div>
-      <!--Recensioni-->
-      <div class="col-6 mb-3 mt-3" id="recensioni" *ngIf="reviews">
-        <h1>recensioni</h1>
-        <ul *ngFor="let row of reviews.content">
-          <div class="row">
-            <ol>
-              voto:
-              {{
-              row.valutazione
-              }}
-            </ol>
-            <ol>
-              motivo:
-              {{
-              row.descrizione
-              }}
-            </ol>
-          </div>
-        </ul>
-        <div *ngIf="reviews.content == 0">
-          <p>non ci sono recensioni qui</p>
-        </div>
-      </div>
-
-      <!--Prenota-->
-      <div class="row mt-6 w-100">
-        <div class="col-10 offset-1" id="prenota">
-          <div class="form-group text-center">
-            <h3>PRENDI IL TUO APPUNTAMENTO</h3>
-          </div>
-          <app-prenotazione class="mt-5"></app-prenotazione>
-        </div>
-      </div>
+  <div class="row mt-4 identita">
+    <div class="col-4 mb-3 mt-3" id="chisiamo">
+      <h1>Chi siamo</h1>
+      <p>
+        Elegante, in stile classico e tutto dedicato a lui, questo barbiere
+        offre servizi di taglio barba e capelli nonché pulizia e maschera viso.
+        Un team esperto e creativo sarà a tua disposizione per donare alla tua
+        chioma e alla tua bella barba uno stile totalmente personalizzato!
+      </p>
     </div>
-
-    <!--Contattaci-->
-    <div class="row mt-4 identita">
-      <div class="col-6">
-        <app-contatti></app-contatti>
-      </div>
-
-      <!--Maps-->
-      <div class="col-lg-6">
-        <div>
-          <h2 class="text-center text-lg-left header pl-lg-3">Dove siamo</h2>
-          <div class="card mb-5 mt-4">
-            <div class="card-block text-center text-lg-left p-3">
-              <h4>Indirizzo</h4>
-              <div>
-                Via Angelo Olivieri, 55,<br />
-                Lido di Ostia RM<br />
-                +39/346 063 6109<br />
-                email@esempio.com<br />
-              </div>
-              <hr />
-              <div>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11909.496065737898!2d12.2895961!3d41.7340249!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf0b31e0906e27186!2sMatt%20barber%20shop!5e0!3m2!1sit!2sit!4v1611783575279!5m2!1sit!2sit"
-                  width="100%" height="300px" frameborder="0" style="border: 0" allowfullscreen="" aria-hidden="false"
-                  tabindex="0"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="col-8">
+      <div class="grid-container">
+        <div class="grid-item1"></div>
+        <div class="grid-item2"></div>
+        <div class="grid-item3"></div>
+        <div class="grid-item4"></div>
       </div>
     </div>
   </div>
-</div>
 
+  <!--Prenota-->
+  <div class="prenota row mt-6 w-100">
+    <div class="col-10">
+      <div class="form-group">
+        <h3 style="color: wheat">PRENDI IL TUO APPUNTAMENTO</h3>
+      </div>
+      <app-prenotazione class="mt-5"></app-prenotazione>
+    </div>
+  </div>
+</div>
 <!--FOOTER-->
 <app-footer></app-footer>
