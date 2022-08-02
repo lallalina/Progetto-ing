@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AjaxService } from 'src/app/core/services/ajax.service';
+import { BarbersService } from 'src/app/core/services/barbers.service';
+import { Barber } from 'src/app/models/barber.model';
 
 @Component({
   selector: 'app-main-page',
@@ -7,10 +9,14 @@ import { AjaxService } from 'src/app/core/services/ajax.service';
   styleUrls: ['./main-page.component.css'],
 })
 export class MainPageComponent implements OnInit {
+  barbers: Array<Barber>;
   reviews: any;
   error;
 
-  constructor(private ajax: AjaxService) {}
+  constructor(
+    private ajax: AjaxService,
+    private barbersService: BarbersService
+  ) {}
 
   //prendi recensioni
   getRecensioni() {
@@ -22,5 +28,8 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     //this.getRecensioni();
+    this.barbersService.barbers$.subscribe((barbers) => {
+      this.barbers = barbers;
+    });
   }
 }

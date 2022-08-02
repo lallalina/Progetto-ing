@@ -45,8 +45,4 @@ export class AjaxService {
   nuovoAdmin(obj): Observable<any> {
     return this.http.post(this.baseUrl + '/admin/nuovoAdmin', obj);
   }
-  //nuovobarbiere
-  nuovoBarbiere(obj): Observable<any> {
-    return this.http.post(this.baseUrl + '/admin/nuovoBarbiere', obj);
-  }
 }

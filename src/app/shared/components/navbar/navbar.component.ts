@@ -17,14 +17,16 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => {
-      console.log(user);
-      this.user = user;
+      if (user) {
+        console.log(user);
+        this.user = user;
 
-      //controllo ruolo admin
-      console.log(this.user.authorities);
-      this.isAdmin = !!this.user.authorities.find(
-        (elem) => elem.role === UserRole.ADMIN
-      );
+        //controllo ruolo admin
+        console.log(this.user.authorities);
+        this.isAdmin = !!this.user.authorities.find(
+          (elem) => elem.role === UserRole.ADMIN
+        );
+      }
     });
   }
 

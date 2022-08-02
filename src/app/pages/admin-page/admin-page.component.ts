@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BarbersService } from 'src/app/core/services/barbers.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class AdminPageComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private utils: UtilsService,
-    private ajax: AjaxService
+    private ajax: AjaxService,
+    private barbersService: BarbersService
   ) {}
 
   //CONTROLLI
@@ -136,7 +138,7 @@ export class AdminPageComponent implements OnInit {
 
   //aggiungi nuovo parrucchiere
   addBarbiere() {
-    this.ajax.nuovoBarbiere(this.form.value).subscribe((response) => {
+    this.barbersService.nuovoBarbiere(this.form.value).subscribe((response) => {
       console.log(response);
       this.barbiere = response;
     });
