@@ -13,7 +13,7 @@ export class BarbersService {
 
   constructor(private http: HttpClient) {
     //Il service farà la GET automaticamente per ottenere la lista di barbieri
-    this.getBarbers();
+    this.getBarbers().subscribe((_) => {});
   }
 
   get barbers(): Array<Barber> {
@@ -26,9 +26,9 @@ export class BarbersService {
 
   //GET barbieri
   getBarbers() {
-    this.http
+    return this.http
       .get<Array<Barber>>(`${environment.API_URL}/public/getBarbieri`)
-      .subscribe((response) => (this.barbers = response));
+      .pipe(tap((response) => (this.barbers = response)));
   }
 
   //nuovobarbiere
