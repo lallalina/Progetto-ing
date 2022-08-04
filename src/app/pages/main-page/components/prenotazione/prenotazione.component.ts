@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Barber } from 'src/app/models/barber.model';
+import { Treatment } from 'src/app/models/treatment.model';
 
 @Component({
   selector: 'app-prenotazione',
@@ -8,6 +9,7 @@ import { Barber } from 'src/app/models/barber.model';
 })
 export class PrenotazioneComponent implements OnInit {
   @Input() barbers: Array<Barber>;
+  @Input() treatments: Array<Treatment>;
 
   constructor() {}
 

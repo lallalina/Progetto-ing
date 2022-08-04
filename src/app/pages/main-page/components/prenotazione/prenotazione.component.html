@@ -27,23 +27,9 @@
             <legend style="color: white; margin-top: 100%">Trattamenti</legend>
             <br />
             <div class="row text-white">
-              <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-                <input type="checkbox" name="taglio" /> Taglio
-              </div>
-              <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-                <input type="checkbox" name="taglio" /> Shampoo
-              </div>
-              <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-                <input type="checkbox" name="taglio" /> Taglio bimbo
-              </div>
-              <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-                <input type="checkbox" name="taglio" /> Barba
-              </div>
-              <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-                <input type="checkbox" name="taglio" /> Anti-forfora
-              </div>
-              <div class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-                <input type="checkbox" name="taglio" /> Anti-caduta
+              <div *ngFor="let treatment of treatments"
+                class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
+                <input type="checkbox" [name]="treatment.nome" /> {{treatment.nome}}
               </div>
             </div>
           </fieldset>

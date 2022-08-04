@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
+import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class AdminPageComponent implements OnInit {
     private auth: AuthService,
     private utils: UtilsService,
     private ajax: AjaxService,
+    private treatmentsService: TreatmentsService,
     private barbersService: BarbersService
   ) {}
 
@@ -104,26 +106,29 @@ export class AdminPageComponent implements OnInit {
 
   //aggiungi nuovo trattamento
   addTrattamento() {
-    this.ajax.addTrattamento(this.form.value).subscribe((response) => {
-      console.log(response);
-      this.admin = response;
-    });
+    this.treatmentsService
+      .addTreatment(this.form.value)
+      .subscribe((response) => {
+        console.log(response);
+        //this.admin = response;
+      });
   }
 
   //prendi trattamento
-  getTrattamento() {
-    this.ajax.trattamenti().subscribe((response) => {
-      console.log(response);
-      this.treatments = response;
-    });
+  getTrattamenti() {
+    this.treatmentsService.treatments$.subscribe(
+      (treatments) => (this.treatments = treatments)
+    );
   }
 
   //cacnella trattamento
   deleteTrattamento() {
-    this.ajax.deleteTrattamento(this.form.value).subscribe((response) => {
-      console.log(response);
-      this.admin = response;
-    });
+    this.treatmentsService
+      .deleteTreatment(this.form.value)
+      .subscribe((response) => {
+        console.log(response);
+        //this.admin = response;
+      });
   }
 
   //UTENTI
@@ -145,8 +150,9 @@ export class AdminPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTrattamenti();
     this.initRegistrazione();
     this.initProdotto();
-    this.initTrattamento;
+    this.initTrattamento();
   }
 }
