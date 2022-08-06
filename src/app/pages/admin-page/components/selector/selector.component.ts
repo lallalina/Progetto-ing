@@ -14,7 +14,7 @@ export class SelectorComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  emitChangePage(event) {
-    this.changePage.emit(event.target.outerText);
+  emitChangePage(page) {
+    this.changePage.emit(page);
   }
 }

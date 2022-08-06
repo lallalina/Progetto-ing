@@ -6,9 +6,11 @@ import { AdminPageComponent } from './admin-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SelectorComponent } from './components/selector/selector.component';
+import { ProdAndTreatmentsComponent } from './components/prod-and-treatments/prod-and-treatments.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
-  declarations: [AdminPageComponent, SelectorComponent],
+  declarations: [AdminPageComponent, SelectorComponent, ProdAndTreatmentsComponent, UsersComponent],
   imports: [
     CommonModule,
     AdminPageRoutingModule,

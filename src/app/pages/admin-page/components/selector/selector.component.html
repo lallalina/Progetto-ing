@@ -10,7 +10,7 @@
 </div>
 
 <ng-template #segmentSelector let-label>
-    <div class="selector" [ngClass]="{'selected': label === this.currentPage}" (click)="emitChangePage($event)">
+    <div class="selector" [ngClass]="{'selected': label === this.currentPage}" (click)="emitChangePage(label)">
         <span>{{label}}</span>
     </div>
 </ng-template>
