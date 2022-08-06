@@ -1,9 +1,14 @@
+<!--Navbar-->
+<app-navbar></app-navbar>
+
 <div class="d-flex flex-column min-vh-100">
-  <!--Navbar-->
-  <app-navbar></app-navbar>
+
+  <!--Selector-->
+  <app-selector [currentPage]="currentPage" (changePage)="switchPage($event)"></app-selector>
 
   <!--Calendar-->
-  <app-calendar class="p-5 mt-5"></app-calendar>
+  <app-calendar class=" p-5 mt-5">
+  </app-calendar>
 
   <div class="container">
     <!--Add Prodotto-->
@@ -12,28 +17,13 @@
         <form [formGroup]="form" (ngSubmit)="addProdotto()">
           <legend>Aggiungi Prodotto</legend>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
+            <input class="form-control" type="text" name="nome" placeholder="Nome" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="Prezzo"
-              placeholder="Prezzo"
-            />
+            <input class="form-control" type="text" name="Prezzo" placeholder="Prezzo" />
           </div>
           <div class="form-group">
-            <textarea
-              name="descrizione"
-              rows="5"
-              cols="30"
-              placeholder="Descrizione"
-            >
+            <textarea name="descrizione" rows="5" cols="30" placeholder="Descrizione">
             </textarea>
           </div>
           <button type="submit" class="btn btn-dark">Aggiungi</button>
@@ -60,28 +50,13 @@
         <form [formGroup]="form" (ngSubmit)="addTrattamento()">
           <legend>Aggiungi Trattamento</legend>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
+            <input class="form-control" type="text" name="nome" placeholder="Nome" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="durata"
-              placeholder="Durata"
-            />
+            <input class="form-control" type="text" name="durata" placeholder="Durata" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="Prezzo"
-              placeholder="Prezzo"
-            />
+            <input class="form-control" type="text" name="Prezzo" placeholder="Prezzo" />
           </div>
           <button type="submit" class="btn btn-dark">Aggiungi</button>
         </form>
@@ -108,60 +83,25 @@
         <form [formGroup]="form" (ngSubmit)="addBarbiere()">
           <legend>Registra Parrucchieri</legend>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
+            <input class="form-control" type="text" name="nome" placeholder="Nome" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="cognome"
-              placeholder="Cognome"
-            />
+            <input class="form-control" type="text" name="cognome" placeholder="Cognome" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="email"
-              name="mail"
-              placeholder="Email"
-            />
+            <input class="form-control" type="email" name="mail" placeholder="Email" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
+            <input class="form-control" type="password" name="password" placeholder="Password" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="password"
-              name="confPassword"
-              placeholder="Conferma Password"
-            />
+            <input class="form-control" type="password" name="confPassword" placeholder="Conferma Password" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="number"
-              name="cellulare"
-              placeholder="Cellulare"
-            />
+            <input class="form-control" type="number" name="cellulare" placeholder="Cellulare" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="url"
-              name="url"
-              placeholder="Foto Barbiere"
-            />
+            <input class="form-control" type="url" name="url" placeholder="Foto Barbiere" />
           </div>
           <button type="submit" class="btn btn-dark">Crea</button>
         </form>
@@ -172,36 +112,16 @@
         <form [formGroup]="form" (ngSubmit)="addAdmin()">
           <legend>Registra Admin</legend>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
+            <input class="form-control" type="text" name="nome" placeholder="Nome" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="cognome"
-              placeholder="Cognome"
-            />
+            <input class="form-control" type="text" name="cognome" placeholder="Cognome" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="email"
-              name="mail"
-              placeholder="Email"
-            />
+            <input class="form-control" type="email" name="mail" placeholder="Email" />
           </div>
           <div class="form-group">
-            <input
-              class="form-control"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
+            <input class="form-control" type="password" name="password" placeholder="Password" />
           </div>
           <button type="submit" class="btn btn-dark">Crea</button>
         </form>

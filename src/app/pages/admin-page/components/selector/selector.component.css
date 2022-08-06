@@ -1,0 +1,24 @@
+.selectors-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.selector {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 15px;
+  font-size: larger;
+  border-radius: 20px;
+  background-color: lightgray;
+}
+
+.selected {
+  background-color: rgba(73, 62, 32, 0.5);
+  color: white;
+  font-weight: bold;
+}

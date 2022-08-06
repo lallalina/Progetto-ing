@@ -7,6 +7,12 @@ import { BarbersService } from 'src/app/core/services/barbers.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 
+enum Pages {
+  Calendar = 'Calendario',
+  ProdsAndTreatments = 'Prodotti/Trattamenti',
+  Users = 'Utenti',
+}
+
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
@@ -20,6 +26,8 @@ export class AdminPageComponent implements OnInit {
   product = [];
   treatments = [];
 
+  currentPage: Pages;
+
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -28,6 +36,19 @@ export class AdminPageComponent implements OnInit {
     private treatmentsService: TreatmentsService,
     private barbersService: BarbersService
   ) {}
+
+  ngOnInit(): void {
+    this.currentPage = Pages.Calendar;
+    this.getTrattamenti();
+    this.initRegistrazione();
+    this.initProdotto();
+    this.initTrattamento();
+  }
+
+  //Switch page
+  switchPage(page: Pages) {
+    this.currentPage = page;
+  }
 
   //CONTROLLI
   printData() {
@@ -147,12 +168,5 @@ export class AdminPageComponent implements OnInit {
       console.log(response);
       this.barbiere = response;
     });
-  }
-
-  ngOnInit(): void {
-    this.getTrattamenti();
-    this.initRegistrazione();
-    this.initProdotto();
-    this.initTrattamento();
   }
 }

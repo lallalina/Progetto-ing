@@ -5,9 +5,10 @@ import { AdminPageRoutingModule } from './admin-page-routing.module';
 import { AdminPageComponent } from './admin-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SelectorComponent } from './components/selector/selector.component';
 
 @NgModule({
-  declarations: [AdminPageComponent],
+  declarations: [AdminPageComponent, SelectorComponent],
   imports: [
     CommonModule,
     AdminPageRoutingModule,
