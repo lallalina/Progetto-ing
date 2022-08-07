@@ -1,0 +1,67 @@
+<div class="container">
+    <!--Add Prodotto-->
+    <div class="row mt-4">
+        <div class="col-3">
+            <form [formGroup]="productsForm" (ngSubmit)="addProdotto()">
+                <legend>Aggiungi Prodotto</legend>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="nome" placeholder="Nome" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="Prezzo" placeholder="Prezzo" />
+                </div>
+                <div class="form-group">
+                    <textarea name="descrizione" rows="5" cols="30" placeholder="Descrizione">
+            </textarea>
+                </div>
+                <button type="submit" class="btn btn-dark">Aggiungi</button>
+            </form>
+        </div>
+        <!--Delete Prodotto-->
+        <div class="col-6 mb-3 mt-3" id="prodotti">
+            <h1>Prodotti</h1>
+            <ul *ngFor="let row of products">
+                <div class="row">
+                    <ol></ol>
+                    <ol></ol>
+                </div>
+            </ul>
+            <!--  <div *ngIf="product == 0">
+        <p>non ci sono prodotti qui</p>
+      </div> -->
+        </div>
+    </div>
+
+    <!--Add trattamento-->
+    <div class="row mt-4">
+        <div class="col-6">
+            <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
+                <legend>Aggiungi Trattamento</legend>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="nome" placeholder="Nome" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="durata" placeholder="Durata" />
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="Prezzo" placeholder="Prezzo" />
+                </div>
+                <button type="submit" class="btn btn-dark">Aggiungi</button>
+            </form>
+        </div>
+        <!--Delete Trattamento-->
+        <div class="col-6 mb-3 mt-3" id="trattamenti">
+            <h1>Trattamenti</h1>
+            <ul *ngFor="let row of treatments">
+                <div class="row">
+                    <ol></ol>
+                    <ol></ol>
+                </div>
+            </ul>
+            <!--  <div *ngIf="product == 0">
+          <p>non ci sono trattamenti qui</p>
+        </div> -->
+        </div>
+    </div>
+
+</div>

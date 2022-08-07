@@ -29,18 +29,6 @@ export class AjaxService {
     return this.http.post(this.baseUrl + '/eliminaProdotto', obj);
   }
 
-  //addTrattamento
-  addTrattamento(obj): Observable<any> {
-    return this.http.post(this.baseUrl + '/nuovoTrattamento', obj);
-  } //getTrattamento
-  trattamenti(): Observable<any> {
-    return this.http.get(this.baseUrl + '/public/getTrattamenti');
-  }
-  //deleteTrattamento
-  deleteTrattamento(obj): Observable<any> {
-    return this.http.post(this.baseUrl + '/eliminaTrattamento', obj);
-  }
-
   //addAdmin
   nuovoAdmin(obj): Observable<any> {
     return this.http.post(this.baseUrl + '/admin/nuovoAdmin', obj);

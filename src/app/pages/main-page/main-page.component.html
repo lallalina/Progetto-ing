@@ -2,7 +2,7 @@
 <app-navbar></app-navbar>
 
 <!--Copertina-->
-<div class="container-fluid custom-margin">
+<div class="container-fluid custom-margin main-page-wrapper">
   <div class="row justify-content-center">
     <div class="col-12 p-0">
       <img class="copertina pc-only" src="assets/copertina.jpg" alt="immagine di copertina" />
@@ -38,7 +38,7 @@
       <div class="form-group">
         <h3 style="color: wheat">PRENDI IL TUO APPUNTAMENTO</h3>
       </div>
-      <app-prenotazione [barbers]="barbers" class="mt-5"></app-prenotazione>
+      <app-prenotazione [barbers]="barbers" [treatments]="treatments" class="mt-5"></app-prenotazione>
     </div>
   </div>
 </div>

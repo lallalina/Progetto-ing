@@ -1,214 +1,24 @@
+<!--Navbar-->
+<app-navbar></app-navbar>
+
 <div class="d-flex flex-column min-vh-100">
-  <!--Navbar-->
-  <app-navbar></app-navbar>
 
-  <!--Calendar-->
-  <app-calendar class="p-5 mt-5"></app-calendar>
+  <!--Selector-->
+  <app-selector [currentPage]="currentPage" (changePage)="switchPage($event)"></app-selector>
 
-  <div class="container">
-    <!--Add Prodotto-->
-    <div class="row mt-4">
-      <div class="col-3">
-        <form [formGroup]="form" (ngSubmit)="addProdotto()">
-          <legend>Aggiungi Prodotto</legend>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="Prezzo"
-              placeholder="Prezzo"
-            />
-          </div>
-          <div class="form-group">
-            <textarea
-              name="descrizione"
-              rows="5"
-              cols="30"
-              placeholder="Descrizione"
-            >
-            </textarea>
-          </div>
-          <button type="submit" class="btn btn-dark">Aggiungi</button>
-        </form>
-      </div>
-      <!--Delete Prodotto-->
-      <div class="col-6 mb-3 mt-3" id="prodotti">
-        <h1>Prodotti</h1>
-        <ul *ngFor="let row of product">
-          <div class="row">
-            <ol></ol>
-            <ol></ol>
-          </div>
-        </ul>
-        <!--  <div *ngIf="product == 0">
-        <p>non ci sono prodotti qui</p>
-      </div> -->
-      </div>
-    </div>
+  <div class="p-5 mt-5" [ngSwitch]="currentPage">
+    <!--Calendar-->
+    <app-calendar *ngSwitchCase="Pages.Calendar">
+    </app-calendar>
 
-    <!--Add trattamento-->
-    <div class="row mt-4">
-      <div class="col-6">
-        <form [formGroup]="form" (ngSubmit)="addTrattamento()">
-          <legend>Aggiungi Trattamento</legend>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="durata"
-              placeholder="Durata"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="Prezzo"
-              placeholder="Prezzo"
-            />
-          </div>
-          <button type="submit" class="btn btn-dark">Aggiungi</button>
-        </form>
-      </div>
-      <!--Delete Trattamento-->
-      <div class="col-6 mb-3 mt-3" id="trattamenti">
-        <h1>Trattamenti</h1>
-        <ul *ngFor="let row of treatments">
-          <div class="row">
-            <ol></ol>
-            <ol></ol>
-          </div>
-        </ul>
-        <!--  <div *ngIf="product == 0">
-          <p>non ci sono trattamenti qui</p>
-        </div> -->
-      </div>
-    </div>
+    <!--Prodotti e trattamenti-->
+    <app-prod-and-treatments [products]="products" [treatments]="treatments" *ngSwitchCase="Pages.ProdsAndTreatments">
+    </app-prod-and-treatments>
 
-    <!--Registra parrucchieri-->
-    <!--Content-->
-    <div class="row mt-4">
-      <div class="col-6">
-        <form [formGroup]="form" (ngSubmit)="addBarbiere()">
-          <legend>Registra Parrucchieri</legend>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="cognome"
-              placeholder="Cognome"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="email"
-              name="mail"
-              placeholder="Email"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="password"
-              name="confPassword"
-              placeholder="Conferma Password"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="number"
-              name="cellulare"
-              placeholder="Cellulare"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="url"
-              name="url"
-              placeholder="Foto Barbiere"
-            />
-          </div>
-          <button type="submit" class="btn btn-dark">Crea</button>
-        </form>
-      </div>
+    <!--Utenti-->
+    <app-users *ngSwitchCase="Pages.Users"></app-users>
 
-      <!--Registra admin-->
-      <div class="col-6">
-        <form [formGroup]="form" (ngSubmit)="addAdmin()">
-          <legend>Registra Admin</legend>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="nome"
-              placeholder="Nome"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              name="cognome"
-              placeholder="Cognome"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="email"
-              name="mail"
-              placeholder="Email"
-            />
-          </div>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-          </div>
-          <button type="submit" class="btn btn-dark">Crea</button>
-        </form>
-      </div>
-    </div>
   </div>
-
   <!--Footer-->
   <app-footer class="mt-5"></app-footer>
 </div>
