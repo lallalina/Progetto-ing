@@ -13,9 +13,15 @@ import {
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarComponent } from './components/calendar/calendar.component';
-
+import { TableComponent } from './components/table/table.component';
+import { PipesModule } from '../core/pipes/pipes.module';
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, CalendarComponent],
+  declarations: [
+    NavbarComponent,
+    FooterComponent,
+    CalendarComponent,
+    TableComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,7 +32,14 @@ import { CalendarComponent } from './components/calendar/calendar.component';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    PipesModule,
   ],
-  exports: [NavbarComponent, FooterComponent, CalendarComponent],
+  exports: [
+    NavbarComponent,
+    FooterComponent,
+    CalendarComponent,
+    TableComponent,
+    PipesModule,
+  ],
 })
 export class SharedModule {}

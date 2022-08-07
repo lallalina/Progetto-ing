@@ -1,9 +1,26 @@
 <div class="container">
 
+    <!--Table-->
+    <app-table [data]="users">
+        <ng-template #headers>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Mail</th>
+            <th>Cellulare</th>
+            <th>Ruolo</th>
+        </ng-template>
+        <ng-template #rows let-row>
+            <td>{{row.nome}}</td>
+            <td>{{row.cognome}}</td>
+            <td>{{row.mail}}</td>
+            <td>{{row.cellulare}}</td>
+            <td>{{row.role | roleName}}</td>
+        </ng-template>
+    </app-table>
 
     <!--Registra parrucchieri-->
     <!--Content-->
-    <div class="row mt-4">
+    <div class="row mt-5">
         <div class="col-6">
             <form [formGroup]="barbersForm" (ngSubmit)="addBarber()">
                 <legend>Registra Parrucchieri</legend>

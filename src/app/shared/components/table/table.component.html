@@ -1,0 +1,13 @@
+<table>
+    <thead>
+        <tr>
+            <ng-container [ngTemplateOutlet]="headers">
+            </ng-container>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data">
+            <ng-container [ngTemplateOutlet]="rows" [ngTemplateOutletContext]="{$implicit: row}"></ng-container>
+        </tr>
+    </tbody>
+</table>
