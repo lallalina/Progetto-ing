@@ -3,7 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { Barber } from 'src/app/models/barber.model';
+import * as _ from 'lodash';
 import { UserRole } from 'src/app/models/user.model';
+
+enum FilterOptions {
+  All = 'Tutti',
+  Barbers = 'Barbieri',
+  Admins = 'Amministratori',
+}
 
 @Component({
   selector: 'app-users',
@@ -11,10 +18,18 @@ import { UserRole } from 'src/app/models/user.model';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  @Input() users: Barber[];
+  @Input() set users(value: Barber[]) {
+    this.usersList = value;
+    this.tableData = this.usersList;
+  }
 
+  usersList: Barber[];
+  tableData: Barber[];
   barbersForm: FormGroup;
   adminsForm: FormGroup;
+
+  readonly FilterOptions = FilterOptions;
+  activeFilter: FilterOptions = FilterOptions.All;
 
   constructor(
     private barbersService: BarbersService,
@@ -24,6 +39,25 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.initBarbersForm();
     this.initAdminsForm();
+    this.applyActiveFilter();
+  }
+
+  applyActiveFilter() {
+    console.log(this.activeFilter);
+    switch (this.activeFilter) {
+      case FilterOptions.Barbers: {
+        this.tableData = _.filter(this.usersList, ['role', UserRole.BARBER]);
+        break;
+      }
+      case FilterOptions.Admins: {
+        this.tableData = _.filter(this.usersList, ['role', UserRole.ADMIN]);
+        break;
+      }
+      default: {
+        this.tableData = this.usersList;
+        break;
+      }
+    }
   }
 
   initBarbersForm() {

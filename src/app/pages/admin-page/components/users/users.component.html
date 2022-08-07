@@ -1,7 +1,13 @@
 <div class="container">
 
+    <!--TODO add loader-->
+    <select class="form-control role-filter" [(ngModel)]="activeFilter" (change)="applyActiveFilter()">
+        <option [value]="FilterOptions.All">Tutti</option>
+        <option [value]="FilterOptions.Barbers">Barbieri</option>
+        <option [value]="FilterOptions.Admins">Aministratori</option>
+    </select>
     <!--Table-->
-    <app-table [data]="users">
+    <app-table [data]="tableData">
         <ng-template #headers>
             <th>Nome</th>
             <th>Cognome</th>
