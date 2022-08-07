@@ -46,15 +46,15 @@ body {
 }
 
 /*NAVBAR*/
-
 .navbar-logo {
   max-width: 75px;
 }
 
 .navbar {
-  background-color: rgba(73, 62, 32, 0.5);
+  background: rgba(73, 62, 32, 0.5) !important;
   font-family: "Times New Roman", Times, serif;
   height: 80px;
+  transition: 0, 5s ease;
 }
 
 .navbar ul li {
@@ -68,6 +68,10 @@ body {
 
 .navbar ul li a:hover {
   background-color: #211b4385;
+}
+
+.navbar.scrolled {
+  background: black !important;
 }
 
 /*Text decoration */
@@ -144,39 +148,9 @@ label {
 
 /*LOGIN*/
 .cover {
-  height: 100%;
-  background-image: url(/assets/sfondo.jpg);
-  background-size: cover;
-  -o-background-size: cover;
-  -moz-background-size: cover;
-  background-position: center;
-}
-
-.cover__caption {
-  display: table;
-  height: 100%;
-  width: 100%;
-}
-
-.cover__caption__copy {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.form {
-  margin-top: 25%;
-}
-
-.form h2 {
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
-  width: 10%;
-  margin-left: 45%;
-}
-
-.form-group input {
-  border: 1px solid black;
+  background-image: url("assets/Imagem-j.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 /*REGISTRAZIONE*/
@@ -220,13 +194,38 @@ label {
 
 /*FOOTER*/
 .footer {
-  background-color: rgba(73, 62, 32, 0.5);
+  background-color: rgba(137, 93, 56, 0.799);
   margin-top: 5px;
 }
 
 .footer ol {
   padding: 4px;
   text-align: center;
+}
+
+/*ICONS*/
+.fa {
+  padding: 12px;
+  font-size: 12px;
+  width: 45px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 15px;
+  border-radius: 50%;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3b5998;
+  color: white;
+}
+
+.fa-instagram {
+  background: #b10d36;
+  color: white;
 }
 
 html,

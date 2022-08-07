@@ -1,6 +1,5 @@
 .login-page-container {
-  height: 100vh;
-  background: #b9a0a0;
+  background: rgba(61, 36, 3, 0.425);
 }
 
 .user_card {
@@ -44,6 +43,7 @@
   width: 100%;
   background: #0c0909 !important;
   color: white !important;
+  margin-bottom: 40px;
 }
 .login_btn:focus {
   box-shadow: none !important;
