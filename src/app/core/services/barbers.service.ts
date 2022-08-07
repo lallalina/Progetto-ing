@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, tap } from 'rxjs';
 import { Barber } from 'src/app/models/barber.model';
 import { environment } from 'src/environments/environment';
 
@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class BarbersService {
-  private readonly barbersSubject = new BehaviorSubject<Array<Barber>>([]);
+  private readonly barbersSubject = new BehaviorSubject<Barber[]>([]);
   readonly barbers$ = this.barbersSubject.asObservable();
 
   constructor(private http: HttpClient) {
@@ -16,19 +16,29 @@ export class BarbersService {
     this.getBarbers().subscribe((_) => {});
   }
 
-  get barbers(): Array<Barber> {
+  get barbers(): Barber[] {
     return this.barbersSubject.value;
   }
 
-  set barbers(value: Array<Barber>) {
+  set barbers(value: Barber[]) {
     this.barbersSubject.next(value);
+  }
+
+  //GET totale utenti
+  getUsers() {
+    return combineLatest([this.barbers$, this.getAdmins()]);
   }
 
   //GET barbieri
   getBarbers() {
     return this.http
-      .get<Array<Barber>>(`${environment.API_URL}/public/getBarbieri`)
+      .get<Barber[]>(`${environment.API_URL}/public/getBarbieri`)
       .pipe(tap((response) => (this.barbers = response)));
+  }
+
+  //GET admin
+  getAdmins() {
+    return this.http.get<Barber[]>(`${environment.API_URL}/admin/getAdmin`);
   }
 
   //nuovobarbiere

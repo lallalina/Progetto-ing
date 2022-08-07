@@ -16,7 +16,7 @@
     </app-prod-and-treatments>
 
     <!--Utenti-->
-    <app-users *ngSwitchCase="Pages.Users"></app-users>
+    <app-users [users]="users" *ngSwitchCase="Pages.Users"></app-users>
 
   </div>
   <!--Footer-->

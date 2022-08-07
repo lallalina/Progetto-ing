@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
+import { Barber } from 'src/app/models/barber.model';
 import { Treatment } from 'src/app/models/treatment.model';
 
 enum Pages {
@@ -25,6 +26,7 @@ export class AdminPageComponent implements OnInit {
   prodotto;
   products = [];
   treatments: Treatment[] = [];
+  users: Barber[] = [];
 
   readonly Pages = Pages;
   currentPage: Pages;
@@ -41,6 +43,7 @@ export class AdminPageComponent implements OnInit {
   ngOnInit(): void {
     this.currentPage = Pages.Calendar;
     this.getTrattamenti();
+    this.getUsers();
   }
 
   //Switch page
@@ -74,6 +77,14 @@ export class AdminPageComponent implements OnInit {
     this.treatmentsService.treatments$.subscribe(
       (treatments) => (this.treatments = treatments)
     );
+  }
+
+  //subscribe barbieri
+  getUsers() {
+    this.barbersService.getUsers().subscribe(([barbers, admins]) => {
+      this.users = barbers.concat(admins);
+      console.log(this.users);
+    });
   }
 
   //cacnella trattamento

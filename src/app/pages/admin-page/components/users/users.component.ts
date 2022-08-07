@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
+import { Barber } from 'src/app/models/barber.model';
+import { UserRole } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-users',
@@ -9,6 +11,8 @@ import { BarbersService } from 'src/app/core/services/barbers.service';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
+  @Input() users: Barber[];
+
   barbersForm: FormGroup;
   adminsForm: FormGroup;
 

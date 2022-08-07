@@ -8,7 +8,7 @@ import { Treatment } from 'src/app/models/treatment.model';
   styleUrls: ['./prenotazione.component.css'],
 })
 export class PrenotazioneComponent implements OnInit {
-  @Input() barbers: Array<Barber>;
+  @Input() barbers: Barber[];
   @Input() treatments: Array<Treatment>;
 
   constructor() {}

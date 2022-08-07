@@ -11,7 +11,7 @@ import { Treatment } from 'src/app/models/treatment.model';
   styleUrls: ['./main-page.component.css'],
 })
 export class MainPageComponent implements OnInit {
-  barbers: Array<Barber>;
+  barbers: Barber[];
   treatments: Array<Treatment>;
   reviews: any;
   error;
