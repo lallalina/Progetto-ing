@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UtilsService } from './core/services/utils.service';
 
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { RegistrationComponent } from './pages/registration-page/registration.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
       useFactory: adapterFactory,
     }),
   ],
-  providers: [UtilsService],
+  providers: [
+    UtilsService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

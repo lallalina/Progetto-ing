@@ -28,6 +28,12 @@ export class AuthService {
       );
   }
 
+  logout() {
+    this.user = null;
+    this.jwt = null;
+    sessionStorage.clear();
+  }
+
   //ottengo l'ultimo valore dell'user
   get user(): User {
     return this.userSubject.value;
