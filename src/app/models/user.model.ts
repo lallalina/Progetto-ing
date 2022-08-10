@@ -16,4 +16,5 @@ export interface User {
   authorities: Authority[];
   enabled: boolean;
   credentialsNonExpired: boolean;
+  jwt: string;
 }

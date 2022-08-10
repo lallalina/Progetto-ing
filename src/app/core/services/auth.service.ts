@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Token } from 'src/app/models/token.model';
 import { environment } from 'src/environments/environment';
 import { User } from '../../models/user.model';
 
@@ -16,8 +17,15 @@ export class AuthService {
   }
 
   //login -passo i parametri
-  login(obj: FormData) {
-    return this.http.post<User>(environment.API_URL + '/login', obj);
+  login(obj) {
+    return this.http
+      .post<Array<Token | User>>(environment.API_URL + '/login', obj)
+      .pipe(
+        tap((response) => {
+          this.jwt = (response[0] as Token).jwt;
+          this.user = response[1] as User;
+        })
+      );
   }
 
   //ottengo l'ultimo valore dell'user
@@ -29,6 +37,14 @@ export class AuthService {
   set user(value: User) {
     sessionStorage.setItem('user', JSON.stringify(value));
     this.userSubject.next(value);
+  }
+
+  get jwt(): Token['jwt'] {
+    return sessionStorage.getItem('jwt');
+  }
+
+  set jwt(value: Token['jwt']) {
+    sessionStorage.setItem('jwt', value);
   }
 
   registrazione(param) {

@@ -3,8 +3,6 @@ import { UtilsService } from '../../core/services/utils.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserRole } from 'src/app/models/user.model';
-import { AjaxService } from 'src/app/core/services/ajax.service';
 
 @Component({
   selector: 'app-login',
@@ -32,9 +30,10 @@ export class LoginComponent implements OnInit {
 
   //per loggarsi
   login() {
-    const data = new FormData();
-    data.append('username', this.form.controls['email'].value);
-    data.append('password', this.form.controls['password'].value);
+    const data = {
+      username: this.form.controls['email'].value,
+      password: this.form.controls['password'].value,
+    };
     this.auth.login(data).subscribe(
       (response) => {
         //viene eseguito solo dopo che il server risponde, response è l'oggetto che mi arriva dal server
