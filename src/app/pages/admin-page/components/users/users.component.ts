@@ -97,7 +97,9 @@ export class UsersComponent implements OnInit {
     this.barbersService
       .nuovoBarbiere(this.barbersForm.value)
       .subscribe((response) => {
-        console.log(response);
+        this.barbersForm.reset();
+        this.usersList.push(response);
+        this.tableData = this.usersList;
         //this.barbiere = response;
       });
   }

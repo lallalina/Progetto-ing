@@ -1,13 +1,22 @@
 <table>
     <thead>
         <tr>
-            <ng-container [ngTemplateOutlet]="headers">
+            <ng-container [ngTemplateOutlet]="headers || defHeaders">
             </ng-container>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let row of data">
-            <ng-container [ngTemplateOutlet]="rows" [ngTemplateOutletContext]="{$implicit: row}"></ng-container>
+            <ng-container [ngTemplateOutlet]="rows || defRows" [ngTemplateOutletContext]="{$implicit: row}">
+            </ng-container>
         </tr>
     </tbody>
 </table>
+
+<ng-template #defHeaders>
+    <th>head</th>
+</ng-template>
+
+<ng-template #defRows>
+    <td>row</td>
+</ng-template>

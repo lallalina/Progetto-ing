@@ -7,6 +7,7 @@ import { ProductsService } from 'src/app/core/services/products.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { Barber } from 'src/app/models/barber.model';
+import { Product } from 'src/app/models/product.model';
 import { Treatment } from 'src/app/models/treatment.model';
 
 enum Pages {
@@ -25,7 +26,7 @@ export class AdminPageComponent implements OnInit {
   admin;
   barbiere;
   prodotto;
-  products = [];
+  products: Product[] = [];
   treatments: Treatment[] = [];
   users: Barber[] = [];
 
@@ -42,6 +43,7 @@ export class AdminPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentPage = Pages.Calendar;
+    this.getProducts();
     this.getTrattamenti();
     this.getUsers();
   }
@@ -65,7 +67,7 @@ export class AdminPageComponent implements OnInit {
   //METODI GET
 
   //prendi prodotti
-  getProdotto() {
+  getProducts() {
     this.productService.getProducts().subscribe((response) => {
       console.log(response);
       this.products = response;

@@ -5,81 +5,32 @@
       <form [formGroup]="productsForm" (ngSubmit)="addProdotto()">
         <legend>Aggiungi Prodotto</legend>
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            name="nome"
-            placeholder="Nome"
-          />
+          <input class="form-control" type="text" name="nome" placeholder="Nome" />
         </div>
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            name="Prezzo"
-            placeholder="Prezzo"
-          />
+          <input class="form-control" type="text" name="Prezzo" placeholder="Prezzo" />
         </div>
         <div class="form-group">
-          <textarea
-            name="descrizione"
-            rows="5"
-            cols="30"
-            placeholder="Descrizione"
-          >
+          <textarea name="descrizione" rows="5" cols="30" placeholder="Descrizione">
           </textarea>
         </div>
         <button type="submit" class="btn btn-dark">Aggiungi</button>
       </form>
     </div>
     <!--Delete and Modify Prodotto-->
-    <div class="col-6 mb-3 mt-3" id="prodotti">
-      <div class="col-6">
-        <h1>Prodotti</h1>
-        <ul *ngFor="let product of products">
-          <div class="row">
-            <ul>
-              <ol>
-                {{
-                  product.nome
-                }}
-              </ol>
-              <ol>
-                {{
-                  product.descrizione
-                }}
-              </ol>
-              <ol>
-                {{
-                  product.prezzo
-                }}
-              </ol>
-            </ul>
-          </div>
-        </ul>
-      </div>
-      <div *ngIf="products.length == 0">
-        <p>non ci sono prodotti qui</p>
-      </div>
-      <div class="col-6">
-        <ul *ngFor="let product of products">
-          <ol>
-            <input
-              type="submit"
-              onclick="deleteProdotto(obj)"
-              class="fa-regular fa-trash"
-            />
-          </ol>
-          <ol>
-            <input
-              type="submit"
-              onclick="ModifyProdotto(obj)"
-              class="fa-regular fa-pencil"
-            />
-            />
-          </ol>
-        </ul>
-      </div>
+    <div class="col-6 mb-3 mt-3" id="prodotti" *ngIf="products">
+      <app-table [data]="products">
+        <ng-template #headers>
+          <th>Nome</th>
+          <th>Descrizione</th>
+          <th>Prezzo</th>
+        </ng-template>
+        <ng-template #rows let-row>
+          <td> {{row.nome}} </td>
+          <td> {{row.descrizione}} </td>
+          <td> {{row.prezzo}} </td>
+        </ng-template>
+      </app-table>
     </div>
   </div>
 
@@ -89,78 +40,27 @@
       <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
         <legend>Aggiungi Trattamento</legend>
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            name="nome"
-            placeholder="Nome"
-          />
+          <input class="form-control" type="text" name="nome" placeholder="Nome" />
         </div>
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            name="durata"
-            placeholder="Durata"
-          />
+          <input class="form-control" type="text" name="durata" placeholder="Durata" />
         </div>
         <div class="form-group">
-          <input
-            class="form-control"
-            type="text"
-            name="Prezzo"
-            placeholder="Prezzo"
-          />
+          <input class="form-control" type="text" name="Prezzo" placeholder="Prezzo" />
         </div>
         <button type="submit" class="btn btn-dark">Aggiungi</button>
       </form>
     </div>
     <!--Delete and Modify Trattamento-->
     <div class="col-6 mb-3 mt-3" id="trattamenti">
-      <h1>Trattamenti</h1>
-      <ul *ngFor="let treatment of treatments">
-        <div class="row">
-          <ul>
-            <ol>
-              {{
-                trattamento.nome
-              }}
-            </ol>
-            <ol>
-              {{
-                trattamento.prezzo
-              }}
-            </ol>
-            <ol>
-              {{
-                trattamento.durata
-              }}
-            </ol>
-          </ul>
-        </div>
-      </ul>
-      <div *ngIf="treatments.length == 0">
-        <p>non ci sono trattamenti qui</p>
-      </div>
-      <div class="col-6">
-        <ul *ngFor="let treatment of treatments">
-          <ol>
-            <input
-              type="submit"
-              onclick="deleteTreatment(obj)"
-              class="fa-regular fa-trash"
-            />
-          </ol>
-          <ol>
-            <input
-              type="submit"
-              onclick="ModifyTreatment(obj)"
-              class="fa-regular fa-pencil"
-            />
-            />
-          </ol>
-        </ul>
-      </div>
+      <app-table [data]="treatments">
+        <ng-template #headers>
+          <th>Nome</th>
+        </ng-template>
+        <ng-template #rows let-row>
+          <td> {{row.nome}} </td>
+        </ng-template>
+      </app-table>
     </div>
   </div>
 </div>

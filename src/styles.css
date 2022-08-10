@@ -235,3 +235,13 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+th {
+  padding: 1em;
+}
+
+td {
+  padding: 1em;
+  background: #ddd;
+  border-bottom: 2px solid white;
+}

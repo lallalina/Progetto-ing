@@ -30,7 +30,9 @@ export class ProductsService {
   }
   //getProdotto
   getProducts(): Observable<any> {
-    return this.http.get(environment.API_URL + '/public/getProdotti');
+    return this.http.get<Product[]>(
+      environment.API_URL + '/public/getProdotti'
+    );
   }
   //deleteProdotto
   deleteProdotto(obj): Observable<any> {
