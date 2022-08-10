@@ -1,78 +1,128 @@
 <div class="container">
+  <!--TODO add loader-->
+  <select
+    class="form-control role-filter"
+    [(ngModel)]="activeFilter"
+    (change)="applyActiveFilter()"
+  >
+    <option [value]="FilterOptions.All">Tutti</option>
+    <option [value]="FilterOptions.Barbers">Barbieri</option>
+    <option [value]="FilterOptions.Admins">Aministratori</option>
+  </select>
+  <!--Table-->
+  <app-table [data]="tableData">
+    <ng-template #headers>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Mail</th>
+      <th>Cellulare</th>
+      <th>Ruolo</th>
+    </ng-template>
+    <ng-template #rows let-row>
+      <td>{{ row.nome }}</td>
+      <td>{{ row.cognome }}</td>
+      <td>{{ row.mail }}</td>
+      <td>{{ row.cellulare }}</td>
+      <td>{{ row.role | roleName }}</td>
+    </ng-template>
+  </app-table>
 
-    <!--TODO add loader-->
-    <select class="form-control role-filter" [(ngModel)]="activeFilter" (change)="applyActiveFilter()">
-        <option [value]="FilterOptions.All">Tutti</option>
-        <option [value]="FilterOptions.Barbers">Barbieri</option>
-        <option [value]="FilterOptions.Admins">Aministratori</option>
-    </select>
-    <!--Table-->
-    <app-table [data]="tableData">
-        <ng-template #headers>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Mail</th>
-            <th>Cellulare</th>
-            <th>Ruolo</th>
-        </ng-template>
-        <ng-template #rows let-row>
-            <td>{{row.nome}}</td>
-            <td>{{row.cognome}}</td>
-            <td>{{row.mail}}</td>
-            <td>{{row.cellulare}}</td>
-            <td>{{row.role | roleName}}</td>
-        </ng-template>
-    </app-table>
-
-    <!--Registra parrucchieri-->
-    <!--Content-->
-    <div class="row mt-5">
-        <div class="col-6">
-            <form [formGroup]="barbersForm" (ngSubmit)="addBarber()">
-                <legend>Registra Parrucchieri</legend>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="nome" placeholder="Nome" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="cognome" placeholder="Cognome" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="email" name="mail" placeholder="Email" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Password" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="confPassword" placeholder="Conferma Password" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="number" name="cellulare" placeholder="Cellulare" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="url" name="url" placeholder="Foto Barbiere" />
-                </div>
-                <button type="submit" class="btn btn-dark">Crea</button>
-            </form>
+  <!--Registra parrucchieri-->
+  <!--Content-->
+  <div class="row mt-5">
+    <div class="col-6">
+      <form [formGroup]="barbersForm" (ngSubmit)="addBarber()">
+        <legend>Registra Parrucchieri</legend>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="nome"
+            placeholder="Nome"
+          />
         </div>
-
-        <!--Registra admin-->
-        <div class="col-6">
-            <form [formGroup]="adminsForm" (ngSubmit)="addAdmin()">
-                <legend>Registra Admin</legend>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="nome" placeholder="Nome" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" name="cognome" placeholder="Cognome" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="email" name="mail" placeholder="Email" />
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password" placeholder="Password" />
-                </div>
-                <button type="submit" class="btn btn-dark">Crea</button>
-            </form>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="cognome"
+            placeholder="Cognome"
+          />
         </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="email"
+            name="mail"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="password"
+            name="confPassword"
+            placeholder="Conferma Password"
+          />
+        </div>
+        <button type="submit" class="btn btn-dark">Crea</button>
+      </form>
     </div>
+
+    <!--Registra admin-->
+    <div class="col-6">
+      <form [formGroup]="adminsForm" (ngSubmit)="addAdmin()">
+        <legend>Registra Admin</legend>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="nome"
+            placeholder="Nome"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            name="cognome"
+            placeholder="Cognome"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="email"
+            name="mail"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="password"
+            name="confPassword"
+            placeholder="Conferma Password"
+          />
+        </div>
+        <button type="submit" class="btn btn-dark">Crea</button>
+      </form>
+    </div>
+  </div>
 </div>

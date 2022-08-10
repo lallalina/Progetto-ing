@@ -6,6 +6,6 @@ export interface Barber {
   role: UserRole;
   nome: string;
   cognome: string;
-  cellulare: string;
-  foto: string;
 }
+
+//Admin ha lo stesso model, con ruolo settato ad Admin--> serviceBarber

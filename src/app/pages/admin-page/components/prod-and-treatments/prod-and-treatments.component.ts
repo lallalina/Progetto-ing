@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { Treatment } from 'src/app/models/treatment.model';
+import { Product } from 'src/app/models/product.model';
+import { ProductsService } from 'src/app/core/services/products.service';
 
 @Component({
   selector: 'app-prod-and-treatments',
@@ -10,7 +12,7 @@ import { Treatment } from 'src/app/models/treatment.model';
   styleUrls: ['./prod-and-treatments.component.css'],
 })
 export class ProdAndTreatmentsComponent implements OnInit {
-  @Input() products: any[];
+  @Input() products: Product[];
   @Input() treatments: Treatment[];
 
   productsForm: FormGroup;
@@ -18,7 +20,8 @@ export class ProdAndTreatmentsComponent implements OnInit {
 
   constructor(
     private ajax: AjaxService,
-    private treatmentsService: TreatmentsService
+    private treatmentsService: TreatmentsService,
+    private productService: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -44,14 +47,28 @@ export class ProdAndTreatmentsComponent implements OnInit {
     });
   }
 
+  //--PRODOTTI--
   //aggiungi nuovo prodotto
   addProdotto() {
-    this.ajax.addProdotto(this.productsForm.value).subscribe((response) => {
-      console.log(response);
-      //this.admin = response;
-    });
+    this.productService
+      .addProdotto(this.productsForm.value)
+      .subscribe((response) => {
+        console.log(response);
+        //this.admin = response;
+      });
   }
 
+  //cancella prodotto
+  deleteProdotto() {
+    this.productService
+      .deleteProdotto(this.productsForm.value)
+      .subscribe((response) => {
+        console.log(response);
+        //this.admin = response;
+      });
+  }
+
+  //--TRATTAMENTI--
   //aggiungi nuovo trattamento
   addTrattamento() {
     this.treatmentsService
@@ -62,11 +79,13 @@ export class ProdAndTreatmentsComponent implements OnInit {
       });
   }
 
-  //cancella prodotto
-  //deleteProdotto() {
-  //  this.ajax.deleteProdotto(this.productsForm.value).subscribe((response) => {
-  //    console.log(response);
-  //    //this.admin = response;
-  //  });
-  //}
+  //cancella trattamento
+  deleteTreatment() {
+    this.treatmentsService
+      .deleteTreatment(this.treatmentsForm.value)
+      .subscribe((response) => {
+        console.log(response);
+        //this.admin = response;
+      });
+  }
 }

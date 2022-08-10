@@ -5,8 +5,16 @@
 <div class="container-fluid custom-margin main-page-wrapper">
   <div class="row justify-content-center">
     <div class="col-12 p-0">
-      <img class="copertina pc-only" src="assets/copertina.jpg" alt="immagine di copertina" />
-      <img class="copertina mobile-only" src="assets/copertina-mobile.jpg" alt="immagine di copertina" />
+      <img
+        class="copertina pc-only"
+        src="assets/copertina.jpg"
+        alt="immagine di copertina"
+      />
+      <img
+        class="copertina mobile-only"
+        src="assets/copertina-mobile.jpg"
+        alt="immagine di copertina"
+      />
       <img class="logo" src="assets/logo-white.png" alt="logo" />
     </div>
   </div>
@@ -38,9 +46,28 @@
       <div class="form-group">
         <h3 style="color: wheat">PRENDI IL TUO APPUNTAMENTO</h3>
       </div>
-      <app-prenotazione [barbers]="barbers" [treatments]="treatments" class="mt-5"></app-prenotazione>
+      <app-prenotazione>
+        [barbers]="barbers" [treatments]="treatments"
+      </app-prenotazione>
+    </div>
+  </div>
+
+  <!--Recensioni-->
+  <div class="prenota row mt-6 w-100">
+    <div class="col-10">
+      <h1 class="justify-content-center">Le nostre recensioni</h1>
+      <div class="card" style="width: 18rem">
+        <img class="card-img-top" src="assets/47774.png" alt="Card image cap" />
+        <div class="card-body">
+          **ngFor="let review of reviews"
+          <p class="card-text">
+            {{ reviews.title }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 <!--FOOTER-->
 <app-footer></app-footer>

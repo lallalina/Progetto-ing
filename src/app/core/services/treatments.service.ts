@@ -42,4 +42,6 @@ export class TreatmentsService {
   deleteTreatment(obj): Observable<any> {
     return this.http.post(environment.API_URL + '/eliminaTrattamento', obj);
   }
+
+  //modifyTrattamento
 }

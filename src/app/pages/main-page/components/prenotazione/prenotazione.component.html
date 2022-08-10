@@ -1,35 +1,82 @@
 <div class="offset-1">
   <div id="prendi-appuntamento" class="mt-4">
     <form action="" class="row">
-      <div class="col-6">
+      <div class="col-4">
+        <!--NOME-->
         <div class="form-group">
           <label for="customer-name">Nome</label>
-          <input type="text" class="form-control" id="nome-prenotazione" placeholder="Nome" required />
+          <input
+            type="text"
+            class="form-control"
+            id="nome-prenotazione"
+            placeholder="Nome"
+            required
+          />
         </div>
+        <!--EMAIL-->
         <div class="form-group">
           <label for="customer-mail">Email</label>
-          <input type="email" class="form-control" id="mail" placeholder="Email" required />
+          <input
+            type="email"
+            class="form-control"
+            id="mail"
+            placeholder="Email"
+            required
+          />
         </div>
-        <div class="form-group">
-          <label for="customer-date">Data e ora</label>
-          <input type="datetime-local" class="form-control date-time-local" id="data-e-ora" />
-        </div>
+        <!--LISTA BARBIERI-->
+        <label for="customer-name">Barbiere</label>
+        <select
+          class="form-control"
+          id="nome-barbiere"
+          onchange="caricaOrari()"
+        >
+          <option *ngFor="let barber of barbers" [value]="barber">
+            {{ barber.nome }}
+          </option>
+        </select>
       </div>
-      <div class="col-6">
-        <div class="form-group">
-          <label for="customer-name">Barbiere</label>
-          <select class="form-control" id="nome-barbiere">
-            <option *ngFor="let barber of barbers" [value]="barber">{{barber.nome}}</option>
-          </select>
-        </div>
+      <div class="col-4">
+        <!--CALENDAR-->
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Scegli una data</mat-label>
+          <input
+            matInput
+            [matDatepickerFilter]="myFilter"
+            [min]="minDate"
+            [matDatepicker]="picker"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <!--ORAIO-->
+        <label for="customer-name">Orari</label>
+        <select class="form-control" id="orario">
+          <option *ngFor="let ora of bookings" [value]="ora">
+            {{ ora.nome }}
+          </option>
+          <option *ngIf="bookings.length == 0" [value]="barber">
+            <p>Non ci sono orari disponibili</p>
+          </option>
+        </select>
+      </div>
+      <div class="col-4">
+        <!--TRATTAMENTI-->
         <div class="form-group">
           <fieldset>
             <legend style="color: white; margin-top: 100%">Trattamenti</legend>
             <br />
             <div class="row text-white">
-              <div *ngFor="let treatment of treatments"
-                class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
-                <input type="checkbox" [name]="treatment.nome" /> {{treatment.nome}}
+              <div
+                *ngFor="let treatment of treatments"
+                class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+              >
+                <input type="checkbox" [name]="treatment.nome" />
+                {{ treatment.nome }}
               </div>
             </div>
           </fieldset>

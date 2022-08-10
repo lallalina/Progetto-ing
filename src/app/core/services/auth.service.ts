@@ -39,20 +39,20 @@ export class AuthService {
     this.userSubject.next(value);
   }
 
-  get jwt(): Token['jwt'] {
-    return sessionStorage.getItem('jwt');
-  }
-
-  set jwt(value: Token['jwt']) {
-    sessionStorage.setItem('jwt', value);
-  }
-
   registrazione(param) {
     return this.http.post(
       `${environment.API_URL}/private/nuovoUtente`,
       param,
       {}
     );
+  }
+
+  get jwt(): Token['jwt'] {
+    return sessionStorage.getItem('jwt');
+  }
+
+  set jwt(value: Token['jwt']) {
+    sessionStorage.setItem('jwt', value);
   }
 
   //prendere id nel session storage

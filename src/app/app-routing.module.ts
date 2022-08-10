@@ -4,8 +4,8 @@ import { AdminGuard } from './core/guards/admin.guard';
 import { CustomerGuard } from './core/guards/customer.guard';
 import { ResponsibleGuard } from './core/guards/responsible.guard';
 import { CustomerPageComponent } from './pages/customer-page/customer-page.component';
-import { LoginComponent } from './pages/login/login.component';
-import { CartComponent } from './pages/cart/cart.component';
+import { LoginComponent } from './pages/login-page/login.component';
+import { CartComponent } from './pages/cart-page/cart.component';
 
 const routes: Routes = [
   {
