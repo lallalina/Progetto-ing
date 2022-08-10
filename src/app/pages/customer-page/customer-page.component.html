@@ -2,72 +2,28 @@
 <app-navbar></app-navbar>
 
 <!--Shop_space-->
-<div class="container p-5 mt-5">
+<div *ngFor="let prodotto of products" class="col-6 p-3">
   <div class="row">
-    <div class="col-4">
-      <div class="card" style="width: 18rem">
-        <img class="card-img-top" src="..." alt="Prodotto" />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Acquista</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card" style="width: 18rem">
-        <img class="card-img-top" src="..." alt="Prodotto" />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Acquista</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card" style="width: 18rem">
-        <img class="card-img-top" src="..." alt="Prodotto" />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">Acquista</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--
-   <div *ngFor="let prodotto of prodotti" class="col-6 p-3">
-        <div class="row">
-  <div class="col-12">
+    <div class="col-12">
       <div class="custom-prodotto">
-          <div class="row">
-              <div class="col-10 card-body pt-2">
-                  <h6 class="card-text font-weight-bold"> {{prodotto.title}} </h6>       
-                  <span class="color-green font-weight-bold">{{prodotto.reservation_items[0].price | currency:'EUR'}}</span>
-              </div>
-              <div class="col-2">
-                  <div class="menu-bottone rounded-pill text-center">
-                      <button (click)="addTocart(prodotto)">+</button>
-                  </div>
-              </div>
+        <div class="row">
+          <div class="col-10 card-body pt-2">
+            <h6 class="card-text font-weight-bold">{{ prodotto.nome }}</h6>
+            <p>{{ prodotto.descrizione }}</p>
+            <span class="color-green font-weight-bold">{{
+              prodotto.reservation_items[0].prezzo | currency: "EUR"
+            }}</span>
           </div>
+          <div class="col-2">
+            <div class="menu-bottone rounded-pill text-center">
+              <button onclick="addTocart(prodotto)">+</button>
+            </div>
+          </div>
+        </div>
       </div>
-  </div>
-</div>
     </div>
-</div>
--->
+  </div>
 
-<!--Footer-->
-<app-footer></app-footer>
+  <!--Footer-->
+  <app-footer></app-footer>
+</div>

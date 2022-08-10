@@ -31,6 +31,7 @@ export class AuthService {
     this.userSubject.next(value);
   }
 
+  //registrazine utente
   registrazione(param) {
     return this.http.post(
       `${environment.API_URL}/private/nuovoUtente`,

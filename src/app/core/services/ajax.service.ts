@@ -7,32 +7,17 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AjaxService {
-  baseUrl = environment.API_URL;
-
   constructor(private http: HttpClient) {}
 
   //ultime 3 recensioni
   recensioni(): Observable<any> {
-    return this.http.get(this.baseUrl + '/public/getLastThreeRecensioni');
+    return this.http.get(
+      environment.API_URL + '/public/getLastThreeRecensioni'
+    );
   }
 
-  //addProdotto
-  addProdotto(obj): Observable<any> {
-    return this.http.post(this.baseUrl + '/nuovoProdotto', obj);
+  //listaOrari
+  orari(): Observable<any> {
+    return this.http.get(environment.API_URL + '/public/getOrari');
   }
-  //getProdotto
-  prodotti(): Observable<any> {
-    return this.http.get(this.baseUrl + '/public/getProdotti');
-  }
-  //deleteProdotto
-  deleteProdotto(obj): Observable<any> {
-    return this.http.post(this.baseUrl + '/eliminaProdotto', obj);
-  }
-
-  //addAdmin
-  nuovoAdmin(obj): Observable<any> {
-    return this.http.post(this.baseUrl + '/admin/nuovoAdmin', obj);
-  }
-
-  //listaprodotti
 }

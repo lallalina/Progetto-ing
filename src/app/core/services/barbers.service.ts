@@ -36,13 +36,18 @@ export class BarbersService {
       .pipe(tap((response) => (this.barbers = response)));
   }
 
-  //GET admin
-  getAdmins() {
-    return this.http.get<Barber[]>(`${environment.API_URL}/admin/getAdmin`);
-  }
-
   //nuovobarbiere
   nuovoBarbiere(obj): Observable<any> {
     return this.http.post(environment.API_URL + '/admin/nuovoBarbiere', obj);
+  }
+
+  //addAdmin
+  nuovoAdmin(obj): Observable<any> {
+    return this.http.post(environment.API_URL + '/admin/nuovoAdmin', obj);
+  }
+
+  //GET admin
+  getAdmins() {
+    return this.http.get<Barber[]>(`${environment.API_URL}/admin/getAdmin`);
   }
 }

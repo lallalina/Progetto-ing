@@ -1,0 +1,60 @@
+<!--form di login-->
+<div class="container-fluid login-page-container">
+  <div class="row">
+    <!--immagine-->
+    <div class="col-5 cover"></div>
+    <!--form-->
+    <div class="col-7">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="user_card">
+          <div class="d-flex justify-content-center">
+            <div class="brand_logo_container">
+              <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
+            </div>
+          </div>
+          <span class="material-icons clickable" [routerLink]="['']">
+            arrow_back
+          </span>
+          <div class="d-flex justify-content-center form_container">
+            <form name="form" [formGroup]="form" (ngSubmit)="registration()">
+              <div class="input-group mb-3">
+                <div class="input-group-append">
+                  <span class="input-group-text"
+                    ><i class="fas fa-user"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control input_user"
+                  value=""
+                  placeholder="email"
+                  formControlName="email"
+                />
+              </div>
+              <div class="input-group mb-2">
+                <div class="input-group-append">
+                  <span class="input-group-text"
+                    ><i class="fas fa-key"></i
+                  ></span>
+                </div>
+                <div class="example-container">
+                  <input formControlName="password" />
+                  <input formControlName="confirmPassword" />
+                  <div *ngIf="passwordMatchError">
+                    La password non è corretta
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mt-3 login_container">
+                <button type="submit" name="button" class="btn login_btn">
+                  Registrati
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

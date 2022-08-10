@@ -68,11 +68,6 @@ export class UsersComponent implements OnInit {
       mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       confPassword: new FormControl('', Validators.required),
-      cellulare: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10),
-      ]),
-      url: new FormControl('', Validators.required),
     });
   }
 
@@ -83,15 +78,18 @@ export class UsersComponent implements OnInit {
       cognome: new FormControl('', Validators.required),
       mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
+      confPassword: new FormControl('', Validators.required),
     });
   }
 
   //aggiungi nuovo admin
   addAdmin() {
-    this.ajax.nuovoAdmin(this.adminsForm.value).subscribe((response) => {
-      console.log(response);
-      // this.admin = response;
-    });
+    this.barbersService
+      .nuovoAdmin(this.adminsForm.value)
+      .subscribe((response) => {
+        console.log(response);
+        // this.admin = response;
+      });
   }
 
   //aggiungi nuovo parrucchiere

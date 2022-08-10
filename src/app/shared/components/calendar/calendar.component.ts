@@ -47,6 +47,8 @@ const colors: any = {
 export class CalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
+  prenotazioniB = [];
+
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
@@ -75,6 +77,21 @@ export class CalendarComponent {
       },
     },
   ];
+
+  //eventi da visualizzare in tabella, si chiama nell'init quando cambio il tipo
+  aggiornaTabella() {
+    //chiamataB date_tipo (il tipo può essere mese, settimana, giorno)
+    //prenotazioniB = [...];
+    this.events = [];
+    this.prenotazioniB.map((p) => {
+      const evento: CalendarEvent = {
+        title: '', //..
+        start: new Date(), //prenotazione.start
+        end: new Date(), //..
+      };
+      this.events.push(evento);
+    });
+  }
 
   refresh = new Subject<void>();
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
+import { ProductsService } from 'src/app/core/services/products.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { Barber } from 'src/app/models/barber.model';
@@ -34,10 +35,9 @@ export class AdminPageComponent implements OnInit {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private utils: UtilsService,
-    private ajax: AjaxService,
     private treatmentsService: TreatmentsService,
-    private barbersService: BarbersService
+    private barbersService: BarbersService,
+    private productService: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -62,17 +62,17 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  //PRODOTTI
+  //METODI GET
 
-  //prendi prodotto
+  //prendi prodotti
   getProdotto() {
-    this.ajax.prodotti().subscribe((response) => {
+    this.productService.getProducts().subscribe((response) => {
       console.log(response);
       this.products = response;
     });
   }
 
-  //prendi trattamento
+  //prendi trattamenti
   getTrattamenti() {
     this.treatmentsService.treatments$.subscribe(
       (treatments) => (this.treatments = treatments)
@@ -85,15 +85,5 @@ export class AdminPageComponent implements OnInit {
       this.users = barbers.concat(admins);
       console.log(this.users);
     });
-  }
-
-  //cacnella trattamento
-  deleteTrattamento() {
-    this.treatmentsService
-      .deleteTreatment(this.form.value)
-      .subscribe((response) => {
-        console.log(response);
-        //this.admin = response;
-      });
   }
 }

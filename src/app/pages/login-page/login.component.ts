@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserRole } from 'src/app/models/user.model';
-import { AjaxService } from 'src/app/core/services/ajax.service';
 
 @Component({
   selector: 'app-login',
@@ -64,37 +63,4 @@ export class LoginComponent implements OnInit {
 
   //controllo dei ruoli
   checkRole() {}
-
-  /*akeLogin() {
-    console.log('fakelogin');
-    let email = this.form.controls['email'].value;
-    let password = this.form.controls['password'].value;
-    console.log(email, password);
-    this.auth.mockLogin(email, password);
-    let user = this.auth.user;
-    console.log(user);
-    if (user) {
-      this.utils.salvaLogin();
-      this.id = user.id;
-      sessionStorage.setItem('id', this.id); //salvo l'id nel session storage
-      switch (user.role) {
-        case UserRole.ADMIN: {
-          this.router.navigate(['admin']);
-          break;
-        }
-        case UserRole.CUSTOMER: {
-          this.router.navigate(['home']);
-          break;
-        }
-        case UserRole.RESPONSIBLE: {
-          this.router.navigate(['responsible']);
-          break;
-        }
-        default: {
-          this.router.navigate(['']);
-          break;
-        }
-      }
-    }
-  }*/
 }

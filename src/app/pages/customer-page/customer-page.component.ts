@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { Product } from 'src/app/models/product.model';
 import { User, UserRole } from 'src/app/models/user.model';
 
 @Component({
@@ -9,17 +10,24 @@ import { User, UserRole } from 'src/app/models/user.model';
   styleUrls: ['./customer-page.component.css'],
 })
 export class CustomerPageComponent implements OnInit {
-  @Input() prodotto;
+  @Input() products: Array<Product>;
 
   user: User;
   readonly UserRole = UserRole;
   carrello = [];
+  prodEsistente: Product | null;
 
   constructor(private auth: AuthService, private router: Router) {}
 
   //metodo per aggiungere al carrello
-  addToCart(prodotto) {}
-  //this.utils.carrello.push(prodotto)
+  addToCart(products) {
+    this.carrello.find((prod) => (prod.id = products.id));
+    if (this.prodEsistente != null) {
+      // prendi il prodotto e aumenta la quantità
+    } else {
+      // prendi il nuovo prodotto e aggiungilo al carrello
+    }
+  } //addtocartSession
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
