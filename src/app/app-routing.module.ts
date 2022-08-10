@@ -6,6 +6,7 @@ import { ResponsibleGuard } from './core/guards/responsible.guard';
 import { CustomerPageComponent } from './pages/customer-page/customer-page.component';
 import { LoginComponent } from './pages/login-page/login.component';
 import { CartComponent } from './pages/cart-page/cart.component';
+import { RegistrationComponent } from './pages/registration-page/registration.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'sign-up',
+    component: RegistrationComponent,
   },
   {
     path: 'admin',

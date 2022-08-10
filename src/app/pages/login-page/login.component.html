@@ -1,6 +1,6 @@
 <!--form di login-->
 <div class="container-fluid login-page-container">
-  <div class="row">
+  <div class="row h-100">
     <!--immagine-->
     <div class="col-5 cover"></div>
     <!--form-->
@@ -19,43 +19,24 @@
             <form name="form" [formGroup]="form" (ngSubmit)="login()">
               <div class="input-group mb-3">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><i class="fas fa-user"></i
-                  ></span>
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input
-                  type="text"
-                  name=""
-                  class="form-control input_user"
-                  value=""
-                  placeholder="email"
-                  formControlName="email"
-                />
+                <input type="text" name="" class="form-control input_user" value="" placeholder="email"
+                  formControlName="email" />
               </div>
               <div class="input-group mb-2">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><i class="fas fa-key"></i
-                  ></span>
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 <div class="example-container">
                   <mat-form-field appearance="fill">
-                    <input
-                      matInput
-                      [type]="hide ? 'password' : 'text'"
-                      placeholder="password"
-                      formControlName="password"
-                    />
-                    <button
-                      mat-icon-button
-                      matSuffix
-                      (click)="hide = !hide"
-                      [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide"
-                    >
+                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="password"
+                      formControlName="password" />
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
                       <mat-icon>{{
                         hide ? "visibility_off" : "visibility"
-                      }}</mat-icon>
+                        }}</mat-icon>
                     </button>
                   </mat-form-field>
                 </div>
@@ -72,12 +53,11 @@
           <div class="mt-4">
             <div class="d-flex justify-content-center links">
               <p style="color: black">Non hai un account?</p>
-              <a href="" class="ml-2" style="color: black">Registrati</a>
+              <a [routerLink]="['/sign-up']" routerLinkActive="router-link-active" class="ml-2"
+                style="color: black">Registrati</a>
             </div>
             <div class="d-flex justify-content-center links">
-              <a [routerLink]="['/registration']" style="color: black"
-                >Password dimenticata?</a
-              >
+              <a style="color: black">Password dimenticata?</a>
             </div>
           </div>
         </div>
