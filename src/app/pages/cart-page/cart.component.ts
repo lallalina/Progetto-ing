@@ -41,4 +41,6 @@ export class CartComponent implements OnInit {
     this.carrello = JSON.parse(sessionStorage.getItem('carrello'));
     this.initForm();
   }
+
+  ordine() {}
 }

@@ -5,32 +5,16 @@
         <!--NOME-->
         <div class="form-group">
           <label for="customer-name">Nome</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nome-prenotazione"
-            placeholder="Nome"
-            required
-          />
+          <input type="text" class="form-control" id="nome-prenotazione" placeholder="Nome" required />
         </div>
         <!--EMAIL-->
         <div class="form-group">
           <label for="customer-mail">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="mail"
-            placeholder="Email"
-            required
-          />
+          <input type="email" class="form-control" id="mail" placeholder="Email" required />
         </div>
         <!--LISTA BARBIERI-->
         <label for="customer-name">Barbiere</label>
-        <select
-          class="form-control"
-          id="nome-barbiere"
-          onchange="caricaOrari()"
-        >
+        <select class="form-control" id="nome-barbiere" (change)="caricaOrari()">
           <option *ngFor="let barber of barbers" [value]="barber">
             {{ barber.nome }}
           </option>
@@ -40,17 +24,9 @@
         <!--CALENDAR-->
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Scegli una data</mat-label>
-          <input
-            matInput
-            [matDatepickerFilter]="myFilter"
-            [min]="minDate"
-            [matDatepicker]="picker"
-          />
+          <input matInput [matDatepickerFilter]="myFilter" [min]="minDate" [matDatepicker]="picker" />
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <!--ORAIO-->
@@ -59,7 +35,7 @@
           <option *ngFor="let ora of bookings" [value]="ora">
             {{ ora.nome }}
           </option>
-          <option *ngIf="bookings.length == 0" [value]="barber">
+          <option *ngIf="bookings && bookings.length === 0">
             <p>Non ci sono orari disponibili</p>
           </option>
         </select>
@@ -71,10 +47,8 @@
             <legend style="color: white; margin-top: 100%">Trattamenti</legend>
             <br />
             <div class="row text-white">
-              <div
-                *ngFor="let treatment of treatments"
-                class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
-              >
+              <div *ngFor="let treatment of treatments"
+                class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0">
                 <input type="checkbox" [name]="treatment.nome" />
                 {{ treatment.nome }}
               </div>
@@ -90,7 +64,3 @@
     </form>
   </div>
 </div>
-
-<script>
-  var app = angular.module("myApp", ["hm.prenotazione"]);
-</script>

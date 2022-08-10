@@ -35,23 +35,18 @@ export class LoginComponent implements OnInit {
       username: this.form.controls['email'].value,
       password: this.form.controls['password'].value,
     };
-    this.auth.login(data).subscribe(
-      (response) => {
-        //viene eseguito solo dopo che il server risponde, response è l'oggetto che mi arriva dal server
-        console.log(response);
-        this.auth.user = response;
-        this.utente = response; //restituisce l'oggetto
-      },
-      (error) => {
+    this.auth.login(data).subscribe({
+      next: (response) => (this.utente = this.auth.user),
+      error: (err) => {
         alert('Credenziali errate');
-        this.error = error;
+        this.error = err;
       },
-      () => {
+      complete: () => {
         this.id = this.utente.id;
         sessionStorage.setItem('id', this.id); //salvo l'id nel session storage
         this.router.navigate(['/']);
-      }
-    );
+      },
+    });
   }
 
   //controllo validità sezioni del form

@@ -26,7 +26,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     LoginComponent,
     CartComponent,
     RegistrationComponent,
-    PrenotazioneComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,10 +34,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule, //per i forms
     ReactiveFormsModule,
     HttpClientModule, //chiamate http
-    MatFormFieldModule, //calendar
-    MatDatepickerModule, //calendar
     BrowserAnimationsModule, //angular material
-    MatIconModule, //per le icone
     SharedModule,
     CalendarModule.forRoot({
       //calendar

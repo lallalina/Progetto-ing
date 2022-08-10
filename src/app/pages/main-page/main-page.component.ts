@@ -16,11 +16,7 @@ export class MainPageComponent implements OnInit {
   reviews: any;
   error;
 
-  constructor(
-    private ajax: AjaxService,
-    private barbersService: BarbersService,
-    private treatmentsService: TreatmentsService
-  ) {}
+  constructor(private ajax: AjaxService) {}
 
   //prendi recensioni
   getRecensioni() {
@@ -30,22 +26,5 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  //subscribe barbieri
-  listenToBarbers() {
-    this.barbersService.barbers$.subscribe((barbers) => {
-      this.barbers = barbers;
-    });
-  }
-
-  //subscribe trattamenti
-  listenToTreatments() {
-    this.treatmentsService.treatments$.subscribe((treatments) => {
-      this.treatments = treatments;
-    });
-  }
-
-  ngOnInit(): void {
-    this.listenToBarbers();
-    this.listenToTreatments();
-  }
+  ngOnInit(): void {}
 }
