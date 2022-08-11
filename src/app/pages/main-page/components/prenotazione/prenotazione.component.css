@@ -1,0 +1,40 @@
+/*grid-container-prenotazioni {
+  display: grid;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  grid-template-areas:
+    "area1 area1 area1 area2 area2 area2 area3 area3  area3"
+    "area1 area1 area1 area2 area2 area2 area3 area3 area3"
+    "area4 area4 area4 area5 area5 area5 area6 area6  area6"
+    "area4 area4 area4 area5 area5 area5 area6 area6 area6";
+}
+
+.grid1 {
+  text-align: center;
+  grid-area: area1;
+}
+
+.grid2 {
+  text-align: center;
+  grid-area: area2;
+}
+.grid3 {
+  text-align: center;
+  grid-area: area3;
+}
+
+.grid4 {
+  text-align: center;
+  grid-area: area4;
+}
+
+.grid5 {
+  text-align: center;
+  grid-area: area5;
+}
+
+.grid6 {
+  text-align: center;
+  grid-area: area6;
+}*/
