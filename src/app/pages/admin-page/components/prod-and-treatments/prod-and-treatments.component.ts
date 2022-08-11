@@ -15,6 +15,11 @@ export class ProdAndTreatmentsComponent implements OnInit {
   @Input() products: Product[];
   @Input() treatments: Treatment[];
 
+  productList: Product[];
+  tratmentList: Treatment[];
+  tableDataP: Product[];
+  TableDataT: Treatment[];
+
   productsForm: FormGroup;
   treatmentsForm: FormGroup;
 
@@ -53,6 +58,9 @@ export class ProdAndTreatmentsComponent implements OnInit {
     this.productService
       .addProdotto(this.productsForm.value)
       .subscribe((response) => {
+        this.productsForm.reset();
+        this.productList.push(response);
+        this.tableDataP = this.productList;
         console.log(response);
         //this.admin = response;
       });

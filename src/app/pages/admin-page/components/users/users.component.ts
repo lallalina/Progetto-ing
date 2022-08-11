@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  MinLengthValidator,
+  Validators,
+} from '@angular/forms';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { Barber } from 'src/app/models/barber.model';
@@ -66,7 +71,10 @@ export class UsersComponent implements OnInit {
       nome: new FormControl('', Validators.required),
       cognome: new FormControl('', Validators.required),
       mail: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
       confPassword: new FormControl('', Validators.required),
     });
   }
@@ -77,16 +85,21 @@ export class UsersComponent implements OnInit {
       nome: new FormControl('', Validators.required),
       cognome: new FormControl('', Validators.required),
       mail: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
       confPassword: new FormControl('', Validators.required),
     });
   }
-
   //aggiungi nuovo admin
   addAdmin() {
     this.barbersService
       .nuovoAdmin(this.adminsForm.value)
       .subscribe((response) => {
+        this.adminsForm.reset();
+        this.usersList.push(response);
+        this.tableData = this.usersList;
         console.log(response);
         // this.admin = response;
       });
