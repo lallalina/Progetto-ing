@@ -18,7 +18,10 @@
       <th>Cellulare</th>
       <th>Ruolo</th>
     </ng-template>
-    <ng-template #rows let-row>
+    <ng-template
+      #rows
+      let-row
+    >
       <td>{{ row.nome }}</td>
       <td>{{ row.cognome }}</td>
       <td>{{ row.mail }}</td>
@@ -31,14 +34,16 @@
   <!--Content-->
   <div class="row mt-5">
     <div class="col-4">
-      <form [formGroup]="barbersForm" (ngSubmit)="addBarber()">
+      <form
+        [formGroup]="barbersForm"
+        (ngSubmit)="addBarber()"
+      >
         <legend>Registra Parrucchieri</legend>
         <div class="form-group">
           <input
             formControlName="nome"
             class="form-control"
             type="text"
-            name="nome"
             placeholder="Nome"
           />
         </div>
@@ -47,7 +52,6 @@
             formControlName="cognome"
             class="form-control"
             type="text"
-            name="cognome"
             placeholder="Cognome"
           />
         </div>
@@ -56,7 +60,6 @@
             formControlName="mail"
             class="form-control"
             type="email"
-            name="mail"
             placeholder="Email"
           />
         </div>
@@ -65,7 +68,6 @@
             formControlName="password"
             class="form-control"
             type="password"
-            name="password"
             placeholder="Password (min 8 caratteri)"
           />
         </div>
@@ -74,7 +76,6 @@
             formControlName="confPassword"
             class="form-control"
             type="password"
-            name="confPassword"
             placeholder="Conferma Password"
           />
         </div>
@@ -102,7 +103,6 @@
             formControlName="nome"
             class="form-control"
             type="text"
-            name="nome"
             placeholder="Nome"
           />
         </div>
@@ -111,7 +111,6 @@
             formControlName="cognome"
             class="form-control"
             type="text"
-            name="cognome"
             placeholder="Cognome"
           />
         </div>
@@ -120,7 +119,6 @@
             formControlName="mail"
             class="form-control"
             type="email"
-            name="mail"
             placeholder="Email"
           />
         </div>
@@ -129,7 +127,6 @@
             formControlName="password"
             class="form-control"
             type="password"
-            name="password"
             placeholder="Password"
           />
         </div>
@@ -138,7 +135,6 @@
             formControlName="confPassword"
             class="form-control"
             type="password"
-            name="confPassword"
             placeholder="Conferma Password"
           />
         </div>
