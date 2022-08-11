@@ -21,12 +21,12 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {
     //Esegue la GET per i trattamenti appena il service viene creato
-    this.getProducts().subscribe((_) => {});
+    this.getProducts().subscribe((_) => { });
   }
 
   //addProdotto
   addProdotto(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/nuovoProdotto', obj);
+    return this.http.post(environment.API_URL + '/admin/nuovoProdotto', obj);
   }
   //getProdotto
   getProducts(): Observable<any> {
@@ -36,7 +36,7 @@ export class ProductsService {
   }
   //deleteProdotto
   deleteProdotto(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/eliminaProdotto', obj);
+    return this.http.post(environment.API_URL + 'admin/eliminaProdotto', obj);
   }
 
   //modifyProdotto

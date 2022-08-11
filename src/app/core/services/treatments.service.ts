@@ -23,12 +23,12 @@ export class TreatmentsService {
 
   constructor(private http: HttpClient) {
     //Esegue la GET per i trattamenti appena il service viene creato
-    this.getTreatments().subscribe((_) => {});
+    this.getTreatments().subscribe((_) => { });
   }
 
   //addTrattamento
   addTreatment(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/nuovoTrattamento', obj);
+    return this.http.post(environment.API_URL + '/admin/nuovoTrattamento', obj);
   }
 
   //getTrattamento

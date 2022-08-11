@@ -15,11 +15,6 @@ export class ProdAndTreatmentsComponent implements OnInit {
   @Input() products: Product[];
   @Input() treatments: Treatment[];
 
-  productList: Product[];
-  tratmentList: Treatment[];
-  tableDataP: Product[];
-  TableDataT: Treatment[];
-
   productsForm: FormGroup;
   treatmentsForm: FormGroup;
 
@@ -27,7 +22,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
     private ajax: AjaxService,
     private treatmentsService: TreatmentsService,
     private productService: ProductsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initProductsForm();
@@ -59,10 +54,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
       .addProdotto(this.productsForm.value)
       .subscribe((response) => {
         this.productsForm.reset();
-        this.productList.push(response);
-        this.tableDataP = this.productList;
-        console.log(response);
-        //this.admin = response;
+        this.products.push(response)        //this.admin = response;
       });
   }
 
@@ -83,7 +75,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
       .addTreatment(this.treatmentsForm.value)
       .subscribe((response) => {
         console.log(response);
-        //this.admin = response;
+        this.treatments.push(response)
       });
   }
 
