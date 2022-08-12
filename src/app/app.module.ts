@@ -10,15 +10,12 @@ import { PrenotazioneComponent } from './pages/main-page/components/prenotazione
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './shared/shared.module';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { RegistrationComponent } from './pages/registration-page/registration.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({

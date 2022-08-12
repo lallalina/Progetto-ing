@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AjaxService } from 'src/app/core/services/ajax.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
-import { UtilsService } from 'src/app/core/services/utils.service';
 import { Barber } from 'src/app/models/barber.model';
 import { Product } from 'src/app/models/product.model';
 import { Treatment } from 'src/app/models/treatment.model';

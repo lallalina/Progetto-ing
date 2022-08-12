@@ -1,0 +1,11 @@
+h1 {
+  color: rgb(234, 230, 217);
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+}
+
+#button {
+  border-color: gray;
+  margin-left: "50%";
+  color: white;
+}

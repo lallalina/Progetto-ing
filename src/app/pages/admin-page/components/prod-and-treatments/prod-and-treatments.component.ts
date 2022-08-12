@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AjaxService } from 'src/app/core/services/ajax.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { Treatment } from 'src/app/models/treatment.model';
 import { Product } from 'src/app/models/product.model';
@@ -19,10 +18,9 @@ export class ProdAndTreatmentsComponent implements OnInit {
   treatmentsForm: FormGroup;
 
   constructor(
-    private ajax: AjaxService,
     private treatmentsService: TreatmentsService,
     private productService: ProductsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initProductsForm();
@@ -54,7 +52,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
       .addProdotto(this.productsForm.value)
       .subscribe((response) => {
         this.productsForm.reset();
-        this.products.push(response)        //this.admin = response;
+        this.products.push(response); //this.admin = response;
       });
   }
 
@@ -75,7 +73,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
       .addTreatment(this.treatmentsForm.value)
       .subscribe((response) => {
         console.log(response);
-        this.treatments.push(response)
+        this.treatments.push(response);
       });
   }
 

@@ -4,4 +4,5 @@ export interface Product {
   descrizione: string;
   prezzo: number;
   count: number; //numero quantità di selezione del prodotto
+  immagine: string;
 }

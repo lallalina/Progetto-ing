@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -39,6 +40,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule, //calendar
     MatNativeDateModule,
     MatIconModule, //per le icone
+    MatCardModule, //card
   ],
   exports: [
     NavbarComponent,
@@ -51,6 +53,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule, //calendar
     MatIconModule, //per le icone
     MatNativeDateModule,
+    MatCardModule, //card
   ],
   providers: [MatDatepickerModule],
 })

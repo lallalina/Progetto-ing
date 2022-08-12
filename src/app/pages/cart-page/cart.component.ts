@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Cart } from 'src/app/models/cart.model';
 
 @Component({
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  carrello = [];
+  carrello: Cart[];
   totale = 0;
   form;
 
@@ -28,12 +29,11 @@ export class CartComponent implements OnInit {
   initForm() {
     //controllo validità sezioni
     this.form = new FormGroup({
-      date: new FormControl('', Validators.required),
-      time: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      address: new FormControl('', Validators.required),
-      floor: new FormControl('', Validators.required),
-      note: new FormControl('', Validators.required),
+      nome: new FormControl('', Validators.required),
+      cognome: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      città: new FormControl('', Validators.required),
+      indirizzo: new FormControl('', Validators.required),
     });
   }
 
@@ -42,5 +42,5 @@ export class CartComponent implements OnInit {
     this.initForm();
   }
 
-  ordine() {}
+  ordina() {}
 }

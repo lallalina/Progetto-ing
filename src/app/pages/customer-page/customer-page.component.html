@@ -1,29 +1,36 @@
 <!--Navbar-->
 <app-navbar></app-navbar>
 
-<!--Shop_space-->
-<div *ngFor="let prodotto of products" class="col-6 p-3">
+<div class="container">
+  <h1>I nostri prodotti</h1>
+
   <div class="row">
-    <div class="col-12">
-      <div class="custom-prodotto">
-        <div class="row">
-          <div class="col-10 card-body pt-2">
-            <h6 class="card-text font-weight-bold">{{ prodotto.nome }}</h6>
-            <p>{{ prodotto.descrizione }}</p>
-            <span class="color-green font-weight-bold">{{
-              prodotto.reservation_items[0].prezzo | currency: "EUR"
-            }}</span>
-          </div>
-          <div class="col-2">
-            <div class="menu-bottone rounded-pill text-center">
-              <button onclick="addTocart(prodotto)">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!--Shop_space-->
+    <div *ngFor="let prodotto of products" class="col-4">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title>{{ prodotto.nome }}</mat-card-title>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+          {{ prodotto.descrizione }}
+        </mat-card-content>
+        <span class="color-green font-weight-bold">{{
+          prodotto.prezzo | currency: "EUR"
+        }}</span>
+        <mat-card-actions>
+          <button mat-button (click)="addTocart(prodotto)">Acquista</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
+</div>
 
+<div class="footer">
   <!--Footer-->
   <app-footer></app-footer>
 </div>
