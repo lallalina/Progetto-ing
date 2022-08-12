@@ -23,3 +23,7 @@ textarea {
   width: 100%;
   border-color: rgb(29, 29, 29);
 }
+
+legend {
+  color: wheat;
+}

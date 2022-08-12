@@ -39,11 +39,17 @@
           <th>Nome</th>
           <th>Descrizione</th>
           <th>Prezzo</th>
+          <th></th>
+          <th>Elimina</th>
+          <th>Modifica</th>
         </ng-template>
         <ng-template #rows let-row>
           <td>{{ row.nome }}</td>
           <td>{{ row.descrizione }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
+          <td></td>
+          <td><i class="fa-solid fa-trash-can"></i></td>
+          <td><i class="fa-solid fa-pencil"></i></td>
         </ng-template>
       </app-table>
     </div>
@@ -51,7 +57,7 @@
 
   <!--Add trattamento-->
   <div class="row mt-4">
-    <div class="col-4">
+    <div class="col-4 mt-3">
       <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
         <legend>Aggiungi Trattamento</legend>
         <div class="form-group">
@@ -88,11 +94,21 @@
           <th>Nome</th>
           <th>Durata</th>
           <th>Prezzo</th>
+          <th></th>
+          <th>Elimina</th>
+          <th>Modifica</th>
         </ng-template>
         <ng-template #rows let-row>
           <td>{{ row.nome }}</td>
           <td>{{ row.durata }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
+          <td></td>
+          <td>
+            <a (onclick)="deleteTreatment()"
+              ><i class="fa-solid fa-trash-can"></i
+            ></a>
+          </td>
+          <td><i class="fa-solid fa-pencil"></i></td>
         </ng-template>
       </app-table>
     </div>

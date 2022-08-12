@@ -66,6 +66,15 @@ export class ProdAndTreatmentsComponent implements OnInit {
       });
   }
 
+  //modifica prodotto
+  modifyProdotto() {
+    this.productService
+      .modifyProdotto(this.productsForm.value)
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
+
   //--TRATTAMENTI--
   //aggiungi nuovo trattamento
   addTrattamento() {
@@ -84,6 +93,15 @@ export class ProdAndTreatmentsComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         //this.admin = response;
+      });
+  }
+
+  //modifica prodotto
+  modifyTrattamento() {
+    this.treatmentsService
+      .modifyTreatment(this.productsForm.value)
+      .subscribe((response) => {
+        console.log(response);
       });
   }
 }
