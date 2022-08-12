@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { CartService } from 'src/app/core/services/cart.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { Cart } from 'src/app/models/cart.model';
 import { Product } from 'src/app/models/product.model';
@@ -13,7 +14,7 @@ import { User, UserRole } from 'src/app/models/user.model';
 })
 export class CustomerPageComponent implements OnInit {
   @Input() products: Product[];
-  carrello: Cart[];
+  carrello: Cart;
   prodEsistente: Product | null;
 
   user: User;
@@ -22,11 +23,16 @@ export class CustomerPageComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private productService: ProductsService
-  ) {}
+    private productService: ProductsService,
+    private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
+    this.cartService.cart$.subscribe((cart) => {
+      console.log(cart);
+      this.carrello = cart;
+    })
     this.listenToProd();
   }
 
@@ -38,8 +44,12 @@ export class CustomerPageComponent implements OnInit {
   }
 
   //metodo per aggiungere al carrello
-  addToCart(products) {
-    this.carrello.push(products);
+  addToCart(product: Product) {
+    this.cartService.addItem(product);
+  }
+
+  clearCart() {
+    this.cartService.clearCart();
   }
 
   logout() {
