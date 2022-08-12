@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Cart } from 'src/app/models/cart.model';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,17 +26,18 @@ export class CartService {
       this.cart = {
         countTot: 0,
         prezzoTot: 0,
-        prodotto: []
-      }
+        prodotto: [],
+      };
     } else {
       this.cart = _cart;
     }
   }
 
+  //aggiungi prodotti nel carrello
   addItem(product: Product) {
     const tempCart = this.cart;
     const isPresent = !!tempCart.prodotto.find(
-      (elem) => (elem.id === product.id) && (elem.nome === product.nome)
+      (elem) => elem.id === product.id && elem.nome === product.nome
     );
     if (!isPresent) {
       tempCart.prodotto.push(product);
@@ -45,11 +47,12 @@ export class CartService {
     this.cart = tempCart;
   }
 
+  //pulisci carrello
   clearCart() {
     this.cart = {
       countTot: 0,
       prezzoTot: 0,
-      prodotto: []
-    }
+      prodotto: [],
+    };
   }
 }

@@ -4,14 +4,9 @@
 <div class="container">
   <h1>I nostri prodotti</h1>
 
-  <button (click)="clearCart()">Svuota carrello</button>
-  <br>
   <div class="row">
     <!--Shop_space-->
-    <div
-      *ngFor="let prodotto of products"
-      class="col-4"
-    >
+    <div *ngFor="let prodotto of products" class="col-4">
       <mat-card class="card">
         <mat-card-header>
           <mat-card-title>{{ prodotto.nome }}</mat-card-title>
@@ -26,12 +21,15 @@
         </mat-card-content>
         <span class="color-green font-weight-bold">{{
           prodotto.prezzo | currency: "EUR"
-          }}</span>
+        }}</span>
         <mat-card-actions>
           <button
             mat-button
             (click)="addToCart(prodotto)"
-          >Acquista</button>
+            (click)="incrementCount()"
+          >
+            Acquista
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

@@ -97,7 +97,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
   }
 
   //modifica prodotto
-  modifyTrattamento() {
+  modifyTreatment() {
     this.treatmentsService
       .modifyTreatment(this.productsForm.value)
       .subscribe((response) => {

@@ -9,6 +9,7 @@ import { User, UserRole } from 'src/app/models/user.model';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  badgeCounter: number = 0;
   user: User;
   isAdmin: boolean;
   readonly UserRole = UserRole;
@@ -28,6 +29,11 @@ export class NavbarComponent implements OnInit {
         );
       }
     });
+  }
+
+  //incremento carrello
+  incrementCount() {
+    this.badgeCounter++;
   }
 
   logout() {

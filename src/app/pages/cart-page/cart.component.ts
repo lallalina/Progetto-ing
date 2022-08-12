@@ -13,10 +13,7 @@ export class CartComponent implements OnInit {
   totale = 0;
   form;
 
-  constructor(
-    private router: Router,
-    private cartService: CartService
-  ) { }
+  constructor(private router: Router, private cartService: CartService) {}
 
   /*ngDoCheck(){
     this.totale=0;
@@ -24,11 +21,17 @@ export class CartComponent implements OnInit {
     this.carrello.forEach(element => {
       this.totale += element.reservation_items[0].price;
     });
+*/
 
-    saveCart(){
-    sessionStorage.setItem('carrello', JSON.stringify(this.carrello))
+  //salvo il carrello nella session
+  saveCart() {
+    sessionStorage.setItem('carrello', JSON.stringify(this.carrello));
   }
-  }*/
+
+  //pulisci carrello
+  clearCart() {
+    this.cartService.clearCart();
+  }
 
   initForm() {
     //controllo validità sezioni
@@ -43,11 +46,12 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe((cart) => {
-      console.log(cart)
-      this.carrello = cart
-    })
+      console.log(cart);
+      this.carrello = cart;
+    });
     this.initForm();
   }
 
-  ordina() { }
+  //ordina prodotto
+  ordina() {}
 }
