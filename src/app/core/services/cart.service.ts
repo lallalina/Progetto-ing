@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Cart } from 'src/app/models/cart.model';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
-import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root',
@@ -48,11 +47,48 @@ export class CartService {
   }
 
   //pulisci carrello
-  clearCart() {
-    this.cart = {
-      countTot: 0,
-      prezzoTot: 0,
-      prodotto: [],
-    };
+  /*
+  clearCart(id) {
+    let updatedCartItems = [];
+    console.log(this.cart.prodotto[0].id);
+
+    for (let i = 0; i < this.cart.prodotto.length; i++) {
+      if (this.cart.prodotto[i].id === id) {
+        let selectedCartItem = this.cart.prodotto[i];
+        let currentQty = selectedCartItem.count;
+        if (currentQty > 1) {
+          //delete only one item
+          const updatedQuantity = selectedCartItem.count - 1;
+          selectedCartItem.count = updatedQuantity; //add in the element the new quantity
+
+          updatedCartItems = [
+            ...this.cart.prodotto,
+            (this.cart.prodotto[i] = selectedCartItem),
+          ];
+        } else {
+          updatedCartItems = this.cart.prodotto.splice(i, 1);
+        }
+        this.cart = {
+          countTot: this.cart.countTot - 1,
+          prezzoTot: this.cart.prezzoTot - this.cart.prodotto[i].prezzo,
+          prodotto: updatedCartItems,
+        };
+        console.log(this.cart);
+      }
+    }
+  }*/
+
+  clearCart(id) {
+    console.log(this.cart);
+    for (let i = 0; i < this.cart.prodotto.length; i++) {
+      if (this.cart.prodotto[i].id === id) {
+        this.cart.prodotto.splice(i, 1);
+        this.cart = {
+          countTot: this.cart.countTot,
+          prezzoTot: this.cart.prezzoTot - this.cart.prodotto[i].prezzo,
+          prodotto: this.cart.prodotto,
+        };
+      }
+    }
   }
 }

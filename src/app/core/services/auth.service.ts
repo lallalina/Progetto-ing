@@ -45,10 +45,11 @@ export class AuthService {
     this.userSubject.next(value);
   }
 
-  registrazione(param) {
+  //registration
+  registrazione(obj) {
     return this.http.post(
       `${environment.API_URL}/private/nuovoUtente`,
-      param,
+      obj,
       {}
     );
   }

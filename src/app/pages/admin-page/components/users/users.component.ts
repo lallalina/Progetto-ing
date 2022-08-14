@@ -89,7 +89,10 @@ export class UsersComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
       ]),
-      confPassword: new FormControl('', Validators.required),
+      confPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
     });
   }
   //aggiungi nuovo admin

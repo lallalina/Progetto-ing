@@ -23,7 +23,9 @@
           <td>{{ row.nome }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
           <td>{{ carrello.countTot }}</td>
-          <td (click)="clearCart()"><i class="fa-solid fa-trash-can"></i></td>
+          <td (click)="clearCart(row.id)">
+            <i class="fa-solid fa-trash-can"></i>
+          </td>
         </ng-template>
       </app-table>
       <h2 class="text-white">

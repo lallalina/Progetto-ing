@@ -1,6 +1,9 @@
 <!--form di login-->
-<div class="container-fluid login-page-container">
-  <div class="row">
+<div
+  class="container-fluid login-page-container"
+  style="background-color: #343530"
+>
+  <div class="row h-100">
     <!--immagine-->
     <div class="col-5 cover"></div>
     <!--form-->
@@ -12,11 +15,12 @@
               <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
             </div>
           </div>
-          <span class="material-icons clickable" [routerLink]="['']">
+          <span class="material-icons clickable" [routerLink]="['/login']">
             arrow_back
           </span>
           <div class="d-flex justify-content-center form_container">
             <form name="form" [formGroup]="form" (ngSubmit)="registration()">
+              <!--email-->
               <div class="input-group mb-3">
                 <div class="input-group-append">
                   <span class="input-group-text"
@@ -25,28 +29,57 @@
                 </div>
                 <input
                   type="text"
-                  name=""
+                  name="email"
                   class="form-control input_user"
-                  value=""
                   placeholder="email"
                   formControlName="email"
                 />
               </div>
-              <div class="input-group mb-2">
+              <!--password-->
+              <div class="input-group mb-2" style="height: 30px">
                 <div class="input-group-append">
                   <span class="input-group-text"
-                    ><i class="fas fa-key"></i
-                  ></span>
+                    ><i class="fas fa-key"></i>
+                  </span>
                 </div>
-                <div class="example-container">
-                  <input formControlName="password" />
-                  <input formControlName="confirmPassword" />
-                  <div *ngIf="passwordMatchError">
-                    La password non è corretta
-                  </div>
-                </div>
+                <input
+                  [type]="changetype ? 'password' : 'text'"
+                  name="password"
+                  class="form-control input_user"
+                  placeholder="password"
+                  formControlName="password"
+                  id="password"
+                />
+                <span class="eye" (click)="show()">
+                  <i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                </span>
               </div>
-              <div class="d-flex justify-content-center mt-3 login_container">
+              <!--conferma password-->
+              <div
+                class="input-group mb-2"
+                style="height: 30px; margin-top: 30px"
+              >
+                <div class="input-group-append">
+                  <span class="input-group-text"
+                    ><i class="fas fa-key"></i>
+                  </span>
+                </div>
+                <input
+                  [type]="changetype ? 'password' : 'text'"
+                  name="password"
+                  class="form-control input_user"
+                  placeholder="password"
+                  formControlName="password"
+                  id="password"
+                />
+                <span class="eye" (click)="show()">
+                  <i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                </span>
+                <div *ngIf="passwordMatchError">La password non è corretta</div>
+              </div>
+              <div
+                class="d-flex justify-content-center mt-3 login_container mt-5"
+              >
                 <button type="submit" name="button" class="btn login_btn">
                   Registrati
                 </button>

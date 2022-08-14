@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/core/services/cart.service';
 import { Cart } from 'src/app/models/cart.model';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   templateUrl: './cart.component.html',
@@ -12,8 +13,17 @@ export class CartComponent implements OnInit {
   carrello: Cart;
   totale = 0;
   form;
+  prodotto: Product[];
 
   constructor(private router: Router, private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cartService.cart$.subscribe((cart) => {
+      console.log(cart);
+      this.carrello = cart;
+    });
+    this.initForm();
+  }
 
   /*ngDoCheck(){
     this.totale=0;
@@ -29,8 +39,8 @@ export class CartComponent implements OnInit {
   }
 
   //pulisci carrello
-  clearCart() {
-    this.cartService.clearCart();
+  clearCart(id) {
+    this.cartService.clearCart(id);
   }
 
   initForm() {
@@ -42,14 +52,6 @@ export class CartComponent implements OnInit {
       city: new FormControl('', Validators.required),
       indirizzo: new FormControl('', Validators.required),
     });
-  }
-
-  ngOnInit(): void {
-    this.cartService.cart$.subscribe((cart) => {
-      console.log(cart);
-      this.carrello = cart;
-    });
-    this.initForm();
   }
 
   //ordina prodotto

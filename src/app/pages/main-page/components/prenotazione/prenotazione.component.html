@@ -1,91 +1,95 @@
-<div class="offset-1">
+<div class="offset-1 prenota">
   <div id="prendi-appuntamento" class="mt-4">
-    <form action="" class="row">
-      <!--NOME-->
-      <div class="col-5">
-        <div class="form-group">
-          <label for="customer-mail">Nome</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nome"
-            placeholder="Nome"
-            required
-          />
-        </div>
-        <!--EMAIL-->
-        <div class="form-group">
-          <label for="customer-mail">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="mail"
-            placeholder="Email"
-            required
-          />
-        </div>
-        <!--LISTA BARBIERI-->
-        <label for="customer-name">Barbiere</label>
-        <select
-          class="form-control"
-          id="nome-barbiere"
-          (change)="caricaOrari()"
-        >
-          <option *ngFor="let barber of barbers" [value]="barber">
-            {{ barber.nome }}
-          </option>
-        </select>
-        <!--TRATTAMENTI-->
-        <div class="form-group">
-          <fieldset>
-            <legend style="color: white; margin-top: 100%">Trattamenti</legend>
-            <br />
-            <div class="row text-white">
-              <div
-                *ngFor="let treatment of treatments"
-                class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+    <div class="row">
+      <!--immagine-->
+      <div class="col-6 image"></div>
+      <!--form-->
+      <div class="col-6">
+        <form action="">
+          <div class="row">
+            <!--NOME-->
+            <div class="col-6">
+              <div class="form-group">
+                <label for="customer-mail">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  placeholder="Nome"
+                  required
+                />
+              </div>
+              <!--EMAIL-->
+              <div class="form-group">
+                <label for="customer-mail">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="mail"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <!--LISTA BARBIERI-->
+              <label for="customer-name">Barbiere</label>
+              <select
+                class="form-control"
+                id="nome-barbiere"
+                (change)="caricaOrari()"
               >
-                <input type="checkbox" [name]="treatment.nome" />
-                {{ treatment.nome }}
+                <option *ngFor="let barber of barbers" [value]="barber">
+                  {{ barber.nome }}
+                </option>
+              </select>
+              <!--TRATTAMENTI-->
+              <div class="form-group">
+                <fieldset>
+                  <legend style="color: white; margin-top: 100%">
+                    Trattamenti
+                  </legend>
+                  <br />
+                  <div class="row text-white">
+                    <div
+                      *ngFor="let treatment of treatments"
+                      class="custom-control custom-checkbox checkbox-success col-6 pl-5 pr-0"
+                    >
+                      <input type="checkbox" [name]="treatment.nome" />
+                      {{ treatment.nome }}
+                    </div>
+                  </div>
+                </fieldset>
               </div>
             </div>
-          </fieldset>
-        </div>
+            <!---->
+            <div class="col-6">
+              <!--CALENDAR-->
+              <mat-card class="demo-inline-calendar-card">
+                <mat-calendar [(selected)]="selected"></mat-calendar>
+              </mat-card>
+            </div>
+          </div>
+          <!---->
+          <div class="row">
+            <!--ORAIO-->
+            <div class="col-4">
+              <label for="customer-name">Orari</label>
+              <select class="form-control" id="orario">
+                <option *ngFor="let ora of bookings" [value]="ora">
+                  {{ ora.nome }}
+                </option>
+                <option *ngIf="bookings && bookings.length === 0">
+                  <p>Non ci sono orari disponibili</p>
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-dark" id="prenota-taglio">
+              Prenota
+            </button>
+          </div>
+        </form>
       </div>
-      <!---->
-      <div class="col-7">
-        <!--CALENDAR-->
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Scegli una data</mat-label>
-          <input
-            matInput
-            [matDatepickerFilter]="myFilter"
-            [min]="minDate"
-            [matDatepicker]="picker"
-          />
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <!--ORAIO-->
-        <label for="customer-name">Orari</label>
-        <select class="form-control" id="orario">
-          <option *ngFor="let ora of bookings" [value]="ora">
-            {{ ora.nome }}
-          </option>
-          <option *ngIf="bookings && bookings.length === 0">
-            <p>Non ci sono orari disponibili</p>
-          </option>
-        </select>
-      </div>
-      <div class="form-group text-center">
-        <button type="submit" class="btn btn-dark" id="prenota-taglio">
-          Prenota
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

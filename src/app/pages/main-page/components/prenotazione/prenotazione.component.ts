@@ -16,6 +16,8 @@ export class PrenotazioneComponent implements OnInit {
   barbers: Barber[];
   treatments: Array<Treatment>;
 
+  selected: Date | null;
+
   minDate: Date;
   OrariDisponibili = [];
 

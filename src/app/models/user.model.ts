@@ -17,4 +17,6 @@ export interface User {
   enabled: boolean;
   credentialsNonExpired: boolean;
   jwt: string;
+  email: string;
+  password: string;
 }

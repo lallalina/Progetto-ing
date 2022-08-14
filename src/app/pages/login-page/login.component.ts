@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilsService } from '../../core/services/utils.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -15,15 +14,12 @@ export class LoginComponent implements OnInit {
   utente;
   id;
   error;
-  hide = true;
   password;
   credentials;
+  visible: boolean = true;
+  changetype: boolean = true;
 
-  constructor(
-    private auth: AuthService,
-    private utils: UtilsService,
-    private router: Router
-  ) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -47,6 +43,12 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
     });
+  }
+
+  //show Password
+  show() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
   }
 
   //controllo validità sezioni del form

@@ -1,5 +1,8 @@
 <!--form di login-->
-<div class="container-fluid login-page-container">
+<div
+  class="container-fluid login-page-container"
+  style="background-color: #343530"
+>
   <div class="row h-100">
     <!--immagine-->
     <div class="col-5 cover"></div>
@@ -17,28 +20,42 @@
           </span>
           <div class="d-flex justify-content-center form_container">
             <form name="form" [formGroup]="form" (ngSubmit)="login()">
+              <!--email-->
               <div class="input-group mb-3">
                 <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  <span class="input-group-text"
+                    ><i class="fas fa-user"></i
+                  ></span>
                 </div>
-                <input type="text" name="" class="form-control input_user" value="" placeholder="email"
-                  formControlName="email" />
+                <input
+                  type="text"
+                  name="email"
+                  class="form-control input_user"
+                  placeholder="email"
+                  formControlName="email"
+                />
               </div>
+              <!--password-->
               <div class="input-group mb-2">
                 <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-key"></i></span>
+                  <span class="input-group-text"
+                    ><i class="fas fa-key"></i
+                  ></span>
                 </div>
                 <div class="example-container">
-                  <mat-form-field appearance="fill">
-                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="password"
-                      formControlName="password" />
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide">
-                      <mat-icon>{{
-                        hide ? "visibility_off" : "visibility"
-                        }}</mat-icon>
-                    </button>
-                  </mat-form-field>
+                  <input
+                    [type]="changetype ? 'password' : 'text'"
+                    name="password"
+                    class="form-control input_user"
+                    placeholder="password"
+                    formControlName="password"
+                    id="password"
+                  />
+                  <span class="eye" (click)="show()">
+                    <i
+                      [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"
+                    ></i>
+                  </span>
                 </div>
               </div>
 
@@ -53,8 +70,13 @@
           <div class="mt-4">
             <div class="d-flex justify-content-center links">
               <p style="color: black">Non hai un account?</p>
-              <a [routerLink]="['/sign-up']" routerLinkActive="router-link-active" class="ml-2"
-                style="color: black">Registrati</a>
+              <a
+                [routerLink]="['/sign-up']"
+                routerLinkActive="router-link-active"
+                class="ml-2"
+                style="color: black"
+                >Registrati</a
+              >
             </div>
             <div class="d-flex justify-content-center links">
               <a style="color: black">Password dimenticata?</a>
@@ -66,4 +88,22 @@
   </div>
 </div>
 
-<!--TODO add loader-->
+<!--show password-->
+<script>
+  function show() {
+    var x = document.getElementById("password");
+    var y = document.getElementById("hide1");
+    var z = document.getElementById("hide2");
+
+    if (x.type === "password") {
+      x.type = "text";
+      y.style.display = "block";
+      z.style.display = "none";
+      console.log(x);
+    } else {
+      x.type = "password";
+      y.style.display = "none";
+      z.style.display = "block";
+    }
+  }
+</script>

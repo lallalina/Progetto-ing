@@ -6,7 +6,8 @@ import { UtilsService } from './core/services/utils.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login-page/login.component';
-import { PrenotazioneComponent } from './pages/main-page/components/prenotazione/prenotazione.component';
+import { RegistrationComponent } from './pages/registration-page/registration.component';
+import { CartComponent } from './pages/cart-page/cart.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,8 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { CartComponent } from './pages/cart-page/cart.component';
-import { RegistrationComponent } from './pages/registration-page/registration.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({

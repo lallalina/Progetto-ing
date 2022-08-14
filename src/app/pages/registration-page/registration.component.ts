@@ -7,6 +7,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   templateUrl: './registration.component.html',
@@ -14,11 +16,25 @@ import {
 })
 export class RegistrationComponent implements OnInit {
   form: FormGroup;
+  newUser: User[];
+  visible: boolean = true;
+  changetype: boolean = true;
 
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
+  ngOnInit(): void {}
+
+  //chiamataAPI
   registration() {
-    //chiamataAPI
+    /* this.auth.registrazione(this.form.value).subscribe((response) => {
+      this.newUser.push(response);
+    });*/
+  }
+
+  //show Password
+  show() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
   }
 
   //controlli per la password
@@ -51,6 +67,4 @@ export class RegistrationComponent implements OnInit {
       [RegistrationComponent.MatchValidator('password', 'confirmPassword')]
     );
   }
-
-  ngOnInit(): void {}
 }

@@ -18,10 +18,7 @@
       <th>Cellulare</th>
       <th>Ruolo</th>
     </ng-template>
-    <ng-template
-      #rows
-      let-row
-    >
+    <ng-template #rows let-row>
       <td>{{ row.nome }}</td>
       <td>{{ row.cognome }}</td>
       <td>{{ row.mail }}</td>
@@ -34,11 +31,9 @@
   <!--Content-->
   <div class="row mt-5">
     <div class="col-4">
-      <form
-        [formGroup]="barbersForm"
-        (ngSubmit)="addBarber()"
-      >
+      <form [formGroup]="barbersForm" (ngSubmit)="addBarber()">
         <legend>Registra Parrucchieri</legend>
+        <!--nome-->
         <div class="form-group">
           <input
             formControlName="nome"
@@ -46,7 +41,16 @@
             type="text"
             placeholder="Nome"
           />
+          <!--check nome-->
+          <div
+            *ngif="nome.invalid && (nome.dirty || nome.touched)"
+            class="alert alert"
+            -danger
+          >
+            <div *ngIf="nome.errors?.['required']">inserisci il nome</div>
+          </div>
         </div>
+        <!--cognome-->
         <div class="form-group">
           <input
             formControlName="cognome"
@@ -54,7 +58,16 @@
             type="text"
             placeholder="Cognome"
           />
+          <!--check cognome-->
+          <div
+            *ngif="cognome.invalid && (cognome.dirty || cognome.touched)"
+            class="alert alert"
+            -danger
+          >
+            <div *ngIf="cognome.errors?.['required']">inserisci il cognome</div>
+          </div>
         </div>
+        <!--email-->
         <div class="form-group">
           <input
             formControlName="mail"
@@ -62,7 +75,16 @@
             type="email"
             placeholder="Email"
           />
+          <!--check email-->
+          <div
+            *ngif="mail.invalid && (mail.dirty || mail.touched)"
+            class="alert alert"
+            -danger
+          >
+            <div *ngIf="mail.errors?.['required']">inserisci l' email</div>
+          </div>
         </div>
+        <!--password-->
         <div class="form-group">
           <input
             formControlName="password"
@@ -70,7 +92,21 @@
             type="password"
             placeholder="Password (min 8 caratteri)"
           />
+          <!--check password-->
+          <div
+            *ngif="password.invalid && (password.dirty || password.touched)"
+            class="alert alert"
+            -danger
+          >
+            <div *ngIf="password.errors?.['required']">
+              inserisci la passord
+            </div>
+            <div *ngIf="password.errors?.['minLenght']">
+              la password deve essere lunga 8 caratteri
+            </div>
+          </div>
         </div>
+        <!--confPassword-->
         <div class="form-group">
           <input
             formControlName="confPassword"
@@ -78,14 +114,24 @@
             type="password"
             placeholder="Conferma Password"
           />
+          <!--check confPassword-->
+          <div
+            *ngif="
+              confPassword.invalid &&
+              (confPassword.dirty || confPassword.touched)
+            "
+            class="alert alert"
+            -danger
+          >
+            <div *ngIf="confPassword.errors?.['required']">
+              inserisci la passord
+            </div>
+            <div *ngIf="confPassword.errors?.['minLenght']">
+              la password deve essere lunga 8 caratteri
+            </div>
+          </div>
         </div>
-        <button
-          type="submit"
-          class="btn btn-dark"
-          [disabled]="!this.barbersForm.valid"
-        >
-          Crea
-        </button>
+        <button type="submit" class="btn btn-dark">Crea</button>
       </form>
     </div>
 

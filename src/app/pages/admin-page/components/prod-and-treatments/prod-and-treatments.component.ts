@@ -58,12 +58,10 @@ export class ProdAndTreatmentsComponent implements OnInit {
 
   //cancella prodotto
   deleteProdotto() {
-    this.productService
-      .deleteProdotto(this.productsForm.value)
-      .subscribe((response) => {
-        console.log(response);
-        //this.admin = response;
-      });
+    this.productService.deleteProdotto((response) => {
+      this.productsForm.reset();
+      this.products.splice(response);
+    });
   }
 
   //modifica prodotto
