@@ -61,8 +61,14 @@ export class RegistrationComponent implements OnInit {
     this.form = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', Validators.required),
-        confirmPassword: new FormControl('', Validators.required),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+        ]),
+        confirmPassword: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+        ]),
       },
       [RegistrationComponent.MatchValidator('password', 'confirmPassword')]
     );
