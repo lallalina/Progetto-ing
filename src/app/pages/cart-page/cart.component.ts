@@ -73,9 +73,6 @@ export class CartComponent implements OnInit {
   initForm() {
     //controllo validità sezioni
     this.form = new FormGroup({
-      nome: new FormControl('', Validators.required),
-      cognome: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       indirizzo: new FormControl('', Validators.required),
     });
