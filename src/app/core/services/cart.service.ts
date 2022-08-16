@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Cart } from 'src/app/models/cart.model';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
+import { isThisSecond } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +47,7 @@ export class CartService {
     this.cart = tempCart;
   }
 
-  //pulisci carrello
+  //pulisci carrello 1 elemento --alfredo
   /*
   clearCart(id) {
     let updatedCartItems = [];
@@ -78,17 +79,26 @@ export class CartService {
     }
   }*/
 
-  clearCart(id) {
+  deletElement(id) {
     console.log(this.cart);
     for (let i = 0; i < this.cart.prodotto.length; i++) {
       if (this.cart.prodotto[i].id === id) {
         this.cart.prodotto.splice(i, 1);
         this.cart = {
-          countTot: this.cart.countTot,
+          countTot: this.cart.countTot - this.cart.prodotto[i].count,
           prezzoTot: this.cart.prezzoTot - this.cart.prodotto[i].prezzo,
           prodotto: this.cart.prodotto,
         };
       }
     }
+  }
+
+  //pulisci carrello
+  clearCart() {
+    this.cart = {
+      countTot: 0,
+      prezzoTot: 0,
+      prodotto: [],
+    };
   }
 }

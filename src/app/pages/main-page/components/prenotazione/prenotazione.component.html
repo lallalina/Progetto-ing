@@ -2,9 +2,9 @@
   <div id="prendi-appuntamento" class="mt-4">
     <div class="row">
       <!--immagine-->
-      <div class="col-6 image"></div>
+      <div class="col-5 image"></div>
       <!--form-->
-      <div class="col-6">
+      <div class="col-6 offset-1">
         <form action="">
           <div class="row">
             <!--NOME-->
@@ -61,17 +61,12 @@
               </div>
             </div>
             <!---->
-            <div class="col-6">
+            <div class="col-6 calendar-orario">
               <!--CALENDAR-->
               <mat-card class="demo-inline-calendar-card">
                 <mat-calendar [(selected)]="selected"></mat-calendar>
               </mat-card>
-            </div>
-          </div>
-          <!---->
-          <div class="row">
-            <!--ORAIO-->
-            <div class="col-4">
+              <!--ORAIO-->
               <label for="customer-name">Orari</label>
               <select class="form-control" id="orario">
                 <option *ngFor="let ora of bookings" [value]="ora">

@@ -16,6 +16,11 @@ export class AjaxService {
     );
   }
 
+  //recensioni per parrucchieri
+  recensioniP(): Observable<any> {
+    return this.http.get(environment.API_URL + '/public/getRecensioniBarbiere');
+  }
+
   //listaOrari
   orari(): Observable<any> {
     return this.http.get(environment.API_URL + '/public/getOrari');

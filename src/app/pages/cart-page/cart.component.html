@@ -23,7 +23,7 @@
           <td>{{ row.nome }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
           <td>{{ carrello.countTot }}</td>
-          <td (click)="clearCart(row.id)">
+          <td (click)="deletElement(row.id)">
             <i class="fa-solid fa-trash-can"></i>
           </td>
         </ng-template>
@@ -31,33 +31,13 @@
       <h2 class="text-white">
         Totale: {{ carrello.prezzoTot | currency: "EUR" }}
       </h2>
+      <button (click)="clearCart()">pulisci carrello</button>
     </div>
 
     <!--FORM-->
     <div class="col-3">
       <form [formGroup]="form" (ngSubmit)="ordina()">
         <div class="form-group">
-          <label>nome:</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="nome"
-            formControlName="nome"
-          />
-          <label>cognome:</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="cognome"
-            formControlName="cognome"
-          />
-          <label>email:</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="email"
-            formControlName="email"
-          />
           <label>Città:</label>
           <input
             type="text"
@@ -73,9 +53,17 @@
             formControlName="indirizzo"
           />
         </div>
-        <button type="submit" class="btn btn-varning" id="button">
-          Ordina
-        </button>
+        <div class="col-3" *ngIf="indirizzi">
+          <h3>i tuoi indirizzi</h3>
+          <div *ngFor="let indirizzo of indirizzi">
+            <select>
+              {{
+                indirizzo.id
+              }}
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn" id="button">Ordina</button>
       </form>
     </div>
   </div>

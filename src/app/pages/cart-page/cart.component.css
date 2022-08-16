@@ -6,6 +6,6 @@ h1 {
 
 #button {
   border-color: gray;
-  margin-left: "50%";
   color: white;
+  justify-content: center;
 }

@@ -70,4 +70,18 @@ export class AuthService {
     }
     console.log(_user);
   }
+
+  //nuovo indirizzo utente
+  NuovoIndirizzo(obj) {
+    return this.http.post(
+      `${environment.API_URL}/user/nuovoIndirizzo`,
+      obj,
+      {}
+    );
+  }
+
+  //prendi indirizzo utente
+  getIndirizzo(): Observable<any> {
+    return this.http.get(environment.API_URL + '/user/getIndirizziUtente');
+  }
 }

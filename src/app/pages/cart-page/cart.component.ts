@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { Cart } from 'src/app/models/cart.model';
 import { Product } from 'src/app/models/product.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   templateUrl: './cart.component.html',
@@ -14,8 +16,13 @@ export class CartComponent implements OnInit {
   totale = 0;
   form;
   prodotto: Product[];
+  indirizzi: [];
 
-  constructor(private router: Router, private cartService: CartService) {}
+  constructor(
+    private router: Router,
+    private cartService: CartService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe((cart) => {
@@ -38,9 +45,29 @@ export class CartComponent implements OnInit {
     sessionStorage.setItem('carrello', JSON.stringify(this.carrello));
   }
 
+  //togli elementi dal carrello
+  deletElement(id) {
+    this.cartService.deletElement(id);
+  }
+
   //pulisci carrello
-  clearCart(id) {
-    this.cartService.clearCart(id);
+  clearCart() {
+    this.cartService.clearCart();
+  }
+
+  //indirizzo per utente
+  nuovoIndirizzo() {
+    /* this.auth.NuovoIndirizzo(this.form.value).subscribe((response) => {
+      this.indirizzi.push(response);
+    });*/
+  }
+
+  //get indirizzi utente
+  getIndirizzi() {
+    this.auth.getIndirizzo().subscribe((response) => {
+      console.log(response);
+      this.indirizzi = response;
+    });
   }
 
   initForm() {

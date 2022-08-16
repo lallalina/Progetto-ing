@@ -10,6 +10,7 @@ import { RegistrationComponent } from './pages/registration-page/registration.co
 
 const routes: Routes = [
   {
+    //home page route
     path: '',
     loadChildren: () =>
       import('./pages/main-page/main-page.module').then(
@@ -17,14 +18,17 @@ const routes: Routes = [
       ),
   },
   {
+    //login page route
     path: 'login',
     component: LoginComponent,
   },
   {
+    //registrazione page route
     path: 'sign-up',
     component: RegistrationComponent,
   },
   {
+    //admin page route
     path: 'admin',
     //canActivate: [AdminGuard],
     loadChildren: () =>
@@ -33,6 +37,7 @@ const routes: Routes = [
       ),
   },
   {
+    //barbiere page route
     path: 'responsible',
     // canActivate: [ResponsibleGuard],
     loadChildren: () =>
@@ -41,6 +46,7 @@ const routes: Routes = [
       ),
   },
   {
+    //customer page route
     path: 'customer',
     // canActivate: [CustomerGuard],
     loadChildren: () =>
