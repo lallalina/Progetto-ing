@@ -4,16 +4,12 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { CartItem } from 'src/app/models/cart.model';
-import { Product } from 'src/app/models/product.model';
-import { User } from 'src/app/models/user.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  private cartSubscription: Subscription;
   public items: CartItem[];
   public total: number;
   form;

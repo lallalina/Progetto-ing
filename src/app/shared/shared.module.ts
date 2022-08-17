@@ -18,6 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -43,6 +44,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatIconModule, //per le icone
     MatCardModule, //card
     MatBadgeModule, //cart counter
+    MatButtonModule
   ],
   exports: [
     NavbarComponent,
@@ -57,7 +59,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatNativeDateModule,
     MatCardModule, //card
     MatBadgeModule, //cart counter
+    MatButtonModule
   ],
   providers: [MatDatepickerModule],
 })
-export class SharedModule {}
+export class SharedModule { }

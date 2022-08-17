@@ -8,7 +8,104 @@
   <div class="row">
     <div class="col-12">
       <!-- Shopping Cart-->
-      <div class="table-responsive shopping-cart">
+      <app-table
+        [data]="items"
+        *ngIf="items"
+      >
+        <ng-template #headers>
+          <th>Prodotto</th>
+          <th class="text-center">Quantità</th>
+          <th class="text-center">Prezzo</th>
+          <th class="text-center">Subtotale</th>
+          <th class="text-right">
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="onClearCart($event)"
+            >
+              pulisci carrello
+            </button>
+          </th>
+
+        </ng-template>
+        <ng-template
+          #rows
+          let-row
+        >
+          <td>
+            <div class="product-item">
+              <a
+                class="product-thumb"
+                routerLink="/products/{{ row.product.id }}"
+              >
+                <img
+                  [src]="row.product.immagine"
+                  alt="Product"
+                />
+              </a>
+              <div class="product-info">
+                <h4 class="product-title">
+                  <a
+                    class="text-black"
+                    routerLink="/products/{{ row.product.id }}"
+                  >{{
+                    row.product.nome
+                    }}</a>
+                </h4>
+              </div>
+            </div>
+          </td>
+          <td class="text-center">
+            <div class="count-input">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="decreaseAmount(row)"
+                  >
+                    -
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  class="form-control text-center"
+                  placeholder=""
+                  [(ngModel)]="row.amount"
+                  (blur)="checkAmount(row)"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="increaseAmount(row)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="text-center text-lg text-medium">
+            {{ row.product.prezzo | currency: "EUR" }}
+          </td>
+          <td class="text-center text-lg text-medium">
+            {{ row.product.prezzo * row.amount | currency: "EUR" }}
+          </td>
+          <td class="text-right">
+            <a
+              class="remove-from-cart"
+              href="#"
+              data-toggle="tooltip"
+              title="Remove item"
+              (click)="onRemoverow($event, row)"
+            >
+              <span class="material-icons md-light">chiudi</span>
+            </a>
+          </td>
+
+        </ng-template>
+      </app-table>
+      <!--- <div class="table-responsive shopping-cart">
         <table class="table">
           <thead>
             <tr>
@@ -35,13 +132,19 @@
                     class="product-thumb"
                     routerLink="/products/{{ item.product.id }}"
                   >
-                    <img [src]="item.product.immagine" alt="Product" />
+                    <img
+                      [src]="item.product.immagine"
+                      alt="Product"
+                    />
                   </a>
                   <div class="product-info">
                     <h4 class="product-title">
-                      <a routerLink="/products/{{ item.product.id }}">{{
+                      <a
+                        class="text-black"
+                        routerLink="/products/{{ item.product.id }}"
+                      >{{
                         item.product.nome
-                      }}</a>
+                        }}</a>
                     </h4>
                   </div>
                 </div>
@@ -105,7 +208,7 @@
             </tbody>
           </ng-template>
         </table>
-      </div>
+      </div> -->
 
       <div class="shopping-cart-footer">
         <div class="column"></div>
@@ -117,7 +220,10 @@
 
       <!--FORM-->
       <div class="col-3">
-        <form [formGroup]="form" (ngSubmit)="ordina()">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="ordina()"
+        >
           <div class="form-group">
             <label>Città:</label>
             <input
@@ -134,17 +240,24 @@
               formControlName="indirizzo"
             />
           </div>
-          <div class="col-3" *ngIf="indirizzi">
+          <div
+            class="col-3"
+            *ngIf="indirizzi"
+          >
             <h3>i tuoi indirizzi</h3>
             <div *ngFor="let indirizzo of indirizzi">
               <select>
                 {{
-                  indirizzo.id
+                indirizzo.id
                 }}
               </select>
             </div>
           </div>
-          <button type="submit" class="btn" id="button">Ordina</button>
+          <button
+            type="submit"
+            class="btn"
+            id="button"
+          >Ordina</button>
         </form>
       </div>
     </div>

@@ -248,6 +248,10 @@ h1 {
   color: white;
 }
 
+.text-black {
+  color: black ;
+}
+
 html,
 body {
   height: 100%;
