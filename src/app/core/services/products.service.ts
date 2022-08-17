@@ -21,7 +21,7 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {
     //Esegue la GET per i trattamenti appena il service viene creato
-    this.getProducts().subscribe((_) => {});
+    this.getProducts().subscribe((_) => { });
   }
 
   //addProdotto
@@ -35,8 +35,8 @@ export class ProductsService {
     );
   }
   //deleteProdotto
-  deleteProdotto(obj): Observable<any> {
-    return this.http.post(environment.API_URL + 'admin/eliminaProdotto', obj);
+  deleteProdotto(id: Product['id']): Observable<any> {
+    return this.http.post(environment.API_URL + '/admin/eliminaProdotto', { idProdotto: id }, { observe: 'response' });
   }
 
   //modifyProdotto

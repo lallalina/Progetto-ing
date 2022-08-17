@@ -72,7 +72,7 @@ export class CartService {
   public removeItem(item: CartItem) {
     const _cart = this.getItems();
     const indexToRemove = _cart.findIndex(
-      (element) => element === item
+      (element) => element.product.id === item.product.id
     );
     _cart.splice(indexToRemove, 1);
     this.cart = _cart;

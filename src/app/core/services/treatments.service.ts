@@ -8,22 +8,22 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class TreatmentsService {
-  private readonly treatmentsSubject = new BehaviorSubject<Array<Treatment>>(
+  private readonly treatmentsSubject = new BehaviorSubject<Treatment[]>(
     []
   );
   readonly treatments$ = this.treatmentsSubject.asObservable();
 
-  get treatments(): Array<Treatment> {
+  get treatments(): Treatment[] {
     return this.treatmentsSubject.value;
   }
 
-  set treatments(value: Array<Treatment>) {
+  set treatments(value: Treatment[]) {
     this.treatmentsSubject.next(value);
   }
 
   constructor(private http: HttpClient) {
     //Esegue la GET per i trattamenti appena il service viene creato
-    this.getTreatments().subscribe((_) => {});
+    this.getTreatments().subscribe((_) => { });
   }
 
   //addTrattamento
@@ -40,11 +40,11 @@ export class TreatmentsService {
 
   //deleteTrattamento
   deleteTreatment(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/eliminaTrattamento', obj);
+    return this.http.post(environment.API_URL + '/admin/eliminaTrattamento', obj, { observe: 'response' });
   }
 
   //modifyTrattamento
   modifyTreatment(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/modificaTrattamento', obj);
+    return this.http.post(environment.API_URL + '/admin/modificaTrattamento', obj);
   }
 }

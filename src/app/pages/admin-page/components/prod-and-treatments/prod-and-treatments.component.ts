@@ -20,7 +20,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
   constructor(
     private treatmentsService: TreatmentsService,
     private productService: ProductsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initProductsForm();
@@ -57,11 +57,12 @@ export class ProdAndTreatmentsComponent implements OnInit {
   }
 
   //cancella prodotto
-  deleteProdotto() {
-    this.productService.deleteProdotto((response) => {
-      this.productsForm.reset();
-      this.products.splice(response);
-    });
+  deleteProdotto(id: Product['id']) {
+    this.productService.deleteProdotto(id)
+      .subscribe((response) => {
+        const prodIndex = this.products.findIndex((item) => item.id === id)
+        this.products.splice(prodIndex, 1);
+      });
   }
 
   //modifica prodotto
@@ -85,12 +86,12 @@ export class ProdAndTreatmentsComponent implements OnInit {
   }
 
   //cancella trattamento
-  deleteTreatment() {
+  deleteTreatment(id: Treatment['id']) {
     this.treatmentsService
-      .deleteTreatment(this.treatmentsForm.value)
+      .deleteTreatment(id)
       .subscribe((response) => {
-        console.log(response);
-        //this.admin = response;
+        const treatIndex = this.products.findIndex((item) => item.id === id)
+        this.products.splice(treatIndex, 1);
       });
   }
 

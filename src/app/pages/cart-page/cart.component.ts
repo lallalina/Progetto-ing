@@ -75,8 +75,12 @@ export class CartComponent implements OnInit {
   }
 
   public decreaseAmount(item: CartItem) {
-    item.amount === 1 && this.cartService.removeItem(item);
-    this.cartService.updateItemAmount(item, item.amount - 1);
+    const newAmount = item.amount--;
+    if (newAmount === 0) {
+      this.cartService.removeItem(item);
+    } else {
+      this.cartService.updateItemAmount(item, newAmount);
+    }
   }
 
   public checkAmount(item: CartItem) {
