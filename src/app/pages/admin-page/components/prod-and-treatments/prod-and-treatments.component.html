@@ -2,10 +2,14 @@
   <!--Add Prodotto-->
   <div class="row mt-4">
     <div class="col-4">
-      <form [formGroup]="productsForm" (ngSubmit)="addProdotto()">
+      <form
+        [formGroup]="productsForm"
+        (ngSubmit)="addProdotto()"
+      >
         <legend>Aggiungi Prodotto</legend>
         <div class="form-group">
           <input
+            formControlName="nome"
             class="form-control"
             type="text"
             name="nome"
@@ -14,6 +18,7 @@
         </div>
         <div class="form-group">
           <input
+            formControlName="prezzo"
             class="form-control"
             type="text"
             name="Prezzo"
@@ -22,6 +27,7 @@
         </div>
         <div class="form-group">
           <textarea
+            formControlName="descrizione"
             name="descrizione"
             rows="5"
             cols="30"
@@ -29,11 +35,18 @@
           >
           </textarea>
         </div>
-        <button type="submit" class="btn btn-dark">Aggiungi</button>
+        <button
+          type="submit"
+          class="btn btn-dark"
+        >Aggiungi</button>
       </form>
     </div>
     <!--Delete and Modify Prodotto-->
-    <div class="col-6 mb-3 mt-3 offset-2" id="prodotti" *ngIf="products">
+    <div
+      class="col-6 mb-3 mt-3 offset-2"
+      id="prodotti"
+      *ngIf="products"
+    >
       <app-table [data]="products">
         <ng-template #headers>
           <th>Nome</th>
@@ -43,7 +56,10 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <td>{{ row.nome }}</td>
           <td>{{ row.descrizione }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
@@ -60,10 +76,14 @@
   <!--Add trattamento-->
   <div class="row mt-4">
     <div class="col-4 mt-3">
-      <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
+      <form
+        [formGroup]="treatmentsForm"
+        (ngSubmit)="addTrattamento()"
+      >
         <legend>Aggiungi Trattamento</legend>
         <div class="form-group">
           <input
+            formControlName="nome"
             class="form-control"
             type="text"
             name="nome"
@@ -72,6 +92,7 @@
         </div>
         <div class="form-group">
           <input
+            formControlName="durata"
             class="form-control"
             type="text"
             name="durata"
@@ -80,17 +101,24 @@
         </div>
         <div class="form-group">
           <input
+            formControlName="prezzo"
             class="form-control"
             type="text"
             name="Prezzo"
             placeholder="Prezzo"
           />
         </div>
-        <button type="submit" class="btn btn-dark">Aggiungi</button>
+        <button
+          type="submit"
+          class="btn btn-dark"
+        >Aggiungi</button>
       </form>
     </div>
     <!--Delete and Modify Trattamento-->
-    <div class="col-6 mb-3 mt-3 offset-2" id="trattamenti">
+    <div
+      class="col-6 mb-3 mt-3 offset-2"
+      id="trattamenti"
+    >
       <app-table [data]="treatments">
         <ng-template #headers>
           <th>Nome</th>
@@ -99,7 +127,10 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <td>{{ row.nome }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
           <td></td>
