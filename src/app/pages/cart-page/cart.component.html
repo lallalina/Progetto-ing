@@ -6,7 +6,7 @@
 
   <!--riepilogo acquisti-->
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 p-4">
       <!-- Shopping Cart-->
       <app-table
         [data]="items"
@@ -210,16 +210,15 @@
         </table>
       </div> -->
 
-      <div class="shopping-cart-footer">
-        <div class="column"></div>
-        <div class="column text-lg text-white">
+      <div class="shopping-cart-footer mt-4">
+        <div class="column text-xl text-white">
           Totale:
-          <span class="text-medium">{{ total | currency }}</span>
+          <span class="text-xl">{{ total | currency: "EUR" }}</span>
         </div>
       </div>
 
       <!--FORM-->
-      <div class="col-3">
+      <div class="col-3 mt-4">
         <form
           [formGroup]="form"
           (ngSubmit)="ordina()"
