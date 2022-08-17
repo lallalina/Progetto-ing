@@ -1,5 +1,14 @@
 /*INSTAGRAM*/
 
+.card {
+  max-width: 200px;
+  background-color: rgb(234, 230, 217);
+}
+
+.card-img-top {
+  max-width: 100px;
+}
+
 .little-logo {
   max-width: 50px;
 }

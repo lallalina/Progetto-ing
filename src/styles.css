@@ -93,6 +93,16 @@ label {
   color: white;
 }
 
+/*RECENSIONI*/
+.recensioni h1 {
+  color: wheat;
+  font-family: fantasy;
+}
+
+.recensioni p {
+  color: white;
+}
+
 /*GRID PHOTO*/
 .grid-container {
   display: grid;

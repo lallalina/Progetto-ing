@@ -15,7 +15,6 @@ export class MainPageComponent implements OnInit {
   error;
 
   constructor(private ajax: AjaxService) {}
-
   //prendi recensioni
   getRecensioni() {
     this.ajax.recensioni().subscribe((response) => {
@@ -24,5 +23,7 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getRecensioni();
+  }
 }

@@ -4,16 +4,18 @@
 <!--Calendar-->
 
 <!--Le recensioni-->
-<div class="prenota row mt-6 w-100" *ngIf="reviews">
-  <div class="col-10">
-    <h1 class="justify-content-center text-white">Le tue recensioni</h1>
-    <div class="card" style="width: 18rem">
+<!--Recensioni-->
+<div class="row mt-6 mb-5 recensioni" *ngIf="reviews">
+  <div class="col-4">
+    <h1>Le nostre recensioni</h1>
+    <div class="card" style="width: 18rem" *ngFor="let review of reviews">
       <img class="card-img-top" src="assets/47774.png" alt="Card image cap" />
       <div class="card-body">
-        *ngFor="let review of reviews"
-        <p class="card-text">
+        <p class="card-text" style="color: black">
+          <b>voto:</b> {{ review.valutazione }}
+        </p>
+        <p class="card-text" style="color: black">
           {{ review.descrizione }}
-          {{ reviews.valutazione }}
         </p>
       </div>
     </div>

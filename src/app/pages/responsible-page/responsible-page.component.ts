@@ -19,5 +19,7 @@ export class ResponsiblePageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getRecensioni();
+  }
 }
