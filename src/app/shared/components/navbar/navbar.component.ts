@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User, UserRole } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
+import { CartService } from 'src/app/core/services/cart.service';
+import { CartItem } from 'src/app/models/cart.model';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +12,29 @@ import { User, UserRole } from 'src/app/models/user.model';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  public items: CartItem[];
+  public total: number;
   badgeCounter: number = 0;
   user: User;
   isAdmin: boolean;
   readonly UserRole = UserRole;
+  private cartSubscription: Subscription;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
+    this.items = this.cartService.getItems();
+    this.total = this.cartService.getTotal();
+    this.cartSubscription = this.cartService.itemsChanged.subscribe(
+      (items: CartItem[]) => {
+        this.items = items;
+        this.total = this.cartService.getTotal();
+      }
+    );
     this.auth.user$.subscribe((user) => {
       if (user) {
         console.log(user);
@@ -29,11 +47,6 @@ export class NavbarComponent implements OnInit {
         );
       }
     });
-  }
-
-  //incremento carrello
-  incrementCount() {
-    this.badgeCounter++;
   }
 
   logout() {

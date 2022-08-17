@@ -1,8 +1,10 @@
-export interface Product {
-  id: number;
-  nome: string;
-  descrizione: string;
-  prezzo: number;
-  count: number; //numero quantità di selezione del prodotto
-  immagine: string;
+export class Product {
+  constructor(
+    public id: number,
+    public nome: string,
+    public descrizione: string,
+    public prezzo: number,
+    public count: number, //numero quantità di selezione del prodotto
+    public immagine: string
+  ) {}
 }

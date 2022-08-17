@@ -1,7 +1,17 @@
+/* Import Google Fonts (Maven Pro) */
+@import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900");
+
 /* COPERTINA - NAVBAR */
 /*Mobile*/
 @import "material-icons/iconfont/material-icons.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+/* all */
+*,
+::after,
+::before {
+  font-family: "Maven Pro";
+}
 
 @media only screen and (max-width: 992px) {
   .mobile-only {
@@ -48,7 +58,7 @@
 
 .navbar {
   background: rgba(73, 62, 32, 0.5) !important;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Maven Pro", "Times New Roman", Times, serif;
   height: 80px;
   transition: 0, 5s ease;
 }
@@ -83,10 +93,14 @@ label {
   color: white;
 }
 
+h1 {
+  font-family: "Maven Pro", fantasy;
+}
+
 /*CHI SIAMO*/
 .identita h1 {
   color: wheat;
-  font-family: fantasy;
+  font-family: "Maven Pro", fantasy;
 }
 
 .identita p {
@@ -230,7 +244,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Maven Pro", Roboto, "Helvetica Neue", sans-serif;
 }
 
 th {
