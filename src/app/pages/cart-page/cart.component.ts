@@ -23,12 +23,12 @@ export class CartComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private auth: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
     this.total = this.cartService.getTotal();
-    this.cartSubscription = this.cartService.itemsChanged.subscribe(
+    this.cartService.cart$.subscribe(
       (items: CartItem[]) => {
         this.items = items;
         this.total = this.cartService.getTotal();
@@ -114,9 +114,5 @@ export class CartComponent implements OnInit {
   }
 
   //ordina prodotto
-  ordina() {}
-
-  ngOnDestroy() {
-    this.cartSubscription.unsubscribe();
-  }
+  ordina() { }
 }

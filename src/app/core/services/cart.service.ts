@@ -4,25 +4,38 @@ import { BehaviorSubject } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { isThisSecond } from 'date-fns';
 import { MessageService } from './message.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private readonly cartSubject = new BehaviorSubject<CartItem[]>(null);
+  private readonly cartSubject = new BehaviorSubject<CartItem[]>([]);
   readonly cart$ = this.cartSubject.asObservable();
-  private cartItems: CartItem[];
 
-  constructor(private messageService: MessageService) {
-    this.cartItems = [];
+  get cart(): CartItem[] {
+    return JSON.parse(sessionStorage.getItem('cart'));
   }
 
-  public itemsChanged: EventEmitter<CartItem[]> = new EventEmitter<
-    CartItem[]
-  >();
+  set cart(value: CartItem[]) {
+    sessionStorage.setItem('cart', JSON.stringify(value));
+    this.cartSubject.next(value);
+  }
+
+
+  constructor(
+    private messageService: MessageService,
+    private toastService: ToastrService) {
+    const _cart = this.cart;
+    if (!_cart) {
+      this.cart = [];
+    } else {
+      this.cart = _cart;
+    }
+  }
 
   public getItems() {
-    return this.cartItems.slice();
+    return this.cart.slice();
   }
 
   // Get Product ids out of CartItem[] in a new array
@@ -30,38 +43,24 @@ export class CartService {
     return this.getItems().map((cartItem) => cartItem.product.id);
   }
 
-  /*
-  constructor() {
-    const _cart = this.cart;
-    if (!_cart) {
-      this.cart = {
-        countTot: 0,
-        prezzoTot: 0,
-        prodotto: [],
-      };
-    } else {
-      this.cart = _cart;
-    }
-  }
-*/
-
   public addItem(item: CartItem) {
+    const _cart = this.getItems();
     console.log(item);
     // If item is already in cart, add to the amount, otherwise push item into cart
     if (this.getItemIds().includes(item.product.id)) {
-      this.cartItems.forEach(function (cartItem) {
+      _cart.forEach(function (cartItem) {
         if (cartItem.product.id === item.product.id) {
           cartItem.amount += item.amount;
         }
       });
-      this.messageService.add(
-        'Amount in cart changed for: ' + item.product.nome
+      this.toastService.success(
+        'Cambiata quantità di: ' + item.product.nome
       );
     } else {
-      this.cartItems.push(item);
-      this.messageService.add('Added to cart: ' + item.product.nome);
+      _cart.push(item);
+      this.toastService.success('Aggiunto al carrello: ' + item.product.nome);
     }
-    this.itemsChanged.emit(this.cartItems.slice());
+    this.cart = _cart;
   }
 
   public addItems(items: CartItem[]) {
@@ -71,33 +70,34 @@ export class CartService {
   }
 
   public removeItem(item: CartItem) {
-    const indexToRemove = this.cartItems.findIndex(
+    const _cart = this.getItems();
+    const indexToRemove = _cart.findIndex(
       (element) => element === item
     );
-    this.cartItems.splice(indexToRemove, 1);
-    this.itemsChanged.emit(this.cartItems.slice());
-    this.messageService.add('Deleted from cart: ' + item.product.nome);
+    _cart.splice(indexToRemove, 1);
+    this.cart = _cart;
+    this.toastService.success('Rimosso dal carrello: ' + item.product.nome);
   }
 
   public updateItemAmount(item: CartItem, newAmount: number) {
-    this.cartItems.forEach((cartItem) => {
+    const _cart = this.getItems();
+    _cart.forEach((cartItem) => {
       if (cartItem.product.id === item.product.id) {
         cartItem.amount = newAmount;
       }
     });
-    this.itemsChanged.emit(this.cartItems.slice());
-    this.messageService.add('Updated amount for: ' + item.product.nome);
+    this.cart = _cart;
+    this.toastService.success('Aggiornata quantità di: ' + item.product.nome);
   }
 
   public clearCart() {
-    this.cartItems = [];
-    this.itemsChanged.emit(this.cartItems.slice());
-    this.messageService.add('Cleared cart');
+    this.cart = [];
+    this.toastService.success('Carrello eliminato');
   }
 
   public getTotal() {
     let total = 0;
-    this.cartItems.forEach((cartItem) => {
+    this.cart.forEach((cartItem) => {
       total += cartItem.amount * cartItem.product.prezzo;
     });
     return total;

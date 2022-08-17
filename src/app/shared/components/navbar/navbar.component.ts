@@ -18,18 +18,17 @@ export class NavbarComponent implements OnInit {
   user: User;
   isAdmin: boolean;
   readonly UserRole = UserRole;
-  private cartSubscription: Subscription;
 
   constructor(
     private auth: AuthService,
     private router: Router,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
     this.total = this.cartService.getTotal();
-    this.cartSubscription = this.cartService.itemsChanged.subscribe(
+    this.cartService.cart$.subscribe(
       (items: CartItem[]) => {
         this.items = items;
         this.total = this.cartService.getTotal();
