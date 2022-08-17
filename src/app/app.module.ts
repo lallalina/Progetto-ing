@@ -20,6 +20,9 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
+import { ToastrModule } from 'ngx-toastr';
+import { MessageService } from './core/services/message.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +39,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     HttpClientModule, //chiamate http
     BrowserAnimationsModule, //angular material
     SharedModule,
+    ToastrModule.forRoot(),
     CalendarModule.forRoot({
       //calendar
       provide: DateAdapter,
@@ -45,6 +49,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
   providers: [
     UtilsService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    [MessageService],
   ],
   bootstrap: [AppComponent],
 })

@@ -5,23 +5,22 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 
-import { Cart } from 'src/app/models/cart.model';
+import { CartItem } from 'src/app/models/cart.model';
 import { Product } from 'src/app/models/product.model';
 import { User, UserRole } from 'src/app/models/user.model';
-
 import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-customer-page',
   templateUrl: './customer-page.component.html',
-  styleUrls: ['./customer-page.component.css'],
+  styleUrls: ['./customer-page.component.scss'],
 })
 export class CustomerPageComponent implements OnInit {
-  @Input() products: Product[];
-  carrello: Cart;
+  @Input() product: Product;
+  carrello: CartItem[];
   prodEsistente: Product | null;
   badgeCounter: number;
-
+  public selectedQuantity: number = 1;
   user: User;
   readonly UserRole = UserRole;
 
@@ -35,7 +34,7 @@ export class CustomerPageComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
     this.cartService.cart$.subscribe((cart) => {
-      console.log(cart);
+      console.log('il carrello: ' + cart);
       this.carrello = cart;
     });
     this.listenToProd();
@@ -45,13 +44,20 @@ export class CustomerPageComponent implements OnInit {
   listenToProd() {
     this.productService.getProducts().subscribe((response) => {
       console.log(response);
-      this.products = response;
+      this.product = response;
     });
   }
 
   //metodo per aggiungere al carrello
-  addToCart(product: Product) {
-    this.cartService.addItem(product);
+  public onAddToCart(prodotto) {
+    console.log(this.selectedQuantity);
+    this.cartService.addItem(new CartItem(prodotto, this.selectedQuantity));
+  }
+
+  public onSelectQuantity(event) {
+    console.log(event.target.value);
+    this.selectedQuantity = <number>+event.target.value;
+    console.log(this.selectedQuantity);
   }
 
   logout() {

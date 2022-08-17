@@ -3,19 +3,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
-import { Cart } from 'src/app/models/cart.model';
+import { CartItem } from 'src/app/models/cart.model';
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  carrello: Cart;
-  totale = 0;
+  private cartSubscription: Subscription;
+  public items: CartItem[];
+  public total: number;
   form;
-  prodotto: Product[];
   indirizzi: [];
 
   constructor(
@@ -25,10 +26,20 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.items = this.cartService.getItems();
+    this.total = this.cartService.getTotal();
+    this.cartSubscription = this.cartService.itemsChanged.subscribe(
+      (items: CartItem[]) => {
+        this.items = items;
+        this.total = this.cartService.getTotal();
+      }
+    );
+    /*
     this.cartService.cart$.subscribe((cart) => {
       console.log(cart);
       this.carrello = cart;
     });
+    */
     this.initForm();
   }
 
@@ -42,17 +53,41 @@ export class CartComponent implements OnInit {
 
   //salvo il carrello nella session
   saveCart() {
-    sessionStorage.setItem('carrello', JSON.stringify(this.carrello));
+    sessionStorage.setItem('carrello', JSON.stringify(this.items));
   }
 
   //togli elementi dal carrello
   deletElement(id) {
-    this.cartService.deletElement(id);
+    this.cartService.removeItem(id);
+  }
+
+  public onClearCart(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.cartService.clearCart();
   }
 
   //pulisci carrello
-  clearCart() {
-    this.cartService.clearCart();
+  public onRemoveItem(event, item: CartItem) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.cartService.removeItem(item);
+  }
+
+  public increaseAmount(item: CartItem) {
+    this.cartService.updateItemAmount(item, item.amount + 1);
+  }
+
+  public decreaseAmount(item: CartItem) {
+    item.amount === 1 && this.cartService.removeItem(item);
+    this.cartService.updateItemAmount(item, item.amount - 1);
+  }
+
+  public checkAmount(item: CartItem) {
+    this.cartService.updateItemAmount(
+      item,
+      item.amount < 1 || !item.amount || isNaN(item.amount) ? 1 : item.amount
+    );
   }
 
   //indirizzo per utente
@@ -80,4 +115,8 @@ export class CartComponent implements OnInit {
 
   //ordina prodotto
   ordina() {}
+
+  ngOnDestroy() {
+    this.cartSubscription.unsubscribe();
+  }
 }
