@@ -12,16 +12,16 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Product Name</th>
-              <th class="text-center">Quantity</th>
-              <th class="text-center">Price</th>
-              <th class="text-center">Subtotal</th>
+              <th>Prodotto</th>
+              <th class="text-center">Quantità</th>
+              <th class="text-center">Prezzo</th>
+              <th class="text-center">Subtotalale</th>
               <th class="text-right">
                 <button
                   class="btn btn-sm btn-outline-danger"
                   (click)="onClearCart($event)"
                 >
-                  Clear Cart
+                  pulisci carrello
                 </button>
               </th>
             </tr>
@@ -43,10 +43,6 @@
                         item.product.nome
                       }}</a>
                     </h4>
-                    <!-- <span>
-                      <em>Size:</em> 10.5</span>
-                    <span>
-                      <em>Color:</em> Dark Blue</span> -->
                   </div>
                 </div>
               </td>
@@ -95,7 +91,7 @@
                   title="Remove item"
                   (click)="onRemoveItem($event, item)"
                 >
-                  <span class="material-icons md-light">close</span>
+                  <span class="material-icons md-light">chiudi</span>
                 </a>
               </td>
             </tr>
@@ -104,7 +100,7 @@
           <ng-template #noItemsInCart>
             <tbody>
               <tr>
-                <td colspan="5">There are no items in your cart..</td>
+                <td colspan="5">Non ci sono prodotti nel tuo carrello..</td>
               </tr>
             </tbody>
           </ng-template>
@@ -112,48 +108,13 @@
       </div>
 
       <div class="shopping-cart-footer">
-        <div class="column">
-          <!-- <form class="coupon-form" method="post">
-            <input class="form-control form-control-sm" type="text" placeholder="Coupon code" required>
-            <button class="btn btn-outline-primary btn-sm" type="submit">Apply Coupon</button>
-          </form> -->
-        </div>
-        <div class="column text-lg">
-          Total:
+        <div class="column"></div>
+        <div class="column text-lg text-white">
+          Totale:
           <span class="text-medium">{{ total | currency }}</span>
         </div>
       </div>
-      <div class="shopping-cart-footer">
-        <div class="column">
-          <!-- <a class="btn btn-primary" href="#" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check"
-            data-toast-title="Your cart" data-toast-message="is updated successfully!">Update Cart</a> -->
-          <a class="btn btn-success" routerLink="/checkout">Checkout</a>
-        </div>
-      </div>
 
-      <!--
-      <app-table *ngIf="items" [data]="items.prodotto">
-        <ng-template #headers>
-          <th></th>
-          <th>Prodotto</th>
-          <th>Prezzo</th>
-          <th>Quantità</th>
-          <th>Elima Prodotto</th>
-        </ng-template>
-        <ng-template #rows let-row>
-          <th>{{ row.immagine }}</th>
-          <td>{{ row.nome }}</td>
-          <td>{{ row.prezzo | currency: "EUR" }}</td>
-          <!--  <td>{{ carrello.countTot }}</td>
-          <td (click)="deletElement(row.id)">
-            <i class="fa-solid fa-trash-can"></i>
-          </td>
-        </ng-template>
-      </app-table>
-      <h2 class="text-white">Totale: {{ total | currency: "EUR" }}</h2>
-      <button (click)="onClearCart($event)">pulisci carrello</button>
-    </div>
- -->
       <!--FORM-->
       <div class="col-3">
         <form [formGroup]="form" (ngSubmit)="ordina()">
@@ -188,7 +149,7 @@
       </div>
     </div>
   </div>
-
-  <!--Footer-->
-  <app-footer></app-footer>
 </div>
+
+<!--Footer-->
+<app-footer></app-footer>
