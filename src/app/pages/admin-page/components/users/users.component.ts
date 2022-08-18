@@ -31,10 +31,13 @@ export class UsersComponent implements OnInit {
   readonly FilterOptions = FilterOptions;
   activeFilter: FilterOptions = FilterOptions.All;
 
+  loadingBarbers: boolean;
+  loadingAdmins: boolean;
+
   constructor(
     private barbersService: BarbersService,
     private ajax: AjaxService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -92,26 +95,38 @@ export class UsersComponent implements OnInit {
   }
   //aggiungi nuovo admin
   addAdmin() {
+    this.loadingAdmins = true;
     this.barbersService
       .nuovoAdmin(this.adminsForm.value)
-      .subscribe((response) => {
-        this.adminsForm.reset();
-        this.usersList.push(response);
-        this.tableData = this.usersList;
-        console.log(response);
+      .subscribe({
+        next: (response) => {
+          this.adminsForm.reset();
+          this.usersList.push(response);
+          this.tableData = this.usersList;
+          console.log(response);
+
+        },
+        complete: () => this.loadingAdmins = false
+      }/*(response) => {
         // this.admin = response;
-      });
+      }*/);
   }
 
   //aggiungi nuovo parrucchiere
   addBarber() {
+    this.loadingBarbers = true;
     this.barbersService
       .nuovoBarbiere(this.barbersForm.value)
-      .subscribe((response) => {
-        this.barbersForm.reset();
-        this.usersList.push(response);
-        this.tableData = this.usersList;
+      .subscribe({
+        next: (response) => {
+          this.barbersForm.reset();
+          this.usersList.push(response);
+          this.tableData = this.usersList;
+
+        },
+        complete: () => this.loadingBarbers = false
+      }/*(response) => {
         //this.barbiere = response;
-      });
+      }*/);
   }
 }

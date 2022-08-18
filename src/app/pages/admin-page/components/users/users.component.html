@@ -134,6 +134,7 @@
           </div>
         </div>
         <button
+          *ngIf="!loadingBarbers;else loader"
           type="submit"
           class="btn btn-dark"
           [disabled]="!this.barbersForm.valid"
@@ -236,6 +237,7 @@
 
         </div>
         <button
+          *ngIf="!loadingAdmins;else loader"
           type="submit"
           class="btn btn-dark"
           [disabled]="!this.adminsForm.valid"
@@ -246,3 +248,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
