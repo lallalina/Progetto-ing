@@ -35,7 +35,7 @@ export class CartService {
   }
 
   public getItems() {
-    return this.cart.slice();
+    return this.cart ? this.cart.slice() : [];
   }
 
   // Get Product ids out of CartItem[] in a new array
@@ -97,9 +97,11 @@ export class CartService {
 
   public getTotal() {
     let total = 0;
-    this.cart.forEach((cartItem) => {
-      total += cartItem.amount * cartItem.product.prezzo;
-    });
+    if (this.cart) {
+      this.cart.forEach((cartItem) => {
+        total += cartItem.amount * cartItem.product.prezzo;
+      });
+    }
     return total;
   }
 

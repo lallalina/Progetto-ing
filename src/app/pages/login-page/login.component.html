@@ -12,20 +12,29 @@
         <div class="user_card">
           <div class="d-flex justify-content-center">
             <div class="brand_logo_container">
-              <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
+              <img
+                src="/assets/logo-white.png"
+                class="brand_logo"
+                alt="Logo"
+              />
             </div>
           </div>
-          <span class="material-icons clickable" [routerLink]="['']">
+          <span
+            class="material-icons clickable"
+            [routerLink]="['']"
+          >
             arrow_back
           </span>
           <div class="d-flex justify-content-center form_container">
-            <form name="form" [formGroup]="form" (ngSubmit)="login()">
+            <form
+              name="form"
+              [formGroup]="form"
+              (ngSubmit)="login()"
+            >
               <!--email-->
               <div class="input-group mb-3">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><i class="fas fa-user"></i
-                  ></span>
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
                 <input
                   type="text"
@@ -36,11 +45,12 @@
                 />
               </div>
               <!--password-->
-              <div class="input-group mb-2" style="margin-top: 25px">
+              <div
+                class="input-group mb-2"
+                style="margin-top: 25px"
+              >
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><i class="fas fa-key"></i
-                  ></span>
+                  <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 <div class="example-container">
                   <input
@@ -51,16 +61,22 @@
                     formControlName="password"
                     id="password"
                   />
-                  <span class="eye" (click)="show()">
-                    <i
-                      [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"
-                    ></i>
+                  <span
+                    class="eye"
+                    (click)="show()"
+                  >
+                    <i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
                   </span>
                 </div>
               </div>
 
               <div class="d-flex justify-content-center mt-3 login_container">
-                <button type="submit" name="button" class="btn login_btn">
+                <button
+                  *ngIf="!loading; else loader"
+                  type="submit"
+                  name="button"
+                  class="btn login_btn"
+                >
                   Login
                 </button>
               </div>
@@ -75,8 +91,7 @@
                 routerLinkActive="router-link-active"
                 class="ml-2"
                 style="color: black"
-                >Registrati</a
-              >
+              >Registrati</a>
             </div>
             <div class="d-flex justify-content-center links">
               <a style="color: black">Password dimenticata?</a>
@@ -87,6 +102,10 @@
     </div>
   </div>
 </div>
+
+<ng-template #loader>
+  <app-loader class="p-4"></app-loader>
+</ng-template>
 
 <!--show password-->
 <script>

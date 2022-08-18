@@ -16,7 +16,7 @@ import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.compone
   styleUrls: ['./customer-page.component.scss'],
 })
 export class CustomerPageComponent implements OnInit {
-  @Input() product: Product;
+  product: Product[];
   carrello: CartItem[];
   prodEsistente: Product | null;
   badgeCounter: number;
@@ -24,12 +24,14 @@ export class CustomerPageComponent implements OnInit {
   user: User;
   readonly UserRole = UserRole;
 
+  loading: boolean;
+
   constructor(
     private auth: AuthService,
     private router: Router,
     private productService: ProductsService,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
@@ -42,9 +44,10 @@ export class CustomerPageComponent implements OnInit {
 
   //get prodotti
   listenToProd() {
-    this.productService.getProducts().subscribe((response) => {
-      console.log(response);
-      this.product = response;
+    this.loading = true;
+    this.productService.getProducts().subscribe({
+      next: (response) => this.product = response,
+      complete: () => this.loading = false
     });
   }
 

@@ -29,7 +29,7 @@ export class ProductsService {
     return this.http.post(environment.API_URL + '/admin/nuovoProdotto', obj);
   }
   //getProdotto
-  getProducts(): Observable<any> {
+  getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(
       environment.API_URL + '/public/getProdotti'
     );

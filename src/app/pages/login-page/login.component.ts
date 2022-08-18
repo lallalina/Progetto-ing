@@ -19,7 +19,9 @@ export class LoginComponent implements OnInit {
   visible: boolean = true;
   changetype: boolean = true;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  loading: boolean;
+
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   //per loggarsi
   login() {
+    this.loading = true;
     const data = {
       username: this.form.controls['email'].value,
       password: this.form.controls['password'].value,
@@ -38,6 +41,7 @@ export class LoginComponent implements OnInit {
         this.error = err;
       },
       complete: () => {
+        this.loading = false;
         this.id = this.utente.id;
         sessionStorage.setItem('id', this.id); //salvo l'id nel session storage
         this.router.navigate(['/']);
@@ -63,5 +67,5 @@ export class LoginComponent implements OnInit {
   }
 
   //controllo dei ruoli
-  checkRole() {}
+  checkRole() { }
 }

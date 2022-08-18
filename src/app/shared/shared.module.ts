@@ -19,12 +19,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderComponent } from './components/loader/loader.component';
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
     CalendarComponent,
     TableComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -44,13 +47,15 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule, //per le icone
     MatCardModule, //card
     MatBadgeModule, //cart counter
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     NavbarComponent,
     FooterComponent,
     CalendarComponent,
     TableComponent,
+    LoaderComponent,
     PipesModule,
     MatFormFieldModule, //calendar
     MatInputModule,
