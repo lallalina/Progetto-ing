@@ -270,3 +270,10 @@ td {
   background: #ddd;
   border-bottom: 2px solid white;
 }
+
+.form-error {
+  width: 100%;
+  padding: 3px;
+  background-color: rgb(215, 175, 168);
+  color: red;
+}
