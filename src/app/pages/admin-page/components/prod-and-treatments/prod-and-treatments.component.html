@@ -36,6 +36,7 @@
           </textarea>
         </div>
         <button
+          *ngIf="!loadingProds;else loader"
           type="submit"
           class="btn btn-dark"
         >Aggiungi</button>
@@ -66,6 +67,7 @@
           <td></td>
           <td>
             <button
+              *ngIf="!loadingProds; else loader"
               mat-icon-button
               color="warn"
               (click)="deleteProdotto(row.id)"
@@ -121,6 +123,7 @@
           />
         </div>
         <button
+          *ngIf="!loadingTreats;else loader"
           type="submit"
           class="btn btn-dark"
         >Aggiungi</button>
@@ -148,6 +151,7 @@
           <td></td>
           <td>
             <button
+              *ngIf="!loadingTreats; else loader"
               mat-icon-button
               color="warn"
               (click)="deleteTreatment(row.id)"
@@ -169,3 +173,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

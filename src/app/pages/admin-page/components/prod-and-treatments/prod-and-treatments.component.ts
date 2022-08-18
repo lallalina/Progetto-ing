@@ -17,6 +17,9 @@ export class ProdAndTreatmentsComponent implements OnInit {
   productsForm: FormGroup;
   treatmentsForm: FormGroup;
 
+  loadingProds: boolean;
+  loadingTreats: boolean;
+
   constructor(
     private treatmentsService: TreatmentsService,
     private productService: ProductsService
@@ -48,20 +51,28 @@ export class ProdAndTreatmentsComponent implements OnInit {
   //--PRODOTTI--
   //aggiungi nuovo prodotto
   addProdotto() {
+    this.loadingProds = true;
     this.productService
       .addProdotto(this.productsForm.value)
-      .subscribe((response) => {
-        this.productsForm.reset();
-        this.products.push(response); //this.admin = response;
+      .subscribe({
+        next: (response) => {
+          this.productsForm.reset()
+          this.products.push(response)
+        },
+        complete: () => this.loadingProds = false
       });
   }
 
   //cancella prodotto
   deleteProdotto(id: Product['id']) {
+    this.loadingProds = true;
     this.productService.deleteProdotto(id)
-      .subscribe((response) => {
-        const prodIndex = this.products.findIndex((item) => item.id === id)
-        this.products.splice(prodIndex, 1);
+      .subscribe({
+        next: (response) => {
+          const prodIndex = this.products.findIndex((item) => item.id === id)
+          this.products.splice(prodIndex, 1);
+        },
+        complete: () => this.loadingProds = false
       });
   }
 
@@ -77,21 +88,26 @@ export class ProdAndTreatmentsComponent implements OnInit {
   //--TRATTAMENTI--
   //aggiungi nuovo trattamento
   addTrattamento() {
+    this.loadingTreats = true;
     this.treatmentsService
       .addTreatment(this.treatmentsForm.value)
-      .subscribe((response) => {
-        console.log(response);
-        this.treatments.push(response);
+      .subscribe({
+        next: (response) => this.treatments.push(response),
+        complete: () => this.loadingTreats = false
       });
   }
 
   //cancella trattamento
   deleteTreatment(id: Treatment['id']) {
+    this.loadingTreats = true;
     this.treatmentsService
       .deleteTreatment(id)
-      .subscribe((response) => {
-        const treatIndex = this.products.findIndex((item) => item.id === id)
-        this.treatments.splice(treatIndex, 1);
+      .subscribe({
+        next: (response) => {
+          const treatIndex = this.products.findIndex((item) => item.id === id)
+          this.treatments.splice(treatIndex, 1);
+        },
+        complete: () => this.loadingTreats = false
       });
   }
 
