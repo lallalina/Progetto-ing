@@ -36,7 +36,7 @@ export class ProductsService {
   }
   //deleteProdotto
   deleteProdotto(id: Product['id']): Observable<any> {
-    return this.http.post(environment.API_URL + '/admin/eliminaProdotto', { idProdotto: id }, { observe: 'response' });
+    return this.http.delete(environment.API_URL + '/admin/eliminaProdotto/' + id);
   }
 
   //modifyProdotto

@@ -63,4 +63,5 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   providers: [MatDatepickerModule],
 })
-export class SharedModule { }
+export class SharedModule {
+}

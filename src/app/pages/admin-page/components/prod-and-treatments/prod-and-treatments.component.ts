@@ -91,7 +91,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
       .deleteTreatment(id)
       .subscribe((response) => {
         const treatIndex = this.products.findIndex((item) => item.id === id)
-        this.products.splice(treatIndex, 1);
+        this.treatments.splice(treatIndex, 1);
       });
   }
 
