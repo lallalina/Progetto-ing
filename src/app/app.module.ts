@@ -22,6 +22,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from './core/services/message.service';
+import { UserPageComponent } from './pages/user-page/user-page.component';
+import { DialogComponent } from './pages/user-page/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MessageService } from './core/services/message.service';
     LoginComponent,
     CartComponent,
     RegistrationComponent,
+    UserPageComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,

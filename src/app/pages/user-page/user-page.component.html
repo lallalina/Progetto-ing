@@ -1,0 +1,39 @@
+<!--navbar-->
+<app-navbar></app-navbar>
+
+<!--form modifica credenziali-->
+
+<!--disabilita notifiche-->
+<p>Disabilita le notifiche</p>
+<mat-slide-toggle [(ngModel)]="isChecked">{{ isChecked }}</mat-slide-toggle>
+
+<!--elimina profilo-->
+<div *ngFor="let row of user">
+  <h1>Elimina il tuo profilo</h1>
+  <button mat-raised-button (click)="openDialog(row)">Elimina</button>
+</div>
+
+<!--lista ordini effettuati-->
+<div *ngIf="prenotazioni">
+  <table *ngFor="let row of prenotazioni">
+    <tr>
+      <th>
+        <ul>
+          Prenotazioni
+        </ul>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <ol>
+          {{
+            row.prenotazioni
+          }}
+        </ol>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--footer-->
+<app-footer></app-footer>

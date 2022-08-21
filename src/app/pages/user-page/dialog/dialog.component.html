@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Cancella Profilo</h1>
+<div mat-dialog-content>Vuoi davvero cancellare il tuo profilo?</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button
+    mat-button
+    mat-dialog-close
+    cdkFocusInitial
+    (click)="deleteUser(user)"
+  >
+    Ok
+  </button>
+</div>

@@ -27,6 +27,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule, //dialog
+    MatSlideToggleModule,
   ],
   exports: [
     NavbarComponent,
@@ -74,6 +76,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatBadgeModule, //cart counter
     MatButtonModule,
     MatDialogModule, //dialog
+    MatSlideToggleModule,
   ],
   providers: [MatDatepickerModule],
 })

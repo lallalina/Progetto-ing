@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { booking } from 'src/app/models/booking';
 import { Token } from 'src/app/models/token.model';
 import { environment } from 'src/environments/environment';
 import { User } from '../../models/user.model';
@@ -68,6 +69,11 @@ export class AuthService {
     );
   }
 
+  //deleteUser
+  deleteUser(id: User['id']) {
+    return this.http.delete(environment.API_URL + '/user/eliminaUtente/' + id);
+  }
+
   //prendere id nel session storage
   getLoggedUser() {
     let _user = JSON.parse(sessionStorage.getItem('user'));
@@ -80,5 +86,12 @@ export class AuthService {
   //prendi indirizzo utente
   getIndirizzi(): Observable<any> {
     return this.http.get(environment.API_URL + '/user/getIndirizziUtente');
+  }
+
+  //get Prenotazioni utente
+  getPrenotazioni(): Observable<any> {
+    return this.http.get(
+      environment.API_URL + '/user/getgetOrdiniDestinatario'
+    );
   }
 }
