@@ -54,12 +54,12 @@ export class BarbersService {
   //deleteBarbieri
   deleteBarber(id: Barber['id']): Observable<any> {
     return this.http.delete(
-      environment.API_URL + '/admin/eliminaBarbiere' + id
+      environment.API_URL + '/admin/eliminaBarbiere/' + id
     );
   }
 
   //deleteAdmin
   deleteAdmin(id: Barber['id']): Observable<any> {
-    return this.http.delete(environment.API_URL + '/admin/eliminaAdmin' + id);
+    return this.http.delete(environment.API_URL + '/admin/eliminaAdmin/' + id);
   }
 }

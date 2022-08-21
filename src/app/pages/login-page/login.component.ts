@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         alert('Credenziali errate');
         this.error = err;
+        console.log(err);
+        this.loading = false;
       },
       complete: () => {
         this.loading = false;
@@ -67,5 +69,5 @@ export class LoginComponent implements OnInit {
   }
 
   //controllo dei ruoli
-  checkRole() { }
+  checkRole() {}
 }

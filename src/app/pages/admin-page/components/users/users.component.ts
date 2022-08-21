@@ -112,25 +112,19 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  //cancella admin
-  deleteAdmin(id: Barber['id']) {
-    this.barbersService.deleteAdmin(id).subscribe({
-      next: (response) => {
-        const prodIndex = this.users.findIndex((item) => item.id === id);
-        this.users.splice(prodIndex, 1);
-      },
-    });
-  }
-
   //aggiungi nuovo parrucchiere
   addBarber() {
     this.loadingBarbers = true;
+    console.log(this.barbersForm.value);
     this.barbersService.nuovoBarbiere(this.barbersForm.value).subscribe(
       {
         next: (response) => {
           this.barbersForm.reset();
           this.usersList.push(response);
           this.tableData = this.usersList;
+        },
+        error: () => {
+          this.loadingBarbers = false;
         },
         complete: () => (this.loadingBarbers = false),
       } /*(response) => {
@@ -139,13 +133,26 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  //cancella brarbiere
-  deleteBarbers(id: Barber['id']) {
-    this.barbersService.deleteBarber(id).subscribe({
-      next: (response) => {
-        const prodIndex = this.users.findIndex((item) => item.id === id);
-        this.users.splice(prodIndex, 1);
-      },
-    });
+  //cancella admin e barbieri
+  deleteUser(user: Barber) {
+    if (user.role == UserRole.BARBER) {
+      this.barbersService.deleteBarber(user.id).subscribe({
+        next: (response) => {
+          const prodIndex = this.users.findIndex((item) => item.id === user.id);
+          this.users.splice(prodIndex, 1);
+        },
+      });
+    } else {
+      this.barbersService.deleteAdmin(user.id).subscribe({
+        next: (response) => {
+          console.log(this.users);
+          const prodIndex = this.users.findIndex((item) => item.id === user.id);
+          this.users.splice(prodIndex, 1);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    }
   }
 }

@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.retrieveIndirizziUser();
     this.items = this.cartService.getItems();
     this.total = this.cartService.getTotal();
     this.cartService.cart$.subscribe((items: CartItem[]) => {
@@ -34,7 +35,7 @@ export class CartComponent implements OnInit {
       this.total = this.cartService.getTotal();
     });
     this.initForm();
-    this.listenToOrderd();
+    this.retrieveIndirizziUser();
   }
 
   //controllo validità sezioni
@@ -99,11 +100,10 @@ export class CartComponent implements OnInit {
     );
   }
 
-  //get indirizzi utente
-  listenToOrderd() {
-    this.orderdService.order$.subscribe((ordine) => {
-      console.log(ordine);
-      this.ordini = ordine;
+  //get indirizzi
+  retrieveIndirizziUser(): void {
+    this.auth.getIndirizzi().subscribe((indirizzi) => {
+      this.indirizzi = indirizzi;
     });
   }
 

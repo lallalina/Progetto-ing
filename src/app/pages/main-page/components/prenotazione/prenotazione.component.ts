@@ -43,9 +43,9 @@ export class PrenotazioneComponent implements OnInit {
     });
   }
 
+  //Delete weekend
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   };
 
@@ -62,5 +62,10 @@ export class PrenotazioneComponent implements OnInit {
     this.treatmentsService.treatments$.subscribe((treatments) => {
       this.treatments = treatments;
     });
+  }
+
+  //onChange Calendar
+  onChange(event) {
+    console.log(event);
   }
 }

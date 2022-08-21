@@ -15,6 +15,7 @@ export class MainPageComponent implements OnInit {
   error;
 
   constructor(private ajax: AjaxService) {}
+
   //prendi recensioni
   getRecensioni() {
     this.ajax.recensioni().subscribe((response) => {

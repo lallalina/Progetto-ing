@@ -198,14 +198,14 @@
             </div>
           </div>
           <div class="col-3" *ngIf="indirizzi">
-            <h3>i tuoi indirizzi</h3>
-            <div *ngFor="let row of ordini">
-              <select>
-                {{
-                  row.indirizzo
-                }}
-              </select>
-            </div>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let indirizzo of indirizzi"
+                [value]="indirizzo"
+              >
+                {{ indirizzo }}
+              </mat-option>
+            </mat-autocomplete>
           </div>
           <button type="submit" class="btn" id="button">Ordina</button>
         </form>

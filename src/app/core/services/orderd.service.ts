@@ -11,10 +11,7 @@ export class OrderdService {
   private readonly orderSubject = new BehaviorSubject<Ordine[]>([]);
   readonly order$ = this.orderSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    //Il service farà la GET automaticamente per ottenere la lista di indirizzi
-    this.getIndirizzi().subscribe((_) => {});
-  }
+  constructor(private http: HttpClient) {}
 
   get order(): Ordine[] {
     return this.orderSubject.value;
@@ -26,13 +23,6 @@ export class OrderdService {
 
   //nuovo ordine
   ordina(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/user/nuovOrdine', obj);
-  }
-
-  //GET indirizzi
-  getIndirizzi() {
-    return this.http.get<Ordine[]>(
-      `${environment.API_URL}/user/getIndirizziUtente`
-    );
+    return this.http.post(environment.API_URL + '/user/nuovoOrdine', obj);
   }
 }

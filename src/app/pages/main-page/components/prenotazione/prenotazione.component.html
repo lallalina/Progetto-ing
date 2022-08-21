@@ -64,7 +64,12 @@
             <div class="col-6 calendar-orario">
               <!--CALENDAR-->
               <mat-card class="demo-inline-calendar-card">
-                <mat-calendar [(selected)]="selected"></mat-calendar>
+                <mat-calendar
+                  [selected]="selected"
+                  (selectedChange)="onChange($event)"
+                  [minDate]="minDate"
+                >
+                </mat-calendar>
               </mat-card>
               <!--ORAIO-->
               <label for="customer-name">Orari</label>

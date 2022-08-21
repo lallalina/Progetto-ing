@@ -14,6 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.getLoggedUser();
+    //Il service farà la GET automaticamente per ottenere la lista di indirizzi
+    this.getIndirizzi().subscribe((_) => {});
   }
 
   //token
@@ -27,10 +29,12 @@ export class AuthService {
 
   //login -passo i parametri
   login(obj) {
+    console.log(obj);
     return this.http
       .post<Array<Token | User>>(environment.API_URL + '/login', obj)
       .pipe(
         tap((response) => {
+          console.log(response);
           this.jwt = (response[0] as Token).jwt;
           this.user = response[1] as User;
         })
@@ -74,7 +78,7 @@ export class AuthService {
   }
 
   //prendi indirizzo utente
-  getIndirizzo(): Observable<any> {
+  getIndirizzi(): Observable<any> {
     return this.http.get(environment.API_URL + '/user/getIndirizziUtente');
   }
 }
