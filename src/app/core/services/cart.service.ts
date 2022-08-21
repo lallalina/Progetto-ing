@@ -97,7 +97,7 @@ export class CartService {
     this.toastService.success('Carrello eliminato');
   }
 
-  //totale dei prodotti
+  //totale conteggio dei prodotti
   public getTotal() {
     let total = 0;
     if (this.cart) {
@@ -106,10 +106,5 @@ export class CartService {
       });
     }
     return total;
-  }
-
-  //nuovo ordine
-  ordina(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/user/nuovOrdine', obj);
   }
 }

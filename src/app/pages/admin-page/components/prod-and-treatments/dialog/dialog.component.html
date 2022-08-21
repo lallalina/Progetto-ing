@@ -1,36 +1,45 @@
 <!--Modifica prodotto-->
 <div>
-  <h1 mat-dialog-title>Modficia Prodotto</h1>
-  <div mat-dialog-actions>
+  <div mat-dialog-actions class="dialog">
     <form id="form" (ngSubmit)="modifyProdotto()" [formGroup]="modifyForm">
-      <div>
-        <label>nome</label>
+      <legend>Modifica Prodotto</legend>
+      <!--nome-->
+      <div class="form-group">
+        <label>nome:</label>
         <input
           formControlName="nome"
+          class="form-control"
           type="text"
           name="nome"
           placeholder="Nome"
         />
       </div>
-      <div>
-        <label>prezzo</label>
+      <!--prezzo-->
+      <div class="form-group">
+        <label>prezzo:</label>
         <input
           formControlName="prezzo"
-          type="number"
-          name="prezzo"
+          class="form-control"
+          type="text"
+          name="Prezzo"
           placeholder="Prezzo"
         />
       </div>
-      <div>
-        <label>descrizione</label>
+      <!--descrizione-->
+      <div class="form-group">
+        <p>descrizione:</p>
         <textarea
           formControlName="descrizione"
           name="descrizione"
+          rows="5"
+          cols="30"
           placeholder="Descrizione"
         >
         </textarea>
       </div>
-      <div>
+      <!--file_img-->
+      <div style="color: white">
+        <label>immagine:</label>
         <input
           formControlName="file"
           type="file"

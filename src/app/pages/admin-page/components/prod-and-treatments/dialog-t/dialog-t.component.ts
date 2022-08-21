@@ -10,19 +10,14 @@ import { Treatment } from 'src/app/models/treatment.model';
   styleUrls: ['./dialog-t.component.css'],
 })
 export class DialogTComponent implements OnInit {
-  @Input() set produtc(value: Treatment[]) {
-    this.treatmentList = value;
-    this.tableData = this.treatmentList;
-  }
+  @Input() treatments: Treatment[];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Treatment,
     private treatmentsService: TreatmentsService
   ) {}
 
   modifyForm: FormGroup;
-
-  treatmentList: Treatment[];
-  tableData: Treatment[];
 
   ngOnInit(): void {
     this.initModifyForm();
@@ -42,9 +37,8 @@ export class DialogTComponent implements OnInit {
     console.log(this.modifyForm.value);
     this.treatmentsService.modifyTreatment(this.modifyForm.value).subscribe({
       next: (response) => {
-        this.treatmentList.push(response);
-        this.tableData = this.treatmentList;
-        console.log(response);
+        this.data.nome = response.nome;
+        this.data.prezzo = response.prezzo;
       },
     });
   }

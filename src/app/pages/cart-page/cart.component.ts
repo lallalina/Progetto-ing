@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
+import { OrderdService } from 'src/app/core/services/orderd.service';
 import { CartItem } from 'src/app/models/cart.model';
 import { Ordine } from 'src/app/models/ordine.model';
 
@@ -13,7 +14,7 @@ import { Ordine } from 'src/app/models/ordine.model';
 export class CartComponent implements OnInit {
   public items: CartItem[];
   public total: number;
-  public ordine: Ordine[];
+  public ordini: Ordine[];
 
   form;
   indirizzi: [];
@@ -21,7 +22,8 @@ export class CartComponent implements OnInit {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private auth: AuthService
+    private auth: AuthService,
+    private orderdService: OrderdService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class CartComponent implements OnInit {
       this.total = this.cartService.getTotal();
     });
     this.initForm();
+    this.listenToOrderd();
   }
 
   //controllo validità sezioni
@@ -62,6 +65,7 @@ export class CartComponent implements OnInit {
     this.cartService.removeItem(id);
   }
 
+  //pulisci carrello
   public onClearCart(event) {
     event.preventDefault();
     event.stopPropagation();
@@ -96,19 +100,19 @@ export class CartComponent implements OnInit {
   }
 
   //get indirizzi utente
-  getIndirizzi() {
-    this.auth.getIndirizzo().subscribe((response) => {
-      console.log(response);
-      this.indirizzi = response;
+  listenToOrderd() {
+    this.orderdService.order$.subscribe((ordine) => {
+      console.log(ordine);
+      this.ordini = ordine;
     });
   }
 
   //ordina prodotto
   ordina() {
-    this.cartService.ordina(this.form.value).subscribe({
+    this.orderdService.ordina(this.form.value).subscribe({
       next: (response) => {
         this.form.reset();
-        this.ordine = response;
+        this.ordini = response;
       },
     });
   }

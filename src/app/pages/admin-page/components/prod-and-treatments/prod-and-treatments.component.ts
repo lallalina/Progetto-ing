@@ -81,11 +81,11 @@ export class ProdAndTreatmentsComponent implements OnInit {
   //dialog per la modifica dei prodotti
   openDialog(product: Product) {
     console.log(product);
-    this.loadingProds = true;
+    //this.loadingProds = true;
     this.dialog.open(DialogComponent, {
       data: product,
-      width: '350px',
-      height: '350px',
+      width: '520px',
+      height: '520px',
     });
   }
 

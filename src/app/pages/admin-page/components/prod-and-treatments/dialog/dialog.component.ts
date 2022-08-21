@@ -10,17 +10,11 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./dialog.component.css'],
 })
 export class DialogComponent implements OnInit {
-  @Input() set produtc(value: Product[]) {
-    this.productList = value;
-    this.tableData = this.productList;
-  }
+  @Input() product: Product[];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Product,
     private productService: ProductsService
   ) {}
-
-  productList: Product[];
-  tableData: Product[];
 
   modifyForm: FormGroup;
 
@@ -44,9 +38,9 @@ export class DialogComponent implements OnInit {
     console.log(this.modifyForm.value);
     this.productService.modifyProdotto(this.modifyForm.value).subscribe({
       next: (response) => {
-        this.productList.push(response);
-        this.tableData = this.productList;
-        console.log(response);
+        this.data.nome = response.nome;
+        this.data.prezzo = response.prezzo;
+        this.data.descrizione = response.descrizione;
       },
     });
   }
