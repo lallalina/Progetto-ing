@@ -36,7 +36,12 @@ export class BarbersService {
       .pipe(tap((response) => (this.barbers = response)));
   }
 
-  //nuovobarbiere
+  //GET admin
+  getAdmins() {
+    return this.http.get<Barber[]>(`${environment.API_URL}/admin/getAdmin`);
+  }
+
+  //addbarbiere
   nuovoBarbiere(obj): Observable<any> {
     return this.http.post(environment.API_URL + '/admin/nuovoBarbiere', obj);
   }
@@ -46,8 +51,15 @@ export class BarbersService {
     return this.http.post(environment.API_URL + '/admin/nuovoAdmin', obj);
   }
 
-  //GET admin
-  getAdmins() {
-    return this.http.get<Barber[]>(`${environment.API_URL}/admin/getAdmin`);
+  //deleteBarbieri
+  deleteBarber(id: Barber['id']): Observable<any> {
+    return this.http.delete(
+      environment.API_URL + '/admin/eliminaBarbiere' + id
+    );
+  }
+
+  //deleteAdmin
+  deleteAdmin(id: Barber['id']): Observable<any> {
+    return this.http.delete(environment.API_URL + '/admin/eliminaAdmin' + id);
   }
 }

@@ -1,0 +1,30 @@
+<!--Modifica trattamento-->
+<div>
+  <h1 mat-dialog-title>Modficia Trattamento</h1>
+  <div mat-dialog-actions>
+    <form id="form" (ngSubmit)="modifyTreatment()" [formGroup]="modifyForm">
+      <div>
+        <label>nome</label>
+        <input
+          formControlName="nome"
+          type="text"
+          name="nome"
+          placeholder="Nome"
+        />
+      </div>
+      <div>
+        <label>prezzo</label>
+        <input
+          formControlName="prezzo"
+          type="number"
+          name="prezzo"
+          placeholder="Prezzo"
+        />
+      </div>
+      <button mat-button mat-dialog-close>No</button>
+      <button mat-button mat-dialog-close cdkFocusInitial type="submit">
+        Ok
+      </button>
+    </form>
+  </div>
+</div>

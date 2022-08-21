@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { CartItem } from 'src/app/models/cart.model';
+import { Ordine } from 'src/app/models/ordine.model';
 
 @Component({
   templateUrl: './cart.component.html',
@@ -12,6 +13,8 @@ import { CartItem } from 'src/app/models/cart.model';
 export class CartComponent implements OnInit {
   public items: CartItem[];
   public total: number;
+  public ordine: Ordine[];
+
   form;
   indirizzi: [];
 
@@ -19,24 +22,26 @@ export class CartComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private auth: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
     this.total = this.cartService.getTotal();
-    this.cartService.cart$.subscribe(
-      (items: CartItem[]) => {
-        this.items = items;
-        this.total = this.cartService.getTotal();
-      }
-    );
-    /*
-    this.cartService.cart$.subscribe((cart) => {
-      console.log(cart);
-      this.carrello = cart;
+    this.cartService.cart$.subscribe((items: CartItem[]) => {
+      this.items = items;
+      this.total = this.cartService.getTotal();
     });
-    */
     this.initForm();
+  }
+
+  //controllo validità sezioni
+  initForm() {
+    this.form = new FormGroup({
+      citta: new FormControl('', Validators.required),
+      indirizzo: new FormControl('', Validators.required),
+      cap: new FormControl('', Validators.required),
+      numCivico: new FormControl('', Validators.required),
+    });
   }
 
   /*ngDoCheck(){
@@ -90,13 +95,6 @@ export class CartComponent implements OnInit {
     );
   }
 
-  //indirizzo per utente
-  nuovoIndirizzo() {
-    /* this.auth.NuovoIndirizzo(this.form.value).subscribe((response) => {
-      this.indirizzi.push(response);
-    });*/
-  }
-
   //get indirizzi utente
   getIndirizzi() {
     this.auth.getIndirizzo().subscribe((response) => {
@@ -105,14 +103,13 @@ export class CartComponent implements OnInit {
     });
   }
 
-  initForm() {
-    //controllo validità sezioni
-    this.form = new FormGroup({
-      city: new FormControl('', Validators.required),
-      indirizzo: new FormControl('', Validators.required),
+  //ordina prodotto
+  ordina() {
+    this.cartService.ordina(this.form.value).subscribe({
+      next: (response) => {
+        this.form.reset();
+        this.ordine = response;
+      },
     });
   }
-
-  //ordina prodotto
-  ordina() { }
 }

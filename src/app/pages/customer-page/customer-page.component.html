@@ -2,15 +2,12 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-  <h1 class="text-white">I nostri prodotti</h1>
+  <h1 class="text-white" style="text-align: center">I nostri prodotti</h1>
 
   <div class="row">
     <!--Shop_space-->
-    <div *ngIf="!loading;else loader">
-      <div
-        *ngFor="let prodotto of product"
-        class="col-4"
-      >
+    <div *ngIf="!loading; else loader">
+      <div *ngFor="let prodotto of product" class="col-5">
         <mat-card class="card">
           <mat-card-header>
             <mat-card-title>{{ prodotto.nome }}</mat-card-title>
@@ -25,14 +22,11 @@
           </mat-card-content>
           <span class="color-green font-weight-bold">{{
             prodotto.prezzo | currency: "EUR"
-            }}</span>
+          }}</span>
           <div class="col-sm-3">
             <div class="form-group">
               <label for="quantity">Quantity</label>
-              <select
-                id="quantity"
-                (change)="onSelectQuantity($event)"
-              >
+              <select id="quantity" (change)="onSelectQuantity($event)">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -46,19 +40,22 @@
               mat-button
               color="primary"
               (click)="onAddToCart(prodotto)"
-            >Acquista</button>
+              id="button"
+            >
+              Acquista
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>
-
     </div>
   </div>
 </div>
 
 <ng-template #loader>
-  <app-loader class="d-flex w-100 align-items-center justify-content-center p-4"></app-loader>
+  <app-loader
+    class="d-flex w-100 align-items-center justify-content-center p-4"
+  ></app-loader>
 </ng-template>
-
 
 <div class="footer">
   <!--Footer-->

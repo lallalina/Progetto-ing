@@ -8,10 +8,7 @@
   <div class="row">
     <div class="col-12 p-4">
       <!-- Shopping Cart-->
-      <app-table
-        [data]="items"
-        *ngIf="items"
-      >
+      <app-table [data]="items" *ngIf="items">
         <ng-template #headers>
           <th>Prodotto</th>
           <th class="text-center">Quantità</th>
@@ -25,31 +22,23 @@
               pulisci carrello
             </button>
           </th>
-
         </ng-template>
-        <ng-template
-          #rows
-          let-row
-        >
+        <ng-template #rows let-row>
           <td>
             <div class="product-item">
               <a
                 class="product-thumb"
                 routerLink="/products/{{ row.product.id }}"
               >
-                <img
-                  [src]="row.product.immagine"
-                  alt="Product"
-                />
+                <img [src]="row.product.immagine" alt="Product" />
               </a>
               <div class="product-info">
                 <h4 class="product-title">
                   <a
                     class="text-black"
                     routerLink="/products/{{ row.product.id }}"
-                  >{{
-                    row.product.nome
-                    }}</a>
+                    >{{ row.product.nome }}</a
+                  >
                 </h4>
               </div>
             </div>
@@ -102,114 +91,8 @@
               <span class="material-icons md-light">chiudi</span>
             </a>
           </td>
-
         </ng-template>
       </app-table>
-      <!--- <div class="table-responsive shopping-cart">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Prodotto</th>
-              <th class="text-center">Quantità</th>
-              <th class="text-center">Prezzo</th>
-              <th class="text-center">Subtotalale</th>
-              <th class="text-right">
-                <button
-                  class="btn btn-sm btn-outline-danger"
-                  (click)="onClearCart($event)"
-                >
-                  pulisci carrello
-                </button>
-              </th>
-            </tr>
-          </thead>
-
-          <tbody *ngIf="items.length; else noItemsInCart">
-            <tr *ngFor="let item of items">
-              <td>
-                <div class="product-item">
-                  <a
-                    class="product-thumb"
-                    routerLink="/products/{{ item.product.id }}"
-                  >
-                    <img
-                      [src]="item.product.immagine"
-                      alt="Product"
-                    />
-                  </a>
-                  <div class="product-info">
-                    <h4 class="product-title">
-                      <a
-                        class="text-black"
-                        routerLink="/products/{{ item.product.id }}"
-                      >{{
-                        item.product.nome
-                        }}</a>
-                    </h4>
-                  </div>
-                </div>
-              </td>
-              <td class="text-center">
-                <div class="count-input">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <button
-                        class="btn btn-outline-secondary"
-                        type="button"
-                        (click)="decreaseAmount(item)"
-                      >
-                        -
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control text-center"
-                      placeholder=""
-                      [(ngModel)]="item.amount"
-                      (blur)="checkAmount(item)"
-                    />
-                    <div class="input-group-append">
-                      <button
-                        class="btn btn-outline-secondary"
-                        type="button"
-                        (click)="increaseAmount(item)"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="text-center text-lg text-medium">
-                {{ item.product.prezzo | currency }}
-              </td>
-              <td class="text-center text-lg text-medium">
-                {{ item.product.prezzo * item.amount | currency }}
-              </td>
-              <td class="text-right">
-                <a
-                  class="remove-from-cart"
-                  href="#"
-                  data-toggle="tooltip"
-                  title="Remove item"
-                  (click)="onRemoveItem($event, item)"
-                >
-                  <span class="material-icons md-light">chiudi</span>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-
-          <ng-template #noItemsInCart>
-            <tbody>
-              <tr>
-                <td colspan="5">Non ci sono prodotti nel tuo carrello..</td>
-              </tr>
-            </tbody>
-          </ng-template>
-        </table>
-      </div> -->
-
       <div class="shopping-cart-footer mt-4">
         <div class="column text-xl text-white">
           Totale:
@@ -219,44 +102,112 @@
 
       <!--FORM-->
       <div class="col-3 mt-4">
-        <form
-          [formGroup]="form"
-          (ngSubmit)="ordina()"
-        >
+        <form [formGroup]="form" (ngSubmit)="ordina()">
+          <!--citta-->
           <div class="form-group">
             <label>Città:</label>
             <input
               type="text"
               class="form-control"
               placeholder="città"
-              formControlName="city"
+              formControlName="citta"
             />
-            <label>Indirizzo:</label>
+            <!--check-->
+            <div
+              *ngIf="
+                form &&
+                form.controls['citta'].invalid &&
+                (form.controls['citta'].dirty || form.controls['citta'].touched)
+              "
+              class="form-error"
+            >
+              <div *ngIf="form.controls['citta'].errors?.['required']">
+                inserisci la citta
+              </div>
+            </div>
+          </div>
+          <!--indirizzo-->
+          <div class="form-group">
+            <label>indirizzo:</label>
             <input
               type="text"
               class="form-control"
               placeholder="indirizzo"
               formControlName="indirizzo"
             />
+            <!--check-->
+            <div
+              *ngIf="
+                form &&
+                form.controls['indirizzo'].invalid &&
+                (form.controls['indirizzo'].dirty ||
+                  form.controls['indirizzo'].touched)
+              "
+              class="form-error"
+            >
+              <div *ngIf="form.controls['indirizzo'].errors?.['required']">
+                inserisci un indirizzo
+              </div>
+            </div>
           </div>
-          <div
-            class="col-3"
-            *ngIf="indirizzi"
-          >
+          <!--cap-->
+          <div class="form-group">
+            <label>cap:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="cap"
+              formControlName="cap"
+            />
+            <!--check-->
+            <div
+              *ngIf="
+                form &&
+                form.controls['cap'].invalid &&
+                (form.controls['cap'].dirty || form.controls['cap'].touched)
+              "
+              class="form-error"
+            >
+              <div *ngIf="form.controls['cap'].errors?.['required']">
+                inserisci cap
+              </div>
+            </div>
+          </div>
+          <!--numero civico-->
+          <div class="form-group">
+            <label>numero civico:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="numero civico"
+              formControlName="numCivico"
+            />
+            <!--check-->
+            <div
+              *ngIf="
+                form &&
+                form.controls['numCivico'].invalid &&
+                (form.controls['numCivico'].dirty ||
+                  form.controls['numCivico'].touched)
+              "
+              class="form-error"
+            >
+              <div *ngIf="form.controls['numCivico'].errors?.['required']">
+                inserisci numero civico
+              </div>
+            </div>
+          </div>
+          <div class="col-3" *ngIf="indirizzi">
             <h3>i tuoi indirizzi</h3>
             <div *ngFor="let indirizzo of indirizzi">
               <select>
                 {{
-                indirizzo.id
+                  indirizzo.id
                 }}
               </select>
             </div>
           </div>
-          <button
-            type="submit"
-            class="btn"
-            id="button"
-          >Ordina</button>
+          <button type="submit" class="btn" id="button">Ordina</button>
         </form>
       </div>
     </div>

@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private barbersService: BarbersService,
     private ajax: AjaxService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -93,40 +93,59 @@ export class UsersComponent implements OnInit {
       ]),
     });
   }
+
   //aggiungi nuovo admin
   addAdmin() {
     this.loadingAdmins = true;
-    this.barbersService
-      .nuovoAdmin(this.adminsForm.value)
-      .subscribe({
+    this.barbersService.nuovoAdmin(this.adminsForm.value).subscribe(
+      {
         next: (response) => {
           this.adminsForm.reset();
           this.usersList.push(response);
           this.tableData = this.usersList;
           console.log(response);
-
         },
-        complete: () => this.loadingAdmins = false
-      }/*(response) => {
+        complete: () => (this.loadingAdmins = false),
+      } /*(response) => {
         // this.admin = response;
-      }*/);
+      }*/
+    );
+  }
+
+  //cancella admin
+  deleteAdmin(id: Barber['id']) {
+    this.barbersService.deleteAdmin(id).subscribe({
+      next: (response) => {
+        const prodIndex = this.users.findIndex((item) => item.id === id);
+        this.users.splice(prodIndex, 1);
+      },
+    });
   }
 
   //aggiungi nuovo parrucchiere
   addBarber() {
     this.loadingBarbers = true;
-    this.barbersService
-      .nuovoBarbiere(this.barbersForm.value)
-      .subscribe({
+    this.barbersService.nuovoBarbiere(this.barbersForm.value).subscribe(
+      {
         next: (response) => {
           this.barbersForm.reset();
           this.usersList.push(response);
           this.tableData = this.usersList;
-
         },
-        complete: () => this.loadingBarbers = false
-      }/*(response) => {
+        complete: () => (this.loadingBarbers = false),
+      } /*(response) => {
         //this.barbiere = response;
-      }*/);
+      }*/
+    );
+  }
+
+  //cancella brarbiere
+  deleteBarbers(id: Barber['id']) {
+    this.barbersService.deleteBarber(id).subscribe({
+      next: (response) => {
+        const prodIndex = this.users.findIndex((item) => item.id === id);
+        this.users.splice(prodIndex, 1);
+      },
+    });
   }
 }

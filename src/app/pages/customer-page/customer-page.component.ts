@@ -8,12 +8,11 @@ import { ProductsService } from 'src/app/core/services/products.service';
 import { CartItem } from 'src/app/models/cart.model';
 import { Product } from 'src/app/models/product.model';
 import { User, UserRole } from 'src/app/models/user.model';
-import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 
 @Component({
   selector: 'app-customer-page',
   templateUrl: './customer-page.component.html',
-  styleUrls: ['./customer-page.component.scss'],
+  styleUrls: [],
 })
 export class CustomerPageComponent implements OnInit {
   product: Product[];
@@ -31,7 +30,7 @@ export class CustomerPageComponent implements OnInit {
     private router: Router,
     private productService: ProductsService,
     private cartService: CartService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
@@ -46,8 +45,8 @@ export class CustomerPageComponent implements OnInit {
   listenToProd() {
     this.loading = true;
     this.productService.getProducts().subscribe({
-      next: (response) => this.product = response,
-      complete: () => this.loading = false
+      next: (response) => (this.product = response),
+      complete: () => (this.loading = false),
     });
   }
 

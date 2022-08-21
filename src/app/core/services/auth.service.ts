@@ -16,6 +16,15 @@ export class AuthService {
     this.getLoggedUser();
   }
 
+  //token
+  get jwt(): Token['jwt'] {
+    return sessionStorage.getItem('jwt');
+  }
+
+  set jwt(value: Token['jwt']) {
+    sessionStorage.setItem('jwt', value);
+  }
+
   //login -passo i parametri
   login(obj) {
     return this.http
@@ -28,6 +37,7 @@ export class AuthService {
       );
   }
 
+  //logout
   logout() {
     this.user = null;
     this.jwt = null;
@@ -54,14 +64,6 @@ export class AuthService {
     );
   }
 
-  get jwt(): Token['jwt'] {
-    return sessionStorage.getItem('jwt');
-  }
-
-  set jwt(value: Token['jwt']) {
-    sessionStorage.setItem('jwt', value);
-  }
-
   //prendere id nel session storage
   getLoggedUser() {
     let _user = JSON.parse(sessionStorage.getItem('user'));
@@ -69,15 +71,6 @@ export class AuthService {
       this.user = _user;
     }
     console.log(_user);
-  }
-
-  //nuovo indirizzo utente
-  NuovoIndirizzo(obj) {
-    return this.http.post(
-      `${environment.API_URL}/user/nuovoIndirizzo`,
-      obj,
-      {}
-    );
   }
 
   //prendi indirizzo utente

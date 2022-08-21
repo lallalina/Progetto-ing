@@ -1,10 +1,10 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CartItem } from 'src/app/models/cart.model';
-import { BehaviorSubject } from 'rxjs';
-import { Product } from 'src/app/models/product.model';
-import { isThisSecond } from 'date-fns';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { MessageService } from './message.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +12,19 @@ import { ToastrService } from 'ngx-toastr';
 export class CartService {
   private readonly cartSubject = new BehaviorSubject<CartItem[]>([]);
   readonly cart$ = this.cartSubject.asObservable();
+
+  constructor(
+    private messageService: MessageService,
+    private toastService: ToastrService,
+    private http: HttpClient
+  ) {
+    const _cart = this.cart;
+    if (!_cart) {
+      this.cart = [];
+    } else {
+      this.cart = _cart;
+    }
+  }
 
   get cart(): CartItem[] {
     return JSON.parse(sessionStorage.getItem('cart'));
@@ -22,18 +35,7 @@ export class CartService {
     this.cartSubject.next(value);
   }
 
-
-  constructor(
-    private messageService: MessageService,
-    private toastService: ToastrService) {
-    const _cart = this.cart;
-    if (!_cart) {
-      this.cart = [];
-    } else {
-      this.cart = _cart;
-    }
-  }
-
+  //prendi items
   public getItems() {
     return this.cart ? this.cart.slice() : [];
   }
@@ -43,6 +45,7 @@ export class CartService {
     return this.getItems().map((cartItem) => cartItem.product.id);
   }
 
+  //aggiungi items
   public addItem(item: CartItem) {
     const _cart = this.getItems();
     console.log(item);
@@ -53,9 +56,7 @@ export class CartService {
           cartItem.amount += item.amount;
         }
       });
-      this.toastService.success(
-        'Cambiata quantità di: ' + item.product.nome
-      );
+      this.toastService.success('Cambiata quantità di: ' + item.product.nome);
     } else {
       _cart.push(item);
       this.toastService.success('Aggiunto al carrello: ' + item.product.nome);
@@ -90,11 +91,13 @@ export class CartService {
     this.toastService.success('Aggiornata quantità di: ' + item.product.nome);
   }
 
+  //pulisci carrello
   public clearCart() {
     this.cart = [];
     this.toastService.success('Carrello eliminato');
   }
 
+  //totale dei prodotti
   public getTotal() {
     let total = 0;
     if (this.cart) {
@@ -105,35 +108,8 @@ export class CartService {
     return total;
   }
 
-  //pulisci carrello 1 elemento --alfredo
-  /*
-  clearCart(id) {
-    let updatedCartItems = [];
-    console.log(this.cart.prodotto[0].id);
-
-    for (let i = 0; i < this.cart.prodotto.length; i++) {
-      if (this.cart.prodotto[i].id === id) {
-        let selectedCartItem = this.cart.prodotto[i];
-        let currentQty = selectedCartItem.count;
-        if (currentQty > 1) {
-          //delete only one item
-          const updatedQuantity = selectedCartItem.count - 1;
-          selectedCartItem.count = updatedQuantity; //add in the element the new quantity
-
-          updatedCartItems = [
-            ...this.cart.prodotto,
-            (this.cart.prodotto[i] = selectedCartItem),
-          ];
-        } else {
-          updatedCartItems = this.cart.prodotto.splice(i, 1);
-        }
-        this.cart = {
-          countTot: this.cart.countTot - 1,
-          prezzoTot: this.cart.prezzoTot - this.cart.prodotto[i].prezzo,
-          prodotto: updatedCartItems,
-        };
-        console.log(this.cart);
-      }
-    }
-  }*/
+  //nuovo ordine
+  ordina(obj): Observable<any> {
+    return this.http.post(environment.API_URL + '/user/nuovOrdine', obj);
+  }
 }

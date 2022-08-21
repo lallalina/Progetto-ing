@@ -1,0 +1,48 @@
+<!--Modifica prodotto-->
+<div>
+  <h1 mat-dialog-title>Modficia Prodotto</h1>
+  <div mat-dialog-actions>
+    <form id="form" (ngSubmit)="modifyProdotto()" [formGroup]="modifyForm">
+      <div>
+        <label>nome</label>
+        <input
+          formControlName="nome"
+          type="text"
+          name="nome"
+          placeholder="Nome"
+        />
+      </div>
+      <div>
+        <label>prezzo</label>
+        <input
+          formControlName="prezzo"
+          type="number"
+          name="prezzo"
+          placeholder="Prezzo"
+        />
+      </div>
+      <div>
+        <label>descrizione</label>
+        <textarea
+          formControlName="descrizione"
+          name="descrizione"
+          placeholder="Descrizione"
+        >
+        </textarea>
+      </div>
+      <div>
+        <input
+          formControlName="file"
+          type="file"
+          id="file"
+          name="file"
+          accept="image/png, image/jpeg"
+        />
+      </div>
+      <button mat-button mat-dialog-close>No</button>
+      <button mat-button mat-dialog-close cdkFocusInitial type="submit">
+        Ok
+      </button>
+    </form>
+  </div>
+</div>

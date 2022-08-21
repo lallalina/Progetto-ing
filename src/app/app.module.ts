@@ -22,7 +22,6 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from './core/services/message.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -54,5 +53,4 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

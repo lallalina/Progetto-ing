@@ -21,7 +21,7 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {
     //Esegue la GET per i trattamenti appena il service viene creato
-    this.getProducts().subscribe((_) => { });
+    this.getProducts().subscribe((_) => {});
   }
 
   //addProdotto
@@ -36,11 +36,17 @@ export class ProductsService {
   }
   //deleteProdotto
   deleteProdotto(id: Product['id']): Observable<any> {
-    return this.http.delete(environment.API_URL + '/admin/eliminaProdotto/' + id);
+    return this.http.delete(
+      environment.API_URL + '/admin/eliminaProdotto/' + id
+    );
   }
 
   //modifyProdotto
   modifyProdotto(obj): Observable<any> {
-    return this.http.post(environment.API_URL + 'admin/modificaProdotto', obj);
+    console.log(obj);
+    return this.http.patch(
+      environment.API_URL + '/admin/modificaProdotto',
+      obj
+    );
   }
 }

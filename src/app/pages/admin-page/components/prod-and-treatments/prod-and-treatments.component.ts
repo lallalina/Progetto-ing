@@ -4,6 +4,9 @@ import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { Treatment } from 'src/app/models/treatment.model';
 import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/core/services/products.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogTComponent } from './dialog-t/dialog-t.component';
 
 @Component({
   selector: 'app-prod-and-treatments',
@@ -22,8 +25,9 @@ export class ProdAndTreatmentsComponent implements OnInit {
 
   constructor(
     private treatmentsService: TreatmentsService,
-    private productService: ProductsService
-  ) { }
+    private productService: ProductsService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.initProductsForm();
@@ -36,6 +40,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
       nome: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
       descrizione: new FormControl('', Validators.required),
+      file: new FormControl('', Validators.required),
     });
   }
 
@@ -52,71 +57,69 @@ export class ProdAndTreatmentsComponent implements OnInit {
   //aggiungi nuovo prodotto
   addProdotto() {
     this.loadingProds = true;
-    this.productService
-      .addProdotto(this.productsForm.value)
-      .subscribe({
-        next: (response) => {
-          this.productsForm.reset()
-          this.products.push(response)
-        },
-        complete: () => this.loadingProds = false
-      });
+    this.productService.addProdotto(this.productsForm.value).subscribe({
+      next: (response) => {
+        this.productsForm.reset();
+        this.products.push(response);
+      },
+      complete: () => (this.loadingProds = false),
+    });
   }
 
   //cancella prodotto
   deleteProdotto(id: Product['id']) {
     this.loadingProds = true;
-    this.productService.deleteProdotto(id)
-      .subscribe({
-        next: (response) => {
-          const prodIndex = this.products.findIndex((item) => item.id === id)
-          this.products.splice(prodIndex, 1);
-        },
-        complete: () => this.loadingProds = false
-      });
+    this.productService.deleteProdotto(id).subscribe({
+      next: (response) => {
+        const prodIndex = this.products.findIndex((item) => item.id === id);
+        this.products.splice(prodIndex, 1);
+      },
+      complete: () => (this.loadingProds = false),
+    });
   }
 
-  //modifica prodotto
-  modifyProdotto() {
-    this.productService
-      .modifyProdotto(this.productsForm.value)
-      .subscribe((response) => {
-        console.log(response);
-      });
+  //dialog per la modifica dei prodotti
+  openDialog(product: Product) {
+    console.log(product);
+    this.loadingProds = true;
+    this.dialog.open(DialogComponent, {
+      data: product,
+      width: '350px',
+      height: '350px',
+    });
   }
 
   //--TRATTAMENTI--
   //aggiungi nuovo trattamento
   addTrattamento() {
     this.loadingTreats = true;
-    this.treatmentsService
-      .addTreatment(this.treatmentsForm.value)
-      .subscribe({
-        next: (response) => this.treatments.push(response),
-        complete: () => this.loadingTreats = false
-      });
+    this.treatmentsService.addTreatment(this.treatmentsForm.value).subscribe({
+      next: (response) => {
+        this.treatments.push(response), this.treatmentsForm.reset();
+      },
+      complete: () => (this.loadingTreats = false),
+    });
   }
 
   //cancella trattamento
   deleteTreatment(id: Treatment['id']) {
     this.loadingTreats = true;
-    this.treatmentsService
-      .deleteTreatment(id)
-      .subscribe({
-        next: (response) => {
-          const treatIndex = this.products.findIndex((item) => item.id === id)
-          this.treatments.splice(treatIndex, 1);
-        },
-        complete: () => this.loadingTreats = false
-      });
+    this.treatmentsService.deleteTreatment(id).subscribe({
+      next: (response) => {
+        const treatIndex = this.products.findIndex((item) => item.id === id);
+        this.treatments.splice(treatIndex, 1);
+      },
+      complete: () => (this.loadingTreats = false),
+    });
   }
 
-  //modifica prodotto
-  modifyTreatment() {
-    this.treatmentsService
-      .modifyTreatment(this.productsForm.value)
-      .subscribe((response) => {
-        console.log(response);
-      });
+  //dialog per la modifica
+  openDialog2(treatment: Treatment) {
+    this.loadingTreats = true;
+    this.dialog.open(DialogTComponent, {
+      data: treatment,
+      width: '350px',
+      height: '350px',
+    });
   }
 }

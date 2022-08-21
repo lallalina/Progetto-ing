@@ -1,16 +1,22 @@
+//module
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { PipesModule } from '../core/pipes/pipes.module';
+
+//component
+import { FooterComponent } from './components/footer/footer.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { TableComponent } from './components/table/table.component';
-import { PipesModule } from '../core/pipes/pipes.module';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
+//material import
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,7 +26,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { LoaderComponent } from './components/loader/loader.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -48,7 +55,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     MatCardModule, //card
     MatBadgeModule, //cart counter
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule, //dialog
   ],
   exports: [
     NavbarComponent,
@@ -64,9 +72,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     MatNativeDateModule,
     MatCardModule, //card
     MatBadgeModule, //cart counter
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule, //dialog
   ],
   providers: [MatDatepickerModule],
 })
-export class SharedModule {
-}
+export class SharedModule {}

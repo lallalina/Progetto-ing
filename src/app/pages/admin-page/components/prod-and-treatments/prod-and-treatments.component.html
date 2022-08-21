@@ -2,11 +2,9 @@
   <!--Add Prodotto-->
   <div class="row mt-4">
     <div class="col-4">
-      <form
-        [formGroup]="productsForm"
-        (ngSubmit)="addProdotto()"
-      >
+      <form [formGroup]="productsForm" (ngSubmit)="addProdotto()">
         <legend>Aggiungi Prodotto</legend>
+        <!--nome-->
         <div class="form-group">
           <input
             formControlName="nome"
@@ -15,7 +13,22 @@
             name="nome"
             placeholder="Nome"
           />
+          <!--check nome-->
+          <div
+            *ngIf="
+              productsForm &&
+              productsForm.controls['nome'].invalid &&
+              (productsForm.controls['nome'].dirty ||
+                productsForm.controls['nome'].touched)
+            "
+            class="form-error"
+          >
+            <div *ngIf="productsForm.controls['nome'].errors?.['required']">
+              inserisci il nome
+            </div>
+          </div>
         </div>
+        <!--prezzo-->
         <div class="form-group">
           <input
             formControlName="prezzo"
@@ -24,7 +37,22 @@
             name="Prezzo"
             placeholder="Prezzo"
           />
+          <!--check prezzo-->
+          <div
+            *ngIf="
+              productsForm &&
+              productsForm.controls['prezzo'].invalid &&
+              (productsForm.controls['prezzo'].dirty ||
+                productsForm.controls['prezzo'].touched)
+            "
+            class="form-error"
+          >
+            <div *ngIf="productsForm.controls['prezzo'].errors?.['required']">
+              inserisci il prezzo
+            </div>
+          </div>
         </div>
+        <!--descrizione-->
         <div class="form-group">
           <textarea
             formControlName="descrizione"
@@ -34,20 +62,58 @@
             placeholder="Descrizione"
           >
           </textarea>
+          <!--check descrizione-->
+          <div
+            *ngIf="
+              productsForm &&
+              productsForm.controls['descrizione'].invalid &&
+              (productsForm.controls['descrizione'].dirty ||
+                productsForm.controls['descrizione'].touched)
+            "
+            class="form-error"
+          >
+            <div
+              *ngIf="productsForm.controls['descrizione'].errors?.['required']"
+            >
+              inserisci una descrizione
+            </div>
+          </div>
+        </div>
+        <!--file_img-->
+        <div style="color: white">
+          <input
+            formControlName="file"
+            type="file"
+            id="file"
+            name="file"
+            accept="image/png, image/jpeg"
+          />
+          <!--check file_img-->
+          <div
+            *ngIf="
+              productsForm &&
+              productsForm.controls['file'].invalid &&
+              (productsForm.controls['file'].dirty ||
+                productsForm.controls['file'].touched)
+            "
+            class="form-error"
+          >
+            <div *ngIf="productsForm.controls['file'].errors?.['required']">
+              inserisci un' immagine
+            </div>
+          </div>
         </div>
         <button
-          *ngIf="!loadingProds;else loader"
+          *ngIf="!loadingProds; else loader"
           type="submit"
           class="btn btn-dark"
-        >Aggiungi</button>
+        >
+          Aggiungi
+        </button>
       </form>
     </div>
-    <!--Delete and Modify Prodotto-->
-    <div
-      class="col-6 mb-3 mt-3 offset-2"
-      id="prodotti"
-      *ngIf="products"
-    >
+    <!--Table and Delete and Modify Prodotto-->
+    <div class="col-6 mb-3 mt-3 offset-2" id="prodotti" *ngIf="products">
       <app-table [data]="products">
         <ng-template #headers>
           <th>Nome</th>
@@ -57,10 +123,7 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template
-          #rows
-          let-row
-        >
+        <ng-template #rows let-row>
           <td>{{ row.nome }}</td>
           <td>{{ row.descrizione }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
@@ -75,13 +138,11 @@
               <mat-icon>delete</mat-icon>
             </button>
           </td>
-          <td> <button
-              mat-icon-button
-              color="primary"
-              (click)="modifyProdotto()"
-            >
+          <td>
+            <button mat-icon-button mat-raised-button (click)="openDialog(row)">
               <mat-icon>edit</mat-icon>
-            </button> </td>
+            </button>
+          </td>
         </ng-template>
       </app-table>
     </div>
@@ -90,12 +151,10 @@
   <!--Add trattamento-->
   <div class="row mt-4">
     <div class="col-4 mt-3">
-      <form
-        [formGroup]="treatmentsForm"
-        (ngSubmit)="addTrattamento()"
-      >
+      <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
         <legend>Aggiungi Trattamento</legend>
         <div class="form-group">
+          <!--nome-->
           <input
             formControlName="nome"
             class="form-control"
@@ -103,16 +162,22 @@
             name="nome"
             placeholder="Nome"
           />
+          <!--check nome-->
+          <div
+            *ngIf="
+              treatmentsForm &&
+              treatmentsForm.controls['nome'].invalid &&
+              (treatmentsForm.controls['nome'].dirty ||
+                treatmentsForm.controls['nome'].touched)
+            "
+            class="form-error"
+          >
+            <div *ngIf="treatmentsForm.controls['nome'].errors?.['required']">
+              inserisci il nome
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <input
-            formControlName="durata"
-            class="form-control"
-            type="text"
-            name="durata"
-            placeholder="Durata"
-          />
-        </div>
+        <!--prezzo-->
         <div class="form-group">
           <input
             formControlName="prezzo"
@@ -121,19 +186,32 @@
             name="Prezzo"
             placeholder="Prezzo"
           />
+          <!--check prezzo-->
+          <div
+            *ngIf="
+              treatmentsForm &&
+              treatmentsForm.controls['prezzo'].invalid &&
+              (treatmentsForm.controls['prezzo'].dirty ||
+                treatmentsForm.controls['prezzo'].touched)
+            "
+            class="form-error"
+          >
+            <div *ngIf="treatmentsForm.controls['prezzo'].errors?.['required']">
+              inserisci il prezzo
+            </div>
+          </div>
         </div>
         <button
-          *ngIf="!loadingTreats;else loader"
+          *ngIf="!loadingTreats; else loader"
           type="submit"
           class="btn btn-dark"
-        >Aggiungi</button>
+        >
+          Aggiungi
+        </button>
       </form>
     </div>
-    <!--Delete and Modify Trattamento-->
-    <div
-      class="col-6 mb-3 mt-3 offset-2"
-      id="trattamenti"
-    >
+    <!--Table and Delete and Modify Trattamento-->
+    <div class="col-6 mb-3 mt-3 offset-2" id="trattamenti">
       <app-table [data]="treatments">
         <ng-template #headers>
           <th>Nome</th>
@@ -142,10 +220,7 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template
-          #rows
-          let-row
-        >
+        <ng-template #rows let-row>
           <td>{{ row.nome }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
           <td></td>
@@ -162,8 +237,8 @@
           <td>
             <button
               mat-icon-button
-              color="primary"
-              (click)="modifyTreatment()"
+              mat-raised-button
+              (click)="openDialog2(row)"
             >
               <mat-icon>edit</mat-icon>
             </button>
