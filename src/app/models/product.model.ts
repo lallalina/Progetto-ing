@@ -5,6 +5,6 @@ export class Product {
     public descrizione: string,
     public prezzo: number,
     public count: number, //numero quantità di selezione del prodotto
-    public immagine: string
-  ) {}
+    public foto: string
+  ) { }
 }

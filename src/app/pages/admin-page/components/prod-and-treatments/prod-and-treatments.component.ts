@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogTComponent } from './dialog-t/dialog-t.component';
 import { UtilsService } from 'src/app/core/services/utils.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-prod-and-treatments',
@@ -25,11 +26,13 @@ export class ProdAndTreatmentsComponent implements OnInit {
   loadingTreats: boolean;
 
   productImage: string | ArrayBuffer;
+  prodImageSource: SafeResourceUrl;
 
   constructor(
     private treatmentsService: TreatmentsService,
     private productService: ProductsService,
-    public dialog: MatDialog
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +65,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
     const self = this;
     reader.onload = function () {
       self.productImage = reader.result;
+      self.prodImageSource = self.sanitizer.bypassSecurityTrustResourceUrl(reader.result as string)
     }
   }
 
@@ -72,6 +76,8 @@ export class ProdAndTreatmentsComponent implements OnInit {
     this.productService.addProdotto({ ...this.productsForm.value, foto: this.productImage }).subscribe({
       next: (response) => {
         this.productsForm.reset();
+        this.productImage = null;
+        this.prodImageSource = null;
         this.products.push(response);
       },
       complete: () => (this.loadingProds = false),

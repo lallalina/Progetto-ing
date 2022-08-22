@@ -10,3 +10,9 @@ legend {
 #file {
   margin-bottom: 10px;
 }
+
+.image-preview {
+  width: 40%;
+  height: 40%;
+  object-fit: contain;
+}
