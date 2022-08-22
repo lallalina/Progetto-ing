@@ -15,8 +15,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.getLoggedUser();
-    //Il service farà la GET automaticamente per ottenere la lista di indirizzi
-    this.getIndirizzi().subscribe((_) => {});
   }
 
   //token
@@ -91,7 +89,7 @@ export class AuthService {
   //get Prenotazioni utente
   getPrenotazioni(): Observable<any> {
     return this.http.get(
-      environment.API_URL + '/user/getgetOrdiniDestinatario'
+      environment.API_URL + '/user/getOrdiniDestinatario'
     );
   }
 }
