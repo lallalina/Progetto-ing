@@ -22,7 +22,10 @@ export class OrderdService {
   }
 
   //nuovo ordine
-  ordina(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/user/nuovoOrdine', obj);
+  ordina(obj): Observable<Ordine> {
+    return this.http.post<Ordine>(
+      environment.API_URL + '/user/nuovoOrdine',
+      obj
+    );
   }
 }

@@ -6,6 +6,7 @@ import { booking } from 'src/app/models/booking';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-prenotazione',
@@ -26,7 +27,8 @@ export class PrenotazioneComponent implements OnInit {
   constructor(
     private ajax: AjaxService,
     private barbersService: BarbersService,
-    private treatmentsService: TreatmentsService
+    private treatmentsService: TreatmentsService,
+    private auth: AuthService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date();
@@ -78,5 +80,12 @@ export class PrenotazioneComponent implements OnInit {
   //onChange Calendar
   onChange(event) {
     console.log(event);
+  }
+
+  //prenota
+  prenota() {
+    /*  this.auth.nuovaPrenotazione(this.form.value).subscribe((response) => {
+      this.booking = this.bookings;
+    });*/
   }
 }

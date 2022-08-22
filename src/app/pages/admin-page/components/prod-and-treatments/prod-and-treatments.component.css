@@ -10,3 +10,15 @@ legend {
 #file {
   margin-bottom: 10px;
 }
+
+label {
+  color: rgb(251, 251, 251);
+}
+
+strong {
+  color: #820000;
+}
+
+small {
+  color: rgb(251, 251, 251);
+}

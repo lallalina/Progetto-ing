@@ -108,7 +108,7 @@ export class CartComponent implements OnInit {
   //get indirizzi
   retrieveIndirizziUser(): void {
     this.auth.getIndirizzi().subscribe((indirizzi) => {
-      this.indirizzi = indirizzi;
+      /*this.indirizzi = indirizzi;*/
     });
   }
 
@@ -117,7 +117,7 @@ export class CartComponent implements OnInit {
     this.orderdService.ordina(this.form.value).subscribe({
       next: (response) => {
         this.form.reset();
-        this.ordini = response;
+        /*this.ordini = response;*/
       },
     });
   }

@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Address } from 'cluster';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { booking } from 'src/app/models/booking';
+import { Ordine } from 'src/app/models/ordine.model';
 import { Token } from 'src/app/models/token.model';
 import { environment } from 'src/environments/environment';
 import { User } from '../../models/user.model';
@@ -82,14 +84,23 @@ export class AuthService {
   }
 
   //prendi indirizzo utente
-  getIndirizzi(): Observable<any> {
-    return this.http.get(environment.API_URL + '/user/getIndirizziUtente');
+  getIndirizzi(): Observable<Address> {
+    return this.http.get<Address>(
+      environment.API_URL + '/user/getIndirizziUtente'
+    );
   }
 
-  //get Prenotazioni utente
-  getPrenotazioni(): Observable<any> {
-    return this.http.get(
+  //get ordini per utente
+  getOrdini(): Observable<Ordine> {
+    return this.http.get<Ordine>(
       environment.API_URL + '/user/getOrdiniDestinatario'
     );
   }
+
+  /*nuova prenotazione
+  nuovaPrenotazione(): Observable<booking> {
+    return this.http.post<booking>(
+      environment.API_URL + '/public/nuovaPrenotazione'
+    );
+  }*/
 }

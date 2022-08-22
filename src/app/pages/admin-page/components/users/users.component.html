@@ -48,6 +48,7 @@
         <legend>Registra Parrucchieri</legend>
         <!--nome-->
         <div class="form-group">
+          <label>Nome:</label><strong>* </strong>
           <input
             formControlName="nome"
             class="form-control"
@@ -64,38 +65,26 @@
             "
             class="form-error"
           >
-            <div *ngIf="barbersForm.controls['nome'].errors?.['required']">
-              inserisci il nome
+            <div
+              *ngIf="barbersForm && barbersForm.controls['nome'].errors?.['required']"
+            >
+              inserisci il enome
             </div>
           </div>
         </div>
         <!--cognome-->
         <div class="form-group">
+          <label>Cognome:</label>
           <input
             formControlName="cognome"
             class="form-control"
             type="text"
             placeholder="Cognome"
           />
-          <!--check cognome-->
-          <div
-            *ngIf="
-              barbersForm &&
-              barbersForm.controls['cognome'].invalid &&
-              (barbersForm.controls['cognome'].dirty ||
-                barbersForm.controls['cognome'].touched)
-            "
-            class="form-error"
-          >
-            <div
-              *ngIf="barbersForm&& barbersForm.controls['cognome'].errors?.['required']"
-            >
-              inserisci il cognome
-            </div>
-          </div>
         </div>
         <!--email-->
         <div class="form-group">
+          <label>Email:</label><strong>* </strong>
           <input
             formControlName="mail"
             class="form-control"
@@ -121,6 +110,7 @@
         </div>
         <!--password-->
         <div class="form-group">
+          <label>Password:</label><strong>* </strong>
           <input
             formControlName="password"
             class="form-control"
@@ -151,6 +141,7 @@
         </div>
         <!--confPassword-->
         <div class="form-group">
+          <label>Conferma Password:</label><strong>* </strong>
           <input
             formControlName="confPassword"
             class="form-control"
@@ -168,12 +159,12 @@
             class="form-error"
           >
             <div
-              *ngIf="barbersForm && barbersForm.controls['confPassword'].errors?.['required']"
+              *ngIf="barbersForm.controls['confPassword'] && barbersForm.controls['confPassword'].errors?.['required']"
             >
               inserisci la password
             </div>
             <div
-              *ngIf="barbersForm && barbersForm.controls['confPassword'].errors?.['minLength']"
+              *ngIf="barbersForm.controls['confPassword'] && barbersForm.controls['confPassword'].errors?.['minLenght']"
             >
               la password deve essere lunga 5 caratteri
             </div>
@@ -199,57 +190,36 @@
         name="form"
       >
         <legend>Registra Admin</legend>
+        <!--nome-->
         <div class="form-group">
+          <label>Nome:</label>
           <input
             formControlName="nome"
             class="form-control"
             type="text"
             placeholder="Nome"
           />
-          <div
-            *ngIf="
-              adminsForm &&
-              adminsForm.controls['nome'].invalid &&
-              (adminsForm.controls['nome'].dirty ||
-                adminsForm.controls['nome'].touched)
-            "
-            class="form-error"
-          >
-            <div *ngIf="adminsForm.controls['nome'].errors?.['required']">
-              inserisci il nome
-            </div>
-          </div>
         </div>
+        <!--cognome-->
         <div class="form-group">
+          <label>Cognome:</label>
           <input
             formControlName="cognome"
             class="form-control"
             type="text"
             placeholder="Cognome"
           />
-          <div
-            *ngIf="
-              adminsForm &&
-              adminsForm.controls['cognome'].invalid &&
-              (adminsForm.controls['cognome'].dirty ||
-                adminsForm.controls['cognome'].touched)
-            "
-            class="form-error"
-          >
-            <div
-              *ngIf="adminsForm&& adminsForm.controls['cognome'].errors?.['required']"
-            >
-              inserisci il cognome
-            </div>
-          </div>
         </div>
+        <!--email-->
         <div class="form-group">
+          <label>Email:</label><strong>* </strong>
           <input
             formControlName="mail"
             class="form-control"
             type="email"
             placeholder="Email"
           />
+          <!--check email-->
           <div
             *ngIf="
               adminsForm &&
@@ -266,13 +236,16 @@
             </div>
           </div>
         </div>
+        <!--password-->
         <div class="form-group">
+          <label>Password:</label><strong>* </strong>
           <input
             formControlName="password"
             class="form-control"
             type="password"
             placeholder="Password (min 5 caratteri)"
           />
+          <!--check password-->
           <div
             *ngIf="
               adminsForm &&
@@ -294,13 +267,16 @@
             </div>
           </div>
         </div>
+        <!--confPassword-->
         <div class="form-group">
+          <label>Conferma Password:</label><strong>* </strong>
           <input
             formControlName="confPassword"
             class="form-control"
             type="password"
             placeholder="Conferma Password"
           />
+          <!--check confPassword-->
           <div
             *ngIf="
               adminsForm &&
@@ -332,6 +308,11 @@
         </button>
       </form>
     </div>
+  </div>
+  <div>
+    <small
+      >I campi contrassegnati da un asterisco rosso (*) sono obbligatori</small
+    >
   </div>
 </div>
 

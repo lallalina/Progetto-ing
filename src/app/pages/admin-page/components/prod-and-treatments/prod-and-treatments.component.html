@@ -6,6 +6,7 @@
         <legend>Aggiungi Prodotto</legend>
         <!--nome-->
         <div class="form-group">
+          <label>Nome:</label><strong>*</strong>
           <input
             formControlName="nome"
             class="form-control"
@@ -30,6 +31,7 @@
         </div>
         <!--prezzo-->
         <div class="form-group">
+          <label>Prezzo:</label><strong>*</strong>
           <input
             formControlName="prezzo"
             class="form-control"
@@ -54,6 +56,7 @@
         </div>
         <!--descrizione-->
         <div class="form-group">
+          <label>Descrizione:</label>
           <textarea
             formControlName="descrizione"
             name="descrizione"
@@ -62,25 +65,10 @@
             placeholder="Descrizione"
           >
           </textarea>
-          <!--check descrizione-->
-          <div
-            *ngIf="
-              productsForm &&
-              productsForm.controls['descrizione'].invalid &&
-              (productsForm.controls['descrizione'].dirty ||
-                productsForm.controls['descrizione'].touched)
-            "
-            class="form-error"
-          >
-            <div
-              *ngIf="productsForm.controls['descrizione'].errors?.['required']"
-            >
-              inserisci una descrizione
-            </div>
-          </div>
         </div>
         <!--file_img-->
         <div style="color: white">
+          <label>Immagine:</label>
           <input
             formControlName="file"
             type="file"
@@ -88,20 +76,6 @@
             name="file"
             accept="image/png, image/jpeg"
           />
-          <!--check file_img-->
-          <div
-            *ngIf="
-              productsForm &&
-              productsForm.controls['file'].invalid &&
-              (productsForm.controls['file'].dirty ||
-                productsForm.controls['file'].touched)
-            "
-            class="form-error"
-          >
-            <div *ngIf="productsForm.controls['file'].errors?.['required']">
-              inserisci un' immagine
-            </div>
-          </div>
         </div>
         <button
           *ngIf="!loadingProds; else loader"
@@ -153,8 +127,9 @@
     <div class="col-4 mt-3">
       <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
         <legend>Aggiungi Trattamento</legend>
+        <!--nome-->
         <div class="form-group">
-          <!--nome-->
+          <label>Nome:</label><strong>*</strong>
           <input
             formControlName="nome"
             class="form-control"
@@ -179,6 +154,7 @@
         </div>
         <!--prezzo-->
         <div class="form-group">
+          <label>Prezzo:</label><strong>*</strong>
           <input
             formControlName="prezzo"
             class="form-control"
@@ -203,6 +179,7 @@
         </div>
         <!--durata-->
         <div class="form-group">
+          <label>Durata:</label>
           <input
             formControlName="durata"
             class="form-control"
@@ -210,20 +187,6 @@
             name="durata"
             placeholder="durata"
           />
-          <!--check durata-->
-          <div
-            *ngIf="
-              treatmentsForm &&
-              treatmentsForm.controls['durata'].invalid &&
-              (treatmentsForm.controls['durata'].dirty ||
-                treatmentsForm.controls['durata'].touched)
-            "
-            class="form-error"
-          >
-            <div *ngIf="treatmentsForm.controls['durata'].errors?.['required']">
-              inserisci la durata
-            </div>
-          </div>
         </div>
         <button
           *ngIf="!loadingTreats; else loader"

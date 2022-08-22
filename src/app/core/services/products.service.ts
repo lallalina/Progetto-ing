@@ -25,8 +25,11 @@ export class ProductsService {
   }
 
   //addProdotto
-  addProdotto(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/admin/nuovoProdotto', obj);
+  addProdotto(obj): Observable<Product> {
+    return this.http.post<Product>(
+      environment.API_URL + '/admin/nuovoProdotto',
+      obj
+    );
   }
   //getProdotto
   getProducts(): Observable<Product[]> {

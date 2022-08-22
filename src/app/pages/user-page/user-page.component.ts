@@ -20,9 +20,9 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  //get Prenotazioni utenti
-  GetBooking() {
-    this.auth.getPrenotazioni().subscribe((response) => {
+  //get ordini utente
+  GetOrdini() {
+    this.auth.getOrdini().subscribe((response) => {
       console.log(response);
       this.prenotazioni = response;
     });

@@ -71,3 +71,15 @@
   top: -1px;
   right: -15px;
 }
+
+label {
+  color: black;
+}
+
+strong {
+  color: #820000;
+}
+
+small {
+  color: rgb(251, 251, 251);
+}
