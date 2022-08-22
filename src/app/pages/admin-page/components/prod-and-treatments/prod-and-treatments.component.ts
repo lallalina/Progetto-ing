@@ -7,6 +7,7 @@ import { ProductsService } from 'src/app/core/services/products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogTComponent } from './dialog-t/dialog-t.component';
+import { UtilsService } from 'src/app/core/services/utils.service';
 
 @Component({
   selector: 'app-prod-and-treatments',
@@ -23,11 +24,13 @@ export class ProdAndTreatmentsComponent implements OnInit {
   loadingProds: boolean;
   loadingTreats: boolean;
 
+  productImage: string | ArrayBuffer;
+
   constructor(
     private treatmentsService: TreatmentsService,
     private productService: ProductsService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initProductsForm();
@@ -39,8 +42,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
     this.productsForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
-      descrizione: new FormControl('', Validators.required),
-      file: new FormControl('', Validators.required),
+      descrizione: new FormControl('', Validators.required)
     });
   }
 
@@ -53,11 +55,21 @@ export class ProdAndTreatmentsComponent implements OnInit {
     });
   }
 
+  convertImage(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file)
+    const self = this;
+    reader.onload = function () {
+      self.productImage = reader.result;
+    }
+  }
+
   //--PRODOTTI--
   //aggiungi nuovo prodotto
   addProdotto() {
     this.loadingProds = true;
-    this.productService.addProdotto(this.productsForm.value).subscribe({
+    this.productService.addProdotto({ ...this.productsForm.value, foto: this.productImage }).subscribe({
       next: (response) => {
         this.productsForm.reset();
         this.products.push(response);
@@ -65,6 +77,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
       complete: () => (this.loadingProds = false),
     });
   }
+
 
   //cancella prodotto
   deleteProdotto(id: Product['id']) {

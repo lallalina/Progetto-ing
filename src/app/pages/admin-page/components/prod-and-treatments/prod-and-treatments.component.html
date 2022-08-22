@@ -1,8 +1,11 @@
 <div class="container">
   <!--Add Prodotto-->
   <div class="row mt-4">
-    <div class="col-4">
-      <form [formGroup]="productsForm" (ngSubmit)="addProdotto()">
+    <div class="col-5">
+      <form
+        [formGroup]="productsForm"
+        (ngSubmit)="addProdotto()"
+      >
         <legend>Aggiungi Prodotto</legend>
         <!--nome-->
         <div class="form-group">
@@ -56,6 +59,7 @@
         <div class="form-group">
           <textarea
             formControlName="descrizione"
+            class="form-control"
             name="descrizione"
             rows="5"
             cols="30"
@@ -72,48 +76,38 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="productsForm.controls['descrizione'].errors?.['required']"
-            >
+            <div *ngIf="productsForm.controls['descrizione'].errors?.['required']">
               inserisci una descrizione
             </div>
           </div>
         </div>
         <!--file_img-->
-        <div style="color: white">
+        <div class="form-group">
           <input
-            formControlName="file"
+            class="form-control"
             type="file"
-            id="file"
+            id="formFile"
             name="file"
             accept="image/png, image/jpeg"
+            (change)="convertImage($event)"
           />
           <!--check file_img-->
-          <div
-            *ngIf="
-              productsForm &&
-              productsForm.controls['file'].invalid &&
-              (productsForm.controls['file'].dirty ||
-                productsForm.controls['file'].touched)
-            "
-            class="form-error"
-          >
-            <div *ngIf="productsForm.controls['file'].errors?.['required']">
-              inserisci un' immagine
-            </div>
-          </div>
         </div>
         <button
           *ngIf="!loadingProds; else loader"
           type="submit"
-          class="btn btn-dark"
+          class="btn btn-dark mt-2"
         >
           Aggiungi
         </button>
       </form>
     </div>
     <!--Table and Delete and Modify Prodotto-->
-    <div class="col-6 mb-3 mt-3 offset-2" id="prodotti" *ngIf="products">
+    <div
+      class="col-7 mb-3 mt-5"
+      id="prodotti"
+      *ngIf="products"
+    >
       <app-table [data]="products">
         <ng-template #headers>
           <th>Nome</th>
@@ -123,7 +117,10 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <td>{{ row.nome }}</td>
           <td>{{ row.descrizione }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
@@ -139,7 +136,11 @@
             </button>
           </td>
           <td>
-            <button mat-icon-button mat-raised-button (click)="openDialog(row)">
+            <button
+              mat-icon-button
+              mat-raised-button
+              (click)="openDialog(row)"
+            >
               <mat-icon>edit</mat-icon>
             </button>
           </td>
@@ -150,8 +151,11 @@
 
   <!--Add trattamento-->
   <div class="row mt-4">
-    <div class="col-4 mt-3">
-      <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
+    <div class="col-5 mt-3">
+      <form
+        [formGroup]="treatmentsForm"
+        (ngSubmit)="addTrattamento()"
+      >
         <legend>Aggiungi Trattamento</legend>
         <div class="form-group">
           <!--nome-->
@@ -235,7 +239,10 @@
       </form>
     </div>
     <!--Table and Delete and Modify Trattamento-->
-    <div class="col-6 mb-3 mt-3 offset-2" id="trattamenti">
+    <div
+      class="col-7 mb-3 mt-5"
+      id="trattamenti"
+    >
       <app-table [data]="treatments">
         <ng-template #headers>
           <th>Nome</th>
@@ -245,7 +252,10 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <td>{{ row.nome }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
           <td>{{ row.durata }} min</td>
