@@ -6,6 +6,10 @@ legend {
   text-align: center;
 }
 
+button {
+  margin-left: 65%;
+}
+
 .dialog {
   background-color: rgb(241, 214, 198);
   padding: 0;

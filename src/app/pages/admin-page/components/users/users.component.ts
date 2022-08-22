@@ -1,5 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { AjaxService } from 'src/app/core/services/ajax.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { Barber } from 'src/app/models/barber.model';
@@ -71,9 +78,12 @@ export class UsersComponent implements OnInit {
       mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(5),
       ]),
-      confPassword: new FormControl('', Validators.required),
+      confPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
     });
   }
 
@@ -85,11 +95,11 @@ export class UsersComponent implements OnInit {
       mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(5),
       ]),
       confPassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(5),
       ]),
     });
   }
@@ -138,16 +148,19 @@ export class UsersComponent implements OnInit {
     if (user.role == UserRole.BARBER) {
       this.barbersService.deleteBarber(user.id).subscribe({
         next: (response) => {
-          const prodIndex = this.users.findIndex((item) => item.id === user.id);
-          this.users.splice(prodIndex, 1);
+          const prodIndex = this.tableData.findIndex(
+            (item) => item.id === user.id
+          );
+          this.tableData.splice(prodIndex, 1);
         },
       });
     } else {
       this.barbersService.deleteAdmin(user.id).subscribe({
         next: (response) => {
-          console.log(this.users);
-          const prodIndex = this.users.findIndex((item) => item.id === user.id);
-          this.users.splice(prodIndex, 1);
+          const prodIndex = this.tableData.findIndex(
+            (item) => item.id === user.id
+          );
+          this.tableData.splice(prodIndex, 1);
         },
         error: (error) => {
           console.log(error);

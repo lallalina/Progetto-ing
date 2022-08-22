@@ -23,12 +23,13 @@ export class DialogTComponent implements OnInit {
     this.initModifyForm();
   }
 
-  //controls
+  //controls con campi già compilati
   initModifyForm() {
     this.modifyForm = new FormGroup({
-      idProdotto: new FormControl(this.data.id),
+      idTrattamento: new FormControl(this.data.id),
       nome: new FormControl(this.data.nome),
       prezzo: new FormControl(this.data.prezzo),
+      durata: new FormControl(this.data.durata),
     });
   }
 
@@ -37,8 +38,10 @@ export class DialogTComponent implements OnInit {
     console.log(this.modifyForm.value);
     this.treatmentsService.modifyTreatment(this.modifyForm.value).subscribe({
       next: (response) => {
+        console.log(response);
         this.data.nome = response.nome;
         this.data.prezzo = response.prezzo;
+        this.data.durata = response.durata;
       },
     });
   }

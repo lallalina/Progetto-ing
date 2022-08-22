@@ -43,8 +43,11 @@ export class CartComponent implements OnInit {
     this.form = new FormGroup({
       citta: new FormControl('', Validators.required),
       indirizzo: new FormControl('', Validators.required),
-      cap: new FormControl('', Validators.required),
-      numCivico: new FormControl('', Validators.required),
+      cap: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      numCivico: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
     });
   }
 
@@ -80,12 +83,14 @@ export class CartComponent implements OnInit {
     this.cartService.removeItem(item);
   }
 
+  //incrementa
   public increaseAmount(item: CartItem) {
     this.cartService.updateItemAmount(item, item.amount + 1);
   }
 
+  //decrementa
   public decreaseAmount(item: CartItem) {
-    const newAmount = item.amount--;
+    const newAmount = item.amount - 1;
     if (newAmount === 0) {
       this.cartService.removeItem(item);
     } else {

@@ -5,6 +5,7 @@ import { AjaxService } from 'src/app/core/services/ajax.service';
 import { booking } from 'src/app/models/booking';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-prenotazione',
@@ -20,6 +21,7 @@ export class PrenotazioneComponent implements OnInit {
 
   minDate: Date;
   OrariDisponibili = [];
+  form;
 
   constructor(
     private ajax: AjaxService,
@@ -33,6 +35,15 @@ export class PrenotazioneComponent implements OnInit {
   ngOnInit(): void {
     this.listenToBarbers();
     this.listenToTreatments();
+    this.initForm();
+  }
+
+  //controllo validità sezioni
+  initForm() {
+    this.form = new FormGroup({
+      nome: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+    });
   }
 
   //chiamataOrari

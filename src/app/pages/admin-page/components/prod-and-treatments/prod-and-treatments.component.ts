@@ -81,7 +81,6 @@ export class ProdAndTreatmentsComponent implements OnInit {
   //dialog per la modifica dei prodotti
   openDialog(product: Product) {
     console.log(product);
-    //this.loadingProds = true;
     this.dialog.open(DialogComponent, {
       data: product,
       width: '520px',
@@ -115,11 +114,10 @@ export class ProdAndTreatmentsComponent implements OnInit {
 
   //dialog per la modifica
   openDialog2(treatment: Treatment) {
-    this.loadingTreats = true;
     this.dialog.open(DialogTComponent, {
       data: treatment,
-      width: '350px',
-      height: '350px',
+      width: '420px',
+      height: '420px',
     });
   }
 }

@@ -11,6 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class DialogComponent implements OnInit {
   @Input() product: Product[];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Product,
     private productService: ProductsService
@@ -22,7 +23,7 @@ export class DialogComponent implements OnInit {
     this.initModifyForm();
   }
 
-  //controls
+  //controls con campi già compilati
   initModifyForm() {
     this.modifyForm = new FormGroup({
       idProdotto: new FormControl(this.data.id),

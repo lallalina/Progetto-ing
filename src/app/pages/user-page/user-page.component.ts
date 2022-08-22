@@ -15,7 +15,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(private auth: AuthService) {}
 
-  isChecked = true;
+  isChecked: boolean;
   public dialog: MatDialog;
 
   ngOnInit(): void {}
@@ -30,7 +30,7 @@ export class UserPageComponent implements OnInit {
 
   //disabilita notifiche
   Notify() {
-    if (this.isChecked) {
+    if (this.isChecked == true) {
       //chiamata per togliere notifica
     }
   }

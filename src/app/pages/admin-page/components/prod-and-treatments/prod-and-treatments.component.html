@@ -201,6 +201,30 @@
             </div>
           </div>
         </div>
+        <!--durata-->
+        <div class="form-group">
+          <input
+            formControlName="durata"
+            class="form-control"
+            type="number"
+            name="durata"
+            placeholder="durata"
+          />
+          <!--check durata-->
+          <div
+            *ngIf="
+              treatmentsForm &&
+              treatmentsForm.controls['durata'].invalid &&
+              (treatmentsForm.controls['durata'].dirty ||
+                treatmentsForm.controls['durata'].touched)
+            "
+            class="form-error"
+          >
+            <div *ngIf="treatmentsForm.controls['durata'].errors?.['required']">
+              inserisci la durata
+            </div>
+          </div>
+        </div>
         <button
           *ngIf="!loadingTreats; else loader"
           type="submit"
@@ -216,6 +240,7 @@
         <ng-template #headers>
           <th>Nome</th>
           <th>Prezzo</th>
+          <th>Durata</th>
           <th></th>
           <th>Elimina</th>
           <th>Modifica</th>
@@ -223,6 +248,7 @@
         <ng-template #rows let-row>
           <td>{{ row.nome }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
+          <td>{{ row.durata }} min</td>
           <td></td>
           <td>
             <button

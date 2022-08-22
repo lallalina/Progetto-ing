@@ -44,8 +44,8 @@ export class TreatmentsService {
   }
 
   //modifyTrattamento
-  modifyTreatment(obj): Observable<any> {
-    return this.http.patch(
+  modifyTreatment(obj): Observable<Treatment> {
+    return this.http.patch<Treatment>(
       environment.API_URL + '/admin/modificaTrattamento',
       obj
     );

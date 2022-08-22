@@ -15,7 +15,6 @@
       <th>Nome</th>
       <th>Cognome</th>
       <th>Mail</th>
-      <th>Cellulare</th>
       <th>Ruolo</th>
       <th></th>
       <th>elimina</th>
@@ -25,7 +24,6 @@
       <td>{{ row.nome }}</td>
       <td>{{ row.cognome }}</td>
       <td>{{ row.mail }}</td>
-      <td>{{ row.cellulare }}</td>
       <td>{{ row.role | roleName }}</td>
       <td></td>
       <td>
@@ -127,7 +125,7 @@
             formControlName="password"
             class="form-control"
             type="password"
-            placeholder="Password (min 8 caratteri)"
+            placeholder="Password (min 5 caratteri)"
           />
           <!--check password-->
           <div
@@ -147,7 +145,7 @@
             <div
               *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['minLenght']"
             >
-              la password deve essere lunga 8 caratteri
+              la password deve essere lunga 5 caratteri
             </div>
           </div>
         </div>
@@ -177,7 +175,7 @@
             <div
               *ngIf="barbersForm && barbersForm.controls['confPassword'].errors?.['minLength']"
             >
-              la password deve essere lunga 8 caratteri
+              la password deve essere lunga 5 caratteri
             </div>
           </div>
         </div>
@@ -273,7 +271,7 @@
             formControlName="password"
             class="form-control"
             type="password"
-            placeholder="Password (min 8 caratteri)"
+            placeholder="Password (min 5 caratteri)"
           />
           <div
             *ngIf="
@@ -292,7 +290,7 @@
             <div
               *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['minLenght']"
             >
-              la password deve essere lunga 8 caratteri
+              la password deve essere lunga 5 caratteri
             </div>
           </div>
         </div>
@@ -320,7 +318,7 @@
             <div
               *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['minLength']"
             >
-              la password deve essere lunga 8 caratteri
+              la password deve essere lunga 5 caratteri
             </div>
           </div>
         </div>
