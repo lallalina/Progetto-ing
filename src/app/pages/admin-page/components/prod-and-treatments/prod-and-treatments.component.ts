@@ -7,6 +7,8 @@ import { ProductsService } from 'src/app/core/services/products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogTComponent } from './dialog-t/dialog-t.component';
+import { UtilsService } from 'src/app/core/services/utils.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-prod-and-treatments',
@@ -23,9 +25,13 @@ export class ProdAndTreatmentsComponent implements OnInit {
   loadingProds: boolean;
   loadingTreats: boolean;
 
+  productImage: string | ArrayBuffer;
+  prodImageSource: SafeResourceUrl;
+
   constructor(
     private treatmentsService: TreatmentsService,
     private productService: ProductsService,
+    private sanitizer: DomSanitizer,
     public dialog: MatDialog
   ) {}
 
@@ -39,6 +45,8 @@ export class ProdAndTreatmentsComponent implements OnInit {
     this.productsForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
+      descrizione: new FormControl('', Validators.required),
+      file: new FormControl('', Validators.required),
     });
   }
 
@@ -50,17 +58,34 @@ export class ProdAndTreatmentsComponent implements OnInit {
     });
   }
 
+  convertImage(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    const self = this;
+    reader.onload = function () {
+      self.productImage = reader.result;
+      self.prodImageSource = self.sanitizer.bypassSecurityTrustResourceUrl(
+        reader.result as string
+      );
+    };
+  }
+
   //--PRODOTTI--
   //aggiungi nuovo prodotto
   addProdotto() {
     this.loadingProds = true;
-    this.productService.addProdotto(this.productsForm.value).subscribe({
-      next: (response) => {
-        this.productsForm.reset();
-        this.products.push(response);
-      },
-      complete: () => (this.loadingProds = false),
-    });
+    this.productService
+      .addProdotto({ ...this.productsForm.value, foto: this.productImage })
+      .subscribe({
+        next: (response) => {
+          this.productsForm.reset();
+          this.productImage = null;
+          this.prodImageSource = null;
+          this.products.push(response);
+        },
+        complete: () => (this.loadingProds = false),
+      });
   }
 
   //cancella prodotto

@@ -1,7 +1,7 @@
 <div class="container">
   <!--Add Prodotto-->
   <div class="row mt-4">
-    <div class="col-4">
+    <div class="col-5">
       <form [formGroup]="productsForm" (ngSubmit)="addProdotto()">
         <legend>Aggiungi Prodotto</legend>
         <!--nome-->
@@ -59,35 +59,66 @@
           <label>Descrizione:</label>
           <textarea
             formControlName="descrizione"
+            class="form-control"
             name="descrizione"
             rows="5"
             cols="30"
             placeholder="Descrizione"
           >
           </textarea>
+          <!--check descrizione-->
+          <div
+            *ngIf="
+              productsForm &&
+              productsForm.controls['descrizione'].invalid &&
+              (productsForm.controls['descrizione'].dirty ||
+                productsForm.controls['descrizione'].touched)
+            "
+            class="form-error"
+          >
+            <div
+              *ngIf="productsForm.controls['descrizione'].errors?.['required']"
+            >
+              inserisci una descrizione
+            </div>
+          </div>
         </div>
         <!--file_img-->
         <div style="color: white">
-          <label>Immagine:</label>
           <input
-            formControlName="file"
+            class="form-control"
             type="file"
-            id="file"
+            id="formFile"
             name="file"
             accept="image/png, image/jpeg"
+            (change)="convertImage($event)"
           />
+          <!--check file_img-->
+          <div
+            *ngIf="
+              productsForm &&
+              productsForm.controls['file'].invalid &&
+              (productsForm.controls['file'].dirty ||
+                productsForm.controls['file'].touched)
+            "
+            class="form-error"
+          >
+            <div *ngIf="productsForm.controls['file'].errors?.['required']">
+              inserisci un' immagine
+            </div>
+          </div>
         </div>
         <button
           *ngIf="!loadingProds; else loader"
           type="submit"
-          class="btn btn-dark"
+          class="btn btn-dark mt-2"
         >
           Aggiungi
         </button>
       </form>
     </div>
     <!--Table and Delete and Modify Prodotto-->
-    <div class="col-6 mb-3 mt-3 offset-2" id="prodotti" *ngIf="products">
+    <div class="col-7 mb-3 mt-5" id="prodotti" *ngIf="products">
       <app-table [data]="products">
         <ng-template #headers>
           <th>Nome</th>
@@ -124,7 +155,7 @@
 
   <!--Add trattamento-->
   <div class="row mt-4">
-    <div class="col-4 mt-3">
+    <div class="col-5 mt-3">
       <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
         <legend>Aggiungi Trattamento</legend>
         <!--nome-->
@@ -198,7 +229,7 @@
       </form>
     </div>
     <!--Table and Delete and Modify Trattamento-->
-    <div class="col-6 mb-3 mt-3 offset-2" id="trattamenti">
+    <div class="col-7 mb-3 mt-5" id="trattamenti">
       <app-table [data]="treatments">
         <ng-template #headers>
           <th>Nome</th>

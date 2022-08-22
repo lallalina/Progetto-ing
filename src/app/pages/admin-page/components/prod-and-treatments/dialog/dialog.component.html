@@ -1,57 +1,85 @@
 <!--Modifica prodotto-->
-<div>
-  <div mat-dialog-actions class="dialog">
-    <form id="form" (ngSubmit)="modifyProdotto()" [formGroup]="modifyForm">
-      <legend>Modifica Prodotto</legend>
-      <!--nome-->
-      <div class="form-group">
-        <label>nome:</label>
-        <input
-          formControlName="nome"
-          class="form-control"
-          type="text"
-          name="nome"
-          placeholder="Nome"
-        />
-      </div>
-      <!--prezzo-->
-      <div class="form-group">
-        <label>prezzo:</label>
-        <input
-          formControlName="prezzo"
-          class="form-control"
-          type="text"
-          name="Prezzo"
-          placeholder="Prezzo"
-        />
-      </div>
-      <!--descrizione-->
-      <div class="form-group">
-        <p>descrizione:</p>
-        <textarea
-          formControlName="descrizione"
-          name="descrizione"
-          rows="5"
-          cols="30"
-          placeholder="Descrizione"
-        >
+<h1 mat-dialog-title>
+  Modifica Prodotto
+</h1>
+<div mat-dialog-content>
+  <form
+    id="form"
+    (ngSubmit)="modifyProdotto()"
+    [formGroup]="modifyForm"
+  >
+    <!--nome-->
+    <div class="form-group">
+      <label>Nome:</label>
+      <input
+        formControlName="nome"
+        class="form-control"
+        type="text"
+        name="nome"
+        placeholder="Nome"
+      />
+    </div>
+    <!--prezzo-->
+    <div class="form-group">
+      <label>Prezzo (€):</label>
+      <input
+        formControlName="prezzo"
+        class="form-control"
+        type="text"
+        name="Prezzo"
+        placeholder="Prezzo"
+      />
+    </div>
+    <!--descrizione-->
+    <div class="form-group">
+      <p>Descrizione:</p>
+      <textarea
+        formControlName="descrizione"
+        name="descrizione"
+        rows="5"
+        cols="30"
+        placeholder="Descrizione"
+      >
         </textarea>
-      </div>
-      <!--file_img-->
-      <div style="color: white">
-        <label>immagine:</label>
-        <input
-          formControlName="file"
-          type="file"
-          id="file"
-          name="file"
-          accept="image/png, image/jpeg"
-        />
-      </div>
-      <button mat-button mat-dialog-close>No</button>
-      <button mat-button mat-dialog-close cdkFocusInitial type="submit">
-        Ok
-      </button>
-    </form>
-  </div>
+    </div>
+    <!--file_img-->
+    <div>
+      <label>Foto:</label>
+      <br>
+      <img
+        class="image-preview"
+        [src]="prodImageSource"
+        alt=""
+        *ngIf="prodImageSource"
+      >
+
+      <input
+        class="form-control"
+        type="file"
+        id="file"
+        name="file"
+        accept="image/png, image/jpeg"
+        (change)="convertImage($event)"
+      />
+    </div>
+  </form>
 </div>
+<div mat-dialog-actions>
+  <button
+    mat-button
+    mat-dialog-close
+  >Annulla</button>
+  <button
+    mat-button
+    mat-dialog-close
+    type="submit"
+    *ngIf="!loading;else loader"
+    (click)="modifyProdotto()"
+  >
+    Conferma
+  </button>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
