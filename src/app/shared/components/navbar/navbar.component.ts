@@ -17,23 +17,22 @@ export class NavbarComponent implements OnInit {
   badgeCounter: number = 0;
   user: User;
   isAdmin: boolean;
+  isUser: boolean;
   readonly UserRole = UserRole;
 
   constructor(
     private auth: AuthService,
     private router: Router,
     private cartService: CartService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
     this.total = this.cartService.getTotal();
-    this.cartService.cart$.subscribe(
-      (items: CartItem[]) => {
-        this.items = items;
-        this.total = this.cartService.getTotal();
-      }
-    );
+    this.cartService.cart$.subscribe((items: CartItem[]) => {
+      this.items = items;
+      this.total = this.cartService.getTotal();
+    });
     this.auth.user$.subscribe((user) => {
       if (user) {
         console.log(user);

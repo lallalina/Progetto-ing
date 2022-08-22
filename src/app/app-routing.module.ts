@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './core/guards/admin.guard';
 import { CustomerGuard } from './core/guards/customer.guard';
@@ -7,6 +7,7 @@ import { CustomerPageComponent } from './pages/customer-page/customer-page.compo
 import { LoginComponent } from './pages/login-page/login.component';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { RegistrationComponent } from './pages/registration-page/registration.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,11 @@ const routes: Routes = [
     //prova per il carrello page
     path: 'cart',
     component: CartComponent,
+  },
+  {
+    //prova user page
+    path: 'user',
+    component: UserPageComponent,
   },
 ];
 
