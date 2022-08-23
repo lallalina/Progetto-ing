@@ -19,6 +19,7 @@ export class PrenotazioneComponent implements OnInit {
   @Input() bookings: booking[];
   barbers: Barber[];
   treatments: Array<Treatment>;
+  orari: Array<string[]>;
 
   selected: Date | null;
 
@@ -85,9 +86,9 @@ export class PrenotazioneComponent implements OnInit {
   //chiamataOrari
   caricaOrari(giorno = this.giorno, barber = this.barbiere) {
     console.log(this.giorno);
-    this.bookingService.orari(barber['id'], giorno).subscribe((response) => {
+    this.bookingService.orari(barber.id, giorno).subscribe((response) => {
       console.log(response);
-      this.bookings = response;
+      this.orari = response;
     });
   }
 
