@@ -96,6 +96,8 @@ export class PrenotazioneComponent implements OnInit {
   prenota() {
     this.bookingService
       .newBooking({ ...this.bookingForm.value, idBarbiere: this.barbiere.id })
-      .subscribe((response) => { });
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }

@@ -11,6 +11,7 @@
       <app-table [data]="items" *ngIf="items">
         <ng-template #headers>
           <th>Prodotto</th>
+          <th></th>
           <th class="text-center">Quantità</th>
           <th class="text-center">Prezzo</th>
           <th class="text-center">Subtotale</th>
@@ -30,17 +31,20 @@
                 class="product-thumb"
                 routerLink="/products/{{ row.product.id }}"
               >
-                <img [src]="row.product.immagine" alt="Product" />
+                <img [src]="row.product.im" alt="Product" />
               </a>
-              <div class="product-info">
-                <h4 class="product-title">
-                  <a
-                    class="text-black"
-                    routerLink="/products/{{ row.product.id }}"
-                    >{{ row.product.nome }}</a
-                  >
-                </h4>
-              </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="product-info">
+              <h4 class="product-title">
+                <a
+                  class="text-black"
+                  routerLink="/products/{{ row.product.id }}"
+                  >{{ row.product.nome }}</a
+                >
+              </h4>
             </div>
           </td>
           <td class="text-center">
