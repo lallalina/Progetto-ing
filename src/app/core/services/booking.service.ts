@@ -9,7 +9,7 @@ import { Barber } from 'src/app/models/barber.model';
   providedIn: 'root',
 })
 export class BookingService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   prenotazione: booking[] = [];
 
@@ -17,15 +17,15 @@ export class BookingService {
   orari(id: Barber['id'], giorno: string): Observable<any> {
     return this.http.get(
       environment.API_URL +
-        'public/getPrenotazioniLibereBarbierePerGiorno/' +
-        id +
-        '/' +
-        giorno
+      '/public/getPrenotazioniLibereBarbierePerGiorno/' +
+      id +
+      '/' +
+      giorno
     );
   }
 
   //nuova prenotazione
-  newBooking(obj): Observable<booking> {
+  newBooking(obj: booking): Observable<booking> {
     return this.http.post<booking>(
       environment.API_URL + '/public/nuovaPrenotazione',
       obj

@@ -82,12 +82,6 @@ export class PrenotazioneComponent implements OnInit {
     this.caricaOrari(this.giorno, this.barbiere);
   }
 
-  //onChange Barber
-  onChangeBarber(event) {
-    this.barbiere = event.target['value'];
-    console.log(event.target['value']);
-  }
-
   //chiamataOrari
   caricaOrari(giorno = this.giorno, barber = this.barbiere) {
     console.log(this.giorno);
@@ -100,7 +94,7 @@ export class PrenotazioneComponent implements OnInit {
   //prenota
   prenota() {
     this.bookingService
-      .newBooking(this.bookingForm.value)
-      .subscribe((response) => {});
+      .newBooking({ ...this.bookingForm.value, idBarbiere: this.barbiere.id })
+      .subscribe((response) => { });
   }
 }
