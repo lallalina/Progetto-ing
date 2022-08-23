@@ -7,6 +7,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/models/user.model';
 
@@ -16,7 +18,6 @@ import { User } from 'src/app/models/user.model';
 })
 export class RegistrationComponent implements OnInit {
   form: FormGroup;
-  newUser: User[];
 
   visible: boolean = true;
   changetype: boolean = true;
@@ -24,14 +25,21 @@ export class RegistrationComponent implements OnInit {
   visible2: boolean = true;
   changetype2: boolean = true;
 
-  constructor(private auth: AuthService) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toast: ToastrService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initForm();
+  }
 
   //chiamataAPI
   registration() {
     this.auth.registrazione(this.form.value).subscribe((response) => {
-      this.newUser.push(response);
+      this.toast.success('registrazione avvenuta con successo');
+      this.router.navigate(['/login']);
     });
   }
 
@@ -50,7 +58,7 @@ export class RegistrationComponent implements OnInit {
   //controllo validità sezioni del form
   initForm() {
     this.form = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
