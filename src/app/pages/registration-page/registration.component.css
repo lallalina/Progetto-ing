@@ -70,8 +70,8 @@
 
 .eye {
   position: absolute;
-  top: -1px;
-  right: -15px;
+  top: 8px;
+  right: 10px;
 }
 
 label {

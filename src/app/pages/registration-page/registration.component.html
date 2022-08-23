@@ -53,7 +53,7 @@
                   id="password"
                 />
                 <span class="eye" (click)="show()">
-                  <i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                  <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
               <!--conferma password-->
@@ -65,15 +65,15 @@
                   </span>
                 </div>
                 <input
-                  [type]="changetype ? 'password' : 'text'"
+                  [type]="changetype2 ? 'password' : 'text'"
                   name="password"
                   class="form-control input_user"
                   placeholder="conferma password"
                   formControlName="confirmPassword"
                   id="password"
                 />
-                <span class="eye" (click)="show()">
-                  <i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+                <span class="eye" (click)="show2()">
+                  <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
               <div

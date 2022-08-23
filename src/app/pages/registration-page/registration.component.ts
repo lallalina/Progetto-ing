@@ -17,8 +17,12 @@ import { User } from 'src/app/models/user.model';
 export class RegistrationComponent implements OnInit {
   form: FormGroup;
   newUser: User[];
+
   visible: boolean = true;
   changetype: boolean = true;
+
+  visible2: boolean = true;
+  changetype2: boolean = true;
 
   constructor(private auth: AuthService) {}
 
@@ -35,6 +39,12 @@ export class RegistrationComponent implements OnInit {
   show() {
     this.visible = !this.visible;
     this.changetype = !this.changetype;
+  }
+
+  //show checkPassword
+  show2() {
+    this.visible2 = !this.visible2;
+    this.changetype2 = !this.changetype2;
   }
 
   //controllo validità sezioni del form
