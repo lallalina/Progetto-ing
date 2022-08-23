@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Barber } from 'src/app/models/barber.model';
 import { Treatment } from 'src/app/models/treatment.model';
-import { AjaxService } from 'src/app/core/services/ajax.service';
-import { booking } from 'src/app/models/booking';
+
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BookingService } from 'src/app/core/services/booking.service';
+import { booking } from 'src/app/models/booking';
 
 @Component({
   selector: 'app-prenotazione',
@@ -25,7 +26,7 @@ export class PrenotazioneComponent implements OnInit {
   form;
 
   constructor(
-    private ajax: AjaxService,
+    private bookingService: BookingService,
     private barbersService: BarbersService,
     private treatmentsService: TreatmentsService,
     private auth: AuthService
@@ -50,7 +51,7 @@ export class PrenotazioneComponent implements OnInit {
 
   //chiamataOrari
   caricaOrari() {
-    this.ajax.orari().subscribe((response) => {
+    this.bookingService.orari().subscribe((response) => {
       console.log(response);
       this.bookings = response;
     });

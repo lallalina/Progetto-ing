@@ -7,7 +7,6 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { AjaxService } from 'src/app/core/services/ajax.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { Barber } from 'src/app/models/barber.model';
 import * as _ from 'lodash';
@@ -41,10 +40,7 @@ export class UsersComponent implements OnInit {
   loadingBarbers: boolean;
   loadingAdmins: boolean;
 
-  constructor(
-    private barbersService: BarbersService,
-    private ajax: AjaxService
-  ) { }
+  constructor(private barbersService: BarbersService) {}
 
   ngOnInit(): void {
     this.initBarbersForm();

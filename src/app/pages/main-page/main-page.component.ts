@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AjaxService } from 'src/app/core/services/ajax.service';
+import { ReviewService } from 'src/app/core/services/review.service';
+
 import { Barber } from 'src/app/models/barber.model';
 import { Review } from 'src/app/models/review.model';
 import { Treatment } from 'src/app/models/treatment.model';
@@ -15,11 +16,11 @@ export class MainPageComponent implements OnInit {
   reviews: Review[] = [];
   error;
 
-  constructor(private ajax: AjaxService) { }
+  constructor(private reviewService: ReviewService) {}
 
   //prendi recensioni
   getRecensioni() {
-    this.ajax.recensioni().subscribe((response) => {
+    this.reviewService.recensioni().subscribe((response) => {
       console.log(response);
       this.reviews = response;
     });

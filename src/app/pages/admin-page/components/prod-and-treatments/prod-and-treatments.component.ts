@@ -45,6 +45,8 @@ export class ProdAndTreatmentsComponent implements OnInit {
     this.productsForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
+      descrizione: new FormControl(''),
+      immagine: new FormControl(''),
     });
   }
 
@@ -53,6 +55,7 @@ export class ProdAndTreatmentsComponent implements OnInit {
     this.treatmentsForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
+      durata: new FormControl(''),
     });
   }
 
