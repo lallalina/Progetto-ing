@@ -1,6 +1,6 @@
 import { booking } from './booking';
 
-export class reviews {
+export class Review {
   idPrenotazione: booking;
   valutazione: number;
   descrizione: string;

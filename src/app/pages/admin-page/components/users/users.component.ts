@@ -44,7 +44,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private barbersService: BarbersService,
     private ajax: AjaxService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -74,6 +74,7 @@ export class UsersComponent implements OnInit {
     //controllo validità sezioni dei form
     this.barbersForm = new FormGroup({
       nome: new FormControl('', Validators.required),
+      cognome: new FormControl(''),
       mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
@@ -89,7 +90,9 @@ export class UsersComponent implements OnInit {
   initAdminsForm() {
     //controllo validità sezioni dei form
     this.adminsForm = new FormGroup({
+      nome: new FormControl(''),
       mail: new FormControl('', [Validators.required, Validators.email]),
+      cognome: new FormControl(''),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
