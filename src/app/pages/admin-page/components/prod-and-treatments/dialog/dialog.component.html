@@ -1,13 +1,7 @@
 <!--Modifica prodotto-->
-<h1 mat-dialog-title>
-  Modifica Prodotto
-</h1>
+<h1 mat-dialog-title>Modifica Prodotto</h1>
 <div mat-dialog-content>
-  <form
-    id="form"
-    (ngSubmit)="modifyProdotto()"
-    [formGroup]="modifyForm"
-  >
+  <form id="form" (ngSubmit)="modifyProdotto()" [formGroup]="modifyForm">
     <!--nome-->
     <div class="form-group">
       <label>Nome:</label>
@@ -40,18 +34,18 @@
         cols="30"
         placeholder="Descrizione"
       >
-        </textarea>
+      </textarea>
     </div>
     <!--file_img-->
     <div>
       <label>Foto:</label>
-      <br>
+      <br />
       <img
         class="image-preview"
         [src]="prodImageSource"
         alt=""
         *ngIf="prodImageSource"
-      >
+      />
 
       <input
         class="form-control"
@@ -65,15 +59,12 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button
-    mat-button
-    mat-dialog-close
-  >Annulla</button>
+  <button mat-button mat-dialog-close>Annulla</button>
   <button
     mat-button
     mat-dialog-close
     type="submit"
-    *ngIf="!loading;else loader"
+    *ngIf="!loading; else loader"
     (click)="modifyProdotto()"
   >
     Conferma

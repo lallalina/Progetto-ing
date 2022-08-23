@@ -11,7 +11,7 @@ export class ReviewsComponent implements OnInit {
   constructor(private reviewService: ReviewService) {}
 
   form;
-  recensioni: Review[] = [];
+  recensioni: Review;
 
   ngOnInit(): void {}
 
@@ -24,7 +24,7 @@ export class ReviewsComponent implements OnInit {
   doReview() {
     this.reviewService.doReview(this.form.value).subscribe((response) => {
       this.form.reset();
-      this.recensioni.push(response);
+      this.recensioni = response;
     });
   }
 }

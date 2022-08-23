@@ -9,7 +9,7 @@ import { booking } from 'src/app/models/booking';
 export class DeleteBookingPageComponent implements OnInit {
   constructor(private bookingService: BookingService) {}
 
-  @Input() booking: booking[];
+  @Input() booking: booking;
 
   ngOnInit(): void {}
 
