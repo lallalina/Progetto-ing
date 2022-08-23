@@ -14,8 +14,8 @@ export class BookingService {
   prenotazione: booking[] = [];
 
   //listaOrari
-  orari(id: Barber['id'], giorno: string): Observable<any> {
-    return this.http.get(
+  orari(id: Barber['id'], giorno: string): Observable<Array<string[]>> {
+    return this.http.get<Array<string[]>>(
       environment.API_URL +
       '/public/getPrenotazioniLibereBarbierePerGiorno/' +
       id +

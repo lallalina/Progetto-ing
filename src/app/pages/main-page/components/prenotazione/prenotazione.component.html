@@ -119,10 +119,10 @@
                   id="orario"
                 >
                   <option
-                    *ngFor="let ora of bookings"
-                    [value]="ora"
+                    *ngFor="let periodo of orari"
+                    [ngValue]="perdiodo"
                   >
-                    {{ ora.nome }}
+                    {{ periodo[0] }} / {{periodo[1]}}
                   </option>
                   <option *ngIf="bookings && bookings.length === 0">
                     <p>Non ci sono orari disponibili</p>
