@@ -24,7 +24,7 @@ export class UserPageComponent implements OnInit {
   GetOrdini() {
     this.auth.getOrdini().subscribe((response) => {
       console.log(response);
-      this.prenotazioni = response;
+      /*this.prenotazioni = response;*/
     });
   }
 
