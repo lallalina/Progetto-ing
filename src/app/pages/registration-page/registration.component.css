@@ -73,3 +73,11 @@
   top: -1px;
   right: -15px;
 }
+
+label {
+  color: black;
+}
+
+strong {
+  color: #820000;
+}

@@ -8,6 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { booking } from 'src/app/models/booking';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-prenotazione',
@@ -21,9 +22,12 @@ export class PrenotazioneComponent implements OnInit {
 
   selected: Date | null;
 
+  giorno: string;
+  barbiere: Barber;
+
   minDate: Date;
   OrariDisponibili = [];
-  form;
+  bookingForm: FormGroup;
 
   constructor(
     private bookingService: BookingService,
@@ -43,25 +47,11 @@ export class PrenotazioneComponent implements OnInit {
 
   //controllo validità sezioni
   initForm() {
-    this.form = new FormGroup({
+    this.bookingForm = new FormGroup({
       nome: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      mail: new FormControl('', Validators.required),
     });
   }
-
-  //chiamataOrari
-  caricaOrari() {
-    this.bookingService.orari().subscribe((response) => {
-      console.log(response);
-      this.bookings = response;
-    });
-  }
-
-  //Delete weekend
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    return day !== 0 && day !== 6;
-  };
 
   //subscribe barbieri
   listenToBarbers() {
@@ -78,15 +68,39 @@ export class PrenotazioneComponent implements OnInit {
     });
   }
 
+  //Delete weekend
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    return day !== 0 && day !== 6;
+  };
+
   //onChange Calendar
-  onChange(event) {
-    console.log(event);
+  onChangeData(event) {
+    this.giorno = event;
+    this.giorno = formatDate(this.giorno, 'dd-MM-yyyy', 'en-US');
+    console.log(this.giorno);
+    this.caricaOrari(this.giorno, this.barbiere);
+  }
+
+  //onChange Barber
+  onChangeBarber(event) {
+    this.barbiere = event.target['value'];
+    console.log(event.target['value']);
+  }
+
+  //chiamataOrari
+  caricaOrari(giorno = this.giorno, barber = this.barbiere) {
+    console.log(this.giorno);
+    this.bookingService.orari(barber['id'], giorno).subscribe((response) => {
+      console.log(response);
+      this.bookings = response;
+    });
   }
 
   //prenota
   prenota() {
-    /*  this.auth.nuovaPrenotazione(this.form.value).subscribe((response) => {
-      this.booking = this.bookings;
-    });*/
+    this.bookingService
+      .newBooking(this.bookingForm.value)
+      .subscribe((response) => {});
   }
 }

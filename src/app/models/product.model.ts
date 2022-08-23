@@ -6,5 +6,5 @@ export class Product {
     public prezzo: number,
     public count: number, //numero quantità di selezione del prodotto
     public foto: string
-  ) { }
+  ) {}
 }

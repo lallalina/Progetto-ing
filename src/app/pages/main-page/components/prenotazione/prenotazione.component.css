@@ -21,3 +21,19 @@
 .mat-form-field {
   margin-top: 16px;
 }
+
+.orario {
+  margin-left: 10%;
+  text-align: center;
+  margin-top: 10%;
+  width: 120%;
+}
+
+.trattamenti {
+  margin-top: 10%;
+  padding: 0%;
+}
+
+.button {
+  margin-top: 10%;
+}

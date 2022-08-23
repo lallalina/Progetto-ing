@@ -25,14 +25,17 @@ export class TreatmentsService {
   }
 
   //addTrattamento
-  addTreatment(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/admin/nuovoTrattamento', obj);
+  addTreatment(obj): Observable<Treatment> {
+    return this.http.post<Treatment>(
+      environment.API_URL + '/admin/nuovoTrattamento',
+      obj
+    );
   }
 
   //getTrattamento
-  getTreatments(): Observable<any> {
+  getTreatments(): Observable<Treatment[]> {
     return this.http
-      .get(environment.API_URL + '/public/getTrattamenti')
+      .get<Treatment[]>(environment.API_URL + '/public/getTrattamenti')
       .pipe(tap((response) => (this.treatments = response)));
   }
 

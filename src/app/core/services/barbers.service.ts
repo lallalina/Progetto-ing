@@ -42,13 +42,19 @@ export class BarbersService {
   }
 
   //addbarbiere
-  nuovoBarbiere(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/admin/nuovoBarbiere', obj);
+  nuovoBarbiere(obj): Observable<Barber> {
+    return this.http.post<Barber>(
+      environment.API_URL + '/admin/nuovoBarbiere',
+      obj
+    );
   }
 
   //addAdmin
-  nuovoAdmin(obj): Observable<any> {
-    return this.http.post(environment.API_URL + '/admin/nuovoAdmin', obj);
+  nuovoAdmin(obj): Observable<Barber> {
+    return this.http.post<Barber>(
+      environment.API_URL + '/admin/nuovoAdmin',
+      obj
+    );
   }
 
   //deleteBarbieri

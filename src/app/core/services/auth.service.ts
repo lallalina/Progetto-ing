@@ -97,11 +97,4 @@ export class AuthService {
       environment.API_URL + '/user/getOrdiniDestinatario'
     );
   }
-
-  /*nuova prenotazione
-  nuovaPrenotazione(): Observable<booking> {
-    return this.http.post<booking>(
-      environment.API_URL + '/public/nuovaPrenotazione'
-    );
-  }*/
 }

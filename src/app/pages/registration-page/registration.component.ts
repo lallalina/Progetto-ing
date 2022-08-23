@@ -37,40 +37,18 @@ export class RegistrationComponent implements OnInit {
     this.changetype = !this.changetype;
   }
 
-  //controlli per la password
-  static MatchValidator(source: string, target: string): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const sourceCtrl = control.get(source);
-      const targetCtrl = control.get(target);
-
-      return sourceCtrl && targetCtrl && sourceCtrl.value !== targetCtrl.value
-        ? { mismatch: true }
-        : null;
-    };
-  }
-
-  get passwordMatchError() {
-    return (
-      this.form.getError('mismatch') &&
-      this.form.get('confirmPassword')?.touched
-    );
-  }
-
   //controllo validità sezioni del form
   initForm() {
-    this.form = new FormGroup(
-      {
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8),
-        ]),
-        confirmPassword: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8),
-        ]),
-      },
-      [RegistrationComponent.MatchValidator('password', 'confirmPassword')]
-    );
+    this.form = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+    });
   }
 }

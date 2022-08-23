@@ -7,4 +7,5 @@ export class booking {
   email: string;
   idBarbiere: Barber;
   start: Time;
+  trattamenti?: string;
 }
