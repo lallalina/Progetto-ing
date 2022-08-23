@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderdService } from 'src/app/core/services/orderd.service';
+import { Address } from 'src/app/models/address.model';
 import { CartItem } from 'src/app/models/cart.model';
 import { Ordine } from 'src/app/models/ordine.model';
 
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   public ordini: Ordine[];
 
   form;
-  indirizzi: [];
+  indirizzi: Address[];
 
   constructor(
     private router: Router,
@@ -106,9 +107,9 @@ export class CartComponent implements OnInit {
   }
 
   //get indirizzi
-  retrieveIndirizziUser(): void {
-    this.auth.getIndirizzi().subscribe((indirizzi) => {
-      /*this.indirizzi = indirizzi;*/
+  retrieveIndirizziUser() {
+    this.auth.getIndirizzi().subscribe((response) => {
+      /*this.indirizzi = response;*/
     });
   }
 
@@ -117,7 +118,7 @@ export class CartComponent implements OnInit {
     this.orderdService.ordina(this.form.value).subscribe({
       next: (response) => {
         this.form.reset();
-        /*this.ordini = response;*/
+        this.ordini.push(response);
       },
     });
   }

@@ -62,8 +62,8 @@ export class AuthService {
   }
 
   //registration
-  registrazione(obj) {
-    return this.http.post(
+  registrazione(obj): Observable<User> {
+    return this.http.post<User>(
       `${environment.API_URL}/private/nuovoUtente`,
       obj,
       {}

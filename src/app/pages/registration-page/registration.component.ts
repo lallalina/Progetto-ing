@@ -26,9 +26,9 @@ export class RegistrationComponent implements OnInit {
 
   //chiamataAPI
   registration() {
-    /* this.auth.registrazione(this.form.value).subscribe((response) => {
+    this.auth.registrazione(this.form.value).subscribe((response) => {
       this.newUser.push(response);
-    });*/
+    });
   }
 
   //show Password

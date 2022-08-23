@@ -24,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from './core/services/message.service';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { DialogComponent } from './pages/user-page/dialog/dialog.component';
+import { ReviewsComponent } from './pages/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DialogComponent } from './pages/user-page/dialog/dialog.component';
     RegistrationComponent,
     UserPageComponent,
     DialogComponent,
+    ReviewsComponent,
   ],
   imports: [
     BrowserModule,

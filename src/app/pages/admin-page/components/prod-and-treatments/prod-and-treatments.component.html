@@ -58,30 +58,12 @@
         <div class="form-group">
           <label>Descrizione:</label>
           <textarea
-            formControlName="descrizione"
-            class="form-control"
             name="descrizione"
             rows="5"
             cols="30"
             placeholder="Descrizione"
           >
           </textarea>
-          <!--check descrizione-->
-          <div
-            *ngIf="
-              productsForm &&
-              productsForm.controls['descrizione'].invalid &&
-              (productsForm.controls['descrizione'].dirty ||
-                productsForm.controls['descrizione'].touched)
-            "
-            class="form-error"
-          >
-            <div
-              *ngIf="productsForm.controls['descrizione'].errors?.['required']"
-            >
-              inserisci una descrizione
-            </div>
-          </div>
         </div>
         <!--file_img-->
         <div style="color: white">
@@ -93,20 +75,6 @@
             accept="image/png, image/jpeg"
             (change)="convertImage($event)"
           />
-          <!--check file_img-->
-          <div
-            *ngIf="
-              productsForm &&
-              productsForm.controls['file'].invalid &&
-              (productsForm.controls['file'].dirty ||
-                productsForm.controls['file'].touched)
-            "
-            class="form-error"
-          >
-            <div *ngIf="productsForm.controls['file'].errors?.['required']">
-              inserisci un' immagine
-            </div>
-          </div>
         </div>
         <button
           *ngIf="!loadingProds; else loader"
@@ -212,7 +180,6 @@
         <div class="form-group">
           <label>Durata:</label>
           <input
-            formControlName="durata"
             class="form-control"
             type="number"
             name="durata"

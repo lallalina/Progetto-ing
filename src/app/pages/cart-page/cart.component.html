@@ -197,13 +197,12 @@
               </div>
             </div>
           </div>
-          <div class="col-3" *ngIf="indirizzi">
+          <!--indirizzi esistenti-->
+          <div class="col-3" *ngIf="ordini">
+            <legend>Seleziona un tuo indirizzo:</legend>
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option
-                *ngFor="let indirizzo of indirizzi"
-                [value]="indirizzo"
-              >
-                {{ indirizzo }}
+              <mat-option *ngFor="let row of ordini" [value]="ordini">
+                {{ row.indirizzo }}
               </mat-option>
             </mat-autocomplete>
           </div>

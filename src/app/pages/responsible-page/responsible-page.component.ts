@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AjaxService } from 'src/app/core/services/ajax.service';
+import { reviews } from 'src/app/models/review.model';
 
 @Component({
   selector: 'app-responsible-page',
@@ -7,15 +8,14 @@ import { AjaxService } from 'src/app/core/services/ajax.service';
   styleUrls: ['./responsible-page.component.css'],
 })
 export class ResponsiblePageComponent implements OnInit {
-  reviews: [];
+  reviews: reviews[];
 
   constructor(private ajax: AjaxService) {}
 
   //prendi recensioni
   getRecensioni() {
     this.ajax.recensioniP().subscribe((response) => {
-      console.log(response);
-      this.reviews = response;
+      this.reviews.push(response);
     });
   }
 
