@@ -7,7 +7,6 @@ import { ProductsService } from 'src/app/core/services/products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogTComponent } from './dialog-t/dialog-t.component';
-import { UtilsService } from 'src/app/core/services/utils.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({

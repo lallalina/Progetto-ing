@@ -5,6 +5,7 @@ import { User, UserRole } from 'src/app/models/user.model';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/core/services/cart.service';
 import { CartItem } from 'src/app/models/cart.model';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit {
   badgeCounter: number = 0;
   user: User;
   isAdmin: boolean;
+  isBarber: boolean;
   isUser: boolean;
   readonly UserRole = UserRole;
 
@@ -40,9 +42,26 @@ export class NavbarComponent implements OnInit {
 
         //controllo ruolo admin
         console.log(this.user.authorities);
-        this.isAdmin = !!this.user.authorities.find(
-          (elem) => elem.role === UserRole.ADMIN
-        );
+        user.authorities.forEach((authority) => {
+          switch (authority.role) {
+            case UserRole.ADMIN: {
+              this.isAdmin = true;
+              break;
+            }
+            case UserRole.BARBER: {
+              this.isBarber = true;
+              break;
+            }
+            case UserRole.CUSTOMER: {
+              this.isUser = true;
+              break;
+            }
+            default: {
+              this.isUser = true;
+              break;
+            }
+          }
+        });
       }
     });
   }

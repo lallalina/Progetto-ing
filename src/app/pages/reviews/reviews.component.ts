@@ -1,14 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReviewService } from 'src/app/core/services/review.service';
+import { Review } from 'src/app/models/review.model';
 
 @Component({
   templateUrl: './reviews.component.html',
-  styleUrls: ['./reviews.component.css']
+  styleUrls: ['./reviews.component.css'],
 })
 export class ReviewsComponent implements OnInit {
+  constructor(private reviewService: ReviewService) {}
 
-  constructor() { }
+  form;
+  recensioni: Review[] = [];
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  initForm() {
+    this.form = new FormGroup({
+      voto: new FormControl('', Validators.required),
+    });
   }
 
+  doReview() {
+    this.reviewService.doReview(this.form.value).subscribe((response) => {
+      this.form.reset();
+      this.recensioni.push(response);
+    });
+  }
 }

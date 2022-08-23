@@ -23,4 +23,12 @@ export class ReviewService {
       environment.API_URL + '/public/getRecensioniBarbiere'
     );
   }
+
+  //nuova recensione da parte dell'acquirente
+  doReview(obj): Observable<Review> {
+    return this.http.post<Review>(
+      environment.API_URL + 'public/recensionePrenotazione',
+      obj
+    );
+  }
 }

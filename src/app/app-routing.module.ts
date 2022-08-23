@@ -8,6 +8,8 @@ import { LoginComponent } from './pages/login-page/login.component';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { RegistrationComponent } from './pages/registration-page/registration.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
+import { ReviewsComponent } from './pages/reviews/reviews.component';
+import { DeleteBookingPageComponent } from './pages/delete-booking-page/delete-booking-page.component';
 
 const routes: Routes = [
   {
@@ -55,20 +57,31 @@ const routes: Routes = [
         (m) => m.CustomerPageModule
       ),
   },
+  //AGGIUNGERE GUARD
   {
-    //prova per il customer page
+    // customer page
     path: 'shop',
     component: CustomerPageComponent,
   },
   {
-    //prova per il carrello page
+    //carrello page
     path: 'cart',
     component: CartComponent,
   },
   {
-    //prova user page
+    //user page
     path: 'user',
     component: UserPageComponent,
+  },
+  {
+    //recensioni page
+    path: 'recensioni',
+    component: ReviewsComponent,
+  },
+  {
+    //deleteBooking page
+    path: 'cancellaPrenotazione',
+    component: DeleteBookingPageComponent,
   },
 ];
 
