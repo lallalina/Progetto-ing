@@ -30,7 +30,7 @@ export class CustomerPageComponent implements OnInit {
     private router: Router,
     private productService: ProductsService,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
@@ -48,18 +48,6 @@ export class CustomerPageComponent implements OnInit {
       next: (response) => (this.product = response),
       complete: () => (this.loading = false),
     });
-  }
-
-  //metodo per aggiungere al carrello
-  public onAddToCart(prodotto) {
-    console.log(this.selectedQuantity);
-    this.cartService.addItem(new CartItem(prodotto, this.selectedQuantity));
-  }
-
-  public onSelectQuantity(event) {
-    console.log(event.target.value);
-    this.selectedQuantity = <number>+event.target.value;
-    console.log(this.selectedQuantity);
   }
 
   logout() {

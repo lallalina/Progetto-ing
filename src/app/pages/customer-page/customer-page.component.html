@@ -1,60 +1,28 @@
 <!--Navbar-->
 <app-navbar></app-navbar>
 
-<div class="container">
-  <h1 class="text-white" style="text-align: center">I nostri prodotti</h1>
+<div class="container-fluid">
+  <h1
+    class="text-white"
+    style="text-align: center"
+  >I nostri prodotti</h1>
 
-  <div class="row">
+  <div
+    class="row"
+    *ngIf="!loading; else loader"
+  >
     <!--Shop_space-->
-    <div *ngIf="!loading; else loader">
-      <div *ngFor="let prodotto of product" class="col-5">
-        <mat-card class="card">
-          <mat-card-header>
-            <mat-card-title>{{ prodotto.nome }}</mat-card-title>
-          </mat-card-header>
-          <img
-            mat-card-image
-            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-            alt="Photo of a Shiba Inu"
-          />
-          <mat-card-content>
-            {{ prodotto.descrizione }}
-          </mat-card-content>
-          <span class="color-green font-weight-bold">{{
-            prodotto.prezzo | currency: "EUR"
-          }}</span>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="quantity">Quantity</label>
-              <select id="quantity" (change)="onSelectQuantity($event)">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-          </div>
-          <mat-card-actions>
-            <button
-              mat-button
-              color="primary"
-              (click)="onAddToCart(prodotto)"
-              id="button"
-            >
-              Acquista
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+    <div
+      *ngFor="let prodotto of product"
+      class="col-6"
+    >
+      <app-product-card [productValue]="prodotto"></app-product-card>
     </div>
   </div>
 </div>
 
 <ng-template #loader>
-  <app-loader
-    class="d-flex w-100 align-items-center justify-content-center p-4"
-  ></app-loader>
+  <app-loader class="d-flex w-100 align-items-center justify-content-center p-4"></app-loader>
 </ng-template>
 
 <div class="footer">

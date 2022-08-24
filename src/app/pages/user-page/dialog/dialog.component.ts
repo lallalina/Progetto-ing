@@ -14,12 +14,12 @@ export class DialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: User,
     private auth: AuthService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   //modifica prodotto
   deleteUser(user) {
-    this.auth.deleteUser(user.id).subscribe((response) => {});
+    this.auth.deleteUser(user.id).subscribe((response) => { });
   }
 }
