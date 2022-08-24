@@ -1,20 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReviewService } from 'src/app/core/services/review.service';
 import { Review } from 'src/app/models/review.model';
+import { ToastrService } from 'ngx-toastr';
+import { booking } from 'src/app/models/booking';
 
 @Component({
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.css'],
 })
 export class ReviewsComponent implements OnInit {
-  constructor(private reviewService: ReviewService) {}
+  constructor(
+    private reviewService: ReviewService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService
+  ) {}
 
   form;
   recensioni: Review;
 
+  id: booking['id'];
+  loading: boolean;
+
   ngOnInit(): void {
     this.initForm();
+    this.id = this.route.snapshot.params?.idPrenotazione;
   }
 
   initForm() {
@@ -24,9 +36,17 @@ export class ReviewsComponent implements OnInit {
   }
 
   doReview() {
-    this.reviewService.doReview(this.form.value).subscribe((response) => {
-      this.form.reset();
-      this.recensioni = response;
+    this.loading = true;
+    this.reviewService.doReview(this.form.value).subscribe({
+      next: (response) => {
+        this.toastr.success('Recensione effettuata');
+        this.router.navigate(['/']);
+        this.form.value = response;
+      },
+      complete: () => {
+        this.form.reset();
+        this.loading = false;
+      },
     });
   }
 }

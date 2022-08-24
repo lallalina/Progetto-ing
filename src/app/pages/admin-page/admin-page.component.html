@@ -2,22 +2,28 @@
 <app-navbar></app-navbar>
 
 <div class="d-flex flex-column min-vh-100">
-
   <!--Selector-->
-  <app-selector [currentPage]="currentPage" (changePage)="switchPage($event)"></app-selector>
+  <app-selector
+    [currentPage]="currentPage"
+    (changePage)="switchPage($event)"
+  ></app-selector>
 
   <div class="p-5 mt-5" [ngSwitch]="currentPage">
     <!--Calendar-->
-    <app-calendar *ngSwitchCase="Pages.Calendar">
-    </app-calendar>
+    <app-calendar *ngSwitchCase="Pages.Calendar"> </app-calendar>
 
     <!--Prodotti e trattamenti-->
-    <app-prod-and-treatments [products]="products" [treatments]="treatments" *ngSwitchCase="Pages.ProdsAndTreatments">
+    <app-prod-and-treatments
+      [products]="products"
+      [treatments]="treatments"
+      *ngSwitchCase="Pages.ProdsAndTreatments"
+    >
     </app-prod-and-treatments>
 
     <!--Utenti-->
     <app-users [users]="users" *ngSwitchCase="Pages.Users"></app-users>
 
+    <!--Ordini degli utenti-->
   </div>
   <!--Footer-->
   <app-footer class="mt-5"></app-footer>

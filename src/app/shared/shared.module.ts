@@ -16,6 +16,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { TableComponent } from './components/table/table.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { CalendarBarberComponent } from './components/calendar-barber/calendar-barber.component';
 
 //material import
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -38,6 +39,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CalendarComponent,
     TableComponent,
     LoaderComponent,
+    CalendarBarberComponent,
   ],
   imports: [
     CommonModule,
@@ -66,6 +68,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
   exports: [
     NavbarComponent,
+    CalendarBarberComponent,
     FooterComponent,
     CalendarComponent,
     TableComponent,
@@ -86,4 +89,4 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   ],
   providers: [MatDatepickerModule],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -75,7 +75,7 @@ const routes: Routes = [
   },
   {
     //recensioni page
-    path: 'recensioni',
+    path: 'recensioni/:idPrenotazione',
     component: ReviewsComponent,
   },
   {
@@ -89,4 +89,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Review } from 'src/app/models/review.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { booking } from 'src/app/models/booking';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class ReviewService {
   //nuova recensione da parte dell'acquirente
   doReview(obj): Observable<Review> {
     return this.http.post<Review>(
-      environment.API_URL + 'public/recensionePrenotazione',
+      environment.API_URL + 'public/recensionePrenotazione/',
       obj
     );
   }

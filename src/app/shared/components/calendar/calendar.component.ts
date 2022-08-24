@@ -90,7 +90,7 @@ export class CalendarComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     private bookingService: BookingService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.aggiornaTabella();
@@ -98,17 +98,7 @@ export class CalendarComponent implements OnInit {
 
   //eventi da visualizzare in tabella, si chiama nell'init quando cambio il tipo
   aggiornaTabella() {
-    //chiamataB date_tipo (il tipo può essere mese, settimana, giorno)
-    //prenotazioniB = [...];
     this.events = [];
-    /* this.prenotazioniB.map((p) => {
-      const evento: CalendarEvent = {
-        title: '', //..
-        start: new Date(), //prenotazione.start
-        end: new Date(), //..
-      };
-      this.events.push(evento);
-    });*/
     this.bookingService.getBookings().subscribe((response) => {
       response.forEach((booking) => {
         this.events.push({
@@ -120,11 +110,11 @@ export class CalendarComponent implements OnInit {
           resizable: {
             beforeStart: false,
             afterEnd: false,
-          }
-        })
+          },
+        });
         this.refresh.next();
-        console.log(this.events)
-      })
+        console.log(this.events);
+      });
     });
   }
 
