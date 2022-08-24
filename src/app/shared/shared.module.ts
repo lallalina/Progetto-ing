@@ -29,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatProgressSpinnerModule,
     MatDialogModule, //dialog
     MatSlideToggleModule,
+    MatCheckboxModule,
     ReactiveFormsModule, //per i form
   ],
   exports: [
@@ -79,8 +81,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatButtonModule,
     MatDialogModule, //dialog
     MatSlideToggleModule,
+    MatCheckboxModule,
     ReactiveFormsModule, //per i form
   ],
   providers: [MatDatepickerModule],
 })
-export class SharedModule {}
+export class SharedModule { }
