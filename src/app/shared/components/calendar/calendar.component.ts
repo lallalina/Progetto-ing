@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
+  OnInit,
 } from '@angular/core';
 import {
   startOfDay,
@@ -22,6 +23,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import { BookingService } from 'src/app/core/services/booking.service';
 
 const colors: any = {
   red: {
@@ -44,7 +46,7 @@ const colors: any = {
   styleUrls: ['./calendar.component.css'],
   templateUrl: './calendar.component.html',
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   prenotazioniB = [];
@@ -54,6 +56,12 @@ export class CalendarComponent {
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
+
+  refresh = new Subject<void>();
+
+  events: CalendarEvent[] = [];
+
+  activeDayIsOpen: boolean = true;
 
   modalData: {
     action: string;
@@ -78,29 +86,35 @@ export class CalendarComponent {
     },
   ];
 
+  constructor(
+    private modal: NgbModal,
+    private bookingService: BookingService
+  ) {}
+
+  ngOnInit(): void {
+    this.aggiornaTabella();
+  }
+
   //eventi da visualizzare in tabella, si chiama nell'init quando cambio il tipo
   aggiornaTabella() {
     //chiamataB date_tipo (il tipo può essere mese, settimana, giorno)
     //prenotazioniB = [...];
     this.events = [];
-    this.prenotazioniB.map((p) => {
+    /* this.prenotazioniB.map((p) => {
       const evento: CalendarEvent = {
         title: '', //..
         start: new Date(), //prenotazione.start
         end: new Date(), //..
       };
       this.events.push(evento);
+    });*/
+    this.bookingService.getBookings().subscribe((response) => {
+      this.events = response;
+      console.log(response);
     });
   }
 
-  refresh = new Subject<void>();
-
-  events: CalendarEvent[] = [];
-
-  activeDayIsOpen: boolean = true;
-
-  constructor(private modal: NgbModal) {}
-
+  //seleziona un giorno
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
@@ -133,11 +147,13 @@ export class CalendarComponent {
     this.handleEvent('Dropped or resized', event);
   }
 
+  //gestisci
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
+  //aggiungi
   addEvent(): void {
     this.events = [
       ...this.events,
@@ -155,6 +171,7 @@ export class CalendarComponent {
     ];
   }
 
+  //cancella
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
