@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { booking } from 'src/app/models/booking';
 import { formatDate } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-prenotazione',
@@ -26,15 +27,19 @@ export class PrenotazioneComponent implements OnInit {
   giorno: string;
   barbiere: Barber;
   periodoSelezionato: string[];
+  trattamentiSelezionati: number[] = [];
 
   minDate: Date;
   OrariDisponibili = [];
   bookingForm: FormGroup;
 
+  loadingRes: boolean;
+
   constructor(
     private bookingService: BookingService,
     private barbersService: BarbersService,
     private treatmentsService: TreatmentsService,
+    private toastr: ToastrService,
     private auth: AuthService
   ) {
     const currentYear = new Date().getFullYear();
@@ -84,6 +89,19 @@ export class PrenotazioneComponent implements OnInit {
     this.caricaOrari(this.giorno, this.barbiere);
   }
 
+  onTreatmentChecked(checked: boolean, treatment: Treatment) {
+    if (checked) {
+      this.trattamentiSelezionati.push(treatment.id);
+    } else {
+      const exists = this.trattamentiSelezionati.includes(treatment.id)
+      if (exists) {
+        const index = this.trattamentiSelezionati.findIndex((elem) => elem === treatment.id)
+        this.trattamentiSelezionati.splice(index, 1);
+      }
+    }
+    console.log(this.trattamentiSelezionati);
+  }
+
   //chiamataOrari
   caricaOrari(giorno = this.giorno, barber = this.barbiere) {
     console.log(this.giorno);
@@ -95,8 +113,20 @@ export class PrenotazioneComponent implements OnInit {
     }
   }
 
+  arrayToString(array: number[]): string {
+    let stringArray = '';
+    array.forEach((elem, index) => {
+      stringArray += elem;
+      if (index !== (array.length - 1)) {
+        stringArray += ','
+      }
+    })
+    return stringArray
+  }
+
   //prenota
   prenota() {
+    this.loadingRes = true;
     if (this.barbiere && this.giornoSelezionato && this.periodoSelezionato) {
       const date = new Date(this.giornoSelezionato);
       const dateString = `${formatDate(
@@ -109,9 +139,14 @@ export class PrenotazioneComponent implements OnInit {
           ...this.bookingForm.value,
           idBarbiere: this.barbiere.id,
           startTime: dateString,
+          trattamenti: this.arrayToString(this.trattamentiSelezionati)
         })
-        .subscribe((response) => {
-          console.log(response);
+        .subscribe({
+          next: (response) => {
+            console.log(response)
+            this.toastr.success('Prenotazione avvenuta con successo')
+          },
+          complete: () => this.loadingRes = false
         });
     }
     /* this.bookingService

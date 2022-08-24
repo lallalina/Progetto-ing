@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { booking } from 'src/app/models/booking';
 import { Barber } from 'src/app/models/barber.model';
 
@@ -21,6 +21,10 @@ export class BookingService {
       id +
       '/' +
       giorno
+    ).pipe(
+      map((orari) => orari.map(
+        (periodo) => periodo.map(
+          (timeString) => timeString.substring(0, timeString.length - 3))))
     );
   }
 
