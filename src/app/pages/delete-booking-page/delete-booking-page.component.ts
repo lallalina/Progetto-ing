@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { booking } from 'src/app/models/booking';
 
@@ -7,15 +9,30 @@ import { booking } from 'src/app/models/booking';
   styleUrls: ['./delete-booking-page.component.css'],
 })
 export class DeleteBookingPageComponent implements OnInit {
-  constructor(private bookingService: BookingService) {}
 
-  @Input() booking: booking;
+  constructor(
+    private bookingService: BookingService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService
+  ) { }
 
-  ngOnInit(): void {}
+  id: booking['id'];
 
-  deletePrenotazione(id: booking['id']) {
-    this.bookingService.deleteBooking(id).subscribe((response) => {
-      /* this.booking = response;*/
-    });
+  loading: boolean;
+
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params?.idPrenotazione;
+  }
+
+  deletePrenotazione() {
+    this.loading = true;
+    this.bookingService.deleteBooking(this.id).subscribe({
+      next: (response) => {
+        this.toastr.warning('Prenotazione eliminata');
+        this.router.navigate(['/'])
+      },
+      complete: () => this.loading = false
+    })
   }
 }

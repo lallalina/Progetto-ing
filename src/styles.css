@@ -94,13 +94,13 @@ label {
 }
 
 h1 {
-  font-family: "Maven Pro", fantasy;
+  font-family: "Maven Pro";
 }
 
 /*CHI SIAMO*/
 .identita h1 {
   color: wheat;
-  font-family: "Maven Pro", fantasy;
+  font-family: "Maven Pro";
 }
 
 .identita p {

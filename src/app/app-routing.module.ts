@@ -80,7 +80,7 @@ const routes: Routes = [
   },
   {
     //deleteBooking page
-    path: 'cancellaPrenotazione',
+    path: 'cancellaPrenotazione/:idPrenotazione',
     component: DeleteBookingPageComponent,
   },
 ];
@@ -89,4 +89,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
