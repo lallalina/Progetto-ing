@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "matt-barber-shop"
+  },
+  "targets": {
+    "matt-barber-shop": {
+      "hosting": {
+        "matt-barber-shops": [
+          "matt-barber-shop"
+        ]
+      }
+    }
+  }
+}
