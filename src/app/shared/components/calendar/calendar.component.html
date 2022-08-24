@@ -92,25 +92,44 @@
 
 <br /><br /><br />
 
-<ng-template #modalContent let-close="close">
+<ng-template
+  #modalContent
+  let-close="close"
+>
   <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
-    <button type="button" class="close" (click)="close()">
+    <h5 class="modal-title">Dettaglio prenotazione</h5>
+    <button
+      type="button"
+      class="close"
+      (click)="close()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
+      Nome:
+      <pre>{{ modalData?.event.title }}</pre>
     </div>
     <div>
-      Event:
-      <pre>{{ modalData?.event | json }}</pre>
+      Data:
+      <pre>{{ modalData?.event.start | date:'shortDate'}}</pre>
+    </div>
+    <div>
+      Ora inizio:
+      <pre>{{ modalData?.event.start | date:'shortTime'}}</pre>
+    </div>
+    <div>
+      Ora fine:
+      <pre>{{ modalData?.event.end | date:'shortTime'}}</pre>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="close()"
+    >
       OK
     </button>
   </div>

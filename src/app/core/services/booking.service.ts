@@ -10,7 +10,7 @@ import { CalendarEvent } from 'angular-calendar';
   providedIn: 'root',
 })
 export class BookingService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   prenotazione: booking[] = [];
 
@@ -19,10 +19,10 @@ export class BookingService {
     return this.http
       .get<Array<string[]>>(
         environment.API_URL +
-          '/public/getPrenotazioniLibereBarbierePerGiorno/' +
-          id +
-          '/' +
-          giorno
+        '/public/getPrenotazioniLibereBarbierePerGiorno/' +
+        id +
+        '/' +
+        giorno
       )
       .pipe(
         map((orari) =>
@@ -51,21 +51,10 @@ export class BookingService {
   }
 
   //get appuntamenti
-  getBookings(): Observable<CalendarEvent[]> {
+  getBookings(): Observable<booking[]> {
     return this.http
-      .get<booking[]>(environment.API_URL + '/public/getPrenotazioni')
-      .pipe(
-        map((bookings) => {
-          const events: CalendarEvent[] = [];
-          bookings.map((elem) => {
-            events.push({
-              start: elem.startTime,
-              end: elem.endTime,
-              title: elem.nome,
-            });
-          });
-          return events;
-        })
-      );
+      .get<booking[]>(environment.API_URL + '/public/getPrenotazioni').pipe(
+        map((bookings) => bookings.filter((elem) => elem.startTime && elem.endTime))
+      )
   }
 }

@@ -24,6 +24,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { BookingService } from 'src/app/core/services/booking.service';
+import { booking } from 'src/app/models/booking';
 
 const colors: any = {
   red: {
@@ -89,7 +90,7 @@ export class CalendarComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     private bookingService: BookingService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.aggiornaTabella();
@@ -109,8 +110,21 @@ export class CalendarComponent implements OnInit {
       this.events.push(evento);
     });*/
     this.bookingService.getBookings().subscribe((response) => {
-      this.events = response;
-      console.log(response);
+      response.forEach((booking) => {
+        this.events.push({
+          title: `${booking.nome} (${booking.mail})`,
+          start: new Date(booking.startTime),
+          end: new Date(booking.endTime),
+          color: colors.red,
+          draggable: false,
+          resizable: {
+            beforeStart: false,
+            afterEnd: false,
+          }
+        })
+        this.refresh.next();
+        console.log(this.events)
+      })
     });
   }
 
