@@ -26,10 +26,41 @@ label {
 }
 
 .orario {
-  margin-left: 0px;
   text-align: center;
 }
 
 .campi {
   margin-top: 20%;
+}
+
+.button {
+  margin-top: 100px;
+}
+
+/*GRID */
+.grid-container {
+  display: grid;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 5px;
+  grid-template-areas:
+    "area1 area1 area1 area2 area2 area2 area2 area2 area3 area3 area4 area4 area4 area4 area4 area4"
+    "area1 area1 area1 area2 area2 area2 area2 area2 area3 area3 area4 area4 area4 area4 area4 area4";
+}
+
+.grid-1 {
+  grid-area: area1;
+}
+
+.grid-2 {
+  grid-area: area2;
+}
+
+.grid-3 {
+  grid-area: area3;
+}
+
+.grid-4 {
+  grid-area: area4;
+  margin-left: 50%;
 }

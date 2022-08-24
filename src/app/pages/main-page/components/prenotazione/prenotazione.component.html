@@ -4,9 +4,9 @@
       <!--form-->
       <div class="offset-1">
         <form [formGroup]="bookingForm" (ngSubmit)="prenota()">
-          <div class="row">
+          <div class="row grid-container">
             <!--NOME-->
-            <div class="col-3">
+            <div class="grid-1">
               <div class="form-group">
                 <label for="customer-name">Nome</label><strong>*</strong>
                 <input
@@ -77,7 +77,7 @@
               </div>
             </div>
             <!--TRATTAMENTI-->
-            <div class="form-group trattamenti col-3">
+            <div class="form-group trattamenti grid-2">
               <fieldset>
                 <label>Trattamenti</label>
                 <div class="row text-white">
@@ -97,7 +97,7 @@
               </fieldset>
             </div>
             <!---->
-            <div class="calendar-orario col-3">
+            <div class="calendar-orario grid-3">
               <!--CALENDAR-->
               <mat-card class="demo-inline-calendar-card">
                 <mat-calendar
@@ -109,7 +109,7 @@
               </mat-card>
             </div>
             <!--ORAIO-->
-            <div class="orario col-3">
+            <div class="orario grid-4">
               <label for="customer-name">Orari</label>
               <select
                 class="form-control"
