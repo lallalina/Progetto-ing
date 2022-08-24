@@ -4,10 +4,13 @@
   margin-left: 20px;
 }
 
-.image {
-  background-image: url("/assets/ffbb4c_f514d18f2e9c4445a399f88f6bf03c11_mv2.webp");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+.prenota {
+  justify-content: center;
+}
+
+.trattamenti,
+label {
+  text-align: center;
 }
 
 #prenota-taglio {
@@ -23,17 +26,10 @@
 }
 
 .orario {
-  margin-left: 10%;
+  margin-left: 0px;
   text-align: center;
-  margin-top: 10%;
-  width: 120%;
 }
 
-.trattamenti {
-  margin-top: 10%;
-  padding: 0%;
-}
-
-.button {
-  margin-top: 10%;
+.campi {
+  margin-top: 20%;
 }
