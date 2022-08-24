@@ -1,17 +1,11 @@
 <div class="offset-1 prenota">
-  <div
-    id="prendi-appuntamento"
-    class="mt-4"
-  >
+  <div id="prendi-appuntamento" class="mt-4">
     <div class="row">
       <!--immagine-->
       <div class="col-5 image"></div>
       <!--form-->
       <div class="col-6 offset-1">
-        <form
-          [formGroup]="bookingForm"
-          (ngSubmit)="prenota()"
-        >
+        <form [formGroup]="bookingForm" (ngSubmit)="prenota()">
           <div class="row">
             <!--NOME-->
             <div class="col-6">
@@ -35,7 +29,9 @@
                   "
                   class="form-error"
                 >
-                  <div *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']">
+                  <div
+                    *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']"
+                  >
                     inserisci il nome
                   </div>
                 </div>
@@ -60,7 +56,9 @@
                   "
                   class="form-error"
                 >
-                  <div *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']">
+                  <div
+                    *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']"
+                  >
                     inserisci l'email
                   </div>
                 </div>
@@ -71,12 +69,9 @@
               <select
                 class="form-control"
                 [(ngModel)]="barbiere"
-                [ngModelOptions]="{standalone: true}"
+                [ngModelOptions]="{ standalone: true }"
               >
-                <option
-                  *ngFor="let barber of barbers"
-                  [ngValue]="barber"
-                >
+                <option *ngFor="let barber of barbers" [ngValue]="barber">
                   {{ barber.nome }}
                 </option>
               </select>
@@ -90,10 +85,7 @@
                       class="custom-control custom-checkbox checkbox-success col-6 pl-5"
                       style="padding: 0%"
                     >
-                      <input
-                        type="checkbox"
-                        [name]="treatment.nome"
-                      />
+                      <input type="checkbox" [name]="treatment.nome" />
                       {{ treatment.nome }}
                     </div>
                   </div>
@@ -105,7 +97,7 @@
               <!--CALENDAR-->
               <mat-card class="demo-inline-calendar-card">
                 <mat-calendar
-                  [selected]="selected"
+                  [(selected)]="giornoSelezionato"
                   (selectedChange)="onChangeData($event)"
                   [minDate]="minDate"
                 >
@@ -117,12 +109,11 @@
                 <select
                   class="form-control"
                   id="orario"
+                  [(ngModel)]="periodoSelezionato"
+                  [ngModelOptions]="{ standalone: true }"
                 >
-                  <option
-                    *ngFor="let periodo of orari"
-                    [ngValue]="perdiodo"
-                  >
-                    {{ periodo[0] }} / {{periodo[1]}}
+                  <option *ngFor="let periodo of orari" [ngValue]="periodo">
+                    {{ periodo[0] }} / {{ periodo[1] }}
                   </option>
                   <option *ngIf="bookings && bookings.length === 0">
                     <p>Non ci sono orari disponibili</p>
@@ -132,11 +123,7 @@
             </div>
           </div>
           <div class="form-group text-center button">
-            <button
-              type="submit"
-              class="btn btn-dark"
-              id="prenota-taglio"
-            >
+            <button type="submit" class="btn btn-dark" id="prenota-taglio">
               Prenota
             </button>
           </div>

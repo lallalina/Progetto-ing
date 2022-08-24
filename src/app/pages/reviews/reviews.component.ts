@@ -13,7 +13,9 @@ export class ReviewsComponent implements OnInit {
   form;
   recensioni: Review;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initForm();
+  }
 
   initForm() {
     this.form = new FormGroup({

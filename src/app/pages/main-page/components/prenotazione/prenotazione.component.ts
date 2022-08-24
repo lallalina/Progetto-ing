@@ -21,10 +21,11 @@ export class PrenotazioneComponent implements OnInit {
   treatments: Array<Treatment>;
   orari: Array<string[]>;
 
-  selected: Date | null;
+  giornoSelezionato: Date | null;
 
   giorno: string;
   barbiere: Barber;
+  periodoSelezionato: string[];
 
   minDate: Date;
   OrariDisponibili = [];
@@ -86,18 +87,37 @@ export class PrenotazioneComponent implements OnInit {
   //chiamataOrari
   caricaOrari(giorno = this.giorno, barber = this.barbiere) {
     console.log(this.giorno);
-    this.bookingService.orari(barber.id, giorno).subscribe((response) => {
-      console.log(response);
-      this.orari = response;
-    });
+    if (barber) {
+      this.bookingService.orari(barber.id, giorno).subscribe((response) => {
+        console.log(response);
+        this.orari = response;
+      });
+    }
   }
 
   //prenota
   prenota() {
-    this.bookingService
+    if (this.barbiere && this.giornoSelezionato && this.periodoSelezionato) {
+      const date = new Date(this.giornoSelezionato);
+      const dateString = `${formatDate(
+        date.toISOString(),
+        'dd/MM/yyyy',
+        'en-US'
+      )} ${this.periodoSelezionato[0]}`;
+      this.bookingService
+        .newBooking({
+          ...this.bookingForm.value,
+          idBarbiere: this.barbiere.id,
+          startTime: dateString,
+        })
+        .subscribe((response) => {
+          console.log(response);
+        });
+    }
+    /* this.bookingService
       .newBooking({ ...this.bookingForm.value, idBarbiere: this.barbiere.id })
       .subscribe((response) => {
         console.log(response);
-      });
+      });*/
   }
 }
