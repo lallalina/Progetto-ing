@@ -136,6 +136,7 @@
             mat-raised-button
             color="primary"
             (click)="ordina()"
+            [disabled]="!this.selectedAddress || this.items.length === 0"
             *ngIf="!loading; else loader"
           >Procedi all'ordine</button>
         </div>
