@@ -1,83 +1,99 @@
-<div class="prenota">
-  <div id="prendi-appuntamento" class="mt-4">
-    <div>
-      <!--form-->
-      <div class="offset-1">
-        <form [formGroup]="bookingForm" (ngSubmit)="prenota()">
-          <div class="row grid-container">
-            <!--NOME-->
-            <div class="grid-1">
-              <div class="form-group">
-                <label for="customer-name">Nome</label><strong>*</strong>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nome"
-                  placeholder="Nome"
-                  required
-                  formControlName="nome"
-                />
-                <!--Check Nome-->
-                <div
-                  *ngIf="
+<div class="row">
+  <div class="col-10 offset-2">
+    <!--form-->
+    <div class="w-100">
+      <form
+        [formGroup]="bookingForm"
+        (ngSubmit)="prenota()"
+      >
+        <!--NOME-->
+        <div>
+          <div class="form-group">
+            <label for="customer-name">Nome</label><strong>*</strong>
+            <input
+              type="text"
+              class="form-control"
+              id="nome"
+              placeholder="Nome"
+              required
+              formControlName="nome"
+            />
+            <!--Check Nome-->
+            <div
+              *ngIf="
                     bookingForm &&
                     bookingForm.controls['nome'].invalid &&
                     (bookingForm.controls['nome'].dirty ||
                       bookingForm.controls['nome'].touched)
                   "
-                  class="form-error"
-                >
-                  <div
-                    *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']"
-                  >
-                    inserisci il nome
-                  </div>
-                </div>
+              class="form-error"
+            >
+              <div *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']">
+                inserisci il nome
               </div>
-              <!--EMAIL-->
-              <div class="form-group campi">
-                <label for="customer-mail">Email</label><strong>*</strong>
-                <input
-                  type="email"
-                  formControlName="mail"
-                  class="form-control"
-                  id="mail"
-                  placeholder="Email"
-                  required
-                />
-                <!--check Email-->
-                <div
-                  *ngIf="
+            </div>
+          </div>
+          <!--EMAIL-->
+          <div class="form-group">
+            <label for="customer-mail">Email</label><strong>*</strong>
+            <input
+              type="email"
+              formControlName="mail"
+              class="form-control"
+              id="mail"
+              placeholder="Email"
+              required
+            />
+            <!--check Email-->
+            <div
+              *ngIf="
                     bookingForm &&
                     bookingForm.controls['mail'].invalid &&
                     (bookingForm.controls['mail'].dirty ||
                       bookingForm.controls['mail'].touched)
                   "
-                  class="form-error"
-                >
-                  <div
-                    *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']"
-                  >
-                    inserisci l'email
-                  </div>
-                </div>
-              </div>
-              <!--LISTA BARBIERI-->
-              <div class="campi">
-                <label for="customer-name">Barbiere</label>
-                <select
-                  class="form-control"
-                  [(ngModel)]="barbiere"
-                  [ngModelOptions]="{ standalone: true }"
-                >
-                  <option *ngFor="let barber of barbers" [ngValue]="barber">
-                    {{ barber.nome }}
-                  </option>
-                </select>
+              class="form-error"
+            >
+              <div *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']">
+                inserisci l'email
               </div>
             </div>
+          </div>
+          <!--LISTA BARBIERI-->
+          <div>
+            <label for="customer-name">Barbiere</label>
+            <select
+              class="form-control"
+              [(ngModel)]="barbiere"
+              [ngModelOptions]="{ standalone: true }"
+            >
+              <option
+                *ngFor="let barber of barbers"
+                [ngValue]="barber"
+              >
+                {{ barber.nome }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <!---->
+            <div class="calendar-orario">
+              <!--CALENDAR-->
+              <mat-card class="demo-inline-calendar-card">
+                <mat-calendar
+                  [(selected)]="giornoSelezionato"
+                  (selectedChange)="onChangeData($event)"
+                  [minDate]="minDate"
+                >
+                </mat-calendar>
+              </mat-card>
+            </div>
+          </div>
+          <div class="col-6 mt-4">
             <!--TRATTAMENTI-->
-            <div class="form-group trattamenti grid-2">
+            <div class="form-group">
               <fieldset>
                 <label>Trattamenti</label>
                 <div class="row text-white">
@@ -96,48 +112,38 @@
                 </div>
               </fieldset>
             </div>
-            <!---->
-            <div class="calendar-orario grid-3">
-              <!--CALENDAR-->
-              <mat-card class="demo-inline-calendar-card">
-                <mat-calendar
-                  [(selected)]="giornoSelezionato"
-                  (selectedChange)="onChangeData($event)"
-                  [minDate]="minDate"
-                >
-                </mat-calendar>
-              </mat-card>
-            </div>
-            <!--ORAIO-->
-            <div class="orario grid-4">
-              <label for="customer-name">Orari</label>
-              <select
-                class="form-control"
-                id="orario"
-                [(ngModel)]="periodoSelezionato"
-                [ngModelOptions]="{ standalone: true }"
-              >
-                <option *ngFor="let periodo of orari" [ngValue]="periodo">
-                  {{ periodo[0] }} / {{ periodo[1] }}
-                </option>
-                <option *ngIf="bookings && bookings.length === 0">
-                  <p>Non ci sono orari disponibili</p>
-                </option>
-              </select>
-            </div>
           </div>
-          <div class="form-group text-center button">
-            <button
-              type="submit"
-              class="btn btn-dark"
-              id="prenota-taglio"
-              *ngIf="!loadingRes; else loader"
+        </div>
+        <!--ORAIO-->
+        <div
+          class="orario"
+          *ngIf="orari"
+        >
+          <label for="customer-name">Orari</label>
+          <select
+            class="form-control"
+            id="orario"
+            [(ngModel)]="periodoSelezionato"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option
+              *ngFor="let periodo of orari"
+              [ngValue]="periodo"
             >
-              Prenota
-            </button>
-          </div>
-        </form>
-      </div>
+              {{ periodo[0] }} / {{ periodo[1] }}
+            </option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-dark"
+          id="prenota-taglio"
+          *ngIf="!loadingRes; else loader"
+          [disabled]="!this.bookingForm.valid && !this.barbiere && !this.giornoSelezionato && !this.periodoSelezionato"
+        >
+          Prenota
+        </button>
+      </form>
     </div>
   </div>
 </div>
