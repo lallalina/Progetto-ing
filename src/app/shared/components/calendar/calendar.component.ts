@@ -24,7 +24,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { BookingService } from 'src/app/core/services/booking.service';
-import { booking } from 'src/app/models/booking';
+import { booking, CalendarBooking } from 'src/app/models/booking';
 
 const colors: any = {
   red: {
@@ -60,6 +60,7 @@ export class CalendarComponent implements OnInit {
 
   refresh = new Subject<void>();
 
+  calendarBookings: CalendarBooking[] = [];
   events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
@@ -67,6 +68,7 @@ export class CalendarComponent implements OnInit {
   modalData: {
     action: string;
     event: CalendarEvent;
+    booking: booking
   };
 
   actions: CalendarEventAction[] = [
@@ -87,10 +89,12 @@ export class CalendarComponent implements OnInit {
     },
   ];
 
+  loading: boolean;
+
   constructor(
     private modal: NgbModal,
     private bookingService: BookingService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.aggiornaTabella();
@@ -101,7 +105,7 @@ export class CalendarComponent implements OnInit {
     this.events = [];
     this.bookingService.getBookings().subscribe((response) => {
       response.forEach((booking) => {
-        this.events.push({
+        const newEvent: CalendarEvent = {
           title: `${booking.nome} (${booking.mail})`,
           start: new Date(booking.startTime),
           end: new Date(booking.endTime),
@@ -110,8 +114,13 @@ export class CalendarComponent implements OnInit {
           resizable: {
             beforeStart: false,
             afterEnd: false,
-          },
-        });
+          }
+        }
+        this.events.push(newEvent);
+        this.calendarBookings.push({
+          event: newEvent,
+          booking
+        })
         this.refresh.next();
         console.log(this.events);
       });
@@ -153,7 +162,8 @@ export class CalendarComponent implements OnInit {
 
   //gestisci
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
+    const calendarBooking = this.calendarBookings.find((elem) => JSON.stringify(elem.event) === JSON.stringify(event))
+    this.modalData = { event, action, booking: calendarBooking.booking };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
@@ -186,5 +196,22 @@ export class CalendarComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  deleteBooking(id: booking['id'], event: CalendarEvent) {
+    this.loading = true;
+    this.bookingService.deleteBooking(id).subscribe({
+      next: (res) => {
+        const bookingIndex = this.calendarBookings.findIndex((elem) => elem.booking.id === id);
+        this.calendarBookings.splice(bookingIndex, 1);
+        this.deleteEvent(event);
+        this.refresh.next();
+      },
+      complete: () => {
+        this.loading = false;
+        this.modal.dismissAll();
+      }
+    }
+    )
   }
 }

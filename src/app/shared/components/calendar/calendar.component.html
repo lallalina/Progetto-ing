@@ -112,6 +112,10 @@
       <pre>{{ modalData?.event.title }}</pre>
     </div>
     <div>
+      Barbiere:
+      <pre>{{ modalData?.booking.barbiere.nome }}</pre>
+    </div>
+    <div>
       Data:
       <pre>{{ modalData?.event.start | date:'shortDate'}}</pre>
     </div>
@@ -127,10 +131,20 @@
   <div class="modal-footer">
     <button
       type="button"
+      class="btn btn-danger"
+      *ngIf="!loading;else loader"
+      (click)="deleteBooking(modalData?.booking.id, modalData?.event)"
+    >Elimina prenotazione</button>
+    <button
+      type="button"
       class="btn btn-outline-secondary"
       (click)="close()"
     >
       OK
     </button>
   </div>
+</ng-template>
+
+<ng-template #loader>
+  <app-loader></app-loader>
 </ng-template>
