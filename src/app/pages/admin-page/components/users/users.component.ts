@@ -11,6 +11,7 @@ import { BarbersService } from 'src/app/core/services/barbers.service';
 import { Barber } from 'src/app/models/barber.model';
 import * as _ from 'lodash';
 import { UserRole } from 'src/app/models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 enum FilterOptions {
   All = 'Tutti',
@@ -39,8 +40,9 @@ export class UsersComponent implements OnInit {
 
   loadingBarbers: boolean;
   loadingAdmins: boolean;
+  loadingUsers: boolean;
 
-  constructor(private barbersService: BarbersService) {}
+  constructor(private barbersService: BarbersService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -141,26 +143,40 @@ export class UsersComponent implements OnInit {
 
   //cancella admin e barbieri
   deleteUser(user: Barber) {
+    this.loadingUsers = true;
     if (user.role == UserRole.BARBER) {
       this.barbersService.deleteBarber(user.id).subscribe({
         next: (response) => {
-          const prodIndex = this.tableData.findIndex(
+          const usersIndex = this.usersList.findIndex(
             (item) => item.id === user.id
           );
-          this.tableData.splice(prodIndex, 1);
+          this.usersList.splice(usersIndex, 1);
+          const tableDataIndex = this.tableData.findIndex(
+            (item) => item.id === user.id
+          );
+          this.tableData.splice(tableDataIndex, 1);
+          this.toastr.warning('Utente eliminato')
         },
+        complete: () => this.loadingUsers = false
       });
     } else {
       this.barbersService.deleteAdmin(user.id).subscribe({
         next: (response) => {
-          const prodIndex = this.tableData.findIndex(
+          const usersIndex = this.usersList.findIndex(
             (item) => item.id === user.id
           );
-          this.tableData.splice(prodIndex, 1);
+          this.usersList.splice(usersIndex, 1);
+          const tableDataIndex = this.tableData.findIndex(
+            (item) => item.id === user.id
+          );
+          this.tableData.splice(tableDataIndex, 1);
+          this.toastr.warning('Utente eliminato')
+
         },
         error: (error) => {
           console.log(error);
         },
+        complete: () => this.loadingUsers = false
       });
     }
   }
