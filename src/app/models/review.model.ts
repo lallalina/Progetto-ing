@@ -1,7 +1,7 @@
 import { booking } from './booking';
 
 export class Review {
-  idPrenotazione: booking;
+  idPrenotazione: booking['id'];
   valutazione: number;
   descrizione: string;
 }

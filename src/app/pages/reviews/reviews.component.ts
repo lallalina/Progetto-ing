@@ -37,11 +37,12 @@ export class ReviewsComponent implements OnInit {
 
   doReview() {
     this.loading = true;
-    this.reviewService.doReview(this.form.value).subscribe({
+    this.reviewService.doReview(this.id, this.form.value).subscribe({
       next: (response) => {
         this.toastr.success('Recensione effettuata');
-        this.router.navigate(['/']);
+        /* this.router.navigate(['/']);*/
         this.form.value = response;
+        console.log(response);
       },
       complete: () => {
         this.form.reset();
