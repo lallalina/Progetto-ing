@@ -2,9 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { Address } from 'src/app/models/address.model';
-import { booking } from 'src/app/models/booking';
-import { Ordine } from 'src/app/models/ordine.model';
 import { Token } from 'src/app/models/token.model';
 import { environment } from 'src/environments/environment';
 import { User } from '../../models/user.model';
@@ -82,19 +79,5 @@ export class AuthService {
       this.user = _user;
     }
     console.log(_user);
-  }
-
-  //prendi indirizzo utente
-  getIndirizzi(): Observable<Address> {
-    return this.http.get<Address>(
-      environment.API_URL + '/user/getIndirizziUtente'
-    );
-  }
-
-  //get ordini per utente
-  getOrdini(): Observable<Ordine> {
-    return this.http.get<Ordine>(
-      environment.API_URL + '/user/getOrdiniDestinatario'
-    );
   }
 }

@@ -4,6 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from './message.service';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/models/user.model';
+import { Address } from 'src/app/models/address.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -105,5 +108,12 @@ export class CartService {
       });
     }
     return total;
+  }
+
+  //prendi indirizzo per utente
+  getIndirizzi(id: User['id']): Observable<Address> {
+    return this.http.get<Address>(
+      environment.API_URL + '/user/getIndirizziUtente' + id
+    );
   }
 }

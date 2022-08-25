@@ -1,16 +1,36 @@
 <div class="mt-5 px-5">
-    <div class="selectors-wrapper">
-        <ng-container [ngTemplateOutlet]="segmentSelector" [ngTemplateOutletContext]="{$implicit: 'Calendario'}">
-        </ng-container>
-        <ng-container [ngTemplateOutlet]="segmentSelector"
-            [ngTemplateOutletContext]="{$implicit: 'Prodotti/Trattamenti'}"></ng-container>
-        <ng-container [ngTemplateOutlet]="segmentSelector" [ngTemplateOutletContext]="{$implicit: 'Utenti'}">
-        </ng-container>
-    </div>
+  <div class="selectors-wrapper">
+    <!--calendar Page-->
+    <ng-container
+      [ngTemplateOutlet]="segmentSelector"
+      [ngTemplateOutletContext]="{ $implicit: 'Calendario' }"
+    >
+    </ng-container>
+    <!--Products and treatments Page-->
+    <ng-container
+      [ngTemplateOutlet]="segmentSelector"
+      [ngTemplateOutletContext]="{ $implicit: 'Prodotti/Trattamenti' }"
+    ></ng-container>
+    <!--Users Page-->
+    <ng-container
+      [ngTemplateOutlet]="segmentSelector"
+      [ngTemplateOutletContext]="{ $implicit: 'Utenti' }"
+    >
+    </ng-container>
+    <!--Orders Page-->
+    <ng-container
+      [ngTemplateOutlet]="segmentSelector"
+      [ngTemplateOutletContext]="{ $implicit: 'Ordini' }"
+    ></ng-container>
+  </div>
 </div>
 
 <ng-template #segmentSelector let-label>
-    <div class="selector" [ngClass]="{'selected': label === this.currentPage}" (click)="emitChangePage(label)">
-        <span>{{label}}</span>
-    </div>
+  <div
+    class="selector"
+    [ngClass]="{ selected: label === this.currentPage }"
+    (click)="emitChangePage(label)"
+  >
+    <span>{{ label }}</span>
+  </div>
 </ng-template>

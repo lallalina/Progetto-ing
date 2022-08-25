@@ -1,30 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { isThisMinute } from 'date-fns';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderdService } from 'src/app/core/services/orderd.service';
 import { Address } from 'src/app/models/address.model';
 import { CartItem } from 'src/app/models/cart.model';
-import { Ordine } from 'src/app/models/ordine.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  public items: CartItem[];
-  public total: number;
-  public ordini: Ordine[];
+  @Input() items: CartItem[]; //prende i prodotti
+  @Input() indirizzi: Address[]; //prende i nuovi indirizzi
+  @Input() user: User[]; //prende gli indirizzi dell'utente
 
   form;
-  indirizzi: Address[];
+  public total: number;
+  loading: boolean;
 
   constructor(
     private router: Router,
     private cartService: CartService,
     private auth: AuthService,
-    private orderdService: OrderdService
+    private orderdService: OrderdService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -51,14 +55,6 @@ export class CartComponent implements OnInit {
       ]),
     });
   }
-
-  /*ngDoCheck(){
-    this.totale=0;
-    //calcolo totale dei prodotti
-    this.carrello.forEach(element => {
-      this.totale += element.reservation_items[0].price;
-    });
-*/
 
   //salvo il carrello nella session
   saveCart() {
@@ -106,20 +102,24 @@ export class CartComponent implements OnInit {
     );
   }
 
-  //get indirizzi
+  //get indirizzi esisteni
   retrieveIndirizziUser() {
-    this.auth.getIndirizzi().subscribe((response) => {
-      /*this.indirizzi = response;*/
+    this.cartService.getIndirizzi(this.user['id']).subscribe((response) => {
+      console.log(response);
     });
   }
 
   //ordina prodotto
-  ordina() {
-    this.orderdService.ordina(this.form.value).subscribe({
+  ordina(items = this.items, idnirizzi = this.indirizzi) {
+    this.loading = true;
+    // manca controllo utente loggato
+    this.orderdService.newOrder(items, idnirizzi).subscribe({
       next: (response) => {
+        this.toastr.success('Ordine effettuato con successo');
+        this.router.navigate(['/']);
         this.form.reset();
-        this.ordini.push(response);
       },
+      complete: () => (this.loading = false),
     });
   }
 }

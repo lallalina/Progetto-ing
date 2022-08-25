@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
+import { OrderdService } from 'src/app/core/services/orderd.service';
 import { ProductsService } from 'src/app/core/services/products.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
+
 import { Barber } from 'src/app/models/barber.model';
+import { Ordine } from 'src/app/models/ordine.model';
 import { Product } from 'src/app/models/product.model';
 import { Treatment } from 'src/app/models/treatment.model';
 
@@ -12,6 +16,7 @@ enum Pages {
   Calendar = 'Calendario',
   ProdsAndTreatments = 'Prodotti/Trattamenti',
   Users = 'Utenti',
+  Orders = 'Ordini',
 }
 
 @Component({
@@ -27,6 +32,7 @@ export class AdminPageComponent implements OnInit {
   products: Product[] = [];
   treatments: Treatment[] = [];
   users: Barber[] = [];
+  orders: Ordine[] = [];
 
   readonly Pages = Pages;
   currentPage: Pages;
@@ -36,7 +42,8 @@ export class AdminPageComponent implements OnInit {
     private auth: AuthService,
     private treatmentsService: TreatmentsService,
     private barbersService: BarbersService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private orderService: OrderdService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +51,7 @@ export class AdminPageComponent implements OnInit {
     this.getProducts();
     this.getTrattamenti();
     this.getUsers();
+    this.getOrder();
   }
 
   //Switch page
@@ -79,7 +87,7 @@ export class AdminPageComponent implements OnInit {
     );
   }
 
-  //subscribe barbieri
+  //prendi barbieri
   getUsers() {
     this.barbersService.getUsers().subscribe(([barbers, admins]) => {
       this.users = barbers.concat(admins);
@@ -87,5 +95,11 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  //prendi ordini
+  //prendi ordini di tutti gli utenti
+  getOrder() {
+    this.orderService.getOrders().subscribe((response) => {
+      console.log(response);
+      this.orders = response;
+    });
+  }
 }

@@ -11,6 +11,7 @@ import { ProdAndTreatmentsComponent } from './components/prod-and-treatments/pro
 import { UsersComponent } from './components/users/users.component';
 import { DialogComponent } from './components/prod-and-treatments/dialog/dialog.component';
 import { DialogTComponent } from './components/prod-and-treatments/dialog-t/dialog-t.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DialogTComponent } from './components/prod-and-treatments/dialog-t/dial
     UsersComponent,
     DialogComponent,
     DialogTComponent,
+    OrderComponent,
   ],
   imports: [
     CommonModule,

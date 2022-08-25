@@ -1,3 +1,5 @@
+import { Address } from 'cluster';
+
 export enum UserRole {
   ADMIN = 'ROLE_ADMIN',
   BARBER = 'ROLE_BARBIERE',
@@ -19,5 +21,5 @@ export interface User {
   jwt: string;
   email: string;
   password: string;
-  indirizzo: string;
+  indirizzo: Address;
 }

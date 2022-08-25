@@ -104,9 +104,10 @@
         </div>
       </div>
 
-      <!--FORM-->
+      <!--FORM Nuovo Indirizzo-->
       <div class="col-3 mt-4">
-        <form [formGroup]="form" (ngSubmit)="ordina()">
+        <p>inserisci un indirizzo:</p>
+        <form [formGroup]="form">
           <!--citta-->
           <div class="form-group">
             <label>Città:</label>
@@ -202,20 +203,25 @@
             </div>
           </div>
           <!--indirizzi esistenti-->
-          <div class="col-3" *ngIf="ordini">
+          <div class="col-3" *ngIf="user['indirizzo']">
             <legend>Seleziona un tuo indirizzo:</legend>
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let row of ordini" [value]="ordini">
+              <mat-option *ngFor="let row of user" [value]="user">
                 {{ row.indirizzo }}
               </mat-option>
             </mat-autocomplete>
           </div>
-          <button type="submit" class="btn" id="button">Ordina</button>
         </form>
       </div>
+      <!--ordina-->
+      <button (click)="ordina()" *ngIf="!loading; else loader"></button>
     </div>
   </div>
 </div>
 
 <!--Footer-->
 <app-footer></app-footer>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from 'src/app/core/services/auth.service';
+
+import { OrderdService } from 'src/app/core/services/orderd.service';
+
 import { booking } from 'src/app/models/booking';
 import { User } from 'src/app/models/user.model';
 import { DialogComponent } from './dialog/dialog.component';
@@ -13,7 +15,7 @@ export class UserPageComponent implements OnInit {
   @Input() user: User[];
   prenotazioni: booking[];
 
-  constructor(private auth: AuthService) {}
+  constructor(private orderService: OrderdService) {}
 
   isChecked: boolean;
   public dialog: MatDialog;
@@ -22,7 +24,7 @@ export class UserPageComponent implements OnInit {
 
   //get ordini utente
   GetOrdini() {
-    this.auth.getOrdini().subscribe((response) => {
+    this.orderService.getOrdiniUtente().subscribe((response) => {
       console.log(response);
       /*this.prenotazioni = response;*/
     });

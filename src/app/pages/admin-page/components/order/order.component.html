@@ -1,0 +1,15 @@
+<!--Table Orders-->
+<div class="row">
+  <div class="mb-3 mt-5" id="ordini" *ngIf="orders">
+    <app-table [data]="orders">
+      <ng-template #headers>
+        <th>Indirizzo Utente</th>
+        <th>Prodotti</th>
+      </ng-template>
+      <ng-template #rows let-row>
+        <td>{{ row.indirizzoDestinatario }}</td>
+        <td>{{ row.prodotti }}</td>
+      </ng-template>
+    </app-table>
+  </div>
+</div>
