@@ -1,0 +1,9 @@
+label {
+  color: black;
+}
+
+.button {
+  margin-top: 75%;
+  width: 20%;
+  background-color: rgb(159, 159, 193);
+}

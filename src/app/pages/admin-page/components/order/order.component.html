@@ -3,12 +3,31 @@
   <div class="col-12 mb-3 mt-5">
     <app-table [data]="orders">
       <ng-template #headers>
-        <th>Indirizzo Utente</th>
-        <th>Prodotti</th>
+        <th>Indirizzo</th>
+        <th></th>
+        <th>Destinatario</th>
+        <th></th>
+        <th>Visualizza Prodotti</th>
       </ng-template>
       <ng-template #rows let-row>
-        <td>{{ row.indirizzoDestinatario }}</td>
-        <td>{{ row.prodotti }}</td>
+        <!--indirizzo-->
+        <td>
+          {{ row.destinatario.via }},{{ row.destinatario.numeroCivico }},
+          {{ row.destinatario.citta }}, {{ row.destinatario.cap }}
+        </td>
+        <td></td>
+        <!--destinatario-->
+        <td>{{ row.destinatario.utente.mail }}</td>
+        <td></td>
+        <td>
+          <button
+            mat-icon-button
+            mat-raised-button
+            (click)="openDialog(row.prodotti)"
+          >
+            <mat-icon>shopping_cart</mat-icon>
+          </button>
+        </td>
       </ng-template>
     </app-table>
   </div>

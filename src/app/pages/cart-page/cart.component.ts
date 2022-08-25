@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
     private auth: AuthService,
     private orderdService: OrderdService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user = this.auth.user;
@@ -51,9 +51,7 @@ export class CartComponent implements OnInit {
       citta: new FormControl('', Validators.required),
       via: new FormControl('', Validators.required),
       cap: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      numeroCivico: new FormControl('', [
-        Validators.required,
-      ]),
+      numeroCivico: new FormControl('', [Validators.required]),
     });
   }
 
@@ -114,10 +112,10 @@ export class CartComponent implements OnInit {
     let result = '';
     this.items.forEach((item, index) => {
       for (let i = 1; i < item.amount; i++) {
-        result += item.product.id + ','
+        result += item.product.id + ',';
       }
-    })
-    return result
+    });
+    return result;
   }
 
   //ordina prodotto
@@ -125,24 +123,32 @@ export class CartComponent implements OnInit {
     this.loading = true;
     // manca controllo utente loggato
     const stringedArray = this.arrayToString();
-    this.orderdService.newOrder({ idIndirizzoDestinatario: this.selectedAddress.id, prodotti: stringedArray }).subscribe({
-      next: (response) => {
-        this.toastr.success('Ordine effettuato con successo');
-        this.router.navigate(['/']);
-        this.form.reset();
-      },
-      complete: () => (this.loading = false),
-    });
+    this.orderdService
+      .newOrder({
+        idIndirizzoDestinatario: this.selectedAddress.id,
+        prodotti: stringedArray,
+      })
+      .subscribe({
+        next: (response) => {
+          this.toastr.success('Ordine effettuato con successo');
+          this.router.navigate(['/']);
+          this.form.reset();
+        },
+        complete: () => (this.loading = false),
+      });
   }
 
+  //crea nuovo indirizzo
   createAddress() {
     this.loading = true;
-    this.cartService.nuovoIndirizzo({ ...this.form.value, idUtente: this.user.id }).subscribe({
-      next: (response) => {
-        this.indirizzi.push(response);
-        this.toastr.success('Nuovo indirizzo aggiunto');
-      },
-      complete: () => this.loading = false
-    })
+    this.cartService
+      .nuovoIndirizzo({ ...this.form.value, idUtente: this.user.id })
+      .subscribe({
+        next: (response) => {
+          this.indirizzi.push(response);
+          this.toastr.success('Nuovo indirizzo aggiunto');
+        },
+        complete: () => (this.loading = false),
+      });
   }
 }
