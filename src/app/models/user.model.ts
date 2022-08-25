@@ -21,5 +21,5 @@ export interface User {
   jwt: string;
   email: string;
   password: string;
-  indirizzo: Address;
+  indirizzi: Address[];
 }

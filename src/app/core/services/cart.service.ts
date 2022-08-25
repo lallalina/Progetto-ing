@@ -111,9 +111,14 @@ export class CartService {
   }
 
   //prendi indirizzo per utente
-  getIndirizzi(id: User['id']): Observable<Address> {
-    return this.http.get<Address>(
-      environment.API_URL + '/user/getIndirizziUtente' + id
+  getIndirizzi(id: User['id']): Observable<Address[]> {
+    return this.http.get<Address[]>(
+      environment.API_URL + '/user/getIndirizziUtente/' + id
     );
+  }
+
+  //nuovo indirizzo
+  nuovoIndirizzo(address: Address): Observable<Address> {
+    return this.http.post<Address>(`${environment.API_URL}/user/nuovoIndirizzo`, address);
   }
 }

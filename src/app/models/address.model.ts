@@ -1,9 +1,10 @@
 import { User } from './user.model';
 
 export interface Address {
-  idUtente: User[];
+  id?: number;
+  idUtente?: User['id'];
   citta: string;
   via: string;
-  numeroCivico: number;
-  cap: number;
+  numeroCivico: string;
+  cap: string;
 }

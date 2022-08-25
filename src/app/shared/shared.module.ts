@@ -31,6 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule, //dialog
     MatSlideToggleModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     ReactiveFormsModule, //per i form
   ],
   exports: [
@@ -85,8 +87,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule, //dialog
     MatSlideToggleModule,
     MatCheckboxModule,
+    MatAutocompleteModule,
     ReactiveFormsModule, //per i form
   ],
   providers: [MatDatepickerModule],
 })
-export class SharedModule {}
+export class SharedModule { }

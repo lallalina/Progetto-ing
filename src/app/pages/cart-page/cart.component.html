@@ -8,7 +8,10 @@
   <div class="row">
     <div class="col-12 p-4">
       <!-- Shopping Cart-->
-      <app-table [data]="items" *ngIf="items">
+      <app-table
+        [data]="items"
+        *ngIf="items"
+      >
         <ng-template #headers>
           <th>Prodotto</th>
           <th></th>
@@ -24,14 +27,20 @@
             </button>
           </th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <td>
             <div class="product-item">
               <a
                 class="product-thumb"
                 routerLink="/products/{{ row.product.id }}"
               >
-                <img [src]="row.product.im" alt="Product" />
+                <img
+                  [src]="row.product.im"
+                  alt="Product"
+                />
               </a>
             </div>
           </td>
@@ -42,8 +51,7 @@
                 <a
                   class="text-black"
                   routerLink="/products/{{ row.product.id }}"
-                  >{{ row.product.nome }}</a
-                >
+                >{{ row.product.nome }}</a>
               </h4>
             </div>
           </td>
@@ -104,10 +112,43 @@
         </div>
       </div>
 
+      <!--indirizzi esistenti-->
+      <div
+        class="col-12 mt-3 mb-4"
+        *ngIf="indirizzi"
+      >
+        <div>
+          <h4>Seleziona un tuo indirizzo:</h4>
+          <br>
+          <select
+            class="form-control"
+            [(ngModel)]="selectedAddress"
+          >
+            <option
+              *ngFor="let row of indirizzi"
+              [ngValue]="row"
+            >
+              {{ row.via + ', ' + row.numeroCivico + ', ' + row.citta + ', ' + row.cap }}
+            </option>
+          </select>
+          <br>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="ordina()"
+            *ngIf="!loading; else loader"
+          >Procedi all'ordine</button>
+        </div>
+      </div>
+
+
       <!--FORM Nuovo Indirizzo-->
-      <div class="col-3 mt-4">
-        <p>inserisci un indirizzo:</p>
-        <form [formGroup]="form">
+      <div class="col-12">
+        <h4>Inserisci un nuovo indirizzo:</h4>
+        <form
+          [formGroup]="form"
+          (ngSubmit)="createAddress()"
+        >
           <!--citta-->
           <div class="form-group">
             <label>Città:</label>
@@ -133,24 +174,24 @@
           </div>
           <!--indirizzo-->
           <div class="form-group">
-            <label>indirizzo:</label>
+            <label>via:</label>
             <input
               type="text"
               class="form-control"
               placeholder="indirizzo"
-              formControlName="indirizzo"
+              formControlName="via"
             />
             <!--check-->
             <div
               *ngIf="
                 form &&
-                form.controls['indirizzo'].invalid &&
-                (form.controls['indirizzo'].dirty ||
-                  form.controls['indirizzo'].touched)
+                form.controls['via'].invalid &&
+                (form.controls['via'].dirty ||
+                  form.controls['via'].touched)
               "
               class="form-error"
             >
-              <div *ngIf="form.controls['indirizzo'].errors?.['required']">
+              <div *ngIf="form.controls['via'].errors?.['required']">
                 inserisci un indirizzo
               </div>
             </div>
@@ -185,36 +226,32 @@
               type="text"
               class="form-control"
               placeholder="numero civico"
-              formControlName="numCivico"
+              formControlName="numeroCivico"
             />
             <!--check-->
             <div
               *ngIf="
                 form &&
-                form.controls['numCivico'].invalid &&
-                (form.controls['numCivico'].dirty ||
-                  form.controls['numCivico'].touched)
+                form.controls['numeroCivico'].invalid &&
+                (form.controls['numeroCivico'].dirty ||
+                  form.controls['numeroCivico'].touched)
               "
               class="form-error"
             >
-              <div *ngIf="form.controls['numCivico'].errors?.['required']">
+              <div *ngIf="form.controls['numeroCivico'].errors?.['required']">
                 inserisci numero civico
               </div>
             </div>
           </div>
-          <!--indirizzi esistenti-->
-          <div class="col-3" *ngIf="user['indirizzo']">
-            <legend>Seleziona un tuo indirizzo:</legend>
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let row of user" [value]="user">
-                {{ row.indirizzo }}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            *ngIf="!loading;else loader"
+          >Aggiungi indirizzo</button>
         </form>
       </div>
       <!--ordina-->
-      <button (click)="ordina()" *ngIf="!loading; else loader"></button>
     </div>
   </div>
 </div>

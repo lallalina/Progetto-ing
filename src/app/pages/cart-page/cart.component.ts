@@ -15,13 +15,15 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  @Input() items: CartItem[]; //prende i prodotti
-  @Input() indirizzi: Address[]; //prende i nuovi indirizzi
-  @Input() user: User[]; //prende gli indirizzi dell'utente
+  items: CartItem[]; //prende i prodotti
+  indirizzi: Address[]; //prende i nuovi indirizzi
+  user: User; //prende gli indirizzi dell'utente
 
-  form;
+  form: FormGroup;
   public total: number;
   loading: boolean;
+
+  selectedAddress: Address;
 
   constructor(
     private router: Router,
@@ -29,10 +31,10 @@ export class CartComponent implements OnInit {
     private auth: AuthService,
     private orderdService: OrderdService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.retrieveIndirizziUser();
+    this.user = this.auth.user;
     this.items = this.cartService.getItems();
     this.total = this.cartService.getTotal();
     this.cartService.cart$.subscribe((items: CartItem[]) => {
@@ -47,11 +49,10 @@ export class CartComponent implements OnInit {
   initForm() {
     this.form = new FormGroup({
       citta: new FormControl('', Validators.required),
-      indirizzo: new FormControl('', Validators.required),
+      via: new FormControl('', Validators.required),
       cap: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      numCivico: new FormControl('', [
+      numeroCivico: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
       ]),
     });
   }
@@ -104,16 +105,27 @@ export class CartComponent implements OnInit {
 
   //get indirizzi esisteni
   retrieveIndirizziUser() {
-    this.cartService.getIndirizzi(this.user['id']).subscribe((response) => {
-      console.log(response);
+    this.cartService.getIndirizzi(this.user.id).subscribe((response) => {
+      this.indirizzi = response;
     });
   }
 
+  arrayToString(): string {
+    let result = '';
+    this.items.forEach((item, index) => {
+      for (let i = 1; i < item.amount; i++) {
+        result += item.product.id + ','
+      }
+    })
+    return result
+  }
+
   //ordina prodotto
-  ordina(items = this.items, idnirizzi = this.indirizzi) {
+  ordina() {
     this.loading = true;
     // manca controllo utente loggato
-    this.orderdService.newOrder(items, idnirizzi).subscribe({
+    const stringedArray = this.arrayToString();
+    this.orderdService.newOrder({ idIndirizzoDestinatario: this.selectedAddress.id, prodotti: stringedArray }).subscribe({
       next: (response) => {
         this.toastr.success('Ordine effettuato con successo');
         this.router.navigate(['/']);
@@ -121,5 +133,16 @@ export class CartComponent implements OnInit {
       },
       complete: () => (this.loading = false),
     });
+  }
+
+  createAddress() {
+    this.loading = true;
+    this.cartService.nuovoIndirizzo({ ...this.form.value, idUtente: this.user.id }).subscribe({
+      next: (response) => {
+        this.indirizzi.push(response);
+        this.toastr.success('Nuovo indirizzo aggiunto');
+      },
+      complete: () => this.loading = false
+    })
   }
 }
