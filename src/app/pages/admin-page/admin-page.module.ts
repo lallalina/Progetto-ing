@@ -10,6 +10,7 @@ import { SelectorComponent } from './components/selector/selector.component';
 import { ProdAndTreatmentsComponent } from './components/prod-and-treatments/prod-and-treatments.component';
 import { UsersComponent } from './components/users/users.component';
 import { DialogComponent } from './components/prod-and-treatments/dialog/dialog.component';
+import { DialogComponent as OrdersDialogComponent } from './components/order/dialog/dialog.component';
 import { DialogTComponent } from './components/prod-and-treatments/dialog-t/dialog-t.component';
 import { OrderComponent } from './components/order/order.component';
 
@@ -22,6 +23,7 @@ import { OrderComponent } from './components/order/order.component';
     DialogComponent,
     DialogTComponent,
     OrderComponent,
+    OrdersDialogComponent
   ],
   imports: [
     CommonModule,
@@ -31,4 +33,4 @@ import { OrderComponent } from './components/order/order.component';
     SharedModule,
   ],
 })
-export class AdminPageModule {}
+export class AdminPageModule { }
