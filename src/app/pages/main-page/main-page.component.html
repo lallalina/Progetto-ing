@@ -15,13 +15,20 @@
         src="assets/copertina-mobile.jpg"
         alt="immagine di copertina"
       />
-      <img class="logo" src="assets/logo-white.png" alt="logo" />
+      <img
+        class="logo"
+        src="assets/logo-white.png"
+        alt="logo"
+      />
     </div>
   </div>
 
   <!--Chi siamo-->
   <div class="row mt-4 identita">
-    <div class="col-4 mb-3 mt-3" id="chisiamo">
+    <div
+      class="col-4 mb-3 mt-3"
+      id="chisiamo"
+    >
       <h1>Chi siamo</h1>
       <p>
         Elegante, in stile classico e tutto dedicato a lui, questo barbiere
@@ -41,28 +48,43 @@
   </div>
 
   <!--Prenota-->
-  <div class="prenota row mt-6 w-100 mb-5">
-    <div class="col-10">
-      <div class="form-group">
-        <h3 style="color: wheat; text-align: center; margin-left: 25%">
-          PRENDI IL TUO APPUNTAMENTO
-        </h3>
-      </div>
-      <app-prenotazione> </app-prenotazione>
+  <div class="row mt-5 mb-5">
+    <div class="col-10 offset-1">
+      <h3 style="color: wheat; text-align: center;">
+        PRENDI IL TUO APPUNTAMENTO
+      </h3>
+      <app-prenotazione [isHome]="true"> </app-prenotazione>
     </div>
   </div>
 
   <!--Recensioni-->
-  <div class="row mt-6 mb-5 recensioni" *ngIf="reviews">
+  <div
+    class="row mt-6 mb-5 recensioni"
+    *ngIf="reviews"
+  >
     <div class="col-4">
       <h1>Le nostre recensioni</h1>
-      <div class="card" style="width: 18rem" *ngFor="let review of reviews">
-        <img class="card-img-top" src="assets/47774.png" alt="Card image cap" />
+      <div
+        class="card"
+        style="width: 18rem"
+        *ngFor="let review of reviews"
+      >
+        <img
+          class="card-img-top"
+          src="assets/47774.png"
+          alt="Card image cap"
+        />
         <div class="card-body">
-          <p class="card-text" style="color: black">
+          <p
+            class="card-text"
+            style="color: black"
+          >
             <b>voto:</b> {{ review.valutazione }}
           </p>
-          <p class="card-text" style="color: black">
+          <p
+            class="card-text"
+            style="color: black"
+          >
             {{ review.descrizione }}
           </p>
         </div>

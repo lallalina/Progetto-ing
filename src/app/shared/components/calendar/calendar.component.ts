@@ -25,6 +25,9 @@ import {
 } from 'angular-calendar';
 import { BookingService } from 'src/app/core/services/booking.service';
 import { booking, CalendarBooking } from 'src/app/models/booking';
+import { UtilsService } from 'src/app/core/services/utils.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ReservationDialogComponent } from '../reservation-dialog/reservation-dialog.component';
 
 const colors: any = {
   red: {
@@ -93,11 +96,14 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private modal: NgbModal,
-    private bookingService: BookingService
+    private bookingService: BookingService,
+    private utils: UtilsService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.aggiornaTabella();
+    this.utils.reloadCalendar.subscribe((_) => this.aggiornaTabella())
   }
 
   //eventi da visualizzare in tabella, si chiama nell'init quando cambio il tipo
@@ -213,5 +219,9 @@ export class CalendarComponent implements OnInit {
       }
     }
     )
+  }
+
+  openReservationDialog() {
+    this.dialog.open(ReservationDialogComponent)
   }
 }

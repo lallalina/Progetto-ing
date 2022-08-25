@@ -32,6 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PrenotazioneComponent } from '../pages/main-page/components/prenotazione/prenotazione.component';
+import { ReservationDialogComponent } from './components/reservation-dialog/reservation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     TableComponent,
     LoaderComponent,
     CalendarBarberComponent,
+    PrenotazioneComponent,
+    ReservationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -70,6 +74,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   ],
   exports: [
     NavbarComponent,
+    PrenotazioneComponent,
+    ReservationDialogComponent,
     CalendarBarberComponent,
     FooterComponent,
     CalendarComponent,

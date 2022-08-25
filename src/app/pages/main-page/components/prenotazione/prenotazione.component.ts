@@ -10,6 +10,7 @@ import { BookingService } from 'src/app/core/services/booking.service';
 import { booking } from 'src/app/models/booking';
 import { formatDate } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { UtilsService } from 'src/app/core/services/utils.service';
 
 @Component({
   selector: 'app-prenotazione',
@@ -17,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./prenotazione.component.css'],
 })
 export class PrenotazioneComponent implements OnInit {
-  @Input() bookings: booking[];
+  @Input() isHome: boolean;
   barbers: Barber[];
   treatments: Array<Treatment>;
   orari: Array<string[]>;
@@ -40,6 +41,7 @@ export class PrenotazioneComponent implements OnInit {
     private barbersService: BarbersService,
     private treatmentsService: TreatmentsService,
     private toastr: ToastrService,
+    private utils: UtilsService,
     private auth: AuthService
   ) {
     const currentYear = new Date().getFullYear();
@@ -145,6 +147,7 @@ export class PrenotazioneComponent implements OnInit {
           next: (response) => {
             console.log(response)
             this.toastr.success('Prenotazione avvenuta con successo')
+            this.utils.reloadCalendar.next();
           },
           complete: () => this.loadingRes = false
         });
