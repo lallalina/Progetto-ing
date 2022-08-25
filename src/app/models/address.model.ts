@@ -1,7 +1,7 @@
 import { User } from './user.model';
 
 export interface Address {
-  id?: number;
+  id: number;
   idUtente?: User['id'];
   citta: string;
   via: string;

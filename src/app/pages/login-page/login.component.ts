@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.loading = true;
     const data = {
-      username: this.form.controls['email'].value,
+      username: this.form.controls['mail'].value,
       password: this.form.controls['password'].value,
     };
     this.auth.login(data).subscribe({
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
   //controllo validità sezioni del form
   initForm() {
     this.form = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      mail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),

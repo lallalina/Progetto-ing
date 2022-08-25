@@ -44,7 +44,6 @@
   width: 100%;
   background: #0c0909 !important;
   color: white !important;
-  margin-bottom: 40px;
 }
 .login_btn:focus {
   box-shadow: none !important;

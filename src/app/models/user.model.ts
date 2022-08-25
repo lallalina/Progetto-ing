@@ -12,14 +12,15 @@ export interface Authority {
 
 export interface User {
   id: number;
-  username: string;
+  nome: string;
+  cognome: string;
   accountNonExpired: boolean;
   accountNonLocked: boolean;
   authorities: Authority[];
   enabled: boolean;
   credentialsNonExpired: boolean;
   jwt: string;
-  email: string;
+  mail: string;
   password: string;
   indirizzi: Address[];
 }
