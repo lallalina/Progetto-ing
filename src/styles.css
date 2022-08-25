@@ -95,8 +95,7 @@ h1 {
 
 /*CHI SIAMO*/
 .identita h1 {
-  color: wheat;
-  font-family: "Maven Pro";
+  color: rgba(67, 45, 3, 0.858);
 }
 
 .identita p {
@@ -105,7 +104,7 @@ h1 {
 
 /*RECENSIONI*/
 .recensioni h1 {
-  color: wheat;
+  color: rgba(67, 45, 3, 0.858);
   font-family: fantasy;
 }
 

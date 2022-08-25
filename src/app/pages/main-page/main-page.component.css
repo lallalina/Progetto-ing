@@ -1,10 +1,13 @@
 .card {
   max-width: 200px;
   background-color: rgb(234, 230, 217);
+  margin-right: 15%;
 }
 
 .card-img-top {
-  max-width: 100px;
+  max-width: 50%;
+  margin-left: 20%;
+  margin-top: 5px;
 }
 
 .little-logo {
@@ -13,4 +16,13 @@
 
 .hidden-link:hover {
   text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+.cardRow {
+  margin-top: 2%;
+  margin-bottom: 5%;
 }
