@@ -16,18 +16,19 @@
       <th>Cognome</th>
       <th>Mail</th>
       <th>Ruolo</th>
-      <th></th>
-      <th>elimina</th>
+      <th>Elimina</th>
     </ng-template>
-    <ng-template #rows let-row>
+    <ng-template
+      #rows
+      let-row
+    >
       <td>{{ row.nome }}</td>
       <td>{{ row.cognome }}</td>
       <td>{{ row.mail }}</td>
       <td>{{ row.role | roleName }}</td>
-      <td></td>
       <td>
         <button
-          *ngIf="row.role"
+          *ngIf="!loadingUsers; else loader"
           mat-icon-button
           color="warn"
           (click)="deleteUser(row)"
@@ -42,7 +43,10 @@
   <!--Content-->
   <div class="row mt-5">
     <div class="col-4">
-      <form [formGroup]="barbersForm" (ngSubmit)="addBarber()">
+      <form
+        [formGroup]="barbersForm"
+        (ngSubmit)="addBarber()"
+      >
         <legend>Registra Parrucchieri</legend>
         <!--nome-->
         <div class="form-group">
@@ -63,9 +67,7 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="barbersForm && barbersForm.controls['nome'].errors?.['required']"
-            >
+            <div *ngIf="barbersForm && barbersForm.controls['nome'].errors?.['required']">
               inserisci il enome
             </div>
           </div>
@@ -99,9 +101,7 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="barbersForm && barbersForm.controls['mail'].errors?.['required']"
-            >
+            <div *ngIf="barbersForm && barbersForm.controls['mail'].errors?.['required']">
               inserisci l' email
             </div>
           </div>
@@ -125,14 +125,10 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['required']"
-            >
+            <div *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['required']">
               inserisci la password
             </div>
-            <div
-              *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['minLenght']"
-            >
+            <div *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['minLenght']">
               la password deve essere lunga 5 caratteri
             </div>
           </div>
@@ -227,9 +223,7 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="adminsForm && adminsForm.controls['mail'].errors?.['required']"
-            >
+            <div *ngIf="adminsForm && adminsForm.controls['mail'].errors?.['required']">
               inserisci l' email
             </div>
           </div>
@@ -253,14 +247,10 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['required']"
-            >
+            <div *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['required']">
               inserisci la password
             </div>
-            <div
-              *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['minLenght']"
-            >
+            <div *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['minLenght']">
               la password deve essere lunga 5 caratteri
             </div>
           </div>
@@ -284,14 +274,10 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['required']"
-            >
+            <div *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['required']">
               inserisci la password
             </div>
-            <div
-              *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['minLength']"
-            >
+            <div *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['minLength']">
               la password deve essere lunga 5 caratteri
             </div>
           </div>
@@ -308,9 +294,7 @@
     </div>
   </div>
   <div>
-    <small
-      >I campi contrassegnati da un asterisco rosso (*) sono obbligatori</small
-    >
+    <small>I campi contrassegnati da un asterisco rosso (*) sono obbligatori</small>
   </div>
 </div>
 
