@@ -9,7 +9,7 @@ import { booking } from 'src/app/models/booking';
   providedIn: 'root',
 })
 export class ReviewService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //ultime 3 recensioni
   recensioni(): Observable<Review[]> {
@@ -28,7 +28,7 @@ export class ReviewService {
   //nuova recensione da parte dell'acquirente
   doReview(obj): Observable<Review> {
     return this.http.post<Review>(
-      environment.API_URL + 'public/recensionePrenotazione/',
+      environment.API_URL + '/public/recensionePrenotazione/',
       obj
     );
   }
