@@ -18,11 +18,13 @@ export class MainPageComponent implements OnInit {
 
   constructor(private reviewService: ReviewService) {}
 
-  //prendi recensioni
+  //prendi ultime 3recensioni
   getRecensioni() {
     this.reviewService.recensioni().subscribe((response) => {
       console.log(response);
       this.reviews = response;
+      console.log('ciao');
+      console.log(this.reviews);
     });
   }
 

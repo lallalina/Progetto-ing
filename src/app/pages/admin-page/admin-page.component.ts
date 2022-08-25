@@ -100,7 +100,6 @@ export class AdminPageComponent implements OnInit {
     this.orderService.getOrders().subscribe((response) => {
       console.log(response);
       this.orders = response;
-      console.log('ciao');
       console.log(this.orders);
     });
   }
