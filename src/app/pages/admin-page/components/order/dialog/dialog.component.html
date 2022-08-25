@@ -1,15 +1,16 @@
 <!--Table Visualizza prodotti-->
 <div class="row">
-  <div class="col-12 mb-3 mt-5">
-    <app-table [data]="prodotti">
+  <div class="col-12">
+    <app-table [data]="data">
       <ng-template #headers>
-        <th>Indirizzo</th>
-        <th></th>
-        <th>Destinatario</th>
-        <th></th>
-        <th>Visualizza Prodotti</th>
+        <th>Nome</th>
+        <th>Descrizione</th>
+        <th>Prezzo</th>
       </ng-template>
-      <ng-template #rows let-row>
+      <ng-template
+        #rows
+        let-row
+      >
         <!--Nome Prodotto-->
         <td>
           {{ row.nome }}
@@ -17,19 +18,7 @@
         <!--Descrizione-->
         <td>{{ row.descrizione }}</td>
         <!--Prezzo-->
-        <td>{{ row.prezzo }}</td>
-        <td></td>
-        <td>
-          <button
-            mat-button
-            mat-dialog-close
-            cdkFocusInitial
-            (click)="onOkClick()"
-            class="button"
-          >
-            Ok
-          </button>
-        </td>
+        <td>{{ row.prezzo | currency: 'EUR' }}</td>
       </ng-template>
     </app-table>
   </div>
