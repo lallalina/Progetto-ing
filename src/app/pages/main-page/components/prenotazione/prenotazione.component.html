@@ -2,10 +2,7 @@
   <div class="col-12">
     <!--form-->
     <div class="w-100">
-      <form
-        [formGroup]="bookingForm"
-        (ngSubmit)="prenota()"
-      >
+      <form [formGroup]="bookingForm" (ngSubmit)="prenota()">
         <!--NOME-->
         <div>
           <div class="form-group">
@@ -21,14 +18,16 @@
             <!--Check Nome-->
             <div
               *ngIf="
-                    bookingForm &&
-                    bookingForm.controls['nome'].invalid &&
-                    (bookingForm.controls['nome'].dirty ||
-                      bookingForm.controls['nome'].touched)
-                  "
+                bookingForm &&
+                bookingForm.controls['nome'].invalid &&
+                (bookingForm.controls['nome'].dirty ||
+                  bookingForm.controls['nome'].touched)
+              "
               class="form-error"
             >
-              <div *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']">
+              <div
+                *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']"
+              >
                 inserisci il nome
               </div>
             </div>
@@ -47,14 +46,16 @@
             <!--check Email-->
             <div
               *ngIf="
-                    bookingForm &&
-                    bookingForm.controls['mail'].invalid &&
-                    (bookingForm.controls['mail'].dirty ||
-                      bookingForm.controls['mail'].touched)
-                  "
+                bookingForm &&
+                bookingForm.controls['mail'].invalid &&
+                (bookingForm.controls['mail'].dirty ||
+                  bookingForm.controls['mail'].touched)
+              "
               class="form-error"
             >
-              <div *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']">
+              <div
+                *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']"
+              >
                 inserisci l'email
               </div>
             </div>
@@ -67,10 +68,7 @@
               [(ngModel)]="barbiere"
               [ngModelOptions]="{ standalone: true }"
             >
-              <option
-                *ngFor="let barber of barbers"
-                [ngValue]="barber"
-              >
+              <option *ngFor="let barber of barbers" [ngValue]="barber">
                 {{ barber.nome }}
               </option>
             </select>
@@ -103,7 +101,6 @@
                     style="padding: 0%"
                   >
                     <mat-checkbox
-                      style="color: black"
                       [name]="treatment.nome"
                       (change)="onTreatmentChecked($event.checked, treatment)"
                     >
@@ -116,10 +113,7 @@
           </div>
         </div>
         <!--ORAIO-->
-        <div
-          class="orario"
-          *ngIf="orari"
-        >
+        <div class="orario" *ngIf="orari">
           <label for="customer-name">Orari</label>
           <select
             class="form-control"
@@ -127,10 +121,7 @@
             [(ngModel)]="periodoSelezionato"
             [ngModelOptions]="{ standalone: true }"
           >
-            <option
-              *ngFor="let periodo of orari"
-              [ngValue]="periodo"
-            >
+            <option *ngFor="let periodo of orari" [ngValue]="periodo">
               {{ periodo[0] }} / {{ periodo[1] }}
             </option>
           </select>
@@ -140,7 +131,12 @@
           class="btn btn-dark"
           id="prenota-taglio"
           *ngIf="!loadingRes; else loader"
-          [disabled]="!this.bookingForm.valid && !this.barbiere && !this.giornoSelezionato && !this.periodoSelezionato"
+          [disabled]="
+            !this.bookingForm.valid &&
+            !this.barbiere &&
+            !this.giornoSelezionato &&
+            !this.periodoSelezionato
+          "
         >
           Prenota
         </button>
