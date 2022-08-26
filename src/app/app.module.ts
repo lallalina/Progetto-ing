@@ -26,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from './core/services/message.service';
 import { DialogComponent } from './pages/user-page/dialog/dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
+import { DialogDeleteUserComponent } from './pages/user-page/dialog-delete-user/dialog-delete-user.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ReviewsComponent } from './pages/reviews/reviews.component';
     DialogComponent,
     ReviewsComponent,
     DeleteBookingPageComponent,
+    DialogDeleteUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,9 +18,4 @@ export class DialogComponent implements OnInit {
   onOkClick(): void {
     this.dialogRef.close();
   }
-
-  /*cancella utente
-  deleteUser(user) {
-    this.auth.deleteUser(user.id).subscribe((response) => {});
-  }*/
 }

@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { DialogDeleteUserComponent } from './dialog-delete-user/dialog-delete-user.component';
 
 @Component({
   templateUrl: './user-page.component.html',
@@ -26,10 +27,10 @@ export class UserPageComponent implements OnInit {
     private notifyService: NotificationsService,
     private auth: AuthService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
-  public dialog: MatDialog;
   loading: boolean;
   isAdmin: boolean;
 
@@ -75,8 +76,8 @@ export class UserPageComponent implements OnInit {
   openDialogUtente(user: User) {
     console.log(user);
     //this.loadingProds = true;
-    this.dialog.open(DialogComponent, {
-      data: user,
+    this.dialog.open(DialogDeleteUserComponent, {
+      data: user.id,
     });
   }
 }
