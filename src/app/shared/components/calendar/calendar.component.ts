@@ -4,6 +4,7 @@ import {
   ViewChild,
   TemplateRef,
   OnInit,
+  Input,
 } from '@angular/core';
 import {
   startOfDay,
@@ -28,6 +29,7 @@ import { booking, CalendarBooking } from 'src/app/models/booking';
 import { UtilsService } from 'src/app/core/services/utils.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReservationDialogComponent } from '../reservation-dialog/reservation-dialog.component';
+import { Barber } from 'src/app/models/barber.model';
 
 const colors: any = {
   red: {
@@ -52,6 +54,8 @@ const colors: any = {
 })
 export class CalendarComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+
+  @Input() barberId: Barber['id']
 
   prenotazioniB = [];
 
@@ -109,28 +113,41 @@ export class CalendarComponent implements OnInit {
   //eventi da visualizzare in tabella, si chiama nell'init quando cambio il tipo
   aggiornaTabella() {
     this.events = [];
-    this.bookingService.getBookings().subscribe((response) => {
-      response.forEach((booking) => {
-        const newEvent: CalendarEvent = {
-          title: `${booking.nome} (${booking.mail})`,
-          start: new Date(booking.startTime),
-          end: new Date(booking.endTime),
-          color: colors.red,
-          draggable: false,
-          resizable: {
-            beforeStart: false,
-            afterEnd: false,
-          }
-        }
-        this.events.push(newEvent);
-        this.calendarBookings.push({
-          event: newEvent,
-          booking
-        })
-        this.refresh.next();
-        console.log(this.events);
+    if (this.barberId) {
+      this.bookingService.getBookingsBarber(this.barberId).subscribe((response) => {
+        response.forEach((booking) => {
+          this.populateEvents(booking);
+          console.log(this.events);
+        });
+      })
+    } else {
+      this.bookingService.getBookings().subscribe((response) => {
+        response.forEach((booking) => {
+          this.populateEvents(booking);
+          console.log(this.events);
+        });
       });
-    });
+    }
+  }
+
+  private populateEvents(booking: booking) {
+    const newEvent: CalendarEvent = {
+      title: `${booking.nome} (${booking.mail})`,
+      start: new Date(booking.startTime),
+      end: new Date(booking.endTime),
+      color: colors.red,
+      draggable: false,
+      resizable: {
+        beforeStart: false,
+        afterEnd: false,
+      }
+    }
+    this.events.push(newEvent);
+    this.calendarBookings.push({
+      event: newEvent,
+      booking
+    })
+    this.refresh.next();
   }
 
   //seleziona un giorno

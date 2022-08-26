@@ -1,27 +1,54 @@
 <!--Navbae-->
 <app-navbar></app-navbar>
 
-<!--Calendar-->
-<app-calendar-barber></app-calendar-barber>
+<div class="container mt-2">
+  <h1>Benvenuto, {{this.user.nome}}</h1>
 
-<!--Le recensioni-->
-<!--Recensioni-->
-<div class="row mt-6 mb-5 recensioni" *ngIf="reviews">
-  <div class="col-4">
-    <h1>Le nostre recensioni</h1>
-    <div class="card" style="width: 18rem" *ngFor="let review of reviews">
-      <img class="card-img-top" src="assets/47774.png" alt="Card image cap" />
-      <div class="card-body">
-        <p class="card-text" style="color: black">
-          <b>voto:</b> {{ review.valutazione }}
-        </p>
-        <p class="card-text" style="color: black">
-          {{ review.descrizione }}
-        </p>
+  <legend class="mt-3">I tuoi appuntamenti: </legend>
+  <!--Calendar-->
+  <app-calendar
+    *ngIf="user"
+    [barberId]="this.user.id"
+    class="mt-4 p-3"
+  ></app-calendar>
+
+  <!--Le recensioni-->
+  <!--Recensioni-->
+  <div
+    class="row mt-6 mb-5 recensioni"
+    *ngIf="reviews && reviews.length"
+  >
+    <div class="col-4">
+      <h1>Cosa pensano di te</h1>
+      <div
+        class="card"
+        style="width: 18rem"
+        *ngFor="let review of reviews"
+      >
+        <img
+          class="card-img-top"
+          src="assets/47774.png"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p
+            class="card-text"
+            style="color: black"
+          >
+            <b>voto:</b> {{ review.valutazione }}
+          </p>
+          <p
+            class="card-text"
+            style="color: black"
+          >
+            {{ review.descrizione }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <!--Footer-->
 <app-footer></app-footer>

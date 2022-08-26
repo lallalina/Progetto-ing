@@ -4,6 +4,7 @@ import { Review } from 'src/app/models/review.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { booking } from 'src/app/models/booking';
+import { Barber } from 'src/app/models/barber.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +20,9 @@ export class ReviewService {
   }
 
   //recensioni per parrucchieri
-  recensioniP(): Observable<Review[]> {
+  recensioniP(id: Barber['id']): Observable<Review[]> {
     return this.http.get<Review[]>(
-      environment.API_URL + '/public/getRecensioniBarbiere'
+      environment.API_URL + '/public/getRecensioniBarbiere/' + id
     );
   }
 
