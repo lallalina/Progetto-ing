@@ -16,7 +16,6 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { TableComponent } from './components/table/table.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { CalendarBarberComponent } from './components/calendar-barber/calendar-barber.component';
 
 //material import
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -42,7 +41,6 @@ import { ReservationDialogComponent } from './components/reservation-dialog/rese
     CalendarComponent,
     TableComponent,
     LoaderComponent,
-    CalendarBarberComponent,
     PrenotazioneComponent,
     ReservationDialogComponent
   ],
@@ -76,7 +74,6 @@ import { ReservationDialogComponent } from './components/reservation-dialog/rese
     NavbarComponent,
     PrenotazioneComponent,
     ReservationDialogComponent,
-    CalendarBarberComponent,
     FooterComponent,
     CalendarComponent,
     TableComponent,

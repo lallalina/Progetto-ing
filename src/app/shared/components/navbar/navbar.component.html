@@ -44,10 +44,11 @@
         *ngIf="user"
       >
         <a
-          class="nav-link navbar-text"
+          class="nav-link navbar-text d-flex align-items-center"
           [routerLink]="['/user']"
         >
           <mat-icon style="color: white">perm_identity</mat-icon>
+          <span>{{this.user.nome}} {{this.user.cognome}}</span>
         </a>
       </li>
     </ul>
