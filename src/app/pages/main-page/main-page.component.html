@@ -53,21 +53,23 @@
   <!--Recensioni-->
   <div class="recensioni" *ngIf="reviews">
     <h1>Le nostre recensioni</h1>
-    <div class="row offset-2 cardRow">
-      <div
-        class="card col-6"
-        style="width: 25rem"
-        *ngFor="let review of reviews"
-      >
-        <img class="card-img-top" src="assets/47774.png" alt="Card image cap" />
-        <div class="card-body">
-          <p class="card-text" style="color: black">
-            <b>voto:</b> {{ review.valutazione }}
-          </p>
-          <p class="card-text" style="color: black">
-            <b>descrizione:</b> {{ review.descrizione }}
-          </p>
-        </div>
+    <div class="row">
+      <div class="col-4">
+        <mat-card class="example-card" *ngFor="let review of reviews">
+          <mat-card-title-group>
+            <img mat-card-sm-image src="assets/47774.png" alt="Card image" />
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="card-body">
+              <p class="card-text" style="color: black">
+                <b>voto:</b> {{ review.valutazione }}
+              </p>
+              <p class="card-text" style="color: black">
+                <b>descrizione:</b> {{ review.descrizione }}
+              </p>
+            </div>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
   </div>
