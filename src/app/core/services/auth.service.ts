@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { AuthResponse } from 'src/app/models/auth-response.model';
 import { Token } from 'src/app/models/token.model';
 import { environment } from 'src/environments/environment';
 import { User } from '../../models/user.model';
@@ -30,12 +31,12 @@ export class AuthService {
   login(obj) {
     console.log(obj);
     return this.http
-      .post<Array<Token | User>>(environment.API_URL + '/login', obj)
+      .post<AuthResponse>(environment.API_URL + '/login', obj)
       .pipe(
         tap((response) => {
           console.log(response);
-          this.jwt = (response[0] as Token).jwt;
-          this.user = response[1] as User;
+          this.jwt = response.jwt;
+          this.user = response.user
         })
       );
   }

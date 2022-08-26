@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
         //controllo ruolo admin
         console.log(this.user.authorities);
         user.authorities.forEach((authority) => {
-          switch (authority.role) {
+          switch (authority.authority) {
             case UserRole.ADMIN: {
               this.isAdmin = true;
               break;

@@ -7,7 +7,7 @@ export enum UserRole {
 }
 
 export interface Authority {
-  role: UserRole;
+  authority: UserRole;
 }
 
 export interface User {
