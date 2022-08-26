@@ -10,31 +10,36 @@ import { DialogComponent } from './dialog/dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Ordine } from 'src/app/models/ordine.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.css'],
 })
 export class UserPageComponent implements OnInit {
-  @Input() user: User;
-  @Input() orders: Ordine[];
+  user: User;
+  orders: Ordine[];
   prenotazioni: booking[];
 
   constructor(
     private orderService: OrderdService,
     private notifyService: NotificationsService,
+    private auth: AuthService,
     private toastr: ToastrService,
     private router: Router
-  ) {}
+  ) { }
 
   public dialog: MatDialog;
   loading: boolean;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = this.auth.user;
+    this.getOrdini()
+  }
 
   //get ordini utente
   getOrdini() {
-    this.orderService.getOrdiniUtente().subscribe((response) => {
+    this.orderService.getOrdiniUtente(this.user.id).subscribe((response) => {
       this.orders = response;
       console.log(this.orders);
     });
@@ -58,9 +63,7 @@ export class UserPageComponent implements OnInit {
     console.log(user);
     //this.loadingProds = true;
     this.dialog.open(DialogComponent, {
-      data: user,
-      width: '520px',
-      height: '520px',
+      data: user
     });
   }
 }
