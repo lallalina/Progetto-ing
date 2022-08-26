@@ -11,14 +11,14 @@ import { DialogComponent } from './dialog/dialog.component';
 export class OrderComponent implements OnInit {
   @Input() orders: Ordine[];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   //dialog per la visualizzazione dei prodotti acquistati
   openDialog(prodotti: Ordine['prodotti']): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: prodotti
+      data: prodotti,
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');

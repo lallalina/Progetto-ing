@@ -6,7 +6,12 @@
     <div class="col-6">
       <!--disabilita notifiche-->
       <h3>Disabilita le notifiche</h3>
-      <button mat-button (click)="notify(user)" *ngIf="!loading; else loader">
+      <button
+        mat-button
+        (click)="notify(user)"
+        *ngIf="!loading; else loader"
+        class="button"
+      >
         disattiva notifiche
       </button>
     </div>
@@ -15,9 +20,7 @@
     <div class="div col-6">
       <h3>Elimina il tuo profilo</h3>
       <div>
-        <button mat-raised-button (click)="openDialog(user)">
-          Elimina profilo
-        </button>
+        <button mat-raised-button class="button">Elimina profilo</button>
       </div>
     </div>
   </div>
@@ -40,7 +43,13 @@
           <td></td>
           <!--prodotti-->
           <td>
-            {{ row.prodotti }}
+            <button
+              mat-icon-button
+              mat-raised-button
+              (click)="openDialog(row.prodotti)"
+            >
+              <mat-icon>shopping_cart</mat-icon>
+            </button>
           </td>
         </ng-template>
       </app-table>

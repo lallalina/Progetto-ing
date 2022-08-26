@@ -27,14 +27,14 @@ export class UserPageComponent implements OnInit {
     private auth: AuthService,
     private toastr: ToastrService,
     private router: Router
-  ) { }
+  ) {}
 
   public dialog: MatDialog;
   loading: boolean;
 
   ngOnInit(): void {
     this.user = this.auth.user;
-    this.getOrdini()
+    this.getOrdini();
   }
 
   //get ordini utente
@@ -44,6 +44,17 @@ export class UserPageComponent implements OnInit {
       console.log(this.orders);
     });
   }
+
+  //dialog per la visualizzazione dei prodotti acquistati
+  openDialog(prodotti: Ordine['prodotti']): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: prodotti,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
   //disabilita notifiche
   notify(user: User) {
     this.loading = true;
@@ -55,15 +66,6 @@ export class UserPageComponent implements OnInit {
         this.router.navigate(['/']);
       },
       complete: () => (this.loading = false),
-    });
-  }
-
-  //dialog per eliminare utente
-  openDialog(user: User) {
-    console.log(user);
-    //this.loadingProds = true;
-    this.dialog.open(DialogComponent, {
-      data: user
     });
   }
 }

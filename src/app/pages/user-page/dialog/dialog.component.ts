@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { User } from 'src/app/models/user.model';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Ordine } from 'src/app/models/ordine.model';
 
 @Component({
   selector: 'app-dialog',
@@ -9,17 +8,19 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./dialog.component.css'],
 })
 export class DialogComponent implements OnInit {
-  @Input() user: User[];
-
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: User,
-    private auth: AuthService
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Ordine['prodotti']
   ) {}
 
   ngOnInit(): void {}
 
-  //cancella utente
+  onOkClick(): void {
+    this.dialogRef.close();
+  }
+
+  /*cancella utente
   deleteUser(user) {
     this.auth.deleteUser(user.id).subscribe((response) => {});
-  }
+  }*/
 }

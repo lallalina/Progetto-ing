@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login-page/login.component';
 import { RegistrationComponent } from './pages/registration-page/registration.component';
 import { CartComponent } from './pages/cart-page/cart.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
+import { DeleteBookingPageComponent } from './pages/delete-booking-page/delete-booking-page.component';
 
 //elementi
 import { CommonModule } from '@angular/common';
@@ -22,10 +24,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from './core/services/message.service';
-import { UserPageComponent } from './pages/user-page/user-page.component';
 import { DialogComponent } from './pages/user-page/dialog/dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
-import { DeleteBookingPageComponent } from './pages/delete-booking-page/delete-booking-page.component';
 
 @NgModule({
   declarations: [
