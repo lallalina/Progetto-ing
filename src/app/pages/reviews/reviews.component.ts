@@ -31,7 +31,8 @@ export class ReviewsComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      voto: new FormControl('', Validators.required),
+      valutazione: new FormControl('', Validators.required),
+      descrizione: new FormControl('')
     });
   }
 
