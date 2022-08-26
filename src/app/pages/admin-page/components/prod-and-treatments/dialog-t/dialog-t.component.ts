@@ -19,6 +19,8 @@ export class DialogTComponent implements OnInit {
 
   modifyForm: FormGroup;
 
+  loading: boolean;
+
   ngOnInit(): void {
     this.initModifyForm();
   }
@@ -36,13 +38,17 @@ export class DialogTComponent implements OnInit {
   //modifica trattamento
   modifyTreatment() {
     console.log(this.modifyForm.value);
-    this.treatmentsService.modifyTreatment(this.modifyForm.value).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.data.nome = response.nome;
-        this.data.prezzo = response.prezzo;
-        this.data.durata = response.durata;
-      },
-    });
+    this.loading = true;
+    this.treatmentsService
+      .modifyTreatment({ ...this.modifyForm.value })
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.data.nome = response.nome;
+          this.data.prezzo = response.prezzo;
+          this.data.durata = response.durata;
+        },
+        complete: () => (this.loading = false),
+      });
   }
 }

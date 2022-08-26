@@ -1,45 +1,54 @@
 <!--Modifica trattamento-->
-<div>
-  <div mat-dialog-actions class="dialog">
-    <form id="form" (ngSubmit)="modifyTreatment()" [formGroup]="modifyForm">
-      <legend>Modifica Trattamento</legend>
-      <!--nome-->
-      <div class="form-group">
-        <label>nome:</label>
-        <input
-          formControlName="nome"
-          class="form-control"
-          type="text"
-          name="nome"
-          placeholder="Nome"
-        />
-      </div>
-      <!--prezzo-->
-      <div class="form-group">
-        <label>prezzo:</label>
-        <input
-          formControlName="prezzo"
-          class="form-control"
-          type="number"
-          name="Prezzo"
-          placeholder="Prezzo"
-        />
-      </div>
-      <!--durata-->
-      <div class="form-group">
-        <label>durata:</label>
-        <input
-          formControlName="durata"
-          class="form-control"
-          type="number"
-          name="durata"
-          placeholder="durata"
-        />
-      </div>
-      <button mat-button mat-dialog-close>No</button>
-      <button mat-button mat-dialog-close cdkFocusInitial type="submit">
-        Ok
-      </button>
-    </form>
+<h1 mat-dialog-title>Modifica Trattamento</h1>
+<div mat-dialog-content>
+  <form id="form" [formGroup]="modifyForm">
+    <!--nome-->
+    <div class="form-group">
+      <label>Nome:</label>
+      <input
+        formControlName="nome"
+        class="form-control"
+        type="text"
+        name="nome"
+        placeholder="Nome"
+      />
+    </div>
+    <!--prezzo-->
+    <div class="form-group">
+      <label>Prezzo (€):</label>
+      <input
+        formControlName="prezzo"
+        class="form-control"
+        type="text"
+        name="Prezzo"
+        placeholder="Prezzo"
+      />
+    </div>
+    <!--durata-->
+    <div class="form-group">
+      <label>Durata (min):</label>
+      <input
+        formControlName="durata"
+        class="form-control"
+        type="number"
+        name="durata"
+        placeholder="durata"
+      />
+    </div>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Annulla</button>
+    <button
+      mat-button
+      mat-dialog-close
+      type="submit"
+      *ngIf="!loading; else loader"
+      (click)="modifyTreatment()"
+    >
+      Conferma
+    </button>
   </div>
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
 </div>

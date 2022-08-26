@@ -1,8 +1,5 @@
 /* Import Google Fonts (Maven Pro) */
 @import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,700,900");
-
-/* COPERTINA - NAVBAR */
-/*Mobile*/
 @import "material-icons/iconfont/material-icons.css";
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
