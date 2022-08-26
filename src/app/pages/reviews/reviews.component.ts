@@ -16,7 +16,7 @@ export class ReviewsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   form;
   recensioni: Review;
@@ -37,7 +37,7 @@ export class ReviewsComponent implements OnInit {
 
   doReview() {
     this.loading = true;
-    this.reviewService.doReview(this.id, this.form.value).subscribe({
+    this.reviewService.doReview({ ...this.form.value, idPrenotazione: this.id }).subscribe({
       next: (response) => {
         this.toastr.success('Recensione effettuata');
         /* this.router.navigate(['/']);*/
