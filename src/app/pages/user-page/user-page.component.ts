@@ -5,7 +5,7 @@ import { NotificationsService } from 'src/app/core/services/notifications.servic
 import { OrderdService } from 'src/app/core/services/orderd.service';
 
 import { booking } from 'src/app/models/booking';
-import { User } from 'src/app/models/user.model';
+import { User, UserRole } from 'src/app/models/user.model';
 import { DialogComponent } from './dialog/dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -31,9 +31,11 @@ export class UserPageComponent implements OnInit {
 
   public dialog: MatDialog;
   loading: boolean;
+  isAdmin: boolean;
 
   ngOnInit(): void {
     this.user = this.auth.user;
+    this.isAdmin = this.user.role === UserRole.ADMIN;
     this.getOrdini();
   }
 

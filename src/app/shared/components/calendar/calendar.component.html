@@ -2,6 +2,7 @@
   mat-raised-button
   color="primary"
   class="mb-5 ml-5"
+  *ngIf="!barberId"
   (click)="openReservationDialog()"
 >Nuova prenotazione</button>
 
@@ -136,12 +137,14 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-danger"
-      *ngIf="!loading;else loader"
-      (click)="deleteBooking(modalData?.booking.id, modalData?.event)"
-    >Elimina prenotazione</button>
+    <div *ngIf="!loading;else loader">
+      <button
+        type="button"
+        class="btn btn-danger"
+        *ngIf="!this.barberId"
+        (click)="deleteBooking(modalData?.booking.id, modalData?.event)"
+      >Elimina prenotazione</button>
+    </div>
     <button
       type="button"
       class="btn btn-outline-secondary"

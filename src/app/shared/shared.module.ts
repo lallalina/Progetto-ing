@@ -16,7 +16,6 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { TableComponent } from './components/table/table.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { CalendarBarberComponent } from './components/calendar-barber/calendar-barber.component';
 
 //material import
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -32,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 import { PrenotazioneComponent } from '../pages/main-page/components/prenotazione/prenotazione.component';
 import { ReservationDialogComponent } from './components/reservation-dialog/reservation-dialog.component';
 
@@ -42,7 +42,6 @@ import { ReservationDialogComponent } from './components/reservation-dialog/rese
     CalendarComponent,
     TableComponent,
     LoaderComponent,
-    CalendarBarberComponent,
     PrenotazioneComponent,
     ReservationDialogComponent
   ],
@@ -76,7 +75,6 @@ import { ReservationDialogComponent } from './components/reservation-dialog/rese
     NavbarComponent,
     PrenotazioneComponent,
     ReservationDialogComponent,
-    CalendarBarberComponent,
     FooterComponent,
     CalendarComponent,
     TableComponent,

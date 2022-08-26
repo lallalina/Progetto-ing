@@ -10,30 +10,55 @@
   <div class="navbar-collapse">
     <ul class="navbar-nav mr-auto border-bottom">
       <li class="nav-item active">
-        <a class="nav-link navbar-text" [routerLink]="['']">Home</a>
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['']"
+        >Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link navbar-text" [routerLink]="['/shop']">Shop</a>
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['/shop']"
+        >Shop</a>
       </li>
-      <li class="nav-item active" *ngIf="user && isAdmin">
-        <a class="nav-link navbar-text" [routerLink]="['/admin']"
-          >Area amministratore</a
+      <li
+        class="nav-item active"
+        *ngIf="user && isAdmin"
+      >
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['/admin']"
+        >Area amministratore</a>
+      </li>
+      <li
+        class="nav-item active"
+        *ngIf="user && isBarber"
+      >
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['/responsible']"
+        >Area responsabile</a>
+      </li>
+      <li
+        class="nav-item active"
+        *ngIf="user"
+      >
+        <a
+          class="nav-link navbar-text d-flex align-items-center"
+          [routerLink]="['/user']"
         >
-      </li>
-      <li class="nav-item active" *ngIf="user">
-        <a class="nav-link navbar-text" [routerLink]="['/user']">
           <mat-icon style="color: white">perm_identity</mat-icon>
+          <span>{{this.user.nome}} {{this.user.cognome}}</span>
         </a>
-      </li>
-      <li class="nav-item active" *ngIf="user && isBarber">
-        <a class="nav-link navbar-text" [routerLink]="['/responsible']"
-          >Area responsabile</a
-        >
       </li>
     </ul>
 
     <div class="h-100 d-flex align-items-center justify-content-around">
-      <span [matBadge]="items.length" matBadgeSize="small" matBadgeColor="warn">
+      <span
+        [matBadge]="items.length"
+        matBadgeSize="small"
+        matBadgeColor="warn"
+      >
         <span
           class="material-icons clickable text-white text-sm"
           [routerLink]="['/cart']"
@@ -51,7 +76,10 @@
       </button>
     </div>
 
-    <ng-template #logged class="clickable">
+    <ng-template
+      #logged
+      class="clickable"
+    >
       <div class="ml-3 d-flex align-items-center">
         <span
           class="material-icons clickable text-white text-sm"
