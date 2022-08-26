@@ -16,8 +16,8 @@ import { User } from 'src/app/models/user.model';
 })
 export class CartComponent implements OnInit {
   items: CartItem[]; //prende i prodotti
-  indirizzi: Address[]; //prende i nuovi indirizzi
-  user: User; //prende gli indirizzi dell'utente
+  indirizzi: Address[]; //prende gli indirizzi dell'utente
+  user: User;
 
   form: FormGroup;
   public total: number;
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
     private auth: AuthService,
     private orderdService: OrderdService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.user = this.auth.user;
@@ -103,9 +103,11 @@ export class CartComponent implements OnInit {
 
   //get indirizzi esisteni
   retrieveIndirizziUser() {
-    this.cartService.getIndirizzi(this.user.id).subscribe((response) => {
-      this.indirizzi = response;
-    });
+    if (this.user) {
+      this.cartService.getIndirizzi(this.user.id).subscribe((response) => {
+        this.indirizzi = response;
+      });
+    }
   }
 
   arrayToString(): string {
