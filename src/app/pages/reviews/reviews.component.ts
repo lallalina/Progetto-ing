@@ -16,7 +16,7 @@ export class ReviewsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   form;
   recensioni: Review;
@@ -32,23 +32,25 @@ export class ReviewsComponent implements OnInit {
   initForm() {
     this.form = new FormGroup({
       valutazione: new FormControl('', Validators.required),
-      descrizione: new FormControl('')
+      descrizione: new FormControl(''),
     });
   }
 
   doReview() {
     this.loading = true;
-    this.reviewService.doReview({ ...this.form.value, idPrenotazione: this.id }).subscribe({
-      next: (response) => {
-        this.toastr.success('Recensione effettuata');
-        /* this.router.navigate(['/']);*/
-        this.form.value = response;
-        console.log(response);
-      },
-      complete: () => {
-        this.form.reset();
-        this.loading = false;
-      },
-    });
+    this.reviewService
+      .doReview({ ...this.form.value, idPrenotazione: this.id })
+      .subscribe({
+        next: (response) => {
+          this.toastr.success('Recensione effettuata');
+          this.router.navigate(['/']);
+          this.form.value = response;
+          console.log(response);
+        },
+        complete: () => {
+          this.form.reset();
+          this.loading = false;
+        },
+      });
   }
 }

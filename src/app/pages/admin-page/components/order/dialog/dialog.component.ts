@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Ordine } from 'src/app/models/ordine.model';
 
@@ -8,13 +8,12 @@ import { Ordine } from 'src/app/models/ordine.model';
   styleUrls: ['./dialog.component.css'],
 })
 export class DialogComponent implements OnInit {
-
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Ordine['prodotti']
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onOkClick(): void {
     this.dialogRef.close();

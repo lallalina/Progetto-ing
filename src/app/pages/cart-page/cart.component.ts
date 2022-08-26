@@ -111,7 +111,7 @@ export class CartComponent implements OnInit {
   arrayToString(): string {
     let result = '';
     this.items.forEach((item, index) => {
-      for (let i = 1; i < item.amount; i++) {
+      for (let i = 0; i < item.amount; i++) {
         result += item.product.id + ',';
       }
     });

@@ -47,7 +47,7 @@ export class CartService {
     return this.getItems().map((cartItem) => cartItem.product.id);
   }
 
-  //aggiungi items
+  //aggiungi items al carrello
   public addItem(item: CartItem) {
     const _cart = this.getItems();
     console.log(item);
@@ -55,7 +55,8 @@ export class CartService {
     if (this.getItemIds().includes(item.product.id)) {
       _cart.forEach(function (cartItem) {
         if (cartItem.product.id === item.product.id) {
-          cartItem.amount += item.amount;
+          const newAmount: number = cartItem.amount + item.amount;
+          cartItem.amount = newAmount;
         }
       });
       this.toastService.success('Cambiata quantità di: ' + item.product.nome);
@@ -63,6 +64,7 @@ export class CartService {
       _cart.push(item);
       this.toastService.success('Aggiunto al carrello: ' + item.product.nome);
     }
+    console.log(_cart);
     this.cart = _cart;
   }
 
@@ -119,6 +121,9 @@ export class CartService {
 
   //nuovo indirizzo
   nuovoIndirizzo(address: Address): Observable<Address> {
-    return this.http.post<Address>(`${environment.API_URL}/user/nuovoIndirizzo`, address);
+    return this.http.post<Address>(
+      `${environment.API_URL}/user/nuovoIndirizzo`,
+      address
+    );
   }
 }

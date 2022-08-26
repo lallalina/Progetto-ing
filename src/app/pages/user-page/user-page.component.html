@@ -1,39 +1,56 @@
 <!--navbar-->
 <app-navbar></app-navbar>
 
-<!--form modifica credenziali-->
+<div class="container">
+  <div class="row elem1">
+    <div class="col-6">
+      <!--disabilita notifiche-->
+      <h3>Disabilita le notifiche</h3>
+      <button mat-button (click)="notify(user)" *ngIf="!loading; else loader">
+        disattiva notifiche
+      </button>
+    </div>
 
-<!--disabilita notifiche-->
-<p>Disabilita le notifiche</p>
-<mat-slide-toggle [(ngModel)]="isChecked">elimina</mat-slide-toggle>
+    <!--elimina profilo-->
+    <div class="div col-6">
+      <h3>Elimina il tuo profilo</h3>
+      <div>
+        <button mat-raised-button (click)="openDialog(user)">
+          Elimina profilo
+        </button>
+      </div>
+    </div>
+  </div>
 
-<!--elimina profilo-->
-<div *ngFor="let row of user">
-  <h1>Elimina il tuo profilo</h1>
-  <button mat-raised-button (click)="openDialog(row)">Elimina</button>
-</div>
-
-<!--lista ordini effettuati-->
-<div *ngIf="prenotazioni">
-  <table *ngFor="let row of prenotazioni">
-    <tr>
-      <th>
-        <ul>
-          Prenotazioni
-        </ul>
-      </th>
-    </tr>
-    <tr>
-      <td>
-        <ol>
-          {{
-            row.prenotazioni
-          }}
-        </ol>
-      </td>
-    </tr>
-  </table>
+  <!--Table Orders-->
+  <div class="row">
+    <div class="col-12 mb-3 mt-5">
+      <app-table [data]="orders">
+        <ng-template #headers>
+          <th>Indirizzo</th>
+          <th></th>
+          <th>Prodotti</th>
+        </ng-template>
+        <ng-template #rows let-row>
+          <!--indirizzo-->
+          <td>
+            {{ row.destinatario.via }},{{ row.destinatario.numeroCivico }},
+            {{ row.destinatario.citta }}, {{ row.destinatario.cap }}
+          </td>
+          <td></td>
+          <!--prodotti-->
+          <td>
+            {{ row.prodotti }}
+          </td>
+        </ng-template>
+      </app-table>
+    </div>
+  </div>
 </div>
 
 <!--footer-->
 <app-footer></app-footer>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
