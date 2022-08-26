@@ -2,20 +2,22 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-  <div class="row elem1">
-    <div class="col-6">
-      <!--disabilita notifiche-->
-      <h3>Disabilita le notifiche</h3>
-      <button mat-button (click)="notify(user)" *ngIf="!loading; else loader">
-        disattiva notifiche
-      </button>
+  <div class="row mt-2">
+    <h1 class="mt-2">Benvenuto, {{ this.user.nome }}</h1>
+  </div>
+  <br />
+  <div class="row align-items-center">
+    <!--disabilita notifiche-->
+    <h4 class="mr-2">Notifiche</h4>
+    <div>
+      <mat-slide-toggle></mat-slide-toggle>
     </div>
 
     <!--elimina profilo-->
     <div class="div col-6">
       <h3>Elimina il tuo profilo</h3>
       <div>
-        <button mat-raised-button (click)="openDialog(user)">
+        <button mat-raised-button (click)="openDialogUtente(user)">
           Elimina profilo
         </button>
       </div>
@@ -43,7 +45,7 @@
             <button
               mat-icon-button
               mat-raised-button
-              (click)="openDialog(row.prodotti)"
+              (click)="openDialogProdotti(row.prodotti)"
             >
               <mat-icon>shopping_cart</mat-icon>
             </button>

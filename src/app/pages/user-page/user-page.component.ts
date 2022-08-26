@@ -48,7 +48,7 @@ export class UserPageComponent implements OnInit {
   }
 
   //dialog per la visualizzazione dei prodotti acquistati
-  openDialog(prodotti: Ordine['prodotti']): void {
+  openDialogProdotti(prodotti: Ordine['prodotti']): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: prodotti,
     });
@@ -68,6 +68,15 @@ export class UserPageComponent implements OnInit {
         this.router.navigate(['/']);
       },
       complete: () => (this.loading = false),
+    });
+  }
+
+  //dialog per eliminare utente
+  openDialogUtente(user: User) {
+    console.log(user);
+    //this.loadingProds = true;
+    this.dialog.open(DialogComponent, {
+      data: user,
     });
   }
 }
