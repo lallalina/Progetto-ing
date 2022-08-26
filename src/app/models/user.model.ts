@@ -16,11 +16,13 @@ export interface User {
   cognome: string;
   accountNonExpired: boolean;
   accountNonLocked: boolean;
-  authorities: Authority[];
+  role: UserRole;
   enabled: boolean;
   credentialsNonExpired: boolean;
   jwt: string;
   mail: string;
   password: string;
   indirizzi: Address[];
+  cellulare?: string;
+  notifiche: boolean;
 }

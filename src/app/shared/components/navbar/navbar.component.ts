@@ -41,27 +41,24 @@ export class NavbarComponent implements OnInit {
         this.user = user;
 
         //controllo ruolo admin
-        console.log(this.user.authorities);
-        user.authorities.forEach((authority) => {
-          switch (authority.authority) {
-            case UserRole.ADMIN: {
-              this.isAdmin = true;
-              break;
-            }
-            case UserRole.BARBER: {
-              this.isBarber = true;
-              break;
-            }
-            case UserRole.CUSTOMER: {
-              this.isUser = true;
-              break;
-            }
-            default: {
-              this.isUser = true;
-              break;
-            }
+        switch (this.user.role) {
+          case UserRole.ADMIN: {
+            this.isAdmin = true;
+            break;
           }
-        });
+          case UserRole.BARBER: {
+            this.isBarber = true;
+            break;
+          }
+          case UserRole.CUSTOMER: {
+            this.isUser = true;
+            break;
+          }
+          default: {
+            this.isUser = true;
+            break;
+          }
+        }
       }
     });
   }
