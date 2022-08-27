@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserRole } from 'src/app/models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,11 @@ export class LoginComponent implements OnInit {
 
   loading: boolean;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         this.id = this.utente.id;
         sessionStorage.setItem('id', this.id); //salvo l'id nel session storage
+        this.toastr.success('Accesso avvenuto con successo');
         this.router.navigate(['/']);
       },
     });
@@ -67,7 +73,4 @@ export class LoginComponent implements OnInit {
       ]),
     });
   }
-
-  //controllo dei ruoli
-  checkRole() {}
 }

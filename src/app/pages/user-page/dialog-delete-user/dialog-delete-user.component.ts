@@ -31,10 +31,11 @@ export class DialogDeleteUserComponent implements OnInit {
     this.auth.deleteUser(this.data).subscribe({
       next: (response) => {
         this.toastr.warning('Utente eliminato');
-        this.router.navigate(['/']);
+        this.router.navigate(['']);
       },
       complete: () => {
-        this.loading = false;
+        this.data = null;
+        this.auth.logout();
         this.dialogRef.close();
       },
     });

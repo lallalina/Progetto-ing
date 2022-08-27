@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/core/services/cart.service';
 import { CartItem } from 'src/app/models/cart.model';
 import { element } from 'protractor';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -25,8 +26,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private cartService: CartService
-  ) { }
+    private cartService: CartService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.items = this.cartService.getItems();
@@ -66,6 +68,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.user = null;
     this.auth.logout();
+    this.toastr.warning('Uscito dal sito');
     this.router.navigate(['']);
   }
 }

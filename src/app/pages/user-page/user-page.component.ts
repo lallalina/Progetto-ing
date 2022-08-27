@@ -33,6 +33,7 @@ export class UserPageComponent implements OnInit {
 
   loading: boolean;
   isAdmin: boolean;
+  isChecked: boolean;
 
   ngOnInit(): void {
     this.user = this.auth.user;
@@ -40,6 +41,7 @@ export class UserPageComponent implements OnInit {
     this.getOrdini();
   }
 
+  /*PRODOTTI*/
   //get ordini utente
   getOrdini() {
     this.orderService.getOrdiniUtente(this.user.id).subscribe((response) => {
@@ -58,20 +60,28 @@ export class UserPageComponent implements OnInit {
     });
   }
 
+  /*NOTIFICHE*/
   //disabilita notifiche
-  notify(user: User) {
+  notify(event: User['id']) {
     this.loading = true;
-    this.notifyService.notifyDisable(user).subscribe({
-      next: (response) => {
-        this.toastr.success('Cancellazione effettuata');
-        user = response;
-        console.log(response);
-        this.router.navigate(['/']);
-      },
-      complete: () => (this.loading = false),
-    });
+    if (this.isChecked == true) {
+      console.log(this.isChecked);
+      this.notifyService.notifyDisable(event).subscribe({
+        next: (response) => {
+          this.toastr.info('Notifiche attivate');
+          this.user = response;
+          console.log(response);
+          this.router.navigate(['/']);
+        },
+        complete: () => (this.loading = false),
+      });
+    } else {
+      console.log(this.isChecked);
+      this.toastr.info('Notifiche disattivate');
+    }
   }
 
+  /*ELIMINAZIONE UTENTE*/
   //dialog per eliminare utente
   openDialogUtente(user: User) {
     console.log(user);

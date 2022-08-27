@@ -36,7 +36,7 @@ export class AuthService {
         tap((response) => {
           console.log(response);
           this.jwt = response.jwt;
-          this.user = response.user
+          this.user = response.user;
         })
       );
   }
@@ -69,8 +69,10 @@ export class AuthService {
   }
 
   //deleteUser
-  deleteUser(id: User['id']) {
-    return this.http.delete(environment.API_URL + '/user/eliminaUtente/' + id);
+  deleteUser(id: User['id']): Observable<User> {
+    return this.http.delete<User>(
+      environment.API_URL + '/user/eliminaUtente/' + id
+    );
   }
 
   //prendere id nel session storage
