@@ -12,21 +12,32 @@
         <div class="user_card">
           <div class="d-flex justify-content-center">
             <div class="brand_logo_container">
-              <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
+              <img
+                src="/assets/logo-white.png"
+                class="brand_logo"
+                alt="Logo"
+              />
             </div>
           </div>
-          <span class="material-icons clickable" [routerLink]="['/login']">
+          <span
+            class="material-icons clickable"
+            [routerLink]="['/login']"
+          >
             arrow_back
           </span>
           <div class="d-flex justify-content-center form_container">
-            <form name="form" [formGroup]="form" (ngSubmit)="registration()">
+            <form
+              name="form"
+              [formGroup]="form"
+              (ngSubmit)="registration()"
+            >
               <!--email-->
               <label>Email:</label><strong>*</strong>
               <div class="input-group">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><mat-icon>email</mat-icon></span
-                  >
+                  <span class="input-group-text">
+                    <mat-icon>email</mat-icon>
+                  </span>
                 </div>
                 <input
                   type="text"
@@ -40,9 +51,9 @@
               <label>Nome:</label><strong>*</strong>
               <div class="input-group">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><mat-icon>account_circle</mat-icon></span
-                  >
+                  <span class="input-group-text">
+                    <mat-icon>account_circle</mat-icon>
+                  </span>
                 </div>
                 <input
                   type="text"
@@ -56,9 +67,9 @@
               <label>Cognome:</label>
               <div class="input-group">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><mat-icon>account_circle</mat-icon></span
-                  >
+                  <span class="input-group-text">
+                    <mat-icon>account_circle</mat-icon>
+                  </span>
                 </div>
                 <input
                   type="text"
@@ -72,9 +83,9 @@
               <label>Password:</label><strong>*</strong>
               <div class="input-group">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><mat-icon> vpn_key</mat-icon></span
-                  >
+                  <span class="input-group-text">
+                    <mat-icon> vpn_key</mat-icon>
+                  </span>
                 </div>
                 <input
                   [type]="changetype ? 'password' : 'text'"
@@ -84,7 +95,10 @@
                   formControlName="password"
                   id="password"
                 />
-                <span class="eye" (click)="show()">
+                <span
+                  class="eye"
+                  (click)="show()"
+                >
                   <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
@@ -92,8 +106,8 @@
               <label>Conferma Password:</label><strong>*</strong>
               <div class="input-group">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><mat-icon> vpn_key</mat-icon>
+                  <span class="input-group-text">
+                    <mat-icon> vpn_key</mat-icon>
                   </span>
                 </div>
                 <input
@@ -104,14 +118,21 @@
                   formControlName="confirmPassword"
                   id="password"
                 />
-                <span class="eye" (click)="show2()">
+                <span
+                  class="eye"
+                  (click)="show2()"
+                >
                   <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
-              <div
-                class="d-flex justify-content-center mt-3 login_container mt-5"
-              >
-                <button type="submit" name="button" class="btn login_btn">
+              <div class="d-flex justify-content-center mt-3 login_container mt-5">
+                <button
+                  type="submit"
+                  name="button"
+                  class="btn login_btn"
+                  [disabled]="!this.form.valid"
+                  *ngIf="!loading;else loader"
+                >
                   Registrati
                 </button>
               </div>
@@ -122,3 +143,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
