@@ -1,3 +1,9 @@
+.identita,
+.recensioni div {
+  display: flex;
+  align-items: center;
+}
+
 .little-logo {
   max-width: 50px;
 }
@@ -14,4 +20,25 @@ h1 {
   max-width: 300px;
   margin-bottom: 8px;
   background-color: rgb(234, 230, 217);
+}
+
+@media screen and (max-width: 480px) {
+  .identita {
+    flex-direction: column;
+  }
+
+  .grid-container {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    grid-template-areas:
+      "area1"
+      "area2"
+      "area3"
+      "area4";
+  }
+  .grid-container div {
+    padding: 40px;
+    align-self: center;
+  }
 }
