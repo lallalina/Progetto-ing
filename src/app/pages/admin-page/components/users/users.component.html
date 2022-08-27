@@ -1,19 +1,24 @@
 <div class="container">
   <!--TODO add loader-->
-  <select
-    class="form-control role-filter"
-    [(ngModel)]="activeFilter"
-    (change)="applyActiveFilter()"
-  >
-    <option [value]="FilterOptions.All">Tutti</option>
-    <option [value]="FilterOptions.Barbers">Barbieri</option>
-    <option [value]="FilterOptions.Admins">Aministratori</option>
-  </select><span>
-    <mat-slide-toggle
-      (change)="barberRanking()"
-      [(ngModel)]="isChecked"
-    ></mat-slide-toggle>
-  </span>
+  <div class="d-flex w-100 justify-content-between">
+    <select
+      class="form-control role-filter"
+      [(ngModel)]="activeFilter"
+      (change)="applyActiveFilter()"
+    >
+      <option [value]="FilterOptions.All">Tutti</option>
+      <option [value]="FilterOptions.Barbers">Barbieri</option>
+      <option [value]="FilterOptions.Admins">Aministratori</option>
+    </select>
+    <div class="d-flex align-items-center">
+      <span class="text-white">Ordina barbieri per ranking</span>
+      <mat-slide-toggle
+        class="ml-2"
+        (change)="barberRanking()"
+        [(ngModel)]="isChecked"
+      ></mat-slide-toggle>
+    </div>
+  </div>
   <!--Table-->
   <app-table [data]="tableData">
     <ng-template #headers>
@@ -52,7 +57,7 @@
         [formGroup]="barbersForm"
         (ngSubmit)="addBarber()"
       >
-        <legend>Registra Parrucchieri</legend>
+        <legend>Registra Barbieri</legend>
         <!--nome-->
         <div class="form-group">
           <label>Nome:</label><strong>* </strong>

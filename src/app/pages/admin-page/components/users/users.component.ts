@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -27,6 +27,8 @@ enum FilterOptions {
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
+  @Output() rankingChanged = new EventEmitter<void>()
+
   @Input() set users(value: Barber[]) {
     this.usersList = value;
     this.tableData = this.usersList;
@@ -58,7 +60,7 @@ export class UsersComponent implements OnInit {
     private toastr: ToastrService,
     private rankingService: RankingService,
     private auth: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -226,6 +228,7 @@ export class UsersComponent implements OnInit {
         } else {
           this.toastr.info('Ranking disattivato');
         }
+        this.rankingChanged.emit();
       },
     });
   }

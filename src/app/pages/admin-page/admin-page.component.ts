@@ -44,7 +44,7 @@ export class AdminPageComponent implements OnInit {
     private barbersService: BarbersService,
     private productService: ProductsService,
     private orderService: OrderdService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.currentPage = Pages.Calendar;
@@ -93,6 +93,11 @@ export class AdminPageComponent implements OnInit {
       this.users = barbers.concat(admins);
       console.log(this.users);
     });
+  }
+
+  refreshUsers() {
+    this.barbersService.getBarbers().subscribe((_) => { })
+    this.getUsers()
   }
 
   //prendi ordini di tutti gli utenti
