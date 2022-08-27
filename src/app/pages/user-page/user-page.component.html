@@ -7,25 +7,30 @@
   </div>
   <br />
   <div class="row align-items-center">
-    <div class="row">
-      <h4 class="mr-2">Notifiche:</h4>
-      <div>
-        <mat-slide-toggle
-          (change)="notify()"
-          [(ngModel)]="isChecked"
-        ></mat-slide-toggle>
-      </div>
+    <h4 class="mr-2">Notifiche:</h4>
+    <div>
+      <mat-slide-toggle
+        (change)="notify()"
+        [(ngModel)]="isChecked"
+      ></mat-slide-toggle>
     </div>
-    <!--disabilita notifiche-->
+  </div>
+  <!--disabilita notifiche-->
 
-    <!--elimina profilo-->
-    <div class="div col-6" *ngIf="canDelete">
-      <h3>Elimina il tuo profilo</h3>
-      <div>
-        <button mat-raised-button (click)="openDialogUtente(user)">
-          Elimina profilo
-        </button>
-      </div>
+  <!--elimina profilo-->
+  <div
+    class="row"
+    *ngIf="canDelete"
+  >
+    <h4 class="mr-2">Elimina il tuo profilo</h4>
+    <div>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="openDialogUtente(user)"
+      >
+        Elimina profilo
+      </button>
     </div>
   </div>
 
@@ -38,7 +43,10 @@
           <th></th>
           <th>Prodotti</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <!--indirizzo-->
           <td>
             {{ row.destinatario.via }},{{ row.destinatario.numeroCivico }},

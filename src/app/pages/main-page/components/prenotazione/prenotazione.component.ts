@@ -36,6 +36,12 @@ export class PrenotazioneComponent implements OnInit {
 
   loadingRes: boolean;
 
+  calendarDatesFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    /* Prevent Saturday and Sunday for select. */
+    return day !== 0 && day !== 6 && day !== 1;
+  }
+
   constructor(
     private bookingService: BookingService,
     private barbersService: BarbersService,

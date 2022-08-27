@@ -25,11 +25,13 @@ export class RegistrationComponent implements OnInit {
   visible2: boolean = true;
   changetype2: boolean = true;
 
+  loading: boolean;
+
   constructor(
     private auth: AuthService,
     private router: Router,
     private toast: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -37,9 +39,13 @@ export class RegistrationComponent implements OnInit {
 
   //chiamataAPI
   registration() {
-    this.auth.registrazione(this.form.value).subscribe((response) => {
-      this.toast.success('registrazione avvenuta con successo');
-      this.router.navigate(['/login']);
+    this.loading = true;
+    this.auth.registrazione(this.form.value).subscribe({
+      next: (response) => {
+        this.toast.success('Registrazione avvenuta con successo');
+        this.router.navigate(['/login']);
+      },
+      complete: () => this.loading = false
     });
   }
 
@@ -60,7 +66,7 @@ export class RegistrationComponent implements OnInit {
     this.form = new FormGroup({
       mail: new FormControl('', [Validators.required, Validators.email]),
       nome: new FormControl('', Validators.required),
-      cognome: new FormControl('', Validators.required),
+      cognome: new FormControl(''),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),

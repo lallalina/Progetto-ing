@@ -14,13 +14,12 @@
       >
         <ng-template #headers>
           <th>Prodotto</th>
-          <th></th>
           <th class="text-center">Quantità</th>
           <th class="text-center">Prezzo</th>
           <th class="text-center">Subtotale</th>
-          <th class="text-right">
+          <th class="text-center">
             <button
-              class="btn btn-sm btn-outline-danger"
+              class="btn btn-sm btn-danger"
               (click)="onClearCart($event)"
             >
               pulisci carrello
@@ -31,20 +30,7 @@
           #rows
           let-row
         >
-          <td>
-            <div class="product-item">
-              <a
-                class="product-thumb"
-                routerLink="/products/{{ row.product.id }}"
-              >
-                <img
-                  [src]="row.product.im"
-                  alt="Product"
-                />
-              </a>
-            </div>
-          </td>
-
+          <!--nome prodotto-->
           <td>
             <div class="product-info">
               <h4 class="product-title">
@@ -55,6 +41,7 @@
               </h4>
             </div>
           </td>
+          <!--quantità-->
           <td class="text-center">
             <div class="count-input">
               <div class="input-group">
@@ -86,9 +73,11 @@
               </div>
             </div>
           </td>
+          <!--prezzo-->
           <td class="text-center text-lg text-medium">
             {{ row.product.prezzo | currency: "EUR" }}
           </td>
+          <!--prezzo-->
           <td class="text-center text-lg text-medium">
             {{ row.product.prezzo * row.amount | currency: "EUR" }}
           </td>
@@ -107,6 +96,7 @@
       </app-table>
       <div class="shopping-cart-footer mt-4">
         <div class="column text-xl text-white">
+          <!--totale-->
           Totale:
           <span class="text-xl">{{ total | currency: "EUR" }}</span>
         </div>
@@ -120,7 +110,7 @@
         >
           <div>
             <h4>Seleziona un tuo indirizzo:</h4>
-            <br>
+            <br />
             <select
               class="form-control"
               [(ngModel)]="selectedAddress"
@@ -129,17 +119,27 @@
                 *ngFor="let row of indirizzi"
                 [ngValue]="row"
               >
-                {{ row.via + ', ' + row.numeroCivico + ', ' + row.citta + ', ' + row.cap }}
+                {{
+                row.via +
+                ", " +
+                row.numeroCivico +
+                ", " +
+                row.citta +
+                ", " +
+                row.cap
+                }}
               </option>
             </select>
-            <br>
+            <br />
             <button
               mat-raised-button
               color="primary"
               (click)="ordina()"
               [disabled]="!this.selectedAddress || this.items.length === 0"
               *ngIf="!loading; else loader"
-            >Procedi all'ordine</button>
+            >
+              Procedi all'ordine
+            </button>
           </div>
         </div>
         <!--FORM Nuovo Indirizzo-->
@@ -163,7 +163,8 @@
                 *ngIf="
                   form &&
                   form.controls['citta'].invalid &&
-                  (form.controls['citta'].dirty || form.controls['citta'].touched)
+                  (form.controls['citta'].dirty ||
+                    form.controls['citta'].touched)
                 "
                 class="form-error"
               >
@@ -186,8 +187,7 @@
                 *ngIf="
                   form &&
                   form.controls['via'].invalid &&
-                  (form.controls['via'].dirty ||
-                    form.controls['via'].touched)
+                  (form.controls['via'].dirty || form.controls['via'].touched)
                 "
                 class="form-error"
               >
@@ -247,8 +247,11 @@
               type="submit"
               mat-raised-button
               color="primary"
-              *ngIf="!loading;else loader"
-            >Aggiungi indirizzo</button>
+              [disabled]="!this.form.valid"
+              *ngIf="!loading; else loader"
+            >
+              Aggiungi indirizzo
+            </button>
           </form>
         </div>
         <!--ordina-->
@@ -266,12 +269,16 @@
 
 <ng-template #notLogged>
   <div class="d-flex w-100 flex-column justify-content-center align-items-center mt-3">
-    <h3 class="text-white">Per procedere con l'ordine, devi aver eseguito l'accesso</h3>
-    <br>
+    <h3 class="text-white">
+      Per procedere con l'ordine, devi aver eseguito l'accesso
+    </h3>
+    <br />
     <button
       mat-raised-button
       color="primary"
       [routerLink]="['/login']"
-    >Accedi/Registrati</button>
+    >
+      Accedi/Registrati
+    </button>
   </div>
 </ng-template>

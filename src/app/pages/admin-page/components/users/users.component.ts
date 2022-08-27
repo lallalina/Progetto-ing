@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -10,9 +10,10 @@ import {
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { Barber } from 'src/app/models/barber.model';
 import * as _ from 'lodash';
-import { UserRole } from 'src/app/models/user.model';
+import { User, UserRole } from 'src/app/models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import { RankingService } from 'src/app/core/services/ranking.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 enum FilterOptions {
   All = 'Tutti',
@@ -26,6 +27,8 @@ enum FilterOptions {
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
+  @Output() rankingChanged = new EventEmitter<void>()
+
   @Input() set users(value: Barber[]) {
     this.usersList = value;
     this.tableData = this.usersList;
@@ -49,18 +52,22 @@ export class UsersComponent implements OnInit {
   visible2: boolean = true;
   changetype2: boolean = true;
 
+  user: User;
   isChecked: boolean;
 
   constructor(
     private barbersService: BarbersService,
     private toastr: ToastrService,
-    private rankingService: RankingService
-  ) {}
+    private rankingService: RankingService,
+    private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.initBarbersForm();
     this.initAdminsForm();
     this.applyActiveFilter();
+    this.user = this.auth.user;
+    this.getRanking();
   }
 
   /*filtro per la table*/
@@ -158,17 +165,14 @@ export class UsersComponent implements OnInit {
   //cancella admin e barbieri
   deleteUser(user: Barber) {
     this.loadingUsers = true;
-    if (user.role == UserRole.BARBER) {
+    if (user.role === UserRole.BARBER) {
       this.barbersService.deleteBarber(user.id).subscribe({
         next: (response) => {
           const usersIndex = this.usersList.findIndex(
             (item) => item.id === user.id
           );
           this.usersList.splice(usersIndex, 1);
-          const tableDataIndex = this.tableData.findIndex(
-            (item) => item.id === user.id
-          );
-          this.tableData.splice(tableDataIndex, 1);
+          this.applyActiveFilter();
           this.toastr.warning('Utente eliminato');
         },
         complete: () => (this.loadingUsers = false),
@@ -180,10 +184,7 @@ export class UsersComponent implements OnInit {
             (item) => item.id === user.id
           );
           this.usersList.splice(usersIndex, 1);
-          const tableDataIndex = this.tableData.findIndex(
-            (item) => item.id === user.id
-          );
-          this.tableData.splice(tableDataIndex, 1);
+          this.applyActiveFilter();
           this.toastr.warning('Utente eliminato');
         },
         error: (error) => {
@@ -206,6 +207,16 @@ export class UsersComponent implements OnInit {
     this.changetype2 = !this.changetype2;
   }
 
+  /*get value ranking*/
+  getRanking() {
+    this.rankingService.getRanking().subscribe({
+      next: (response) => {
+        this.isChecked = response;
+        console.log(response);
+      },
+    });
+  }
+
   /*ranking barbieri*/
   barberRanking() {
     this.rankingService.ranking(this.tableData).subscribe({
@@ -217,6 +228,7 @@ export class UsersComponent implements OnInit {
         } else {
           this.toastr.info('Ranking disattivato');
         }
+        this.rankingChanged.emit();
       },
     });
   }
