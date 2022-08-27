@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-
-import { User } from 'src/app/models/user.model';
+import { Barber } from 'src/app/models/barber.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class NotificationsService {
+export class RankingService {
   constructor(private http: HttpClient) {}
 
-  //disabilita notifiche per utenti
-  notifyDisable(id: User['id']): Observable<boolean> {
+  //ranking barbieri
+  ranking(barber: Barber[]): Observable<boolean> {
     return this.http.patch<boolean>(
-      environment.API_URL + '/user/toggleNotifiche',
-      { idUtente: id }
+      environment.API_URL + '/admin/toggleRanking',
+      barber
     );
   }
 }

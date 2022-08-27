@@ -12,6 +12,7 @@ import { Barber } from 'src/app/models/barber.model';
 import * as _ from 'lodash';
 import { UserRole } from 'src/app/models/user.model';
 import { ToastrService } from 'ngx-toastr';
+import { RankingService } from 'src/app/core/services/ranking.service';
 
 enum FilterOptions {
   All = 'Tutti',
@@ -42,7 +43,19 @@ export class UsersComponent implements OnInit {
   loadingAdmins: boolean;
   loadingUsers: boolean;
 
-  constructor(private barbersService: BarbersService, private toastr: ToastrService) { }
+  /*password*/
+  visible: boolean = true;
+  changetype: boolean = true;
+  visible2: boolean = true;
+  changetype2: boolean = true;
+
+  isChecked: boolean;
+
+  constructor(
+    private barbersService: BarbersService,
+    private toastr: ToastrService,
+    private rankingService: RankingService
+  ) {}
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -50,6 +63,7 @@ export class UsersComponent implements OnInit {
     this.applyActiveFilter();
   }
 
+  /*filtro per la table*/
   applyActiveFilter() {
     console.log(this.activeFilter);
     switch (this.activeFilter) {
@@ -155,9 +169,9 @@ export class UsersComponent implements OnInit {
             (item) => item.id === user.id
           );
           this.tableData.splice(tableDataIndex, 1);
-          this.toastr.warning('Utente eliminato')
+          this.toastr.warning('Utente eliminato');
         },
-        complete: () => this.loadingUsers = false
+        complete: () => (this.loadingUsers = false),
       });
     } else {
       this.barbersService.deleteAdmin(user.id).subscribe({
@@ -170,14 +184,40 @@ export class UsersComponent implements OnInit {
             (item) => item.id === user.id
           );
           this.tableData.splice(tableDataIndex, 1);
-          this.toastr.warning('Utente eliminato')
-
+          this.toastr.warning('Utente eliminato');
         },
         error: (error) => {
           console.log(error);
         },
-        complete: () => this.loadingUsers = false
+        complete: () => (this.loadingUsers = false),
       });
     }
+  }
+
+  //show Password
+  show() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
+
+  //show checkPassword
+  show2() {
+    this.visible2 = !this.visible2;
+    this.changetype2 = !this.changetype2;
+  }
+
+  /*ranking barbieri*/
+  barberRanking() {
+    this.rankingService.ranking(this.tableData).subscribe({
+      next: (response) => {
+        this.isChecked = response;
+        console.log(response);
+        if (this.isChecked == true) {
+          this.toastr.info('Ranking attivato');
+        } else {
+          this.toastr.info('Ranking disattivato');
+        }
+      },
+    });
   }
 }
