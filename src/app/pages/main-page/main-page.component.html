@@ -21,64 +21,59 @@
 
   <!--Chi siamo-->
   <div class="row mt-4 identita">
-    <<<<<<< HEAD
     <div class="col-sm-12 col-md-4 mb-3 mt-3" id="chisiamo">
-      =======
-      <div class="col-4 mb-3 mt-3" id="chisiamo">
-        >>>>>>> 574584662880832659749873cd31e5e980c022bf
-        <h1>Chi siamo</h1>
-        <p>
-          Elegante, in stile classico e tutto dedicato a lui, questo barbiere
-          offre servizi di taglio barba e capelli nonché pulizia e maschera
-          viso. Un team esperto e creativo sarà a tua disposizione per donare
-          alla tua chioma e alla tua bella barba uno stile totalmente
-          personalizzato!
-        </p>
-      </div>
-      <div class="col-8 justify-content-center">
-        <div class="grid-container">
-          <div class="grid-item1"></div>
-          <div class="grid-item2"></div>
-          <div class="grid-item3"></div>
-          <div class="grid-item4"></div>
-        </div>
-      </div>
+      <h1>Chi siamo</h1>
+      <p>
+        Elegante, in stile classico e tutto dedicato a lui, questo barbiere
+        offre servizi di taglio barba e capelli nonché pulizia e maschera viso.
+        Un team esperto e creativo sarà a tua disposizione per donare alla tua
+        chioma e alla tua bella barba uno stile totalmente personalizzato!
+      </p>
     </div>
-
-    <!--Prenota-->
-    <div class="row mt-5 mb-5">
-      <div class="col-10 offset-1">
-        <h3 style="color: wheat; text-align: center">
-          PRENDI IL TUO APPUNTAMENTO
-        </h3>
-        <app-prenotazione [isHome]="true"> </app-prenotazione>
-      </div>
-    </div>
-
-    <!--Recensioni-->
-    <div class="recensioni" *ngIf="reviews && reviews.length">
-      <h2>Le nostre recensioni</h2>
-      <div class="row">
-        <div class="col-4 ml-4">
-          <mat-card class="example-card" *ngFor="let review of reviews">
-            <img mat-card-sm-image src="{{ review.user }}" alt="Card image" />
-
-            <mat-card-content>
-              <div class="card-body">
-                <p class="card-text" style="color: black">
-                  <b>voto:</b> {{ review.valutazione }}
-                </p>
-                <p class="card-text" style="color: black">
-                  <b>descrizione:</b> {{ review.descrizione }}
-                </p>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
+    <div class="col-8 justify-content-center">
+      <div class="grid-container">
+        <div class="grid-item1"></div>
+        <div class="grid-item2"></div>
+        <div class="grid-item3"></div>
+        <div class="grid-item4"></div>
       </div>
     </div>
   </div>
 
-  <!--FOOTER-->
-  <app-footer></app-footer>
+  <!--Prenota-->
+  <div class="row mt-5 mb-5">
+    <div class="col-10 offset-1">
+      <h3 style="color: wheat; text-align: center">
+        PRENDI IL TUO APPUNTAMENTO
+      </h3>
+      <app-prenotazione [isHome]="true"> </app-prenotazione>
+    </div>
+  </div>
+
+  <!--Recensioni-->
+  <div class="recensioni" *ngIf="reviews">
+    <h1>Le nostre recensioni</h1>
+    <div class="row">
+      <div class="col-4">
+        <mat-card class="example-card" *ngFor="let review of reviews">
+          <mat-card-title-group>
+            <img mat-card-sm-image src="assets/47774.png" alt="Card image" />
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="card-body">
+              <p class="card-text" style="color: black">
+                <b>voto:</b> {{ review.valutazione }}
+              </p>
+              <p class="card-text" style="color: black">
+                <b>descrizione:</b> {{ review.descrizione }}
+              </p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!--FOOTER-->
+<app-footer></app-footer>

@@ -22,18 +22,8 @@ export class MainPageComponent implements OnInit {
   getRecensioni() {
     this.reviewService.recensioni().subscribe((response) => {
       console.log(response);
-
-      console.log(this.reviews);
-      // generate a random string
-      response.forEach(
-        (review) =>
-          (review['user'] = `https://avatars.dicebear.com/api/micah/${(
-            Math.random() + 1
-          )
-            .toString(36)
-            .substring(7)}.svg?radius=20`)
-      );
       this.reviews = response;
+      console.log('ciao');
       console.log(this.reviews);
     });
   }
