@@ -1,6 +1,6 @@
-import { User } from "./user.model";
+import { User } from './user.model';
 
 export interface AuthResponse {
-    jwt: string;
-    user: User
+  jwt: string;
+  user: User;
 }

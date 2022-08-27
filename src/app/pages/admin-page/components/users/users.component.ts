@@ -10,9 +10,10 @@ import {
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { Barber } from 'src/app/models/barber.model';
 import * as _ from 'lodash';
-import { UserRole } from 'src/app/models/user.model';
+import { User, UserRole } from 'src/app/models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import { RankingService } from 'src/app/core/services/ranking.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 enum FilterOptions {
   All = 'Tutti',
@@ -49,18 +50,22 @@ export class UsersComponent implements OnInit {
   visible2: boolean = true;
   changetype2: boolean = true;
 
+  user: User;
   isChecked: boolean;
 
   constructor(
     private barbersService: BarbersService,
     private toastr: ToastrService,
-    private rankingService: RankingService
+    private rankingService: RankingService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
     this.initBarbersForm();
     this.initAdminsForm();
     this.applyActiveFilter();
+    this.user = this.auth.user;
+    this.getRanking();
   }
 
   /*filtro per la table*/
@@ -204,6 +209,16 @@ export class UsersComponent implements OnInit {
   show2() {
     this.visible2 = !this.visible2;
     this.changetype2 = !this.changetype2;
+  }
+
+  /*get value ranking*/
+  getRanking() {
+    this.rankingService.getRanking().subscribe({
+      next: (response) => {
+        this.isChecked = response;
+        console.log(response);
+      },
+    });
   }
 
   /*ranking barbieri*/
