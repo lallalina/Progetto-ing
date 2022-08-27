@@ -163,17 +163,14 @@ export class UsersComponent implements OnInit {
   //cancella admin e barbieri
   deleteUser(user: Barber) {
     this.loadingUsers = true;
-    if (user.role == UserRole.BARBER) {
+    if (user.role === UserRole.BARBER) {
       this.barbersService.deleteBarber(user.id).subscribe({
         next: (response) => {
           const usersIndex = this.usersList.findIndex(
             (item) => item.id === user.id
           );
           this.usersList.splice(usersIndex, 1);
-          const tableDataIndex = this.tableData.findIndex(
-            (item) => item.id === user.id
-          );
-          this.tableData.splice(tableDataIndex, 1);
+          this.applyActiveFilter();
           this.toastr.warning('Utente eliminato');
         },
         complete: () => (this.loadingUsers = false),
@@ -185,10 +182,7 @@ export class UsersComponent implements OnInit {
             (item) => item.id === user.id
           );
           this.usersList.splice(usersIndex, 1);
-          const tableDataIndex = this.tableData.findIndex(
-            (item) => item.id === user.id
-          );
-          this.tableData.splice(tableDataIndex, 1);
+          this.applyActiveFilter();
           this.toastr.warning('Utente eliminato');
         },
         error: (error) => {
