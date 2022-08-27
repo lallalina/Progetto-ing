@@ -7,11 +7,11 @@
   </div>
   <br />
   <div class="row align-items-center">
-    <div class="col-6">
-      <h4 class="mr-2">Notifiche</h4>
+    <div class="row">
+      <h4 class="mr-2">Notifiche:</h4>
       <div>
         <mat-slide-toggle
-          (change)="notify($event)"
+          (change)="notify()"
           [(ngModel)]="isChecked"
         ></mat-slide-toggle>
       </div>
@@ -19,7 +19,7 @@
     <!--disabilita notifiche-->
 
     <!--elimina profilo-->
-    <div class="div col-6">
+    <div class="div col-6" *ngIf="canDelete">
       <h3>Elimina il tuo profilo</h3>
       <div>
         <button mat-raised-button (click)="openDialogUtente(user)">

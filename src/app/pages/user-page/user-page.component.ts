@@ -8,7 +8,7 @@ import { booking } from 'src/app/models/booking';
 import { User, UserRole } from 'src/app/models/user.model';
 import { DialogComponent } from './dialog/dialog.component';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+
 import { Ordine } from 'src/app/models/ordine.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DialogDeleteUserComponent } from './dialog-delete-user/dialog-delete-user.component';
@@ -22,22 +22,25 @@ export class UserPageComponent implements OnInit {
   orders: Ordine[];
   prenotazioni: booking[];
 
+  firstCall: boolean = true;
+
   constructor(
     private orderService: OrderdService,
     private notifyService: NotificationsService,
     private auth: AuthService,
     private toastr: ToastrService,
-    private router: Router,
     public dialog: MatDialog
   ) {}
 
   loading: boolean;
-  isAdmin: boolean;
+  canDelete: boolean;
   isChecked: boolean;
 
   ngOnInit(): void {
     this.user = this.auth.user;
-    this.isAdmin = this.user.role === UserRole.ADMIN;
+    this.isChecked = this.user.notifiche;
+    this.canDelete =
+      this.user.role !== UserRole.ADMIN && this.user.role !== UserRole.BARBER;
     this.getOrdini();
   }
 
@@ -62,23 +65,20 @@ export class UserPageComponent implements OnInit {
 
   /*NOTIFICHE*/
   //disabilita notifiche
-  notify(event: User['id']) {
-    this.loading = true;
-    if (this.isChecked == true) {
-      console.log(this.isChecked);
-      this.notifyService.notifyDisable(event).subscribe({
-        next: (response) => {
+  notify() {
+    this.notifyService.notifyDisable(this.user.id).subscribe({
+      next: (response) => {
+        this.isChecked = response;
+        this.user.notifiche = response; //cambio valore notifiche dell'user
+        this.auth.user = this.user;
+        console.log(response);
+        if (this.isChecked == true) {
           this.toastr.info('Notifiche attivate');
-          this.user = response;
-          console.log(response);
-          this.router.navigate(['/']);
-        },
-        complete: () => (this.loading = false),
-      });
-    } else {
-      console.log(this.isChecked);
-      this.toastr.info('Notifiche disattivate');
-    }
+        } else {
+          this.toastr.info('Notifiche disattivate');
+        }
+      },
+    });
   }
 
   /*ELIMINAZIONE UTENTE*/

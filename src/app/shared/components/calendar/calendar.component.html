@@ -4,7 +4,9 @@
   class="mb-5 ml-5"
   *ngIf="!barberId"
   (click)="openReservationDialog()"
->Nuova prenotazione</button>
+>
+  Nuova prenotazione
+</button>
 
 <div class="row text-center">
   <div class="col-md-4">
@@ -18,11 +20,7 @@
       >
         Previous
       </div>
-      <div
-        class="btn btn-outline-secondary"
-        mwlCalendarToday
-        [(viewDate)]="viewDate"
-      >
+      <div class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate">
         Today
       </div>
       <div
@@ -100,17 +98,10 @@
 
 <br /><br /><br />
 
-<ng-template
-  #modalContent
-  let-close="close"
->
+<ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Dettaglio prenotazione</h5>
-    <button
-      type="button"
-      class="close"
-      (click)="close()"
-    >
+    <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -125,31 +116,29 @@
     </div>
     <div>
       Data:
-      <pre>{{ modalData?.event.start | date:'shortDate'}}</pre>
+      <pre>{{ modalData?.event.start | date: "shortDate" }}</pre>
     </div>
     <div>
       Ora inizio:
-      <pre>{{ modalData?.event.start | date:'shortTime'}}</pre>
+      <pre>{{ modalData?.event.start | date: "shortTime" }}</pre>
     </div>
     <div>
       Ora fine:
-      <pre>{{ modalData?.event.end | date:'shortTime'}}</pre>
+      <pre>{{ modalData?.event.end | date: "shortTime" }}</pre>
     </div>
   </div>
   <div class="modal-footer">
-    <div *ngIf="!loading;else loader">
+    <div *ngIf="!loading; else loader">
       <button
         type="button"
         class="btn btn-danger"
         *ngIf="!this.barberId"
         (click)="deleteBooking(modalData?.booking.id, modalData?.event)"
-      >Elimina prenotazione</button>
+      >
+        Elimina prenotazione
+      </button>
     </div>
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      (click)="close()"
-    >
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
       OK
     </button>
   </div>

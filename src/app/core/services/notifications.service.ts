@@ -11,10 +11,10 @@ export class NotificationsService {
   constructor(private http: HttpClient) {}
 
   //disabilita notifiche per utenti
-  notifyDisable(id: User['id']): Observable<User> {
-    return this.http.patch<User>(
+  notifyDisable(id: User['id']): Observable<boolean> {
+    return this.http.patch<boolean>(
       environment.API_URL + '/user/toggleNotifiche',
-      id
+      { idUtente: id }
     );
   }
 }

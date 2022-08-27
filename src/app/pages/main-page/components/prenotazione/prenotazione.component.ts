@@ -95,9 +95,11 @@ export class PrenotazioneComponent implements OnInit {
     if (checked) {
       this.trattamentiSelezionati.push(treatment.id);
     } else {
-      const exists = this.trattamentiSelezionati.includes(treatment.id)
+      const exists = this.trattamentiSelezionati.includes(treatment.id);
       if (exists) {
-        const index = this.trattamentiSelezionati.findIndex((elem) => elem === treatment.id)
+        const index = this.trattamentiSelezionati.findIndex(
+          (elem) => elem === treatment.id
+        );
         this.trattamentiSelezionati.splice(index, 1);
       }
     }
@@ -119,11 +121,11 @@ export class PrenotazioneComponent implements OnInit {
     let stringArray = '';
     array.forEach((elem, index) => {
       stringArray += elem;
-      if (index !== (array.length - 1)) {
-        stringArray += ','
+      if (index !== array.length - 1) {
+        stringArray += ',';
       }
-    })
-    return stringArray
+    });
+    return stringArray;
   }
 
   //prenota
@@ -141,21 +143,16 @@ export class PrenotazioneComponent implements OnInit {
           ...this.bookingForm.value,
           idBarbiere: this.barbiere.id,
           startTime: dateString,
-          trattamenti: this.arrayToString(this.trattamentiSelezionati)
+          trattamenti: this.arrayToString(this.trattamentiSelezionati),
         })
         .subscribe({
           next: (response) => {
-            console.log(response)
-            this.toastr.success('Prenotazione avvenuta con successo')
+            console.log(response);
+            this.toastr.success('Prenotazione avvenuta con successo');
             this.utils.reloadCalendar.next();
           },
-          complete: () => this.loadingRes = false
+          complete: () => (this.loadingRes = false),
         });
     }
-    /* this.bookingService
-      .newBooking({ ...this.bookingForm.value, idBarbiere: this.barbiere.id })
-      .subscribe((response) => {
-        console.log(response);
-      });*/
   }
 }
