@@ -247,6 +247,7 @@
               type="submit"
               mat-raised-button
               color="primary"
+              [disabled]="!this.form.valid"
               *ngIf="!loading; else loader"
             >
               Aggiungi indirizzo

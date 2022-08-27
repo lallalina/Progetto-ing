@@ -2,7 +2,10 @@
   <!--Add Prodotto-->
   <div class="row mt-4">
     <div class="col-5">
-      <form [formGroup]="productsForm" (ngSubmit)="addProdotto()">
+      <form
+        [formGroup]="productsForm"
+        (ngSubmit)="addProdotto()"
+      >
         <legend>Aggiungi Prodotto</legend>
         <!--nome-->
         <div class="form-group">
@@ -82,13 +85,18 @@
           *ngIf="!loadingProds; else loader"
           type="submit"
           class="btn btn-dark mt-2"
+          [disabled]="!this.productsForm.valid"
         >
           Aggiungi
         </button>
       </form>
     </div>
     <!--Table Delete and Modify Prodotto-->
-    <div class="col-7 mb-3 mt-5" id="prodotti" *ngIf="products">
+    <div
+      class="col-7 mb-3 mt-5"
+      id="prodotti"
+      *ngIf="products"
+    >
       <app-table [data]="products">
         <ng-template #headers>
           <th>Nome</th>
@@ -98,7 +106,10 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <td>{{ row.nome }}</td>
           <td>{{ row.descrizione }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
@@ -114,7 +125,11 @@
             </button>
           </td>
           <td>
-            <button mat-icon-button mat-raised-button (click)="openDialog(row)">
+            <button
+              mat-icon-button
+              mat-raised-button
+              (click)="openDialog(row)"
+            >
               <mat-icon>edit</mat-icon>
             </button>
           </td>
@@ -126,7 +141,10 @@
   <!--Add trattamento-->
   <div class="row mt-4">
     <div class="col-5 mt-3">
-      <form [formGroup]="treatmentsForm" (ngSubmit)="addTrattamento()">
+      <form
+        [formGroup]="treatmentsForm"
+        (ngSubmit)="addTrattamento()"
+      >
         <legend>Aggiungi Trattamento</legend>
         <!--nome-->
         <div class="form-group">
@@ -193,13 +211,17 @@
           *ngIf="!loadingTreats; else loader"
           type="submit"
           class="btn btn-dark"
+          [disabled]="!this.treatmentsForm.valid"
         >
           Aggiungi
         </button>
       </form>
     </div>
     <!--Table Delete and Modify Trattamento-->
-    <div class="col-7 mb-3 mt-5" id="trattamenti">
+    <div
+      class="col-7 mb-3 mt-5"
+      id="trattamenti"
+    >
       <app-table [data]="treatments">
         <ng-template #headers>
           <th>Nome</th>
@@ -209,7 +231,10 @@
           <th>Elimina</th>
           <th>Modifica</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <td>{{ row.nome }}</td>
           <td>{{ row.prezzo | currency: "EUR" }}</td>
           <td>{{ row.durata }} min</td>

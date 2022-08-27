@@ -12,21 +12,32 @@
         <div class="user_card">
           <div class="d-flex justify-content-center">
             <div class="brand_logo_container">
-              <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
+              <img
+                src="/assets/logo-white.png"
+                class="brand_logo"
+                alt="Logo"
+              />
             </div>
           </div>
-          <span class="material-icons clickable" [routerLink]="['']">
+          <span
+            class="material-icons clickable"
+            [routerLink]="['']"
+          >
             arrow_back
           </span>
           <div class="d-flex justify-content-center form_container">
-            <form name="form" [formGroup]="form" (ngSubmit)="login()">
+            <form
+              name="form"
+              [formGroup]="form"
+              (ngSubmit)="login()"
+            >
               <!--email-->
               <strong>*</strong> <label>Email:</label>
               <div class="input-group mb-3">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><mat-icon>account_circle</mat-icon></span
-                  >
+                  <span class="input-group-text">
+                    <mat-icon>account_circle</mat-icon>
+                  </span>
                 </div>
                 <input
                   type="email"
@@ -40,9 +51,9 @@
               <strong>*</strong> <label>Password:</label>
               <div class="input-group mb-2">
                 <div class="input-group-append">
-                  <span class="input-group-text"
-                    ><mat-icon> vpn_key</mat-icon></span
-                  >
+                  <span class="input-group-text">
+                    <mat-icon> vpn_key</mat-icon>
+                  </span>
                 </div>
                 <div class="example-container">
                   <input
@@ -53,7 +64,10 @@
                     formControlName="password"
                     id="password"
                   />
-                  <span class="eye" (click)="show()">
+                  <span
+                    class="eye"
+                    (click)="show()"
+                  >
                     <mat-icon>remove_red_eye</mat-icon>
                   </span>
                 </div>
@@ -65,6 +79,7 @@
                   type="submit"
                   name="button"
                   class="btn login_btn"
+                  [disabled]="!this.form.valid"
                 >
                   Login
                 </button>
@@ -80,8 +95,7 @@
                 routerLinkActive="router-link-active"
                 class="ml-2"
                 style="color: black"
-                >Registrati</a
-              >
+              >Registrati</a>
             </div>
             <div class="d-flex justify-content-center links">
               <a style="color: black">Password dimenticata?</a>
