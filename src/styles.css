@@ -215,31 +215,6 @@ h1 {
   text-align: center;
 }
 
-/*ICONS*/
-.fa {
-  padding: 12px;
-  font-size: 12px;
-  width: 45px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 15px;
-  border-radius: 50%;
-}
-
-.fa:hover {
-  opacity: 0.7;
-}
-
-.fa-facebook {
-  background: #3b5998;
-  color: white;
-}
-
-.fa-instagram {
-  background: #b10d36;
-  color: white;
-}
-
 .text-black {
   color: black;
 }
