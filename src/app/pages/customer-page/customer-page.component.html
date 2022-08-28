@@ -8,7 +8,7 @@
 
   <div class="row" *ngIf="!loading; else loader">
     <!--Shop_space-->
-    <div *ngFor="let prodotto of product" class="col-4">
+    <div *ngFor="let prodotto of product" class="col-lg-4 col-sm-12">
       <app-product-card [productValue]="prodotto"></app-product-card>
     </div>
   </div>

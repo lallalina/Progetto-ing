@@ -8,10 +8,7 @@
     (changePage)="switchPage($event)"
   ></app-selector>
 
-  <div
-    class="p-5 mt-5"
-    [ngSwitch]="currentPage"
-  >
+  <div class="p-5 mt-5" [ngSwitch]="currentPage">
     <!--Calendar-->
     <app-calendar *ngSwitchCase="Pages.Calendar"> </app-calendar>
 
@@ -31,10 +28,7 @@
     ></app-users>
 
     <!--Ordini degli utenti-->
-    <app-order
-      [orders]="orders"
-      *ngSwitchCase="Pages.Orders"
-    ></app-order>
+    <app-order [orders]="orders" *ngSwitchCase="Pages.Orders"></app-order>
   </div>
   <!--Footer-->
   <app-footer class="mt-5"></app-footer>
