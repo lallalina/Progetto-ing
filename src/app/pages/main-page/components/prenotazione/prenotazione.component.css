@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1000px) {
   .prenotazione-container {
     flex-direction: column;
     align-items: center;
@@ -37,11 +37,12 @@
   margin-top: 20%;
 }
 
-.table {
-  height: 600px;
-  overflow: scroll;
-}
-
 .button {
   margin-top: 100px;
+}
+
+.table {
+  max-height: 380px;
+  overflow: auto;
+  display: inline-block;
 }

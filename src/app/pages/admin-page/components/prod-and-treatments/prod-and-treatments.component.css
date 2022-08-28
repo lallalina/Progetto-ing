@@ -26,3 +26,9 @@ strong {
 small {
   color: rgb(251, 251, 251);
 }
+
+.table {
+  max-height: 250px;
+  overflow: auto;
+  display: inline-block;
+}

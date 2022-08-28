@@ -90,7 +90,7 @@
     </div>
     <!--Table Delete and Modify Prodotto-->
     <div class="col-lg-7 col-sm-7 mb-3 mt-5" id="prodotti" *ngIf="products">
-      <app-table [data]="products">
+      <app-table [data]="products" class="table">
         <ng-template #headers>
           <th>Nome</th>
           <th>Descrizione</th>
@@ -202,7 +202,7 @@
     </div>
     <!--Table Delete and Modify Trattamento-->
     <div class="col-lg-7 col-sm-7 mb-3 mt-5" id="trattamenti">
-      <app-table [data]="treatments">
+      <app-table [data]="treatments" class="table">
         <ng-template #headers>
           <th>Nome</th>
           <th>Prezzo</th>
