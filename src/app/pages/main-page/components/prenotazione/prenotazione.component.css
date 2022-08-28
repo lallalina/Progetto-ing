@@ -37,8 +37,9 @@
   margin-top: 20%;
 }
 
-.treatment {
-  color: white;
+.table {
+  height: 600px;
+  overflow: scroll;
 }
 
 .button {

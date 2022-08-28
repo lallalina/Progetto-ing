@@ -2,7 +2,7 @@
 <form [formGroup]="bookingForm" (ngSubmit)="prenota()">
   <div class="prenotazione-container">
     <!--NOME-->
-    <div class="col-4">
+    <div class="col-4" style="margin-top: 5%">
       <div class="form-group">
         <label for="customer-name">Nome</label><strong>*</strong>
         <input
@@ -87,7 +87,7 @@
         </mat-card>
       </div>
       <!--ORAIO-->
-      <div class="orario col-4 offset-4" *ngIf="orari">
+      <div class="orario" *ngIf="orari">
         <label for="customer-name">Orari</label>
         <select
           class="form-control"
@@ -104,25 +104,26 @@
     <div class="col-4 mt-4">
       <!--TRATTAMENTI-->
       <div class="form-group">
-        <fieldset>
-          <label>Trattamenti</label>
-          <div class="row">
-            <div
-              *ngFor="let treatment of treatments"
-              class="custom-control custom-checkbox checkbox-success col-6 pl-5"
-              style="padding: 0%"
-            >
+        <app-table [data]="treatments" class="table">
+          <ng-template #headers>
+            <th></th>
+            <th>Trattamento</th>
+            <th>Prezzo</th>
+          </ng-template>
+          <ng-template #rows let-row>
+            <td>
               <mat-checkbox
                 class="treatment"
-                [name]="treatment.nome"
-                (change)="onTreatmentChecked($event.checked, treatment)"
+                [name]="row.nome"
+                (change)="onTreatmentChecked($event.checked, row)"
               >
-                {{ treatment.nome }} -
-                {{ treatment.prezzo | currency: "EUR" }}
               </mat-checkbox>
-            </div>
-          </div>
-        </fieldset>
+            </td>
+            <td>{{ row.nome }}</td>
+
+            <td>{{ row.prezzo | currency: "EUR" }}</td>
+          </ng-template>
+        </app-table>
       </div>
     </div>
   </div>
