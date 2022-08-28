@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { Barber } from 'src/app/models/barber.model';
 import { Treatment } from 'src/app/models/treatment.model';
 
@@ -19,6 +25,26 @@ import { UtilsService } from 'src/app/core/services/utils.service';
 })
 export class PrenotazioneComponent implements OnInit {
   @Input() isHome: boolean;
+
+  private _bookingToEdit: booking;
+
+  get bookingToEdit(): booking {
+    return this._bookingToEdit;
+  }
+
+  @Input() set bookingToEdit(value: booking) {
+    this._bookingToEdit = value;
+    if (this.bookingToEdit) {
+      this.giornoSelezionato = this.bookingToEdit.startTime;
+      this.barbiere = this.bookingToEdit.barbiere;
+      const _giorno = new Date(
+        this.bookingToEdit.startTime
+      ).toLocaleDateString();
+      this.giorno = formatDate(_giorno, 'dd-MM-yyyy', 'en-US');
+      this.caricaOrari(this.giorno, this.bookingToEdit.barbiere);
+    }
+  }
+
   barbers: Barber[];
   treatments: Array<Treatment>;
   orari: Array<string[]>;
@@ -40,7 +66,7 @@ export class PrenotazioneComponent implements OnInit {
     const day = d.getDay();
     /* Prevent Saturday and Sunday for select. */
     return day !== 0 && day !== 6 && day !== 1;
-  }
+  };
 
   constructor(
     private bookingService: BookingService,
@@ -63,8 +89,14 @@ export class PrenotazioneComponent implements OnInit {
   //controllo validità sezioni
   initForm() {
     this.bookingForm = new FormGroup({
-      nome: new FormControl('', Validators.required),
-      mail: new FormControl('', Validators.required),
+      nome: new FormControl(
+        this.bookingToEdit ? this.bookingToEdit.nome : '',
+        Validators.required
+      ),
+      mail: new FormControl(
+        this.bookingToEdit ? this.bookingToEdit.mail : '',
+        Validators.required
+      ),
     });
   }
 
@@ -113,7 +145,7 @@ export class PrenotazioneComponent implements OnInit {
   }
 
   //chiamataOrari
-  caricaOrari(giorno = this.giorno, barber = this.barbiere) {
+  caricaOrari(giorno: string, barber: Barber) {
     console.log(this.giorno);
     if (barber) {
       this.bookingService.orari(barber.id, giorno).subscribe((response) => {
@@ -144,21 +176,41 @@ export class PrenotazioneComponent implements OnInit {
         'dd/MM/yyyy',
         'en-US'
       )} ${this.periodoSelezionato[0]}`;
-      this.bookingService
-        .newBooking({
-          ...this.bookingForm.value,
-          idBarbiere: this.barbiere.id,
-          startTime: dateString,
-          trattamenti: this.arrayToString(this.trattamentiSelezionati),
-        })
-        .subscribe({
-          next: (response) => {
-            console.log(response);
-            this.toastr.success('Prenotazione avvenuta con successo');
-            this.utils.reloadCalendar.next();
-          },
-          complete: () => (this.loadingRes = false),
-        });
+
+      if (this.bookingToEdit) {
+        this.bookingService
+          .editBooking({
+            ...this.bookingForm.value,
+            idPrenotazione: this.bookingToEdit.id,
+            idBarbiere: this.barbiere.id,
+            startTime: dateString,
+            trattamenti: this.arrayToString(this.trattamentiSelezionati),
+          })
+          .subscribe({
+            next: (response) => {
+              console.log(response);
+              this.toastr.success('Prenotazione modificata con successo');
+              this.utils.reloadCalendar.next();
+            },
+            complete: () => (this.loadingRes = false),
+          });
+      } else {
+        this.bookingService
+          .newBooking({
+            ...this.bookingForm.value,
+            idBarbiere: this.barbiere.id,
+            startTime: dateString,
+            trattamenti: this.arrayToString(this.trattamentiSelezionati),
+          })
+          .subscribe({
+            next: (response) => {
+              console.log(response);
+              this.toastr.success('Prenotazione avvenuta con successo');
+              this.utils.reloadCalendar.next();
+            },
+            complete: () => (this.loadingRes = false),
+          });
+      }
     }
   }
 }

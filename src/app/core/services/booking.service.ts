@@ -73,4 +73,19 @@ export class BookingService {
         )
       );
   }
+
+  //get prenotazione tramite id
+  getBookingById(id: booking['id']): Observable<booking> {
+    return this.http.get<booking>(
+      `${environment.API_URL}/public/getPrenotazione/${id}`
+    );
+  }
+
+  //modifica prenotazione
+  editBooking(booking: booking): Observable<booking> {
+    return this.http.patch<booking>(
+      `${environment.API_URL}/public/modificaPrenotazione`,
+      booking
+    );
+  }
 }

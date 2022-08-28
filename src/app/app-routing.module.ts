@@ -10,6 +10,7 @@ import { RegistrationComponent } from './pages/registration-page/registration.co
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { DeleteBookingPageComponent } from './pages/delete-booking-page/delete-booking-page.component';
+import { EditBookingPageComponent } from './pages/edit-booking-page/edit-booking-page.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,11 @@ const routes: Routes = [
     path: 'cancellaPrenotazione/:idPrenotazione',
     component: DeleteBookingPageComponent,
   },
+  {
+    //edit booking page
+    path: 'modificaPrenotazione/:idPrenotazione',
+    component: EditBookingPageComponent
+  }
 ];
 
 @NgModule({

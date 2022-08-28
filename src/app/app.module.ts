@@ -27,6 +27,7 @@ import { MessageService } from './core/services/message.service';
 import { DialogComponent } from './pages/user-page/dialog/dialog.component';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { DialogDeleteUserComponent } from './pages/user-page/dialog-delete-user/dialog-delete-user.component';
+import { EditBookingPageComponent } from './pages/edit-booking-page/edit-booking-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DialogDeleteUserComponent } from './pages/user-page/dialog-delete-user/
     ReviewsComponent,
     DeleteBookingPageComponent,
     DialogDeleteUserComponent,
+    EditBookingPageComponent,
   ],
   imports: [
     BrowserModule,
