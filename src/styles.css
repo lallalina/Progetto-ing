@@ -11,6 +11,7 @@
 }
 
 @media only screen and (max-width: 992px) {
+  /*mobile*/
   .mobile-only {
     display: block;
   }
@@ -27,9 +28,12 @@
     left: 50%;
     width: 30%;
   }
-  /*PC*/
+  .navbar-text {
+    font-size: medium;
+  }
 }
 @media only screen and (min-width: 992px) {
+  /*PC*/
   .mobile-only {
     display: none;
   }
