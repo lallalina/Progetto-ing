@@ -1,40 +1,35 @@
 <mat-card class="card">
-    <mat-card-header>
-        <mat-card-title>{{ product.nome }}</mat-card-title>
-        <mat-card-subtitle> {{product.descrizione}} </mat-card-subtitle>
-    </mat-card-header>
-    <img
-        mat-card-md-image
-        [src]="imageSource ?? 'assets/alt-prod.jpg'"
-        alt=""
-    />
-    <mat-card-content>
-        <select
-            id="quantity"
-            class="mt-3 mb-3 form-control"
-            placeholder="Quantità"
-            [(ngModel)]="quantity"
-        >
-            <option [ngValue]="1">1</option>
-            <option [ngValue]="2">2</option>
-            <option [ngValue]="3">3</option>
-            <option [ngValue]="4">4</option>
-            <option [ngValue]="5">5</option>
-        </select>
-        <span class="color-green font-weight-bold">{{
-            product.prezzo | currency: "EUR"
-            }}</span>
-        <div class="col-sm-3">
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <button
-            mat-button
-            color="primary"
-            (click)="addToCart()"
-            id="button"
-        >
-            Aggiungi al carrello
-        </button>
-    </mat-card-actions>
+  <mat-card-header>
+    <mat-card-title class="title">{{ product.nome }}</mat-card-title>
+    <mat-card-subtitle> {{ product.descrizione }} </mat-card-subtitle>
+  </mat-card-header>
+  <img
+    class="img"
+    mat-card-md-image
+    [src]="imageSource ?? 'assets/alt-prod.jpg'"
+    alt=""
+  />
+  <mat-card-content>
+    <select
+      id="quantity"
+      class="mt-3 mb-3 form-control"
+      placeholder="Quantità"
+      [(ngModel)]="quantity"
+    >
+      <option [ngValue]="1">1</option>
+      <option [ngValue]="2">2</option>
+      <option [ngValue]="3">3</option>
+      <option [ngValue]="4">4</option>
+      <option [ngValue]="5">5</option>
+    </select>
+    <span class="color-green font-weight-bold">{{
+      product.prezzo | currency: "EUR"
+    }}</span>
+    <div class="col-sm-3"></div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="btn btn-outline-primary" (click)="addToCart()" id="button">
+      Aggiungi al carrello
+    </button>
+  </mat-card-actions>
 </mat-card>

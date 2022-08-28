@@ -2,27 +2,22 @@
 <app-navbar></app-navbar>
 
 <div class="container-fluid">
-  <h1
-    class="text-white"
-    style="text-align: center"
-  >I nostri prodotti</h1>
+  <h1 style="text-align: center; margin-top: 10px; color: wheat" class="title">
+    I nostri prodotti
+  </h1>
 
-  <div
-    class="row"
-    *ngIf="!loading; else loader"
-  >
+  <div class="row" *ngIf="!loading; else loader">
     <!--Shop_space-->
-    <div
-      *ngFor="let prodotto of product"
-      class="col-6"
-    >
+    <div *ngFor="let prodotto of product" class="col-4">
       <app-product-card [productValue]="prodotto"></app-product-card>
     </div>
   </div>
 </div>
 
 <ng-template #loader>
-  <app-loader class="d-flex w-100 align-items-center justify-content-center p-4"></app-loader>
+  <app-loader
+    class="d-flex w-100 align-items-center justify-content-center p-4"
+  ></app-loader>
 </ng-template>
 
 <div class="footer">

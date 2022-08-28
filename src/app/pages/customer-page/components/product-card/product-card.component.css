@@ -1,0 +1,18 @@
+.card {
+  width: 80%;
+  margin-top: 10px;
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.img {
+  margin-left: 30%;
+  width: 40%;
+}
+
+#quantity {
+  margin-left: 35%;
+  width: 30%;
+}
