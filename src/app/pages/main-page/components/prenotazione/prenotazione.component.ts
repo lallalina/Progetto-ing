@@ -1,22 +1,16 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Barber } from 'src/app/models/barber.model';
 import { Treatment } from 'src/app/models/treatment.model';
+import { booking } from 'src/app/models/booking';
 
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { BookingService } from 'src/app/core/services/booking.service';
-import { booking } from 'src/app/models/booking';
-import { formatDate } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { UtilsService } from 'src/app/core/services/utils.service';
+
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-prenotazione',
@@ -73,8 +67,7 @@ export class PrenotazioneComponent implements OnInit {
     private barbersService: BarbersService,
     private treatmentsService: TreatmentsService,
     private toastr: ToastrService,
-    private utils: UtilsService,
-    private auth: AuthService
+    private utils: UtilsService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date();
@@ -114,12 +107,6 @@ export class PrenotazioneComponent implements OnInit {
       this.treatments = treatments;
     });
   }
-
-  //Delete weekend
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    return day !== 0 && day !== 6;
-  };
 
   //onChange Calendar
   onChangeData(event) {
