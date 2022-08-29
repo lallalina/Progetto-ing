@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         alert('Credenziali errate');
         this.error = err;
-        console.log(err);
         this.loading = false;
       },
       complete: () => {

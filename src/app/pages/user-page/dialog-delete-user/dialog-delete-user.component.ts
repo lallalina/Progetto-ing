@@ -31,7 +31,6 @@ export class DialogDeleteUserComponent implements OnInit {
 
   //cancella utente
   deleteUser() {
-    console.log(this.data);
     this.loading = true;
     if (this.data.isAdmin) {
       this.barbersService.deleteAdmin(this.data.user).subscribe({

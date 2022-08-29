@@ -72,7 +72,6 @@ export class UsersComponent implements OnInit {
 
   /*filtro per la table*/
   applyActiveFilter() {
-    console.log(this.activeFilter);
     switch (this.activeFilter) {
       case FilterOptions.Barbers: {
         this.tableData = _.filter(this.usersList, ['role', UserRole.BARBER]);

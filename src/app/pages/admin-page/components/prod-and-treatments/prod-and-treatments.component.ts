@@ -106,7 +106,6 @@ export class ProdAndTreatmentsComponent implements OnInit {
 
   //dialog per la modifica dei prodotti
   openDialog(product: Product) {
-    console.log(product);
     this.dialog.open(DialogComponent, {
       data: product,
       width: '520px',

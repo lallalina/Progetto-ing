@@ -1,9 +1,9 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './core/guards/admin.guard';
-import { CustomerGuard } from './core/guards/customer.guard';
+
 import { ResponsibleGuard } from './core/guards/responsible.guard';
-import { CustomerPageComponent } from './pages/customer-page/customer-page.component';
+
 import { LoginComponent } from './pages/login-page/login.component';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { RegistrationComponent } from './pages/registration-page/registration.component';
@@ -82,17 +82,17 @@ const routes: Routes = [
   {
     //edit booking page
     path: 'modificaPrenotazione/:idPrenotazione',
-    component: EditBookingPageComponent
+    component: EditBookingPageComponent,
   },
   {
     path: '**',
     redirectTo: '',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

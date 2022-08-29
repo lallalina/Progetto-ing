@@ -47,7 +47,6 @@ export class ProductsService {
 
   //modifyProdotto
   modifyProdotto(obj): Observable<Product> {
-    console.log(obj);
     return this.http.patch<Product>(
       environment.API_URL + '/admin/modificaProdotto',
       obj

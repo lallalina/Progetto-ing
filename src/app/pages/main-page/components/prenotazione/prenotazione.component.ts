@@ -128,14 +128,12 @@ export class PrenotazioneComponent implements OnInit {
         this.trattamentiSelezionati.splice(index, 1);
       }
     }
-    console.log(this.trattamentiSelezionati);
   }
 
   //chiamataOrari
   caricaOrari(giorno: string, barber: Barber) {
     if (barber) {
       this.bookingService.orari(barber.id, giorno).subscribe((response) => {
-        console.log(response);
         this.orari = response;
       });
     }

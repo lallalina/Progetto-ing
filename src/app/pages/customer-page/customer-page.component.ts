@@ -37,7 +37,6 @@ export class CustomerPageComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
     this.cartService.cart$.subscribe((cart) => {
-      console.log('il carrello: ' + cart);
       this.carrello = cart;
     });
     this.listenToProd();

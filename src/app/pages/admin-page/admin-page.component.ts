@@ -60,16 +60,7 @@ export class AdminPageComponent implements OnInit {
     this.currentPage = page;
   }
 
-  //CONTROLLI
-  printData() {
-    console.log(this.form.value);
-    //per registrarsi
-    this.auth.registrazione(this.form.value).subscribe((response) => {
-      this.router.navigate(['/login']);
-    });
-  }
-
-  //METODI GET
+  /*METODI GET*/
 
   //prendi prodotti
   getProducts() {

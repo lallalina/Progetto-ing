@@ -39,11 +39,9 @@ export class NavbarComponent implements OnInit {
       this.total = this.cartService.getTotal();
     });
     this.auth.user$.subscribe((user) => {
+      /*controllo dei ruoli per*/
       if (user) {
-        console.log(user);
         this.user = user;
-
-        //controllo ruolo admin
         switch (this.user.role) {
           case UserRole.ADMIN: {
             this.isAdmin = true;

@@ -30,12 +30,10 @@ export class AuthService {
 
   //login -passo i parametri
   login(obj) {
-    console.log(obj);
     return this.http
       .post<AuthResponse>(environment.API_URL + '/login', obj)
       .pipe(
         tap((response) => {
-          console.log(response);
           this.jwt = response.jwt;
           this.user = response.user;
         })
@@ -82,6 +80,5 @@ export class AuthService {
     if (_user) {
       this.user = _user;
     }
-    console.log(_user);
   }
 }

@@ -6,15 +6,10 @@ import {
   OnInit,
   Input,
 } from '@angular/core';
-import { startOfDay, endOfDay, isSameDay, isSameMonth } from 'date-fns';
+import { isSameDay, isSameMonth } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { ReservationDialogComponent } from '../reservation-dialog/reservation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -63,24 +58,6 @@ export class CalendarComponent implements OnInit {
     booking: booking;
   };
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
   constructor(
     private modal: NgbModal,
     private bookingService: BookingService,
@@ -93,6 +70,7 @@ export class CalendarComponent implements OnInit {
     this.utils.reloadCalendar.subscribe((_) => this.aggiornaTabella());
   }
 
+  /*ADD EVENT*/
   //eventi da visualizzare in tabella, si chiama nell'init quando cambio il tipo
   aggiornaTabella() {
     this.events = [];
@@ -102,19 +80,16 @@ export class CalendarComponent implements OnInit {
         .subscribe((response) => {
           response.forEach((booking) => {
             this.populateEvents(booking);
-            console.log(this.events);
           });
         });
     } else {
       this.bookingService.getBookings().subscribe((response) => {
         response.forEach((booking) => {
           this.populateEvents(booking);
-          console.log(this.events);
         });
       });
     }
   }
-
   //visualizzazione eventi nel calendario
   private populateEvents(booking: booking) {
     const newEvent: CalendarEvent = {
@@ -136,40 +111,7 @@ export class CalendarComponent implements OnInit {
     this.refresh.next();
   }
 
-  //seleziona un giorno
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
-
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  //gestisci
+  //per la viusalizzazione dei dettagli
   handleEvent(action: string, event: CalendarEvent): void {
     const calendarBooking = this.calendarBookings.find(
       (elem) => JSON.stringify(elem.event) === JSON.stringify(event)
@@ -178,37 +120,7 @@ export class CalendarComponent implements OnInit {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  //aggiungi
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
-  //cancella
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-  }
-
+  /*DELETE EVENT*/
   //cancella prenotazione
   deleteBooking(id: booking['id'], event: CalendarEvent) {
     this.loading = true;
@@ -227,9 +139,37 @@ export class CalendarComponent implements OnInit {
       },
     });
   }
+  //cancella dal calendario
+  deleteEvent(eventToDelete: CalendarEvent) {
+    this.events = this.events.filter((event) => event !== eventToDelete);
+  }
 
   //per aggiungere una nuova prenotazione
   openReservationDialog() {
     this.dialog.open(ReservationDialogComponent);
+  }
+
+  /*VIEW*/
+  setView(view: CalendarView) {
+    this.view = view;
+  }
+
+  closeOpenMonthViewDay() {
+    this.activeDayIsOpen = false;
+  }
+
+  //seleziona un giorno
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+      this.viewDate = date;
+    }
   }
 }

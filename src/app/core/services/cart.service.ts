@@ -47,7 +47,6 @@ export class CartService {
   //aggiungi items al carrello
   public addItem(item: CartItem) {
     const _cart = this.getItems();
-    console.log(item);
     // If item is already in cart, add to the amount, otherwise push item into cart
     if (this.getItemIds().includes(item.product.id)) {
       _cart.forEach(function (cartItem) {
@@ -61,7 +60,6 @@ export class CartService {
       _cart.push(item);
       this.toastService.success('Aggiunto al carrello: ' + item.product.nome);
     }
-    console.log(_cart);
     this.cart = _cart;
   }
 
