@@ -30,7 +30,7 @@ export class UserPageComponent implements OnInit {
     private auth: AuthService,
     private toastr: ToastrService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   loading: boolean;
   canDelete: boolean;
@@ -87,7 +87,7 @@ export class UserPageComponent implements OnInit {
     console.log(user);
     //this.loadingProds = true;
     this.dialog.open(DialogDeleteUserComponent, {
-      data: user.id,
+      data: { user: user.id, isAdmin: false },
     });
   }
 }

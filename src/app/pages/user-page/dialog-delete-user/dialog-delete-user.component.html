@@ -1,7 +1,10 @@
 <!--delete user-->
-<h1 mat-dialog-title>Vuoi davvero cancellare questo utente?</h1>
+<h1 mat-dialog-title>Vuoi davvero eliminare il tuo account?</h1>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No grazie</button>
+  <button
+    mat-button
+    (click)="onNoClick()"
+  >No grazie</button>
   <button
     mat-button
     (click)="deleteUser()"

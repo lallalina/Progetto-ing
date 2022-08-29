@@ -14,6 +14,8 @@ import { User, UserRole } from 'src/app/models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import { RankingService } from 'src/app/core/services/ranking.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogDeleteUserComponent } from 'src/app/pages/user-page/dialog-delete-user/dialog-delete-user.component'
 
 enum FilterOptions {
   All = 'Tutti',
@@ -60,8 +62,9 @@ export class UsersComponent implements OnInit {
     private barbersService: BarbersService,
     private toastr: ToastrService,
     private rankingService: RankingService,
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -179,20 +182,12 @@ export class UsersComponent implements OnInit {
         complete: () => (this.loadingUsers = false),
       });
     } else {
-      this.barbersService.deleteAdmin(user.id).subscribe({
-        next: (response) => {
-          const usersIndex = this.usersList.findIndex(
-            (item) => item.id === user.id
-          );
-          this.usersList.splice(usersIndex, 1);
-          this.applyActiveFilter();
-          this.toastr.warning('Utente eliminato');
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => (this.loadingUsers = false),
-      });
+      if (user.id === this.user.id) {
+        this.dialog.open(DialogDeleteUserComponent, {
+          data: { user: this.user.id, isAdmin: true }
+        })
+        this.dialog.afterAllClosed.subscribe((_) => this.loadingUsers = false)
+      }
     }
   }
 
