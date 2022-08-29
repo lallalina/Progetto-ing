@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 mb-3 mt-5">
-      <app-table [data]="orders">
+      <app-table [data]="orders" class="table">
         <ng-template #headers>
           <th>Indirizzo</th>
           <th></th>
@@ -10,10 +10,7 @@
           <th></th>
           <th>Visualizza Prodotti</th>
         </ng-template>
-        <ng-template
-          #rows
-          let-row
-        >
+        <ng-template #rows let-row>
           <!--indirizzo-->
           <td>
             {{ row.destinatario.via }},{{ row.destinatario.numeroCivico }},

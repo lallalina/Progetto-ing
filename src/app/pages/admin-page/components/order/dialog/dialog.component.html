@@ -1,16 +1,13 @@
 <!--Table Visualizza prodotti-->
 <div class="row">
   <div class="col-12">
-    <app-table [data]="data">
+    <app-table [data]="data" class="table">
       <ng-template #headers>
         <th>Nome</th>
         <th>Descrizione</th>
         <th>Prezzo</th>
       </ng-template>
-      <ng-template
-        #rows
-        let-row
-      >
+      <ng-template #rows let-row>
         <!--Nome Prodotto-->
         <td>
           {{ row.nome }}
@@ -18,7 +15,7 @@
         <!--Descrizione-->
         <td>{{ row.descrizione }}</td>
         <!--Prezzo-->
-        <td>{{ row.prezzo | currency: 'EUR' }}</td>
+        <td>{{ row.prezzo | currency: "EUR" }}</td>
       </ng-template>
     </app-table>
   </div>

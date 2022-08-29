@@ -33,3 +33,9 @@ strong {
 small {
   color: rgb(251, 251, 251);
 }
+
+.table {
+  max-height: 450px;
+  overflow: auto;
+  display: inline-block;
+}
