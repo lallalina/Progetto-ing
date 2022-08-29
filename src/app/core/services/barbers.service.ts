@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, tap } from 'rxjs';
-import { Barber } from 'src/app/models/barber.model';
 import { environment } from 'src/environments/environment';
+
+import { Barber } from 'src/app/models/barber.model';
 
 @Injectable({
   providedIn: 'root',

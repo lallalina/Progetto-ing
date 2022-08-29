@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+
 import { booking } from 'src/app/models/booking';
 import { Barber } from 'src/app/models/barber.model';
-import { CalendarEvent } from 'angular-calendar';
 
 @Injectable({
   providedIn: 'root',

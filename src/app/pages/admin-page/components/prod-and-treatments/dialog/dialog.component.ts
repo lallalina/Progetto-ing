@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ProductsService } from 'src/app/core/services/products.service';
-import { Product } from 'src/app/models/product.model';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import { ProductsService } from 'src/app/core/services/products.service';
+
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-dialog',
@@ -11,18 +13,19 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./dialog.component.css'],
 })
 export class DialogComponent implements OnInit {
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Product,
-    private productService: ProductsService,
-    private sanitizer: DomSanitizer
-  ) { }
-
+  /*variabili*/
   modifyForm: FormGroup;
-  productImage: string | ArrayBuffer
-  prodImageSource: SafeResourceUrl
+
+  productImage: string | ArrayBuffer;
+  prodImageSource: SafeResourceUrl;
 
   loading: boolean;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Product, //prendo il valore di data
+    private productService: ProductsService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
     this.initModifyForm();
@@ -31,7 +34,9 @@ export class DialogComponent implements OnInit {
   //controls con campi già compilati
   initModifyForm() {
     this.productImage = this.data.foto;
-    this.prodImageSource = this.sanitizer.bypassSecurityTrustResourceUrl(this.data.foto as string)
+    this.prodImageSource = this.sanitizer.bypassSecurityTrustResourceUrl(
+      this.data.foto as string
+    );
     this.modifyForm = new FormGroup({
       idProdotto: new FormControl(this.data.id),
       nome: new FormControl(this.data.nome),
@@ -40,30 +45,33 @@ export class DialogComponent implements OnInit {
     });
   }
 
+  //converti immagine
   convertImage(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
     const self = this;
     reader.onload = function () {
       self.productImage = reader.result;
-      self.prodImageSource = self.sanitizer.bypassSecurityTrustResourceUrl(reader.result as string)
-    }
+      self.prodImageSource = self.sanitizer.bypassSecurityTrustResourceUrl(
+        reader.result as string
+      );
+    };
   }
-
 
   //modifica prodotto
   modifyProdotto() {
-    console.log(this.modifyForm.value);
     this.loading = true;
-    this.productService.modifyProdotto({ ...this.modifyForm.value, foto: this.productImage }).subscribe({
-      next: (response) => {
-        this.data.nome = response.nome;
-        this.data.prezzo = response.prezzo;
-        this.data.descrizione = response.descrizione;
-        this.data.foto = response.foto
-      },
-      complete: () => this.loading = false
-    });
+    this.productService
+      .modifyProdotto({ ...this.modifyForm.value, foto: this.productImage })
+      .subscribe({
+        next: (response) => {
+          this.data.nome = response.nome;
+          this.data.prezzo = response.prezzo;
+          this.data.descrizione = response.descrizione;
+          this.data.foto = response.foto;
+        },
+        complete: () => (this.loading = false),
+      });
   }
 }

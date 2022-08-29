@@ -1,7 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
+
 import { Treatment } from 'src/app/models/treatment.model';
 
 @Component({
@@ -10,16 +12,16 @@ import { Treatment } from 'src/app/models/treatment.model';
   styleUrls: ['./dialog-t.component.css'],
 })
 export class DialogTComponent implements OnInit {
+  /*variabili*/
   @Input() treatments: Treatment[];
+
+  modifyForm: FormGroup;
+  loading: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Treatment,
     private treatmentsService: TreatmentsService
   ) {}
-
-  modifyForm: FormGroup;
-
-  loading: boolean;
 
   ngOnInit(): void {
     this.initModifyForm();

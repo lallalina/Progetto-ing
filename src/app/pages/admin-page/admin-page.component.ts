@@ -12,6 +12,7 @@ import { Ordine } from 'src/app/models/ordine.model';
 import { Product } from 'src/app/models/product.model';
 import { Treatment } from 'src/app/models/treatment.model';
 
+/*sezioni per le pagine*/
 enum Pages {
   Calendar = 'Calendario',
   ProdsAndTreatments = 'Prodotti/Trattamenti',
@@ -25,17 +26,17 @@ enum Pages {
   styleUrls: ['./admin-page.component.css'],
 })
 export class AdminPageComponent implements OnInit {
+  /*variabili*/
   form;
   admin;
   barbiere;
   prodotto;
+  currentPage: Pages;
   products: Product[] = [];
   treatments: Treatment[] = [];
   users: Barber[] = [];
   orders: Ordine[] = [];
-
   readonly Pages = Pages;
-  currentPage: Pages;
 
   constructor(
     private router: Router,
@@ -44,7 +45,7 @@ export class AdminPageComponent implements OnInit {
     private barbersService: BarbersService,
     private productService: ProductsService,
     private orderService: OrderdService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.currentPage = Pages.Calendar;
@@ -64,8 +65,6 @@ export class AdminPageComponent implements OnInit {
     console.log(this.form.value);
     //per registrarsi
     this.auth.registrazione(this.form.value).subscribe((response) => {
-      console.log(response);
-      console.log('registrazione effettuata');
       this.router.navigate(['/login']);
     });
   }
@@ -75,7 +74,6 @@ export class AdminPageComponent implements OnInit {
   //prendi prodotti
   getProducts() {
     this.productService.getProducts().subscribe((response) => {
-      console.log(response);
       this.products = response;
     });
   }
@@ -87,25 +85,23 @@ export class AdminPageComponent implements OnInit {
     );
   }
 
-  //prendi barbieri
+  //prendi barbieri/admin
   getUsers() {
     this.barbersService.getUsers().subscribe(([barbers, admins]) => {
       this.users = barbers.concat(admins);
-      console.log(this.users);
     });
   }
 
+  //aggiornare i barbieri non appena attivato il ranking
   refreshUsers() {
-    this.barbersService.getBarbers().subscribe((_) => { })
-    this.getUsers()
+    this.barbersService.getBarbers().subscribe((_) => {});
+    this.getUsers();
   }
 
   //prendi ordini di tutti gli utenti
   getOrder() {
     this.orderService.getOrders().subscribe((response) => {
-      console.log(response);
       this.orders = response;
-      console.log(this.orders);
     });
   }
 }

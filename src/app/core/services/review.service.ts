@@ -3,14 +3,14 @@ import { Observable } from 'rxjs';
 import { Review } from 'src/app/models/review.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { booking } from 'src/app/models/booking';
+
 import { Barber } from 'src/app/models/barber.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReviewService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   //ultime 3 recensioni
   recensioni(): Observable<Review[]> {

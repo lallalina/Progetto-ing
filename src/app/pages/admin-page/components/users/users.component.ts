@@ -1,22 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
-import { BarbersService } from 'src/app/core/services/barbers.service';
-import { Barber } from 'src/app/models/barber.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
-import { User, UserRole } from 'src/app/models/user.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogDeleteUserComponent } from 'src/app/pages/user-page/dialog-delete-user/dialog-delete-user.component';
+
+import { BarbersService } from 'src/app/core/services/barbers.service';
 import { ToastrService } from 'ngx-toastr';
 import { RankingService } from 'src/app/core/services/ranking.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogDeleteUserComponent } from 'src/app/pages/user-page/dialog-delete-user/dialog-delete-user.component'
 
+import { Barber } from 'src/app/models/barber.model';
+import { User, UserRole } from 'src/app/models/user.model';
+
+/*utilizzo per filtri*/
 enum FilterOptions {
   All = 'Tutti',
   Barbers = 'Barbieri',
@@ -29,8 +25,8 @@ enum FilterOptions {
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
+  /*variabili*/
   @Output() rankingChanged = new EventEmitter<void>();
-
   @Input() set users(value: Barber[]) {
     this.usersList = value;
     this.tableData = this.usersList;
@@ -42,6 +38,9 @@ export class UsersComponent implements OnInit {
   barbersForm: FormGroup;
   adminsForm: FormGroup;
 
+  user: User;
+  isChecked: boolean;
+
   readonly FilterOptions = FilterOptions;
   activeFilter: FilterOptions = FilterOptions.All;
 
@@ -49,14 +48,11 @@ export class UsersComponent implements OnInit {
   loadingAdmins: boolean;
   loadingUsers: boolean;
 
-  /*password*/
+  /*password variabili*/
   visible: boolean = true;
   changetype: boolean = true;
   visible2: boolean = true;
   changetype2: boolean = true;
-
-  user: User;
-  isChecked: boolean;
 
   constructor(
     private barbersService: BarbersService,
@@ -64,7 +60,7 @@ export class UsersComponent implements OnInit {
     private rankingService: RankingService,
     private auth: AuthService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initBarbersForm();
@@ -93,8 +89,8 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  //controllo validità sezioni dei form
   initBarbersForm() {
-    //controllo validità sezioni dei form
     this.barbersForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       cognome: new FormControl(''),
@@ -110,8 +106,8 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  //controllo validità sezioni dei form
   initAdminsForm() {
-    //controllo validità sezioni dei form
     this.adminsForm = new FormGroup({
       nome: new FormControl(''),
       mail: new FormControl('', [Validators.required, Validators.email]),
@@ -130,40 +126,30 @@ export class UsersComponent implements OnInit {
   //aggiungi nuovo admin
   addAdmin() {
     this.loadingAdmins = true;
-    this.barbersService.nuovoAdmin(this.adminsForm.value).subscribe(
-      {
-        next: (response) => {
-          this.adminsForm.reset();
-          this.usersList.push(response);
-          this.tableData = this.usersList;
-          console.log(response);
-        },
-        complete: () => (this.loadingAdmins = false),
-      } /*(response) => {
-        // this.admin = response;
-      }*/
-    );
+    this.barbersService.nuovoAdmin(this.adminsForm.value).subscribe({
+      next: (response) => {
+        this.adminsForm.reset();
+        this.usersList.push(response);
+        this.tableData = this.usersList;
+      },
+      complete: () => (this.loadingAdmins = false),
+    });
   }
 
   //aggiungi nuovo parrucchiere
   addBarber() {
     this.loadingBarbers = true;
-    console.log(this.barbersForm.value);
-    this.barbersService.nuovoBarbiere(this.barbersForm.value).subscribe(
-      {
-        next: (response) => {
-          this.barbersForm.reset();
-          this.usersList.push(response);
-          this.tableData = this.usersList;
-        },
-        error: () => {
-          this.loadingBarbers = false;
-        },
-        complete: () => (this.loadingBarbers = false),
-      } /*(response) => {
-        //this.barbiere = response;
-      }*/
-    );
+    this.barbersService.nuovoBarbiere(this.barbersForm.value).subscribe({
+      next: (response) => {
+        this.barbersForm.reset();
+        this.usersList.push(response);
+        this.tableData = this.usersList;
+      },
+      error: () => {
+        this.loadingBarbers = false;
+      },
+      complete: () => (this.loadingBarbers = false),
+    });
   }
 
   //cancella admin e barbieri
@@ -184,9 +170,11 @@ export class UsersComponent implements OnInit {
     } else {
       if (user.id === this.user.id) {
         this.dialog.open(DialogDeleteUserComponent, {
-          data: { user: this.user.id, isAdmin: true }
-        })
-        this.dialog.afterAllClosed.subscribe((_) => this.loadingUsers = false)
+          data: { user: this.user.id, isAdmin: true },
+        });
+        this.dialog.afterAllClosed.subscribe(
+          (_) => (this.loadingUsers = false)
+        );
       }
     }
   }
@@ -208,7 +196,6 @@ export class UsersComponent implements OnInit {
     this.rankingService.getRanking().subscribe({
       next: (response) => {
         this.isChecked = response;
-        console.log(response);
       },
     });
   }
@@ -218,7 +205,6 @@ export class UsersComponent implements OnInit {
     this.rankingService.ranking(this.tableData).subscribe({
       next: (response) => {
         this.isChecked = response;
-        console.log(response);
         if (this.isChecked == true) {
           this.toastr.info('Ranking attivato');
         } else {

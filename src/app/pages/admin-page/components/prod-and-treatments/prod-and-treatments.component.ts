@@ -1,13 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { TreatmentsService } from 'src/app/core/services/treatments.service';
-import { Treatment } from 'src/app/models/treatment.model';
-import { Product } from 'src/app/models/product.model';
-import { ProductsService } from 'src/app/core/services/products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { DialogTComponent } from './dialog-t/dialog-t.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import { TreatmentsService } from 'src/app/core/services/treatments.service';
+import { ProductsService } from 'src/app/core/services/products.service';
+
+import { Treatment } from 'src/app/models/treatment.model';
+import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-prod-and-treatments',
@@ -15,6 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./prod-and-treatments.component.css'],
 })
 export class ProdAndTreatmentsComponent implements OnInit {
+  /*variabili*/
   @Input() products: Product[];
   @Input() treatments: Treatment[];
 
@@ -39,8 +42,8 @@ export class ProdAndTreatmentsComponent implements OnInit {
     this.initTreatmentsForm();
   }
 
+  //controllo validità sezioni prodotto
   initProductsForm() {
-    //controllo validità sezioni prodotto
     this.productsForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),
@@ -49,8 +52,8 @@ export class ProdAndTreatmentsComponent implements OnInit {
     });
   }
 
+  //controllo validità sezioni prodotto
   initTreatmentsForm() {
-    //controllo validità sezioni prodotto
     this.treatmentsForm = new FormGroup({
       nome: new FormControl('', Validators.required),
       prezzo: new FormControl('', Validators.required),

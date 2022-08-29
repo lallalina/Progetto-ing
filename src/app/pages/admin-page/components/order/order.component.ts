@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { Ordine } from 'src/app/models/ordine.model';
 import { DialogComponent } from './dialog/dialog.component';
 
@@ -9,6 +10,7 @@ import { DialogComponent } from './dialog/dialog.component';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
+  /*variabili*/
   @Input() orders: Ordine[];
 
   constructor(public dialog: MatDialog) {}
@@ -20,8 +22,6 @@ export class OrderComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: prodotti,
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 }

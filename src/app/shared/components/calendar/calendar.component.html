@@ -1,4 +1,5 @@
 <div class="container">
+  <!--bottone per form nuova prenotazione-->
   <button
     mat-raised-button
     color="primary"
@@ -9,6 +10,7 @@
     Nuova prenotazione
   </button>
 
+  <!--angular calendar-->
   <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
@@ -21,11 +23,7 @@
         >
           Previous
         </div>
-        <div
-          class="btn btn-secondary"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-        >
+        <div class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate">
           Today
         </div>
         <div
@@ -70,6 +68,7 @@
   </div>
   <br />
   <div [ngSwitch]="view">
+    <!--month view-->
     <mwl-calendar-month-view
       *ngSwitchCase="CalendarView.Month"
       [viewDate]="viewDate"
@@ -81,6 +80,7 @@
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-month-view>
+    <!--week view-->
     <mwl-calendar-week-view
       *ngSwitchCase="CalendarView.Week"
       [viewDate]="viewDate"
@@ -90,6 +90,7 @@
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-week-view>
+    <!--day view-->
     <mwl-calendar-day-view
       *ngSwitchCase="CalendarView.Day"
       [viewDate]="viewDate"
@@ -104,17 +105,11 @@
 
 <br /><br /><br />
 
-<ng-template
-  #modalContent
-  let-close="close"
->
+<!--Dialog sul dettaglio della prenotazione-->
+<ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Dettaglio prenotazione</h5>
-    <button
-      type="button"
-      class="close"
-      (click)="close()"
-    >
+    <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -139,11 +134,15 @@
       Ora fine:
       <pre>{{ modalData?.event.end | date: "shortTime" }}</pre>
     </div>
-    <div *ngIf="modalData?.booking.trattamenti && modalData?.booking.trattamenti.length">
+    <div
+      *ngIf="
+        modalData?.booking.trattamenti && modalData?.booking.trattamenti.length
+      "
+    >
       Trattamenti:
       <ul>
         <li *ngFor="let treatment of modalData?.booking.trattamenti">
-          {{treatment.nome}}
+          {{ treatment.nome }}
         </li>
       </ul>
     </div>
@@ -159,11 +158,7 @@
         Elimina prenotazione
       </button>
     </div>
-    <button
-      type="button"
-      class="btn btn-outline-secondary"
-      (click)="close()"
-    >
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
       OK
     </button>
   </div>

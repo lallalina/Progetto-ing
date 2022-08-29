@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { CartItem } from 'src/app/models/cart.model';
+import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from './message.service';
+
 import { ToastrService } from 'ngx-toastr';
+
 import { User } from 'src/app/models/user.model';
 import { Address } from 'src/app/models/address.model';
-import { environment } from 'src/environments/environment';
+import { CartItem } from 'src/app/models/cart.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +16,7 @@ export class CartService {
   private readonly cartSubject = new BehaviorSubject<CartItem[]>([]);
   readonly cart$ = this.cartSubject.asObservable();
 
-  constructor(
-    private messageService: MessageService,
-    private toastService: ToastrService,
-    private http: HttpClient
-  ) {
+  constructor(private toastService: ToastrService, private http: HttpClient) {
     const _cart = this.cart;
     if (!_cart) {
       this.cart = [];
@@ -74,6 +71,7 @@ export class CartService {
     });
   }
 
+  //cancella item
   public removeItem(item: CartItem) {
     const _cart = this.getItems();
     const indexToRemove = _cart.findIndex(
@@ -84,6 +82,7 @@ export class CartService {
     this.toastService.success('Rimosso dal carrello: ' + item.product.nome);
   }
 
+  //aggiorna le quantità
   public updateItemAmount(item: CartItem, newAmount: number) {
     const _cart = this.getItems();
     _cart.forEach((cartItem) => {

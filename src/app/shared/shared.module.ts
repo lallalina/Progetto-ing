@@ -16,6 +16,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { TableComponent } from './components/table/table.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PrenotazioneComponent } from '../pages/main-page/components/prenotazione/prenotazione.component';
+import { ReservationDialogComponent } from './components/reservation-dialog/reservation-dialog.component';
 
 //material import
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -32,9 +34,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import { PrenotazioneComponent } from '../pages/main-page/components/prenotazione/prenotazione.component';
-import { ReservationDialogComponent } from './components/reservation-dialog/reservation-dialog.component';
-
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -43,7 +42,7 @@ import { ReservationDialogComponent } from './components/reservation-dialog/rese
     TableComponent,
     LoaderComponent,
     PrenotazioneComponent,
-    ReservationDialogComponent
+    ReservationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -96,4 +95,4 @@ import { ReservationDialogComponent } from './components/reservation-dialog/rese
   ],
   providers: [MatDatepickerModule],
 })
-export class SharedModule { }
+export class SharedModule {}

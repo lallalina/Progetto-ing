@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -66,10 +66,8 @@ export class LoginComponent implements OnInit {
   //controllo validità sezioni del form
   initForm() {
     this.form = new FormGroup({
-      mail: new FormControl('', [Validators.required]),
-      password: new FormControl('', [
-        Validators.required
-      ]),
+      mail: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 }
