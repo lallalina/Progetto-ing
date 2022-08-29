@@ -32,3 +32,9 @@ small {
   overflow: auto;
   display: inline-block;
 }
+
+.tableP {
+  max-height: 400px;
+  overflow: auto;
+  display: inline-block;
+}

@@ -27,7 +27,7 @@ enum FilterOptions {
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  @Output() rankingChanged = new EventEmitter<void>()
+  @Output() rankingChanged = new EventEmitter<void>();
 
   @Input() set users(value: Barber[]) {
     this.usersList = value;
@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
     private toastr: ToastrService,
     private rankingService: RankingService,
     private auth: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initBarbersForm();
