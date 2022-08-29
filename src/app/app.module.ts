@@ -26,6 +26,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [
     UtilsService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

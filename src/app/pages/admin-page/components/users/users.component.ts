@@ -130,6 +130,10 @@ export class UsersComponent implements OnInit {
         this.adminsForm.reset();
         this.usersList.push(response);
         this.tableData = this.usersList;
+        this.toastr.success('Nuovo admin creato');
+      },
+      error: (err) => {
+        this.loadingAdmins = false;
       },
       complete: () => (this.loadingAdmins = false),
     });
@@ -143,8 +147,9 @@ export class UsersComponent implements OnInit {
         this.barbersForm.reset();
         this.usersList.push(response);
         this.tableData = this.usersList;
+        this.toastr.success('Nuovo barbiere creato');
       },
-      error: () => {
+      error: (err) => {
         this.loadingBarbers = false;
       },
       complete: () => (this.loadingBarbers = false),
@@ -174,6 +179,18 @@ export class UsersComponent implements OnInit {
         this.dialog.afterAllClosed.subscribe(
           (_) => (this.loadingUsers = false)
         );
+      } else {
+        this.barbersService.deleteAdmin(user.id).subscribe({
+          next: (response) => {
+            const usersIndex = this.usersList.findIndex(
+              (item) => item.id === user.id
+            );
+            this.usersList.splice(usersIndex, 1);
+            this.applyActiveFilter();
+            this.toastr.warning('Utente eliminato');
+          },
+          complete: () => (this.loadingUsers = false),
+        });
       }
     }
   }

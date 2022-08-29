@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
     this.auth.login(data).subscribe({
       next: (response) => (this.utente = this.auth.user),
       error: (err) => {
-        alert('Credenziali errate');
-        this.error = err;
         this.loading = false;
       },
       complete: () => {
