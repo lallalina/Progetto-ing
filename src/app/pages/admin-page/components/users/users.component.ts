@@ -32,6 +32,7 @@ export class UsersComponent implements OnInit {
   @Input() set users(value: Barber[]) {
     this.usersList = value;
     this.tableData = this.usersList;
+    this.applyActiveFilter();
   }
 
   usersList: Barber[];
