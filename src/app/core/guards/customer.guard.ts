@@ -14,7 +14,7 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class CustomerGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -24,12 +24,11 @@ export class CustomerGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    /*  let user = this.auth.user;
+    let user = this.auth.user;
     if (user && user.role === UserRole.CUSTOMER) {
       return true;
     } else {
-      return false;
-    }*/
-    return true;
+      return this.router.navigate(['/login']);
+    }
   }
 }
