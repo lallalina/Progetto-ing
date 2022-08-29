@@ -11,6 +11,7 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { DeleteBookingPageComponent } from './pages/delete-booking-page/delete-booking-page.component';
 import { EditBookingPageComponent } from './pages/edit-booking-page/edit-booking-page.component';
+import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -34,7 +35,7 @@ const routes: Routes = [
   {
     //admin page route
     path: 'admin',
-    //canActivate: [AdminGuard],
+    canActivate: [AuthenticatedGuard, AdminGuard],
     loadChildren: () =>
       import('./pages/admin-page/admin-page.module').then(
         (m) => m.AdminPageModule
@@ -43,7 +44,7 @@ const routes: Routes = [
   {
     //barbiere page route
     path: 'responsible',
-    // canActivate: [ResponsibleGuard],
+    canActivate: [AuthenticatedGuard, ResponsibleGuard],
     loadChildren: () =>
       import('./pages/responsible-page/responsible-page.module').then(
         (m) => m.ResponsiblePageModule
@@ -51,18 +52,11 @@ const routes: Routes = [
   },
   {
     //customer page route
-    path: 'customer',
-    // canActivate: [CustomerGuard],
+    path: 'shop',
     loadChildren: () =>
       import('./pages/customer-page/customer-page.module').then(
         (m) => m.CustomerPageModule
       ),
-  },
-  //AGGIUNGERE GUARD
-  {
-    // customer page
-    path: 'shop',
-    component: CustomerPageComponent,
   },
   {
     //carrello page
@@ -72,6 +66,7 @@ const routes: Routes = [
   {
     //user page
     path: 'user',
+    canActivate: [AuthenticatedGuard],
     component: UserPageComponent,
   },
   {
@@ -88,6 +83,11 @@ const routes: Routes = [
     //edit booking page
     path: 'modificaPrenotazione/:idPrenotazione',
     component: EditBookingPageComponent
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 
@@ -95,4 +95,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
