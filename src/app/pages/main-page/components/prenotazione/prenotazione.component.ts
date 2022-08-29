@@ -207,6 +207,10 @@ export class PrenotazioneComponent implements OnInit {
               console.log(response);
               this.toastr.success('Prenotazione avvenuta con successo');
               this.utils.reloadCalendar.next();
+              this.bookingForm.reset();
+              this.barbiere = null;
+              this.giornoSelezionato = null;
+              this.periodoSelezionato = null;
             },
             complete: () => (this.loadingRes = false),
           });
