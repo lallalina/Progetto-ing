@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { ReviewService } from 'src/app/core/services/review.service';
-import { Review } from 'src/app/models/review.model';
 import { ToastrService } from 'ngx-toastr';
+
+import { Review } from 'src/app/models/review.model';
 import { booking } from 'src/app/models/booking';
 
 @Component({
@@ -11,6 +13,13 @@ import { booking } from 'src/app/models/booking';
   styleUrls: ['./reviews.component.css'],
 })
 export class ReviewsComponent implements OnInit {
+  /*variabili*/
+  form;
+  recensioni: Review;
+  id: booking['id'];
+
+  loading: boolean;
+
   constructor(
     private reviewService: ReviewService,
     private router: Router,
@@ -18,17 +27,12 @@ export class ReviewsComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  form;
-  recensioni: Review;
-
-  id: booking['id'];
-  loading: boolean;
-
   ngOnInit(): void {
     this.initForm();
     this.id = this.route.snapshot.params?.idPrenotazione;
   }
 
+  //controllo validità dei campi
   initForm() {
     this.form = new FormGroup({
       valutazione: new FormControl('', Validators.required),
@@ -36,6 +40,7 @@ export class ReviewsComponent implements OnInit {
     });
   }
 
+  //fai una recensione
   doReview() {
     this.loading = true;
     this.reviewService
@@ -45,7 +50,6 @@ export class ReviewsComponent implements OnInit {
           this.toastr.success('Recensione effettuata');
           this.router.navigate(['/']);
           this.form.value = response;
-          console.log(response);
         },
         complete: () => {
           this.form.reset();

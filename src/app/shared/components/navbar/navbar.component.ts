@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AuthService } from 'src/app/core/services/auth.service';
-import { User, UserRole } from 'src/app/models/user.model';
-import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/core/services/cart.service';
-import { CartItem } from 'src/app/models/cart.model';
-import { element } from 'protractor';
 import { ToastrService } from 'ngx-toastr';
+
+import { CartItem } from 'src/app/models/cart.model';
+import { User, UserRole } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  /*variabili*/
   public items: CartItem[];
   public total: number;
   badgeCounter: number = 0;
@@ -65,6 +66,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  //esci dalla pagina
   logout() {
     this.user = null;
     this.auth.logout();

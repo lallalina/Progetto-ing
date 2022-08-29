@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserRole } from 'src/app/models/user.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,12 +11,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  /*variabili*/
   form: FormGroup;
   utente;
   id;
   error;
   password;
   credentials;
+
   visible: boolean = true;
   changetype: boolean = true;
 
@@ -30,6 +32,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  //controllo validità sezioni del form
+  initForm() {
+    this.form = new FormGroup({
+      mail: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
   }
 
   //per loggarsi
@@ -61,13 +71,5 @@ export class LoginComponent implements OnInit {
   show() {
     this.visible = !this.visible;
     this.changetype = !this.changetype;
-  }
-
-  //controllo validità sezioni del form
-  initForm() {
-    this.form = new FormGroup({
-      mail: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required]),
-    });
   }
 }

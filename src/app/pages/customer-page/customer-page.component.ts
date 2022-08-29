@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -15,13 +15,15 @@ import { User, UserRole } from 'src/app/models/user.model';
   styleUrls: [],
 })
 export class CustomerPageComponent implements OnInit {
+  /*variabili*/
   product: Product[];
   carrello: CartItem[];
+  user: User;
+  readonly UserRole = UserRole;
+
   prodEsistente: Product | null;
   badgeCounter: number;
   public selectedQuantity: number = 1;
-  user: User;
-  readonly UserRole = UserRole;
 
   loading: boolean;
 
@@ -30,7 +32,7 @@ export class CustomerPageComponent implements OnInit {
     private router: Router,
     private productService: ProductsService,
     private cartService: CartService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.auth.user$.subscribe((user) => (this.user = user));
@@ -50,6 +52,7 @@ export class CustomerPageComponent implements OnInit {
     });
   }
 
+  //pulisci storage
   logout() {
     this.auth.user = null;
     sessionStorage.clear();

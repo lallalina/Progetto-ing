@@ -1,20 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 import { CartService } from 'src/app/core/services/cart.service';
+
 import { CartItem } from 'src/app/models/cart.model';
 import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css']
+  styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent implements OnInit {
-
   @Input() set productValue(value: Product) {
     this.product = value;
     if (value.foto) {
-      this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl(value.foto as string)
+      this.imageSource = this.sanitizer.bypassSecurityTrustResourceUrl(
+        value.foto as string
+      );
     }
   }
 
@@ -29,18 +32,17 @@ export class ProductCardComponent implements OnInit {
   }
 
   quantity: number = 1;
-  imageSource: SafeResourceUrl
+  imageSource: SafeResourceUrl;
 
   constructor(
     private cartService: CartService,
     private sanitizer: DomSanitizer
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
+  //aggiungi al carrello
   addToCart() {
     this.cartService.addItem(new CartItem(this.product, this.quantity));
   }
-
 }

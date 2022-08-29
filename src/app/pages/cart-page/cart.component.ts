@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { isThisMinute, isThursday } from 'date-fns';
+
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderdService } from 'src/app/core/services/orderd.service';
+
 import { Address } from 'src/app/models/address.model';
 import { CartItem } from 'src/app/models/cart.model';
 import { User, UserRole } from 'src/app/models/user.model';
@@ -15,6 +16,7 @@ import { User, UserRole } from 'src/app/models/user.model';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  /*variabili*/
   readonly UserRole = UserRole;
 
   items: CartItem[]; //prende i prodotti
@@ -33,7 +35,7 @@ export class CartComponent implements OnInit {
     private auth: AuthService,
     private orderdService: OrderdService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user = this.auth.user;
@@ -74,13 +76,6 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart();
   }
 
-  //pulisci carrello
-  public onRemoveItem(event, item: CartItem) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.cartService.removeItem(item);
-  }
-
   //incrementa
   public increaseAmount(item: CartItem) {
     this.cartService.updateItemAmount(item, item.amount + 1);
@@ -96,6 +91,7 @@ export class CartComponent implements OnInit {
     }
   }
 
+  //calcolo quantità prodotto selezionato
   public checkAmount(item: CartItem) {
     this.cartService.updateItemAmount(
       item,
@@ -112,6 +108,7 @@ export class CartComponent implements OnInit {
     }
   }
 
+  //prodotto in stringa per passarlo al backend
   arrayToString(): string {
     let result = '';
     this.items.forEach((item, index) => {
@@ -125,7 +122,6 @@ export class CartComponent implements OnInit {
   //ordina prodotto
   ordina() {
     this.loading = true;
-    // manca controllo utente loggato
     const stringedArray = this.arrayToString();
     this.orderdService
       .newOrder({

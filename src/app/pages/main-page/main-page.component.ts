@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ReviewService } from 'src/app/core/services/review.service';
 
 import { Barber } from 'src/app/models/barber.model';
@@ -11,12 +12,17 @@ import { Treatment } from 'src/app/models/treatment.model';
   styleUrls: ['./main-page.component.css'],
 })
 export class MainPageComponent implements OnInit {
+  /*variabili*/
   barbers: Barber[] = [];
   treatments: Treatment[] = [];
   reviews: Review[] = [];
   error;
 
   constructor(private reviewService: ReviewService) {}
+
+  ngOnInit(): void {
+    this.getRecensioni();
+  }
 
   //prendi ultime 3recensioni
   getRecensioni() {
@@ -26,9 +32,5 @@ export class MainPageComponent implements OnInit {
       console.log('ciao');
       console.log(this.reviews);
     });
-  }
-
-  ngOnInit(): void {
-    this.getRecensioni();
   }
 }

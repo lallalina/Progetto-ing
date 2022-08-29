@@ -6,16 +6,7 @@ import {
   OnInit,
   Input,
 } from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
+import { startOfDay, endOfDay, isSameDay, isSameMonth } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -24,25 +15,19 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
-import { BookingService } from 'src/app/core/services/booking.service';
-import { booking, CalendarBooking } from 'src/app/models/booking';
-import { UtilsService } from 'src/app/core/services/utils.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ReservationDialogComponent } from '../reservation-dialog/reservation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
+import { BookingService } from 'src/app/core/services/booking.service';
+import { UtilsService } from 'src/app/core/services/utils.service';
+
+import { booking, CalendarBooking } from 'src/app/models/booking';
 import { Barber } from 'src/app/models/barber.model';
 
 const colors: any = {
   red: {
     primary: '#ad2121',
     secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
   },
 };
 
@@ -53,16 +38,14 @@ const colors: any = {
   templateUrl: './calendar.component.html',
 })
 export class CalendarComponent implements OnInit {
+  /*variabili*/
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
-  @Input() barberId: Barber['id']
+  @Input() barberId: Barber['id'];
 
   prenotazioniB = [];
 
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
 
   refresh = new Subject<void>();
@@ -72,10 +55,12 @@ export class CalendarComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
 
+  loading: boolean;
+
   modalData: {
     action: string;
     event: CalendarEvent;
-    booking: booking
+    booking: booking;
   };
 
   actions: CalendarEventAction[] = [
@@ -96,30 +81,30 @@ export class CalendarComponent implements OnInit {
     },
   ];
 
-  loading: boolean;
-
   constructor(
     private modal: NgbModal,
     private bookingService: BookingService,
     private utils: UtilsService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.aggiornaTabella();
-    this.utils.reloadCalendar.subscribe((_) => this.aggiornaTabella())
+    this.utils.reloadCalendar.subscribe((_) => this.aggiornaTabella());
   }
 
   //eventi da visualizzare in tabella, si chiama nell'init quando cambio il tipo
   aggiornaTabella() {
     this.events = [];
     if (this.barberId) {
-      this.bookingService.getBookingsBarber(this.barberId).subscribe((response) => {
-        response.forEach((booking) => {
-          this.populateEvents(booking);
-          console.log(this.events);
+      this.bookingService
+        .getBookingsBarber(this.barberId)
+        .subscribe((response) => {
+          response.forEach((booking) => {
+            this.populateEvents(booking);
+            console.log(this.events);
+          });
         });
-      })
     } else {
       this.bookingService.getBookings().subscribe((response) => {
         response.forEach((booking) => {
@@ -130,6 +115,7 @@ export class CalendarComponent implements OnInit {
     }
   }
 
+  //visualizzazione eventi nel calendario
   private populateEvents(booking: booking) {
     const newEvent: CalendarEvent = {
       title: `${booking.nome} (${booking.mail})`,
@@ -140,13 +126,13 @@ export class CalendarComponent implements OnInit {
       resizable: {
         beforeStart: false,
         afterEnd: false,
-      }
-    }
+      },
+    };
     this.events.push(newEvent);
     this.calendarBookings.push({
       event: newEvent,
-      booking
-    })
+      booking,
+    });
     this.refresh.next();
   }
 
@@ -185,7 +171,9 @@ export class CalendarComponent implements OnInit {
 
   //gestisci
   handleEvent(action: string, event: CalendarEvent): void {
-    const calendarBooking = this.calendarBookings.find((elem) => JSON.stringify(elem.event) === JSON.stringify(event))
+    const calendarBooking = this.calendarBookings.find(
+      (elem) => JSON.stringify(elem.event) === JSON.stringify(event)
+    );
     this.modalData = { event, action, booking: calendarBooking.booking };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
@@ -221,11 +209,14 @@ export class CalendarComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
+  //cancella prenotazione
   deleteBooking(id: booking['id'], event: CalendarEvent) {
     this.loading = true;
     this.bookingService.deleteBooking(id).subscribe({
       next: (res) => {
-        const bookingIndex = this.calendarBookings.findIndex((elem) => elem.booking.id === id);
+        const bookingIndex = this.calendarBookings.findIndex(
+          (elem) => elem.booking.id === id
+        );
         this.calendarBookings.splice(bookingIndex, 1);
         this.deleteEvent(event);
         this.refresh.next();
@@ -233,12 +224,12 @@ export class CalendarComponent implements OnInit {
       complete: () => {
         this.loading = false;
         this.modal.dismissAll();
-      }
-    }
-    )
+      },
+    });
   }
 
+  //per aggiungere una nuova prenotazione
   openReservationDialog() {
-    this.dialog.open(ReservationDialogComponent)
+    this.dialog.open(ReservationDialogComponent);
   }
 }

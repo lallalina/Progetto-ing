@@ -6,6 +6,7 @@
   <div class="row h-100">
     <!--immagine-->
     <div class="col-5 cover"></div>
+
     <!--form-->
     <div class="col-7">
       <div
@@ -17,6 +18,7 @@
               <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
             </div>
           </div>
+          <!--torno alla home-->
           <span class="material-icons clickable" [routerLink]="['']">
             arrow_back
           </span>
@@ -75,6 +77,7 @@
             </form>
           </div>
 
+          <!--registrazione-->
           <div class="mt-4">
             <div class="d-flex justify-content-center links">
               <p style="color: black">Non hai un account?</p>
@@ -96,23 +99,3 @@
 <ng-template #loader>
   <app-loader></app-loader>
 </ng-template>
-
-<!--show password-->
-<script>
-  function show() {
-    var x = document.getElementById("password");
-    var y = document.getElementById("hide1");
-    var z = document.getElementById("hide2");
-
-    if (x.type === "password") {
-      x.type = "text";
-      y.style.display = "block";
-      z.style.display = "none";
-      console.log(x);
-    } else {
-      x.type = "password";
-      y.style.display = "none";
-      z.style.display = "block";
-    }
-  }
-</script>

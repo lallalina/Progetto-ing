@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Barber } from 'src/app/models/barber.model';
-import { Treatment } from 'src/app/models/treatment.model';
-import { booking } from 'src/app/models/booking';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 import { BarbersService } from 'src/app/core/services/barbers.service';
 import { TreatmentsService } from 'src/app/core/services/treatments.service';
@@ -9,8 +8,9 @@ import { BookingService } from 'src/app/core/services/booking.service';
 import { ToastrService } from 'ngx-toastr';
 import { UtilsService } from 'src/app/core/services/utils.service';
 
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import { Barber } from 'src/app/models/barber.model';
+import { Treatment } from 'src/app/models/treatment.model';
+import { booking } from 'src/app/models/booking';
 
 @Component({
   selector: 'app-prenotazione',
@@ -18,7 +18,14 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./prenotazione.component.css'],
 })
 export class PrenotazioneComponent implements OnInit {
+  /*variabili*/
   @Input() isHome: boolean;
+
+  barbers: Barber[];
+  treatments: Array<Treatment>;
+  orari: Array<string[]>;
+  giorno: string;
+  barbiere: Barber;
 
   private _bookingToEdit: booking;
 
@@ -39,28 +46,15 @@ export class PrenotazioneComponent implements OnInit {
     }
   }
 
-  barbers: Barber[];
-  treatments: Array<Treatment>;
-  orari: Array<string[]>;
-
   giornoSelezionato: Date | null;
-
-  giorno: string;
-  barbiere: Barber;
   periodoSelezionato: string[];
-  trattamentiSelezionati: number[] = [];
-
   minDate: Date;
   OrariDisponibili = [];
+
+  trattamentiSelezionati: number[] = [];
+
   bookingForm: FormGroup;
-
   loadingRes: boolean;
-
-  calendarDatesFilter = (d: Date): boolean => {
-    const day = d.getDay();
-    /* Prevent Saturday and Sunday for select. */
-    return day !== 0 && day !== 6 && day !== 1;
-  };
 
   constructor(
     private bookingService: BookingService,
@@ -79,6 +73,13 @@ export class PrenotazioneComponent implements OnInit {
     this.initForm();
   }
 
+  //eliminazione weekend e lunedì dal calendario
+  calendarDatesFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    /* Prevent Saturday and Sunday for select. */
+    return day !== 0 && day !== 6 && day !== 1;
+  };
+
   //controllo validità sezioni
   initForm() {
     this.bookingForm = new FormGroup({
@@ -96,7 +97,6 @@ export class PrenotazioneComponent implements OnInit {
   //subscribe barbieri
   listenToBarbers() {
     this.barbersService.barbers$.subscribe((barbers) => {
-      console.log(barbers);
       this.barbers = barbers;
     });
   }
@@ -112,10 +112,10 @@ export class PrenotazioneComponent implements OnInit {
   onChangeData(event) {
     this.giorno = event;
     this.giorno = formatDate(this.giorno, 'dd-MM-yyyy', 'en-US');
-    console.log(this.giorno);
     this.caricaOrari(this.giorno, this.barbiere);
   }
 
+  //get trattamenti
   onTreatmentChecked(checked: boolean, treatment: Treatment) {
     if (checked) {
       this.trattamentiSelezionati.push(treatment.id);
@@ -133,7 +133,6 @@ export class PrenotazioneComponent implements OnInit {
 
   //chiamataOrari
   caricaOrari(giorno: string, barber: Barber) {
-    console.log(this.giorno);
     if (barber) {
       this.bookingService.orari(barber.id, giorno).subscribe((response) => {
         console.log(response);
@@ -142,6 +141,7 @@ export class PrenotazioneComponent implements OnInit {
     }
   }
 
+  //trasformo in stringa una i vari trattamenti
   arrayToString(array: number[]): string {
     let stringArray = '';
     array.forEach((elem, index) => {
@@ -164,6 +164,7 @@ export class PrenotazioneComponent implements OnInit {
         'en-US'
       )} ${this.periodoSelezionato[0]}`;
 
+      /*in caso di modifica prenotazione*/
       if (this.bookingToEdit) {
         this.bookingService
           .editBooking({
@@ -175,13 +176,13 @@ export class PrenotazioneComponent implements OnInit {
           })
           .subscribe({
             next: (response) => {
-              console.log(response);
               this.toastr.success('Prenotazione modificata con successo');
               this.utils.reloadCalendar.next();
             },
             complete: () => (this.loadingRes = false),
           });
       } else {
+        /*nuova prenotazione*/
         this.bookingService
           .newBooking({
             ...this.bookingForm.value,
@@ -191,7 +192,6 @@ export class PrenotazioneComponent implements OnInit {
           })
           .subscribe({
             next: (response) => {
-              console.log(response);
               this.toastr.success('Prenotazione avvenuta con successo');
               this.utils.reloadCalendar.next();
               this.bookingForm.reset();

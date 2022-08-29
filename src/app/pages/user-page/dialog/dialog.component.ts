@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
 import { Ordine } from 'src/app/models/ordine.model';
 
 @Component({
@@ -15,6 +16,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //chuidi dialog
   onOkClick(): void {
     this.dialogRef.close();
   }

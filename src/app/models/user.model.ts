@@ -1,4 +1,4 @@
-import { Address } from 'cluster';
+import { Address } from './address.model';
 
 export enum UserRole {
   ADMIN = 'ROLE_ADMIN',

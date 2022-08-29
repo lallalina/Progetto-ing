@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
+
 import { BookingService } from 'src/app/core/services/booking.service';
+
 import { booking } from 'src/app/models/booking';
 
 @Component({
@@ -10,17 +11,16 @@ import { booking } from 'src/app/models/booking';
   styleUrls: ['./edit-booking-page.component.css'],
 })
 export class EditBookingPageComponent implements OnInit {
-  constructor(
-    private bookingService: BookingService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private toastr: ToastrService
-  ) {}
-
+  /*variabili*/
   id: booking['id'];
   booking: booking;
 
   loadingForm: boolean;
+
+  constructor(
+    private bookingService: BookingService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loadingForm = true;

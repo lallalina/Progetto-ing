@@ -1,28 +1,32 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogDeleteUserComponent } from './dialog-delete-user/dialog-delete-user.component';
 
 import { OrderdService } from 'src/app/core/services/orderd.service';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 import { booking } from 'src/app/models/booking';
 import { User, UserRole } from 'src/app/models/user.model';
-import { DialogComponent } from './dialog/dialog.component';
-import { ToastrService } from 'ngx-toastr';
-
 import { Ordine } from 'src/app/models/ordine.model';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { DialogDeleteUserComponent } from './dialog-delete-user/dialog-delete-user.component';
 
 @Component({
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.css'],
 })
 export class UserPageComponent implements OnInit {
+  /*variabili*/
   user: User;
   orders: Ordine[];
   prenotazioni: booking[];
 
   firstCall: boolean = true;
+
+  loading: boolean;
+  canDelete: boolean;
+  isChecked: boolean;
 
   constructor(
     private orderService: OrderdService,
@@ -30,11 +34,7 @@ export class UserPageComponent implements OnInit {
     private auth: AuthService,
     private toastr: ToastrService,
     public dialog: MatDialog
-  ) { }
-
-  loading: boolean;
-  canDelete: boolean;
-  isChecked: boolean;
+  ) {}
 
   ngOnInit(): void {
     this.user = this.auth.user;
@@ -49,7 +49,6 @@ export class UserPageComponent implements OnInit {
   getOrdini() {
     this.orderService.getOrdiniUtente(this.user.id).subscribe((response) => {
       this.orders = response;
-      console.log(this.orders);
     });
   }
 
@@ -58,9 +57,7 @@ export class UserPageComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: prodotti,
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   /*NOTIFICHE*/
@@ -71,7 +68,6 @@ export class UserPageComponent implements OnInit {
         this.isChecked = response;
         this.user.notifiche = response; //cambio valore notifiche dell'user
         this.auth.user = this.user;
-        console.log(response);
         if (this.isChecked == true) {
           this.toastr.info('Notifiche attivate');
         } else {
@@ -84,8 +80,6 @@ export class UserPageComponent implements OnInit {
   /*ELIMINAZIONE UTENTE*/
   //dialog per eliminare utente
   openDialogUtente(user: User) {
-    console.log(user);
-    //this.loadingProds = true;
     this.dialog.open(DialogDeleteUserComponent, {
       data: { user: user.id, isAdmin: false },
     });

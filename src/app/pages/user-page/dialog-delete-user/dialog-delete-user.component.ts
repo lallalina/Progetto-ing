@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BarbersService } from 'src/app/core/services/barbers.service';
+
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -12,19 +14,20 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./dialog-delete-user.component.css'],
 })
 export class DialogDeleteUserComponent implements OnInit {
+  /*variabili*/
+  loading: boolean;
+
   constructor(
     public dialogRef: MatDialogRef<DialogDeleteUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: User['id'], isAdmin: boolean },
+    @Inject(MAT_DIALOG_DATA)
+    public data: { user: User['id']; isAdmin: boolean },
     private auth: AuthService,
     private barbersService: BarbersService,
     private toastr: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private router: Router
+  ) {}
 
-  loading: boolean;
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   //cancella utente
   deleteUser() {
@@ -57,6 +60,7 @@ export class DialogDeleteUserComponent implements OnInit {
     }
   }
 
+  //chiudi dialog
   onNoClick(): void {
     this.dialogRef.close();
   }

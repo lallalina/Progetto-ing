@@ -1,21 +1,22 @@
 <!--navbar-->
 <app-navbar> </app-navbar>
 
-<!--delete prenotazione-->
+<!--modifica prenotazione-->
 <div class="container-fluid mt-2">
-    <h2>MODIFICA LA TUA PRENOTAZIONE</h2>
-    <div class="row">
-        <div class="col-10 offset-1">
-            <app-prenotazione [bookingToEdit]="this.booking" *ngIf="!loadingForm;else loader"></app-prenotazione>
-        </div>
+  <h2>MODIFICA LA TUA PRENOTAZIONE</h2>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <app-prenotazione
+        [bookingToEdit]="this.booking"
+        *ngIf="!loadingForm; else loader"
+      ></app-prenotazione>
     </div>
-
-
+  </div>
 </div>
 
 <!--footer-->
 <app-footer></app-footer>
 
 <ng-template #loader>
-    <app-loader></app-loader>
+  <app-loader></app-loader>
 </ng-template>
