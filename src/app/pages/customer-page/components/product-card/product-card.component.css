@@ -16,3 +16,11 @@
   margin-left: 35%;
   width: 30%;
 }
+
+.zoom {
+  margin: 50px;
+  transition: 1.2s ease;
+}
+.zoom:hover {
+  transform: scale(1.8);
+}
