@@ -139,6 +139,14 @@
       Ora fine:
       <pre>{{ modalData?.event.end | date: "shortTime" }}</pre>
     </div>
+    <div *ngIf="modalData?.booking.trattamenti && modalData?.booking.trattamenti.length">
+      Trattamenti:
+      <ul>
+        <li *ngFor="let treatment of modalData?.booking.trattamenti">
+          {{treatment.nome}}
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="modal-footer">
     <div *ngIf="!loading; else loader">
