@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminGuard } from './core/guards/admin.guard';
-
-import { ResponsibleGuard } from './core/guards/responsible.guard';
 
 import { LoginComponent } from './pages/login-page/login.component';
 import { CartComponent } from './pages/cart-page/cart.component';
@@ -11,6 +8,9 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { DeleteBookingPageComponent } from './pages/delete-booking-page/delete-booking-page.component';
 import { EditBookingPageComponent } from './pages/edit-booking-page/edit-booking-page.component';
+
+import { AdminGuard } from './core/guards/admin.guard';
+import { ResponsibleGuard } from './core/guards/responsible.guard';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
 
 const routes: Routes = [
