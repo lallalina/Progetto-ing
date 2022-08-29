@@ -8,13 +8,15 @@ import { CartService } from 'src/app/core/services/cart.service';
 import { OrderdService } from 'src/app/core/services/orderd.service';
 import { Address } from 'src/app/models/address.model';
 import { CartItem } from 'src/app/models/cart.model';
-import { User } from 'src/app/models/user.model';
+import { User, UserRole } from 'src/app/models/user.model';
 
 @Component({
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  readonly UserRole = UserRole;
+
   items: CartItem[]; //prende i prodotti
   indirizzi: Address[]; //prende gli indirizzi dell'utente
   user: User;

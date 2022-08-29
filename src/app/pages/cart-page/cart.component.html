@@ -8,19 +8,28 @@
   <div class="row">
     <div class="col-lg-12 p-4">
       <!-- Shopping Cart-->
-      <app-table [data]="items" *ngIf="items">
+      <app-table
+        [data]="items"
+        *ngIf="items"
+      >
         <ng-template #headers>
           <th>Prodotto</th>
           <th class="text-center">Quantità</th>
           <th class="text-center">Prezzo</th>
           <th class="text-center">Subtotale</th>
           <th class="text-center">
-            <button class="btn btn-sm btn-danger" (click)="onClearCart($event)">
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="onClearCart($event)"
+            >
               pulisci carrello
             </button>
           </th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <!--nome prodotto-->
           <td>
             <div class="product-info">
@@ -28,8 +37,7 @@
                 <a
                   class="text-black"
                   routerLink="/products/{{ row.product.id }}"
-                  >{{ row.product.nome }}</a
-                >
+                >{{ row.product.nome }}</a>
               </h4>
             </div>
           </td>
@@ -96,20 +104,29 @@
 
       <!--indirizzi esistenti-->
       <div *ngIf="user; else notLogged">
-        <div class="col-12 mt-3 mb-4" *ngIf="indirizzi">
+        <div
+          class="col-12 mt-3 mb-4"
+          *ngIf="indirizzi"
+        >
           <div>
             <h4>Seleziona un tuo indirizzo:</h4>
             <br />
-            <select class="form-control" [(ngModel)]="selectedAddress">
-              <option *ngFor="let row of indirizzi" [ngValue]="row">
+            <select
+              class="form-control"
+              [(ngModel)]="selectedAddress"
+            >
+              <option
+                *ngFor="let row of indirizzi"
+                [ngValue]="row"
+              >
                 {{
-                  row.via +
-                    ", " +
-                    row.numeroCivico +
-                    ", " +
-                    row.citta +
-                    ", " +
-                    row.cap
+                row.via +
+                ", " +
+                row.numeroCivico +
+                ", " +
+                row.citta +
+                ", " +
+                row.cap
                 }}
               </option>
             </select>
@@ -126,9 +143,15 @@
           </div>
         </div>
         <!--FORM Nuovo Indirizzo-->
-        <div class="col-12">
+        <div
+          class="col-12"
+          *ngIf="this.user.role !== UserRole.ADMIN"
+        >
           <h4>Inserisci un nuovo indirizzo:</h4>
-          <form [formGroup]="form" (ngSubmit)="createAddress()">
+          <form
+            [formGroup]="form"
+            (ngSubmit)="createAddress()"
+          >
             <!--citta-->
             <div class="form-group">
               <label>Città:</label>
@@ -248,14 +271,16 @@
 </ng-template>
 
 <ng-template #notLogged>
-  <div
-    class="d-flex w-100 flex-column justify-content-center align-items-center mt-3"
-  >
+  <div class="d-flex w-100 flex-column justify-content-center align-items-center mt-3">
     <h3 class="text-white">
       Per procedere con l'ordine, devi aver eseguito l'accesso
     </h3>
     <br />
-    <button mat-raised-button color="primary" [routerLink]="['/login']">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/login']"
+    >
       Accedi/Registrati
     </button>
   </div>
