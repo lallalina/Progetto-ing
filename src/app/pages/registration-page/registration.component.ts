@@ -26,7 +26,7 @@ export class RegistrationComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private toast: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -40,11 +40,11 @@ export class RegistrationComponent implements OnInit {
       cognome: new FormControl(''),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(5),
       ]),
       confirmPassword: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
+        Validators.minLength(5),
       ]),
     });
   }
