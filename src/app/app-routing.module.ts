@@ -12,6 +12,7 @@ import { ReviewsComponent } from './pages/reviews/reviews.component';
 import { DeleteBookingPageComponent } from './pages/delete-booking-page/delete-booking-page.component';
 import { EditBookingPageComponent } from './pages/edit-booking-page/edit-booking-page.component';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,11 @@ const routes: Routes = [
     //edit booking page
     path: 'modificaPrenotazione/:idPrenotazione',
     component: EditBookingPageComponent
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 
