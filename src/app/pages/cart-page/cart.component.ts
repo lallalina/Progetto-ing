@@ -135,6 +135,7 @@ export class CartComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.toastr.success('Ordine effettuato con successo');
+          this.cartService.clearCart();
           this.router.navigate(['/']);
           this.form.reset();
         },

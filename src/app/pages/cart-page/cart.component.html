@@ -106,7 +106,7 @@
       <div *ngIf="user; else notLogged">
         <div
           class="col-12 mt-3 mb-4"
-          *ngIf="indirizzi"
+          *ngIf="indirizzi && indirizzi.length"
         >
           <div>
             <h4>Seleziona un tuo indirizzo:</h4>
