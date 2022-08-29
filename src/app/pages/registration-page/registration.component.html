@@ -1,8 +1,5 @@
 <!--form di login-->
-<div
-  class="container-fluid login-page-container"
-  style="background-color: #343530"
->
+<div class="container-fluid login-page-container" style="background-color: #343530">
   <div class="row h-100">
     <!--immagine-->
     <div class="col-5 cover"></div>
@@ -13,26 +10,15 @@
         <div class="user_card">
           <div class="d-flex justify-content-center">
             <div class="brand_logo_container">
-              <img
-                src="/assets/logo-white.png"
-                class="brand_logo"
-                alt="Logo"
-              />
+              <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
             </div>
           </div>
           <!--torna alla login-->
-          <span
-            class="material-icons clickable"
-            [routerLink]="['/login']"
-          >
+          <span class="material-icons clickable" [routerLink]="['/login']">
             arrow_back
           </span>
           <div class="d-flex justify-content-center form_container">
-            <form
-              name="form"
-              [formGroup]="form"
-              (ngSubmit)="registration()"
-            >
+            <form name="form" [formGroup]="form" (ngSubmit)="registration()">
               <!--email-->
               <label>Email:</label><strong>*</strong>
               <div class="input-group">
@@ -41,13 +27,8 @@
                     <mat-icon>email</mat-icon>
                   </span>
                 </div>
-                <input
-                  type="text"
-                  name="mail"
-                  class="form-control input_user"
-                  placeholder="mail"
-                  formControlName="mail"
-                />
+                <input type="text" name="mail" class="form-control input_user" placeholder="mail"
+                  formControlName="mail" />
               </div>
               <!--Nome-->
               <label>Nome:</label><strong>*</strong>
@@ -57,13 +38,8 @@
                     <mat-icon>account_circle</mat-icon>
                   </span>
                 </div>
-                <input
-                  type="text"
-                  name="nome"
-                  class="form-control input_user"
-                  placeholder="nome"
-                  formControlName="nome"
-                />
+                <input type="text" name="nome" class="form-control input_user" placeholder="nome"
+                  formControlName="nome" />
               </div>
               <!--password-->
               <label>Password:</label><strong>*</strong>
@@ -73,18 +49,9 @@
                     <mat-icon> vpn_key</mat-icon>
                   </span>
                 </div>
-                <input
-                  [type]="changetype ? 'password' : 'text'"
-                  name="password"
-                  class="form-control input_user"
-                  placeholder="password"
-                  formControlName="password"
-                  id="password"
-                />
-                <span
-                  class="eye"
-                  (click)="show()"
-                >
+                <input [type]="changetype ? 'password' : 'text'" name="password" class="form-control input_user"
+                  placeholder="Password (min. 5 car.)" formControlName="password" id="password" />
+                <span class="eye" (click)="show()">
                   <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
@@ -96,29 +63,15 @@
                     <mat-icon> vpn_key</mat-icon>
                   </span>
                 </div>
-                <input
-                  [type]="changetype2 ? 'password' : 'text'"
-                  name="password"
-                  class="form-control input_user"
-                  placeholder="conferma password"
-                  formControlName="confirmPassword"
-                  id="password"
-                />
-                <span
-                  class="eye"
-                  (click)="show2()"
-                >
+                <input [type]="changetype2 ? 'password' : 'text'" name="password" class="form-control input_user"
+                  placeholder="conferma password" formControlName="confirmPassword" id="password" />
+                <span class="eye" (click)="show2()">
                   <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
               <div class="d-flex justify-content-center mt-3 login_container mt-5">
-                <button
-                  type="submit"
-                  name="button"
-                  class="btn login_btn"
-                  [disabled]="!this.form.valid"
-                  *ngIf="!loading; else loader"
-                >
+                <button type="submit" name="button" class="btn login_btn" [disabled]="!this.form.valid"
+                  *ngIf="!loading; else loader">
                   Registrati
                 </button>
               </div>

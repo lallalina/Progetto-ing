@@ -248,6 +248,8 @@ td {
   color: red;
 }
 
-.table-container {
-  overflow-x: scroll;
+@media screen and (max-width: 480px) {
+  .table-container {
+    overflow-x: scroll;
+  }
 }

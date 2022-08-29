@@ -1,8 +1,5 @@
 <!--form di login-->
-<div
-  class="container-fluid login-page-container"
-  style="background-color: #343530"
->
+<div class="container-fluid login-page-container" style="background-color: #343530">
   <div class="row h-100">
     <!--immagine-->
     <div class="col-5 cover"></div>
@@ -13,26 +10,15 @@
         <div class="user_card">
           <div class="d-flex justify-content-center">
             <div class="brand_logo_container">
-              <img
-                src="/assets/logo-white.png"
-                class="brand_logo"
-                alt="Logo"
-              />
+              <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
             </div>
           </div>
           <!--torno alla home-->
-          <span
-            class="material-icons clickable"
-            [routerLink]="['']"
-          >
+          <span class="material-icons clickable" [routerLink]="['']">
             arrow_back
           </span>
           <div class="d-flex justify-content-center form_container">
-            <form
-              name="form"
-              [formGroup]="form"
-              (ngSubmit)="login()"
-            >
+            <form name="form" [formGroup]="form" (ngSubmit)="login()">
               <!--email-->
               <strong>*</strong> <label>Email:</label>
               <div class="input-group mb-3">
@@ -41,13 +27,8 @@
                     <mat-icon>account_circle</mat-icon>
                   </span>
                 </div>
-                <input
-                  type="email"
-                  name="mail"
-                  class="form-control input_user"
-                  placeholder="mail"
-                  formControlName="mail"
-                />
+                <input type="email" name="mail" class="form-control input_user" placeholder="mail"
+                  formControlName="mail" />
               </div>
               <!--password-->
               <strong>*</strong> <label>Password:</label>
@@ -58,31 +39,17 @@
                   </span>
                 </div>
                 <div class="example-container">
-                  <input
-                    [type]="changetype ? 'password' : 'text'"
-                    name="password"
-                    class="form-control input_user"
-                    placeholder="password"
-                    formControlName="password"
-                    id="password"
-                  />
-                  <span
-                    class="eye"
-                    (click)="show()"
-                  >
+                  <input [type]="changetype ? 'password' : 'text'" name="password" class="form-control input_user"
+                    placeholder="Password (min. 5 car.)" formControlName="password" id="password" />
+                  <span class="eye" (click)="show()">
                     <mat-icon>remove_red_eye</mat-icon>
                   </span>
                 </div>
               </div>
 
               <div class="d-flex justify-content-center mt-3 login_container">
-                <button
-                  *ngIf="!loading; else loader"
-                  type="submit"
-                  name="button"
-                  class="btn login_btn"
-                  [disabled]="!this.form.valid"
-                >
+                <button *ngIf="!loading; else loader" type="submit" name="button" class="btn login_btn"
+                  [disabled]="!this.form.valid">
                   Login
                 </button>
               </div>
@@ -93,12 +60,8 @@
           <div class="mt-4">
             <div class="d-flex justify-content-center links">
               <p style="color: black">Non hai un account?</p>
-              <a
-                [routerLink]="['/sign-up']"
-                routerLinkActive="router-link-active"
-                class="ml-2"
-                style="color: black"
-              >Registrati</a>
+              <a [routerLink]="['/sign-up']" routerLinkActive="router-link-active" class="ml-2"
+                style="color: black">Registrati</a>
             </div>
           </div>
         </div>
