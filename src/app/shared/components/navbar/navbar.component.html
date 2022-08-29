@@ -1,6 +1,5 @@
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm">
-  <!--logo-->
+<nav class="navbar navbar-expand-lg">
   <img
     class="navbar-logo ml-lg-3 mr-lg-3 ml-sm-3 mlr-sm-3"
     src="assets/logo-white.png"
@@ -10,34 +9,53 @@
   <button
     class="navbar-toggler"
     type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarSupportedContent"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent"
     aria-expanded="false"
     aria-label="Toggle navigation"
   >
-    <span class="navbar-toggler-icon"></span>
+    <mat-icon class="text-white">menu</mat-icon>
   </button>
-  <!--link alle pagine-->
-  <div class="collapse navbar-collapse identita">
+  <div
+    class="collapse navbar-collapse identita"
+    id="navbarSupportedContent"
+  >
     <ul class="navbar-nav mr-auto border-bottom">
       <li class="nav-item active">
-        <a class="nav-link navbar-text" [routerLink]="['']">Home</a>
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['']"
+        >Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link navbar-text" [routerLink]="['/shop']">Shop</a>
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['/shop']"
+        >Shop</a>
       </li>
-      <li class="nav-item active" *ngIf="user && isAdmin">
-        <a class="nav-link navbar-text" [routerLink]="['/admin']"
-          >Area amministratore</a
-        >
+      <li
+        class="nav-item active"
+        *ngIf="user && isAdmin"
+      >
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['/admin']"
+        >Area amministratore</a>
       </li>
-      <li class="nav-item active" *ngIf="user && isBarber">
-        <a class="nav-link navbar-text" [routerLink]="['/responsible']"
-          >Area responsabile</a
-        >
+      <li
+        class="nav-item active"
+        *ngIf="user && isBarber"
+      >
+        <a
+          class="nav-link navbar-text"
+          [routerLink]="['/responsible']"
+        >Area responsabile</a>
       </li>
-      <li class="nav-item active" *ngIf="user">
+      <li
+        class="nav-item active"
+        *ngIf="user"
+      >
         <a
           class="nav-link navbar-text d-flex align-items-center"
           [routerLink]="['/user']"
@@ -49,7 +67,11 @@
     </ul>
 
     <div class="h-100 d-flex align-items-center justify-content-around">
-      <span [matBadge]="items.length" matBadgeSize="small" matBadgeColor="warn">
+      <span
+        [matBadge]="items.length"
+        matBadgeSize="small"
+        matBadgeColor="warn"
+      >
         <span
           class="material-icons clickable text-white text-sm"
           [routerLink]="['/cart']"
@@ -67,7 +89,10 @@
       </button>
     </div>
 
-    <ng-template #logged class="clickable">
+    <ng-template
+      #logged
+      class="clickable"
+    >
       <div class="ml-3 d-flex align-items-center">
         <span
           class="material-icons clickable text-white text-sm"

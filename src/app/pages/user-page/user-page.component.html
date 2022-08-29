@@ -2,11 +2,11 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-  <div class="row mt-2">
+  <div class="row mt-2 px-2">
     <h1 class="mt-2">Benvenuto, {{ this.user.nome }}</h1>
   </div>
   <br />
-  <div class="row align-items-center">
+  <div class="row align-items-center px-2">
     <h4 class="mr-2">Notifiche:</h4>
     <div>
       <!--disabilita notifiche-->
@@ -18,10 +18,17 @@
   </div>
 
   <!--elimina profilo-->
-  <div class="row" *ngIf="canDelete">
+  <div
+    class="row"
+    *ngIf="canDelete"
+  >
     <h4 class="mr-2">Elimina il tuo profilo</h4>
     <div>
-      <button mat-raised-button color="warn" (click)="openDialogUtente(user)">
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="openDialogUtente(user)"
+      >
         Elimina profilo
       </button>
     </div>
@@ -30,13 +37,19 @@
   <!--Table Orders-->
   <div class="row">
     <div class="col-12 mb-3 mt-5">
-      <app-table [data]="orders" class="table">
+      <app-table
+        [data]="orders"
+        class="table"
+      >
         <ng-template #headers>
           <th>Indirizzo</th>
           <th></th>
           <th>Prodotti</th>
         </ng-template>
-        <ng-template #rows let-row>
+        <ng-template
+          #rows
+          let-row
+        >
           <!--indirizzo-->
           <td>
             {{ row.destinatario.via }},{{ row.destinatario.numeroCivico }},

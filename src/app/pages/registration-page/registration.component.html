@@ -8,20 +8,31 @@
     <div class="col-5 cover"></div>
 
     <!--form-->
-    <div class="col-7">
+    <div class="col-12 col-md-7">
       <div class="d-flex justify-content-center">
         <div class="user_card">
           <div class="d-flex justify-content-center">
             <div class="brand_logo_container">
-              <img src="/assets/logo-white.png" class="brand_logo" alt="Logo" />
+              <img
+                src="/assets/logo-white.png"
+                class="brand_logo"
+                alt="Logo"
+              />
             </div>
           </div>
           <!--torna alla login-->
-          <span class="material-icons clickable" [routerLink]="['/login']">
+          <span
+            class="material-icons clickable"
+            [routerLink]="['/login']"
+          >
             arrow_back
           </span>
           <div class="d-flex justify-content-center form_container">
-            <form name="form" [formGroup]="form" (ngSubmit)="registration()">
+            <form
+              name="form"
+              [formGroup]="form"
+              (ngSubmit)="registration()"
+            >
               <!--email-->
               <label>Email:</label><strong>*</strong>
               <div class="input-group">
@@ -70,7 +81,10 @@
                   formControlName="password"
                   id="password"
                 />
-                <span class="eye" (click)="show()">
+                <span
+                  class="eye"
+                  (click)="show()"
+                >
                   <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
@@ -90,13 +104,14 @@
                   formControlName="confirmPassword"
                   id="password"
                 />
-                <span class="eye" (click)="show2()">
+                <span
+                  class="eye"
+                  (click)="show2()"
+                >
                   <mat-icon>remove_red_eye</mat-icon>
                 </span>
               </div>
-              <div
-                class="d-flex justify-content-center mt-3 login_container mt-5"
-              >
+              <div class="d-flex justify-content-center mt-3 login_container mt-5">
                 <button
                   type="submit"
                   name="button"

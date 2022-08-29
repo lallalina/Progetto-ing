@@ -39,3 +39,21 @@ small {
   overflow: auto;
   display: inline-block;
 }
+
+@media screen and (max-width: 480px) {
+  .table-filter-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .table-filter-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

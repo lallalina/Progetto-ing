@@ -1,4 +1,4 @@
-<div class="mt-5 px-5">
+<div class="mt-5 px-2 px-md-5">
   <div class="selectors-wrapper">
     <!--calendar Page-->
     <ng-container
@@ -25,7 +25,10 @@
   </div>
 </div>
 
-<ng-template #segmentSelector let-label>
+<ng-template
+  #segmentSelector
+  let-label
+>
   <div
     class="selector"
     [ngClass]="{ selected: label === this.currentPage }"

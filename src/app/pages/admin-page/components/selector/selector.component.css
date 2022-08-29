@@ -1,9 +1,22 @@
-.selectors-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 15px;
+@media screen and (max-width: 480px) {
+  .selectors-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .selectors-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+  }
 }
 
 .selector {

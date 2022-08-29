@@ -88,4 +88,8 @@ small {
   .cover {
     display: none;
   }
+
+  .user_card {
+    margin-top: 40%;
+  }
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <!--filtri per la table-->
-  <div class="d-flex w-100 justify-content-between">
+  <div class="table-filter-container">
     <select
       class="form-control role-filter"
       [(ngModel)]="activeFilter"
@@ -20,7 +20,10 @@
     </div>
   </div>
   <!--Table-->
-  <app-table [data]="tableData" class="table">
+  <app-table
+    [data]="tableData"
+    class="table"
+  >
     <ng-template #headers>
       <th>Nome</th>
       <th>Cognome</th>
@@ -28,7 +31,10 @@
       <th>Ruolo</th>
       <th>Elimina</th>
     </ng-template>
-    <ng-template #rows let-row>
+    <ng-template
+      #rows
+      let-row
+    >
       <td>{{ row.nome }}</td>
       <td>{{ row.cognome }}</td>
       <td>{{ row.mail }}</td>
@@ -49,8 +55,11 @@
   <!--Registra parrucchieri-->
   <!--Content-->
   <div class="row mt-5">
-    <div class="col-lg-4 col-sm-4">
-      <form [formGroup]="barbersForm" (ngSubmit)="addBarber()">
+    <div class="col-12 col-md-4">
+      <form
+        [formGroup]="barbersForm"
+        (ngSubmit)="addBarber()"
+      >
         <legend>Registra Barbieri</legend>
         <!--nome-->
         <div class="form-group">
@@ -71,9 +80,7 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="barbersForm && barbersForm.controls['nome'].errors?.['required']"
-            >
+            <div *ngIf="barbersForm && barbersForm.controls['nome'].errors?.['required']">
               inserisci il enome
             </div>
           </div>
@@ -107,9 +114,7 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="barbersForm && barbersForm.controls['mail'].errors?.['required']"
-            >
+            <div *ngIf="barbersForm && barbersForm.controls['mail'].errors?.['required']">
               inserisci l' email
             </div>
           </div>
@@ -124,7 +129,10 @@
             type="password"
             placeholder="Password (min 5 caratteri)"
           />
-          <span class="eye" (click)="show()">
+          <span
+            class="eye"
+            (click)="show()"
+          >
             <mat-icon>remove_red_eye</mat-icon>
           </span>
           <!--check password-->
@@ -137,14 +145,10 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['required']"
-            >
+            <div *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['required']">
               inserisci la password
             </div>
-            <div
-              *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['minLenght']"
-            >
+            <div *ngIf="barbersForm.controls['password'] && barbersForm.controls['password'].errors?.['minLenght']">
               la password deve essere lunga 5 caratteri
             </div>
           </div>
@@ -159,7 +163,10 @@
             type="password"
             placeholder="Conferma Password"
           />
-          <span class="eye" (click)="show2()">
+          <span
+            class="eye"
+            (click)="show2()"
+          >
             <mat-icon>remove_red_eye</mat-icon>
           </span>
           <!--check confPassword-->
@@ -196,7 +203,7 @@
     </div>
 
     <!--Registra admin-->
-    <div class="col-lg-4 col-sm-4 offset-3">
+    <div class="col-12 col-md-4 offset-md-3">
       <form
         [formGroup]="adminsForm"
         (ngSubmit)="addAdmin()"
@@ -243,9 +250,7 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="adminsForm && adminsForm.controls['mail'].errors?.['required']"
-            >
+            <div *ngIf="adminsForm && adminsForm.controls['mail'].errors?.['required']">
               inserisci l' email
             </div>
           </div>
@@ -260,7 +265,10 @@
             type="password"
             placeholder="Password (min 5 caratteri)"
           />
-          <span class="eye" (click)="show()">
+          <span
+            class="eye"
+            (click)="show()"
+          >
             <mat-icon>remove_red_eye</mat-icon>
           </span>
           <!--check password-->
@@ -273,14 +281,10 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['required']"
-            >
+            <div *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['required']">
               inserisci la password
             </div>
-            <div
-              *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['minLenght']"
-            >
+            <div *ngIf="adminsForm.controls['password'] && adminsForm.controls['password'].errors?.['minLenght']">
               la password deve essere lunga 5 caratteri
             </div>
           </div>
@@ -295,7 +299,10 @@
             type="password"
             placeholder="Conferma Password"
           />
-          <span class="eye" (click)="show2()">
+          <span
+            class="eye"
+            (click)="show2()"
+          >
             <mat-icon>remove_red_eye</mat-icon>
           </span>
           <!--check confPassword-->
@@ -308,14 +315,10 @@
             "
             class="form-error"
           >
-            <div
-              *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['required']"
-            >
+            <div *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['required']">
               inserisci la password
             </div>
-            <div
-              *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['minLength']"
-            >
+            <div *ngIf="adminsForm && adminsForm.controls['confPassword'].errors?.['minLength']">
               la password deve essere lunga 5 caratteri
             </div>
           </div>
@@ -332,9 +335,7 @@
     </div>
   </div>
   <div>
-    <small
-      >I campi contrassegnati da un asterisco rosso (*) sono obbligatori</small
-    >
+    <small>I campi contrassegnati da un asterisco rosso (*) sono obbligatori</small>
   </div>
 </div>
 

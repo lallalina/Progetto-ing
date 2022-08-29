@@ -1,8 +1,14 @@
 <!--form-->
-<form [formGroup]="bookingForm" (ngSubmit)="prenota()">
+<form
+  [formGroup]="bookingForm"
+  (ngSubmit)="prenota()"
+>
   <div class="prenotazione-container">
     <!--NOME-->
-    <div class="col-4" style="margin-top: 5%">
+    <div
+      class="col-12 col-md-4"
+      style="margin-top: 5%"
+    >
       <div class="form-group">
         <label for="customer-name">Nome</label><strong>*</strong>
         <input
@@ -23,9 +29,7 @@
           "
           class="form-error"
         >
-          <div
-            *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']"
-          >
+          <div *ngIf="bookingForm && bookingForm.controls['nome'].errors?.['required']">
             inserisci il nome
           </div>
         </div>
@@ -51,9 +55,7 @@
           "
           class="form-error"
         >
-          <div
-            *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']"
-          >
+          <div *ngIf="bookingForm && bookingForm.controls['mail'].errors?.['required']">
             inserisci l'email
           </div>
         </div>
@@ -66,13 +68,19 @@
           [(ngModel)]="barbiere"
           [ngModelOptions]="{ standalone: true }"
         >
-          <option *ngFor="let barber of barbers" [ngValue]="barber">
+          <option
+            *ngFor="let barber of barbers"
+            [ngValue]="barber"
+          >
             {{ barber.nome }}
           </option>
         </select>
       </div>
     </div>
-    <div class="col-4" *ngIf="barbiere">
+    <div
+      class="col-12 col-md-4"
+      *ngIf="barbiere"
+    >
       <!---->
       <div class="d-flex w-100 justify-content-center">
         <!--CALENDAR-->
@@ -87,7 +95,10 @@
         </mat-card>
       </div>
       <!--ORAIO-->
-      <div class="orario" *ngIf="orari">
+      <div
+        class="orario"
+        *ngIf="orari"
+      >
         <label for="customer-name">Orari</label>
         <select
           class="form-control"
@@ -95,22 +106,31 @@
           [(ngModel)]="periodoSelezionato"
           [ngModelOptions]="{ standalone: true }"
         >
-          <option *ngFor="let periodo of orari" [ngValue]="periodo">
+          <option
+            *ngFor="let periodo of orari"
+            [ngValue]="periodo"
+          >
             {{ periodo[0] }}
           </option>
         </select>
       </div>
     </div>
-    <div class="col-4 mt-4">
+    <div class="col-12 col-md-4 mt-4">
       <!--TRATTAMENTI-->
       <div class="form-group">
-        <app-table [data]="treatments" class="table">
+        <app-table
+          [data]="treatments"
+          class="table"
+        >
           <ng-template #headers>
             <th></th>
             <th>Trattamento</th>
             <th>Prezzo</th>
           </ng-template>
-          <ng-template #rows let-row>
+          <ng-template
+            #rows
+            let-row
+          >
             <td>
               <mat-checkbox
                 class="treatment"

@@ -12,7 +12,7 @@
 
   <!--angular calendar-->
   <div class="row text-center">
-    <div class="col-md-4">
+    <div class="col-12 col-md-4">
       <div class="btn-group">
         <div
           class="btn btn-primary"
@@ -23,7 +23,11 @@
         >
           Previous
         </div>
-        <div class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+        <div
+          class="btn btn-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
           Today
         </div>
         <div
@@ -37,10 +41,10 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-12 col-md-4">
       <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
     </div>
-    <div class="col-md-4">
+    <div class="col-12 col-md-4">
       <div class="btn-group">
         <div
           class="btn btn-primary"
@@ -106,10 +110,17 @@
 <br /><br /><br />
 
 <!--Dialog sul dettaglio della prenotazione-->
-<ng-template #modalContent let-close="close">
+<ng-template
+  #modalContent
+  let-close="close"
+>
   <div class="modal-header">
     <h5 class="modal-title">Dettaglio prenotazione</h5>
-    <button type="button" class="close" (click)="close()">
+    <button
+      type="button"
+      class="close"
+      (click)="close()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -134,11 +145,9 @@
       Ora fine:
       <pre>{{ modalData?.event.end | date: "shortTime" }}</pre>
     </div>
-    <div
-      *ngIf="
+    <div *ngIf="
         modalData?.booking.trattamenti && modalData?.booking.trattamenti.length
-      "
-    >
+      ">
       Trattamenti:
       <ul>
         <li *ngFor="let treatment of modalData?.booking.trattamenti">
@@ -158,7 +167,11 @@
         Elimina prenotazione
       </button>
     </div>
-    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="close()"
+    >
       OK
     </button>
   </div>
